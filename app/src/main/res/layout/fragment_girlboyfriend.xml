@@ -1,0 +1,237 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.hubert.gameoflife.GirlboyfriendFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/girlboyfriend_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/girlfriend"
+            android:textColor="@color/textColorOnPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/search_for_a_girlfriend"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/girlboyfriend_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/status"
+            android:textColor="@color/textColorOnPrimary"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="6dp"
+            android:background="#eee"
+            android:text="@string/ask_her_to_marry_you"
+            android:textColor="#000" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_girlboyFriend_relations"
+            style="@style/ProgressBarMain"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="30dp"
+            tools:progress="75" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/relations"
+            android:textColor="#666"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/girlboyfriend_lastMeet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="55dp"
+            android:text="@string/last_meet"
+            android:textColor="@color/textColorOnPrimary"
+            android:textSize="16sp" />
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/buy_her_a_gift"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="179dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="80dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/take_her_somewhere"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="137dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/broke_up_with_her"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="61dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+
+        <TextView
+            android:id="@+id/children_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/children"
+            android:textColor="@color/textColorOnPrimary"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_children_relations"
+            style="@style/ProgressBarMain"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="30dp"
+            tools:progress="75" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/relations"
+            android:textColor="#666"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/play_with_him"
+            tools:text="Help with something"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="179dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/take_him_somewhere"
+            tools:text="Be naughty"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="110dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/buy_him_a_gift"
+            tools:text="Ask to play with You"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="179dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="110dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/ask_for_increased_pocket_money"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="167dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/disinheritance"
+            tools:text="Escape from home"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
