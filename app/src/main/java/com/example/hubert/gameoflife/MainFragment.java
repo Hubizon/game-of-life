@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,44 +14,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MainFragment extends Fragment  {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public MainFragment() {
-        // Required empty public constructor
-    }
+    public MainFragment() {}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
+    public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,10 +30,6 @@ public class MainFragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -77,7 +43,6 @@ public class MainFragment extends Fragment  {
 
         Timer timer = new Timer();
         TimerTask updateLabels = new MainFragment.ChangeProgressBars(view);
-       // timer.scheduleAtFixedRate(updateLabels, 0, 1500);
 
         return view;
     }
@@ -102,7 +67,7 @@ public class MainFragment extends Fragment  {
         }
     }
 
-    private void updateLabels(View view)//getResources().getDrawable(R.drawable.avatar_icon1)
+    private void updateLabels(View view)
     {
         ((view.findViewById(R.id.characterIcon))).setBackground(getResources().getDrawable(MainActivity.Icon));
         ((TextView)(view.findViewById(R.id.characterName))).setText(MainActivity.Name);
@@ -117,11 +82,7 @@ public class MainFragment extends Fragment  {
         ((ProgressBar)(view.findViewById(R.id.progressBar_character_happiness))).setProgress((MainActivity.Happiness / 10));
 
         ((TextView)(view.findViewById(R.id.characterLodging))).setText(getResources().getString(R.string.loudging) + " " + MainActivity.MyLodging.getName());
-       // ((TextView)(view.findViewById(R.id.characterEducationWork))).setText(getResources().getString(R.string.education) + " " + MainActivity.SchoolName);
-        //((TextView)(view.findViewById(R.id.characterEducationWork))).setText(getResources().getString(R.string.work) + " " + MainActivity.MyJob.getName());
         ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + MainActivity.MyTransport.getName());
-        //((TextView)(view.findViewById(R.id.characterGirlboyfriend))).setText(getResources().getString(R.string.girlfriend) + " " + MainActivity.MyGirlboyfriend.getName());
-        //((TextView)(view.findViewById(R.id.characterChildrens))).setText(getResources().getString(R.string.children) + " " + MainActivity.MyChildren.getName());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -159,7 +120,6 @@ public class MainFragment extends Fragment  {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }
