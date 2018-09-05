@@ -100,6 +100,7 @@ public class LearnInHomeFragment extends Fragment implements RecyclerViewSubject
     public void onItemClick(View view, int position) {
         if(view.findViewById(R.id.subjectHomework).getVisibility() == View.VISIBLE)
         {
+            MainActivity.ThingToDoForDoingSomething = "DoHomework";
             getActivity().getSupportFragmentManager().beginTransaction()
                     .add(R.id.mainFragmentHolder, new DoingSomethingFragment())
                     .commit();
