@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,8 +113,51 @@ public class DoingSomethingFragment extends Fragment {
                 case "PlayPhone":
                     MainActivity.Happiness += MainActivity.MyPhone.getGivenFun();
                     break;
+
                 case "TalkOnMessengers":
                     MainActivity.CommunicationSkills += 2;
+                    MainActivity.Hungry--;
+                    MainActivity.Energy--;
+                    break;
+
+                case "GoToSchool":
+                    for(int i = 0; i < MainActivity.subjectsList.length; i++)
+                        MainActivity.subjectsList[i].increaseToAnotherMark(5);
+                    MainActivity.Hungry--;
+                    MainActivity.Energy--;
+                    MainActivity.Happiness -= 2;
+                    break;
+
+                case "GoToSchoolLearnHard":
+                    for(int i = 0; i < MainActivity.subjectsList.length; i++)
+                        MainActivity.subjectsList[i].increaseToAnotherMark(10);
+                    MainActivity.Hungry--;
+                    MainActivity.Energy -= 4;
+                    MainActivity.Happiness -= 7;
+                    break;
+
+                case "GoToSchoolHangAround":
+                    for(int i = 0; i < MainActivity.subjectsList.length; i++)
+                        MainActivity.subjectsList[i].decreaseToAnotherMark(10);
+                    MainActivity.subjectsList[MainActivity.subjectsList.length - 1].decreaseToAnotherMark(15);
+                    MainActivity.Hungry--;
+                    MainActivity.Energy--;
+                    MainActivity.Happiness += 25;
+                    break;
+
+                case "DoHomework":
+                    view.findViewById(R.id.textview_homework).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.progressBar_homework_doingSomething).setVisibility(View.VISIBLE);
+                    ((ProgressBar)(view.findViewById(R.id.progressBar_homework_doingSomething))).setProgress(
+                            ((ProgressBar)(view.findViewById(R.id.progressBar_homework_doingSomething))).getProgress() + 25);
+                    if(((ProgressBar)(view.findViewById(R.id.progressBar_homework_doingSomething))).getProgress() >= 100)
+                        MainActivity.subjectsList[LearnInHomeFragment.NumberToDoForDoingSomething].increaseToAnotherMark(50);
+
+                    // TODO: fix this error
+                   // FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                   // ft.remove(new DoingSomethingFragment());
+                  //  ft.commit();
+
                     break;
             }
 

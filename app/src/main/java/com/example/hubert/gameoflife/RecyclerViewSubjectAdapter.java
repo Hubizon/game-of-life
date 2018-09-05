@@ -29,6 +29,7 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_subjects_row, parent, false);
+
         return new ViewHolder(view);
     }
 
@@ -37,6 +38,11 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(ViewHolder holder, int position) {
         String animal = mData.get(position);
         holder.myTextView.setText(animal);
+
+        if(MainActivity.subjectsList[position].IsTodaysHomeworkDone)
+            holder.myTextViewHomework.setVisibility(View.GONE);
+        else
+            holder.myTextViewHomework.setVisibility(View.VISIBLE);
     }
 
     // total number of rows
@@ -45,14 +51,15 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
         return mData.size();
     }
 
-
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextView;
+        TextView myTextViewHomework;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.subjectNameMark);
+            myTextViewHomework = itemView.findViewById(R.id.subjectHomework);
             itemView.setOnClickListener(this);
         }
 

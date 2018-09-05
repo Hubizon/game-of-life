@@ -19,131 +19,158 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/doingThing"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Sleeping"
-            android:textAlignment="center"
-            android:textColor="@color/textColorOnPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="100dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/clock_icon" />
+            <TextView
+                android:id="@+id/doingThing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Sleeping"
+                android:textAlignment="center"
+                android:textColor="@color/textColorOnPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/time_doingSomething"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/textColorOnPrimary"
-            tools:text="01.09 15:30" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="100dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/clock_icon" />
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/money_icon" />
+            <TextView
+                android:id="@+id/time_doingSomething"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="-20dp"
+                android:textColor="@color/textColorOnPrimary"
+                tools:text="01.09 15:30" />
 
-        <TextView
-            android:id="@+id/money_doingSomething"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="33dp"
-            android:text="$"
-            android:textAlignment="center"
-            android:textColor="@color/textColorOnPrimary" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/money_icon" />
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="62dp"
-            android:background="@drawable/health_icon" />
+            <TextView
+                android:id="@+id/money_doingSomething"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="-23dp"
+                android:text="$"
+                android:textAlignment="center"
+                android:textColor="@color/textColorOnPrimary" />
 
-        <ProgressBar
-            android:id="@+id/progressBar_health_doingSomething"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="74dp"
-            tools:progress="75" />
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/health_icon" />
 
-
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="94dp"
-            android:background="@drawable/food_icon" />
-
-        <ProgressBar
-            android:id="@+id/progressBar_hungry_doingSomething"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="106dp"
-            tools:progress="75" />
+            <ProgressBar
+                android:id="@+id/progressBar_health_doingSomething"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-22dp"
+                tools:progress="75" />
 
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="126dp"
-            android:background="@drawable/energy_icon" />
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/food_icon" />
 
-        <ProgressBar
-            android:id="@+id/progressBar_energy_doingSomething"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="138dp"
-            tools:progress="75" />
+            <ProgressBar
+                android:id="@+id/progressBar_hungry_doingSomething"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-20dp"
+                tools:progress="75" />
 
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="158dp"
-            android:background="@drawable/happiness_icon" />
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/energy_icon" />
 
-        <ProgressBar
-            android:id="@+id/progressBar_happiness_doingSomething"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="170dp"
-            tools:progress="75" />
+            <ProgressBar
+                android:id="@+id/progressBar_energy_doingSomething"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-20dp"
+                tools:progress="75" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="195dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="8dp"
-            android:text="Click anywhere to end"
-            android:textColor="@color/textColorOnPrimary"
-            android:textStyle="italic"
-            android:textSize="12sp"/>
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/happiness_icon" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_happiness_doingSomething"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-20dp"
+                tools:progress="75" />
+
+            <TextView
+                android:id="@+id/textview_homework"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Doing Homework: "
+                android:layout_marginTop="15dp"
+                android:textColor="@color/textColorOnPrimary"
+                android:visibility="gone"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar_homework_doingSomething"
+                style="@style/ProgressBarMain"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="2dp"
+                tools:progress="75"
+                android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="-30dp"
+                android:text="Click anywhere to end"
+                android:textColor="@color/textColorOnPrimary"
+                android:textStyle="italic"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 

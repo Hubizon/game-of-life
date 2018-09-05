@@ -1,9 +1,13 @@
 package com.example.hubert.gameoflife;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +27,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class LearnInHomeFragment extends Fragment implements RecyclerViewSubjectAdapter.ItemClickListener {
+
+    public static int NumberToDoForDoingSomething;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,8 +72,6 @@ public class LearnInHomeFragment extends Fragment implements RecyclerViewSubject
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
@@ -77,17 +82,8 @@ public class LearnInHomeFragment extends Fragment implements RecyclerViewSubject
                 container, false);
 
         ArrayList<String> subjectNames = new ArrayList<>();
-        subjectNames.add("Mathematics: 4");
-        subjectNames.add("English: 4");
-        subjectNames.add("Languages: 4");
-        subjectNames.add("Art: 4");
-        subjectNames.add("Music: 4");
-        subjectNames.add("Psychical Education: 4");
-        subjectNames.add("Information Technology: 4");
-        subjectNames.add("Biology: 4");
-        subjectNames.add("Chemistry: 4");
-        subjectNames.add("History: 4");
-        subjectNames.add("Behavior: 4");
+        for(int i = 0; i <= (MainActivity.subjectsList.length - 1); i++)
+            subjectNames.add(MainActivity.subjectsList[(i)].getSubjectName());
 
         // set up the RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewSubjects);
@@ -96,12 +92,18 @@ public class LearnInHomeFragment extends Fragment implements RecyclerViewSubject
         adapter.setClickListener(LearnInHomeFragment.this);
         recyclerView.setAdapter(adapter);
 
+
         return view;
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        //    Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        if(view.findViewById(R.id.subjectHomework).getVisibility() == View.VISIBLE)
+        {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .add(R.id.mainFragmentHolder, new DoingSomethingFragment())
+                    .commit();
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

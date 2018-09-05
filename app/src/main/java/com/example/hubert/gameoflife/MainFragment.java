@@ -117,7 +117,7 @@ public class MainFragment extends Fragment  {
         ((ProgressBar)(view.findViewById(R.id.progressBar_character_happiness))).setProgress((MainActivity.Happiness / 10));
 
         ((TextView)(view.findViewById(R.id.characterLodging))).setText(getResources().getString(R.string.loudging) + " " + MainActivity.MyLodging.getName());
-        ((TextView)(view.findViewById(R.id.characterEducationWork))).setText(getResources().getString(R.string.education) + " " + MainActivity.SchoolName);
+       // ((TextView)(view.findViewById(R.id.characterEducationWork))).setText(getResources().getString(R.string.education) + " " + MainActivity.SchoolName);
         //((TextView)(view.findViewById(R.id.characterEducationWork))).setText(getResources().getString(R.string.work) + " " + MainActivity.MyJob.getName());
         ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + MainActivity.MyTransport.getName());
         //((TextView)(view.findViewById(R.id.characterGirlboyfriend))).setText(getResources().getString(R.string.girlfriend) + " " + MainActivity.MyGirlboyfriend.getName());

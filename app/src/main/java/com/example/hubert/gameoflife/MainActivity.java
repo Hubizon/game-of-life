@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
     public static int TimeHours = 12;
 
     public static Lodging MyLodging = new Lodging("Parents House", 0, 10, 5, 125, 5);;
-    public static String SchoolName = "Primary School";
     public static Job MyJob = null;
+    public static boolean IsInSchoolNow = true;
     public static Transport MyTransport = new Transport("Foots", 0, 10);
     public static Girlboyfriend MyGirlboyfriend = null;
     public static Children MyChildren = null;
@@ -53,6 +53,19 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
     public static Fun MyTv = null;
     public static Fun MyPhone = null;
     public static ArrayList<Lottery> OwnedLotteries = new ArrayList<>();
+
+    public static Subject[] subjectsList = new Subject[] { new Subject("Mathematics", 4),
+    new Subject("English", 4),
+    new Subject("Languages", 4),
+    new Subject("History", 4),
+    new Subject("Chemistry", 4),
+    new Subject("Psychic", 4),
+    new Subject("Biology", 4),
+    new Subject("Information Technology", 4),
+    new Subject("Art", 4),
+    new Subject("Music", 4),
+    new Subject("Psychical Education", 4),
+    new Subject("Behavior", 4), };
 
     public static int CommunicationSkills = 100;
 
@@ -83,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
              {
                  TimeHours = 0;
                  AgeDays++;
+
+                 for(int i = 0; i <= (subjectsList.length - 1); i++)
+                     subjectsList[i].IsTodaysHomeworkDone = false;
+
                  if(DateDays >= 31)
                  {
                      DateDays = 0;
@@ -100,6 +117,14 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
              }
              else
                  TimeHours++;
+
+             if(AgeYears <= 18)
+             {
+                 for(int i = 0; i < MainActivity.subjectsList.length; i++)
+                 {
+                     MainActivity.subjectsList[i].decreaseToAnotherMark(1);
+                 }
+             }
         }
     }
 
@@ -248,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
     }
 
     public void onGiveUpSchoolClick(View view) {
+        IsInSchoolNow = false;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
         ft.commit();
@@ -316,11 +342,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         dialog.setTitle(title)
                 //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Nah", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         dialoginterface.cancel();
                     }})
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         Money -= 50;
                         CommunicationSkills += 15;
@@ -331,6 +357,37 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
     public void onTalkClick(View view)
     {
         ThingToDoForDoingSomething = "TalkOnMessengers";
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
+        ft.commit();
+    }
+
+    public void onGoToSchoolClick(View view)
+    {
+        ThingToDoForDoingSomething = "GoToSchool";
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
+        ft.commit();
+    }
+
+    public void onLearnHardClick(View view)
+    {
+        ThingToDoForDoingSomething = "GoToSchoolLearnHard";
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
+        ft.commit();
+    }
+
+    public void onHangAroundClick(View view)
+    {
+        ThingToDoForDoingSomething = "GoToSchoolHangAround";
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
+        ft.commit();
+    }
+
+    public void test()
+    {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
         ft.commit();

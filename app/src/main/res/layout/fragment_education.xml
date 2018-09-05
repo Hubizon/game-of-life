@@ -51,15 +51,6 @@
         android:layout_margin="8dp">
 
 
-        <TextView
-            android:id="@+id/timeToGoToSchool"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/mon_fri"
-            android:textColor="@color/textColorOnPrimary"
-            android:textSize="16sp" />
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -70,18 +61,8 @@
             android:background="@color/colorSecondary"
             android:text="@string/go_to_the_school"
             android:textColor="@color/textColorOnSecondary"
-            android:textSize="15sp" />
-
-        <ProgressBar
-            android:id="@+id/progressBar_goToSchool"
-            style="@style/ProgressBarMain"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="79dp"
-            android:layout_marginBottom="8dp"
-            tools:progress="0" />
+            android:textSize="15sp"
+            android:onClick="onGoToSchoolClick"/>
 
         <Button
             android:layout_width="160dp"
@@ -92,7 +73,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/learn_hard"/>
+            android:text="@string/learn_hard"
+            android:onClick="onLearnHardClick"/>
 
         <Button
             android:layout_width="160dp"
@@ -103,7 +85,8 @@
             android:layout_marginStart="176dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/hang_around"/>
+            android:text="@string/hang_around"
+            android:onClick="onHangAroundClick"/>
 
         <Button
             android:layout_width="match_parent"
