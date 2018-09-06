@@ -4,10 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.hubert.gameoflife.Education.LearnInHomeFragment;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.Utils.Food;
 import com.example.hubert.gameoflife.Utils.Fun;
 import com.example.hubert.gameoflife.Utils.Lodging;
@@ -15,6 +22,7 @@ import com.example.hubert.gameoflife.Utils.Lottery;
 import com.example.hubert.gameoflife.Utils.Medicines;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Transport;
+import com.example.hubert.gameoflife.Work.FindJobFragment;
 
 
 /**
@@ -25,7 +33,8 @@ import com.example.hubert.gameoflife.Utils.Transport;
  * Use the {@link ShopFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShopFragment extends Fragment {
+public class ShopFragment extends Fragment
+implements View.OnClickListener{
 
     public static Food[] foodList = new Food[] {
             new Food("Eat Thrashes", 0, 50, -20, 0, -15),
@@ -113,94 +122,99 @@ public class ShopFragment extends Fragment {
             new Transport("Buy a Teleporter", 100000000, 0),
     };
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    public ShopFragment() {}
 
-    public ShopFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShopFragment newInstance(String param1, String param2) {
+    public static ShopFragment newInstance() {
         ShopFragment fragment = new ShopFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_shop,
+                container, false);
+
+        ImageButton foodBuybutton = view.findViewById(R.id.foodBuyShop);
+        foodBuybutton.setOnClickListener(this);
+
+        ImageButton medicinesBuybutton = view.findViewById(R.id.medicinesBuyShop);
+        medicinesBuybutton.setOnClickListener(this);
+
+        ImageButton funBuybutton = view.findViewById(R.id.funBuyShop);
+        funBuybutton.setOnClickListener(this);
+
+        ImageButton lotteryBuybutton = view.findViewById(R.id.lotteryBuyShop);
+        lotteryBuybutton.setOnClickListener(this);
+
+        ImageButton houseBuybutton = view.findViewById(R.id.houseBuyShop);
+        houseBuybutton.setOnClickListener(this);
+
+        ImageButton transportBuybutton = view.findViewById(R.id.transportBuyShop);
+        transportBuybutton.setOnClickListener(this);
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.foodBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.medicinesBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.funBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.lotteryBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.houseBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.transportBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+   /* public void onShopButtonClick(View view) {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+
+        switch(view.getId())
+        {
+
+            case R.id.giveUpSchoolEducation:
+                MainActivity.IsInSchoolNow = false;
+                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
+
+            case R.id.learnAtHomeEducation:
+                ft.replace(R.id.mainFragmentHolder, new LearnInHomeFragment());
+
+            default:
+                break;
+
         }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
+        ft.commit();
+    }*/
 
 }
 

@@ -35,8 +35,6 @@ public class ShopBuyFragment extends Fragment implements RecyclerViewShopBuyAdap
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
-
     public ShopBuyFragment() {
         // Required empty public constructor
     }
@@ -253,30 +251,6 @@ public class ShopBuyFragment extends Fragment implements RecyclerViewShopBuyAdap
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
     @Override
     public void onItemClick(View view, int position) {
         switch (view.getId())
@@ -398,34 +372,25 @@ public class ShopBuyFragment extends Fragment implements RecyclerViewShopBuyAdap
         if (MainActivity.Money >= ShopFragment.funList[position].getPrice())
         {
             MainActivity.Money -= ShopFragment.funList[position].getPrice();
-            if(ShopFragment.funList[position].getType().equals("Exit"))
-                MainActivity.Happiness += ShopFragment.funList[position].getGivenFun();
-            else if(ShopFragment.funList[position].getType().equals("Tv"))
-                MainActivity.MyTv = ShopFragment.funList[position];
-            else if(ShopFragment.funList[position].getType().equals("Computer"))
-                MainActivity.MyComputer = ShopFragment.funList[position];
-            else if(ShopFragment.funList[position].getType().equals("Phone"))
-                MainActivity.MyPhone = ShopFragment.funList[position];
+            switch (ShopFragment.funList[position].getType()) {
+                case "Exit":
+                    MainActivity.Happiness += ShopFragment.funList[position].getGivenFun();
+                    break;
+                case "Tv":
+                    MainActivity.MyTv = ShopFragment.funList[position];
+                    break;
+                case "Computer":
+                    MainActivity.MyComputer = ShopFragment.funList[position];
+                    break;
+                case "Phone":
+                    MainActivity.MyPhone = ShopFragment.funList[position];
+                    break;
+            }
             return true;
         } else
         {
             Toast.makeText(getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
             return false;
         }
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

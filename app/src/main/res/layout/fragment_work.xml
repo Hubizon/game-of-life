@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
 <LinearLayout
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -183,13 +187,13 @@ tools:context=".Work.WorkFragment">
             android:text="@string/give_up_work"
             android:textColor="@color/textColorOnSecondary"
             android:textSize="15sp"
-            android:onClick="onOtherClicks"/>
+            android:onClick="onWorkButtonClick"/>
 
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="61dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp">
@@ -244,25 +248,26 @@ tools:context=".Work.WorkFragment">
         <Button
             android:layout_width="160dp"
             android:layout_height="40dp"
-            android:background="@color/colorSecondary"
-            android:textColor="@color/textColorOnSecondary"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="bottom"
-            android:text="@string/iincrease_their_salary"/>
+            android:background="@color/colorSecondary"
+            android:text="@string/iincrease_their_salary"
+            android:textColor="@color/textColorOnSecondary" />
 
         <Button
             android:layout_width="160dp"
             android:layout_height="40dp"
-            android:background="@color/colorSecondary"
-            android:textColor="@color/textColorOnSecondary"
-            android:layout_marginStart="176dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="10dp"
             android:layout_gravity="bottom"
-            android:text="@string/lower_their_salary"/>
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="176dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/lower_their_salary"
+            android:textColor="@color/textColorOnSecondary" />
 
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
+</ScrollView>
