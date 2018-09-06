@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.OnFragmentInteractionListener, EducationFragment.OnFragmentInteractionListener,
+public class MainActivity extends AppCompatActivity implements EducationFragment.OnFragmentInteractionListener,
                     ShopFragment.OnFragmentInteractionListener, ShopBuyFragment.OnFragmentInteractionListener, GirlboyfriendFragment.OnFragmentInteractionListener,
                     HomeFragment.OnFragmentInteractionListener, ComputerFragment.OnFragmentInteractionListener, FindJobFragment.OnFragmentInteractionListener,
                     WorkFragment.OnFragmentInteractionListener, LearnInHomeFragment.OnFragmentInteractionListener, DoingSomethingFragment.OnFragmentInteractionListener{
@@ -103,6 +103,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
 
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     class ChangeProgressBars extends TimerTask {
         public void run() {
             Hungry = Hungry - 5;
@@ -146,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         }
     }
 
-    public void onOtherClicks(View view) {
+    public void onMainIconClick(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         switch(view.getId())
@@ -173,7 +178,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
                 break;
 
                 default:
-                    Toast.makeText(this, String.format("The %s view is not yet implemented!", view.getId()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, String.format("The %s view is not yet implemented!",
+                            getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                    return;
 //            case R.id.computerHome:
 //                if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
 //                    ft.replace(R.id.mainFragmentHolder, new ComputerFragment());
@@ -227,7 +234,4 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
         ft.commit();
     }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {}
 }
