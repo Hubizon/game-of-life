@@ -1,21 +1,34 @@
 package com.example.hubert.gameoflife;
 
-import android.app.FragmentManager;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.icu.lang.UCharacter;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.hubert.gameoflife.Education.EducationFragment;
+import com.example.hubert.gameoflife.Education.LearnInHomeFragment;
+import com.example.hubert.gameoflife.Education.Subject;
+import com.example.hubert.gameoflife.Girlboyfriend.Children;
+import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
+import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
+import com.example.hubert.gameoflife.House.ComputerFragment;
+import com.example.hubert.gameoflife.House.HomeFragment;
+import com.example.hubert.gameoflife.Profile.MainFragment;
+import com.example.hubert.gameoflife.Shop.ShopBuyFragment;
+import com.example.hubert.gameoflife.Shop.ShopFragment;
+import com.example.hubert.gameoflife.Utils.Fun;
+import com.example.hubert.gameoflife.Utils.Lodging;
+import com.example.hubert.gameoflife.Utils.Lottery;
+import com.example.hubert.gameoflife.Utils.Transport;
+import com.example.hubert.gameoflife.Work.FindJobFragment;
+import com.example.hubert.gameoflife.Work.Job;
+import com.example.hubert.gameoflife.Work.WorkFragment;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
     public static long DateDays = 1;
     public static int TimeHours = 12;
 
-    public static Lodging MyLodging = new Lodging("Parents House", 0, 10, 5, 125, 5);;
+    public static Lodging MyLodging = new Lodging("Parents House", 0, 10, 5, 125, 5);
     public static Job MyJob = null;
     public static boolean IsInSchoolNow = true;
     public static Transport MyTransport = new Transport("Foots", 0, 10);
@@ -128,213 +141,58 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         }
     }
 
-    public void onProfileWorkClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new MainFragment());
-        ft.commit();
-    }
-
-    public void onEducationWorkClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new EducationFragment());
-        ft.commit();
-    }
-
-    public void onShopClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopFragment());
-        ft.commit();
-    }
-
-    public void onGirlBoyFriendClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new GirlboyfriendFragment());
-        ft.commit();
-    }
-
-    public void onHomeClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new HomeFragment());
-        ft.commit();
-    }
-
-    public static String ThingToDo = "food";
-    public void onFoodBuyClick(View view) {
-        ThingToDo = "foodBuy";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onMedicinesBuyClick(View view) {
-        ThingToDo = "medicinesBuy";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onFunBuyClick(View view) {
-        ThingToDo = "funBuy";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onLotteryBuyClick(View view) {
-        ThingToDo = "lotteryBuy";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onHouseBuyClick(View view) {
-        ThingToDo = "houseBuy";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onTransportBuyClick(View view) {
-        ThingToDo = "transportBuy";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onFridgeClick(View view) {
-        ThingToDo = "foodEat";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onMedikitClick(View view) {
-        ThingToDo = "medicinesEat";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onOfficeWorkClick(View view) {
-        ThingToDo = "officeJob";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onCriminalWorkClick(View view) {
-        ThingToDo = "criminalJob";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onArtsWorkClick(View view) {
-        ThingToDo = "artsJob";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onMediaWorkClick(View view) {
-        ThingToDo = "mediaJob";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onOutsideWorkClick(View view) {
-        ThingToDo = "outsideJob";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onOtherWorkClick(View view) {
-        ThingToDo = "otherJob";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
-        ft.commit();
-    }
-
-    public void onComputerClick(View view) {
-        if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
-        {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainFragmentHolder, new ComputerFragment());
-            ft.commit();
-        }
-    }
-
-    public void onLearnAtHomeClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new LearnInHomeFragment());
-        ft.commit();
-    }
-
-    public void onGiveUpSchoolClick(View view) {
-        IsInSchoolNow = false;
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
-        ft.commit();
-    }
-
-    public void onGiveUpWorkClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
-        ft.commit();
-    }
-
-    public void onEducationClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new EducationFragment());
-        ft.commit();
-    }
-
-    public static String ThingToDoForDoingSomething;
-    public void onBedClick(View view)
+    public void onOtherClicks(View view)
     {
-        ThingToDoForDoingSomething = "Sleep";
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
+
+        switch(view.getId())
+        {
+            case R.id.profile:
+                ft.replace(R.id.mainFragmentHolder, new MainFragment());
+                break;
+
+            case R.id.educationWork:
+                ft.replace(R.id.mainFragmentHolder, new EducationFragment());
+                break;
+
+            case R.id.shop:
+                ft.replace(R.id.mainFragmentHolder, new ShopFragment());
+                break;
+
+            case R.id.girlboyfriend:
+                ft.replace(R.id.mainFragmentHolder, new GirlboyfriendFragment());
+                break;
+
+            case R.id.house:
+                ft.replace(R.id.mainFragmentHolder, new HomeFragment());
+                break;
+
+            case R.id.computerHome:
+                if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
+                    ft.replace(R.id.mainFragmentHolder, new ComputerFragment());
+                else
+                    Toast.makeText(this, "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.giveUpSchoolEducation:
+                IsInSchoolNow = false;
+                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
+                break;
+
+            case R.id.giveUpWorkWork:
+                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
+                break;
+
+            case R.id.educationFindJob:
+                ft.replace(R.id.mainFragmentHolder, new EducationFragment());
+                break;
+
+            case R.id.supportComputer:
+                alertView("Support a charity event", "Do you really want to support a charity event for $50?");
+                break;
+        }
+
         ft.commit();
-    }
-
-    public void onTvClick(View view)
-    {
-        if(MainActivity.MyTv != null)
-        {
-            ThingToDoForDoingSomething = "WatchTV";
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
-            ft.commit();
-        }
-    }
-
-    public void onPlayClick(View view)
-    {
-        if(MyComputer == null || MyPhone == null)
-        {
-            if(MyPhone == null)
-                ThingToDoForDoingSomething = "PlayComputer";
-            else if(MyComputer == null)
-                ThingToDoForDoingSomething = "PlayPhone";
-        }
-        else
-        {
-            if(MyComputer.getPrice() >= MyPhone.getPrice())
-                ThingToDoForDoingSomething = "PlayComputer";
-            else
-                ThingToDoForDoingSomething = "PlayPhone";
-        }
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
-        ft.commit();
-    }
-
-    public void onSupportClick(View view)
-    {
-        alertView("Support a charity event", "Do you really want to support a charity event for $50?");
     }
 
     private void alertView(String title, String message) {
@@ -354,39 +212,14 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
                 }).show();
     }
 
-    public void onTalkClick(View view)
+    public void onBuyOrWorkClick(View view)
     {
-        ThingToDoForDoingSomething = "TalkOnMessengers";
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
+        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
         ft.commit();
     }
 
-    public void onGoToSchoolClick(View view)
-    {
-        ThingToDoForDoingSomething = "GoToSchool";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
-        ft.commit();
-    }
-
-    public void onLearnHardClick(View view)
-    {
-        ThingToDoForDoingSomething = "GoToSchoolLearnHard";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
-        ft.commit();
-    }
-
-    public void onHangAroundClick(View view)
-    {
-        ThingToDoForDoingSomething = "GoToSchoolHangAround";
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
-        ft.commit();
-    }
-
-    public void test()
+    public void onThingsClick(View view)
     {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());

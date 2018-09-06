@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.example.hubert.gameoflife.Shop;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.MainActivity;
+import com.example.hubert.gameoflife.R;
+
 import java.util.ArrayList;
 
 
@@ -22,7 +25,7 @@ import java.util.ArrayList;
  * Use the {@link ShopBuyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShopBuyFragment extends Fragment implements RecyclerViewShopBuyAdapter.ItemClickListener{
+public class ShopBuyFragment extends Fragment implements RecyclerViewShopBuyAdapter.ItemClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

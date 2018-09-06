@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -65,7 +66,7 @@ public class DoingSomethingFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         Timer timer = new Timer();
-        TimerTask updateValues = new DoingSomethingFragment.ChangeLabelsDoingSomething();
+        TimerTask updateValues = new ChangeLabelsDoingSomething();
         timer.scheduleAtFixedRate(updateValues, 0, 2000);
     }
 
@@ -74,7 +75,7 @@ public class DoingSomethingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_computer,
+        view = inflater.inflate(R.layout.fragment_doing_something,
                 container, false);
 
         /*((TextView)(view.findViewById(R.id.money_doingSomething))).setText("$ " + MainActivity.Money);
@@ -94,33 +95,45 @@ public class DoingSomethingFragment extends Fragment {
     class ChangeLabelsDoingSomething extends TimerTask {
 
         public void run() {
-            switch (MainActivity.ThingToDoForDoingSomething)
+            switch (view.getId())
             {
-                case "Sleep":
+                case R.id.sleepHome:
                     MainActivity.Energy += MainActivity.MyLodging.getGivenEnergy();
                     MainActivity.Health += MainActivity.MyLodging.getGivenHealth();
                     MainActivity.Happiness += MainActivity.MyLodging.getGivenHappiness();
                     break;
 
-                case "WatchTV":
-                    MainActivity.Happiness += MainActivity.MyTv.getGivenFun();
+                case R.id.watchTvHome:
+                    if(MainActivity.MyTv != null)
+                        MainActivity.Happiness += MainActivity.MyTv.getGivenFun();
+                    else
+                        Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a televisor", Toast.LENGTH_SHORT).show();
                     break;
 
-                case "PlayComputer":
-                    MainActivity.Happiness += MainActivity.MyComputer.getGivenFun();
+                case R.id.playComputer:
+                    if(MainActivity.MyComputer == null || MainActivity.MyPhone == null)
+                    {
+                        if(MainActivity.MyPhone == null)
+                            MainActivity.Happiness += MainActivity.MyComputer.getGivenFun();
+                        else if(MainActivity.MyComputer == null)
+                            MainActivity.Happiness += MainActivity.MyPhone.getGivenFun();
+                    }
+                    else
+                    {
+                        if(MainActivity.MyComputer.getPrice() >= MainActivity.MyPhone.getPrice())
+                            MainActivity.Happiness += MainActivity.MyComputer.getGivenFun();
+                        else
+                            MainActivity.Happiness += MainActivity.MyPhone.getGivenFun();
+                    }
                     break;
 
-                case "PlayPhone":
-                    MainActivity.Happiness += MainActivity.MyPhone.getGivenFun();
-                    break;
-
-                case "TalkOnMessengers":
+                case R.id.talkComputer:
                     MainActivity.CommunicationSkills += 2;
                     MainActivity.Hungry--;
                     MainActivity.Energy--;
                     break;
 
-                case "GoToSchool":
+                case R.id.GoToSchoolEducation:
                     for(int i = 0; i < MainActivity.subjectsList.length; i++)
                         MainActivity.subjectsList[i].increaseToAnotherMark(5);
                     MainActivity.Hungry--;
@@ -128,7 +141,7 @@ public class DoingSomethingFragment extends Fragment {
                     MainActivity.Happiness -= 2;
                     break;
 
-                case "GoToSchoolLearnHard":
+                case R.id.GoToSchoolLearnHardEducation:
                     for(int i = 0; i < MainActivity.subjectsList.length; i++)
                         MainActivity.subjectsList[i].increaseToAnotherMark(10);
                     MainActivity.Hungry--;
@@ -136,7 +149,7 @@ public class DoingSomethingFragment extends Fragment {
                     MainActivity.Happiness -= 7;
                     break;
 
-                case "GoToSchoolHangAround":
+                case R.id.GoToSchoolHangAroundEducation:
                     for(int i = 0; i < MainActivity.subjectsList.length; i++)
                         MainActivity.subjectsList[i].decreaseToAnotherMark(10);
                     MainActivity.subjectsList[MainActivity.subjectsList.length - 1].decreaseToAnotherMark(15);
@@ -145,7 +158,7 @@ public class DoingSomethingFragment extends Fragment {
                     MainActivity.Happiness += 25;
                     break;
 
-                case "DoHomework":
+               /* case R.id.subjectCardView:
                     view.findViewById(R.id.textview_homework).setVisibility(View.VISIBLE);
                     view.findViewById(R.id.progressBar_homework_doingSomething).setVisibility(View.VISIBLE);
                     ((ProgressBar)(view.findViewById(R.id.progressBar_homework_doingSomething))).setProgress(
@@ -153,12 +166,11 @@ public class DoingSomethingFragment extends Fragment {
                     if(((ProgressBar)(view.findViewById(R.id.progressBar_homework_doingSomething))).getProgress() >= 100)
                         MainActivity.subjectsList[LearnInHomeFragment.NumberToDoForDoingSomething].increaseToAnotherMark(50);
 
-                    // TODO: fix this error
-                   // FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                   // ft.remove(new DoingSomethingFragment());
-                  //  ft.commit();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .add(R.id.mainFragmentHolder, new DoingSomethingFragment())
+                            .commit();
 
-                    break;
+                    break;*/
             }
 
 

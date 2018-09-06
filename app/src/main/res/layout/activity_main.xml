@@ -17,45 +17,50 @@
         android:layout_margin="8dp">
 
         <ImageView
+            android:id="@+id/profile"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/profile_icon"
-            android:onClick="onProfileWorkClick"/>
+            android:onClick="onOtherClicks"/>
 
         <ImageView
+            android:id="@+id/educationWork"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="85dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/education_icon"
-            android:onClick="onEducationWorkClick" />
+            android:onClick="onOtherClicks" />
 
         <ImageView
+            android:id="@+id/shop"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="150dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/shop_icon"
-            android:onClick="onShopClick" />
+            android:onClick="onOtherClicks" />
 
         <ImageView
+            android:id="@+id/girlboyfriend"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="215dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/girlboyfriend_icon"
-            android:onClick="onGirlBoyFriendClick"/>
+            android:onClick="onOtherClicks"/>
 
         <ImageView
+            android:id="@+id/house"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="275dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/house_icon"
-            android:onClick="onHomeClick"/>
+            android:onClick="onOtherClicks"/>
 
     </android.support.v7.widget.CardView>
 

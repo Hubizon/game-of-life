@@ -5,7 +5,7 @@
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".WorkFragment">
+tools:context=".Work.WorkFragment">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -172,6 +172,7 @@ tools:context=".WorkFragment">
             android:text="@string/hang_around"/>
 
         <Button
+            android:id="@+id/giveUpWorkWork"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -182,7 +183,7 @@ tools:context=".WorkFragment">
             android:text="@string/give_up_work"
             android:textColor="@color/textColorOnSecondary"
             android:textSize="15sp"
-            android:onClick="onGiveUpWorkClick"/>
+            android:onClick="onOtherClicks"/>
 
     </android.support.v7.widget.CardView>
 

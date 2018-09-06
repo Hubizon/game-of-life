@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.example.hubert.gameoflife.Profile;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.hubert.gameoflife.MainActivity;
+import com.example.hubert.gameoflife.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

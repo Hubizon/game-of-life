@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.example.hubert.gameoflife.Utils;
 
 public class Lottery {
 

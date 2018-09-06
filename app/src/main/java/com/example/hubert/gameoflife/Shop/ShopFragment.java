@@ -1,15 +1,20 @@
-package com.example.hubert.gameoflife;
+package com.example.hubert.gameoflife.Shop;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import com.example.hubert.gameoflife.Utils.Food;
+import com.example.hubert.gameoflife.Utils.Fun;
+import com.example.hubert.gameoflife.Utils.Lodging;
+import com.example.hubert.gameoflife.Utils.Lottery;
+import com.example.hubert.gameoflife.Utils.Medicines;
+import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Utils.Transport;
 
 
 /**
