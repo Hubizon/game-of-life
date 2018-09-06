@@ -98,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         timer.scheduleAtFixedRate(updateValues, 0, 1500);
     }
 
+    @Override
+    public void onFragmentInteraction() {
+
+    }
+
     class ChangeProgressBars extends TimerTask {
         public void run() {
             Hungry = Hungry - 5;
@@ -141,8 +146,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         }
     }
 
-    public void onOtherClicks(View view)
-    {
+    public void onOtherClicks(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         switch(view.getId())
@@ -152,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
                 break;
 
             case R.id.educationWork:
+            case R.id.educationFindJob:
                 ft.replace(R.id.mainFragmentHolder, new EducationFragment());
                 break;
 
@@ -167,29 +172,28 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
                 ft.replace(R.id.mainFragmentHolder, new HomeFragment());
                 break;
 
-            case R.id.computerHome:
-                if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
-                    ft.replace(R.id.mainFragmentHolder, new ComputerFragment());
-                else
-                    Toast.makeText(this, "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.giveUpSchoolEducation:
-                IsInSchoolNow = false;
-                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
-                break;
-
-            case R.id.giveUpWorkWork:
-                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
-                break;
-
-            case R.id.educationFindJob:
-                ft.replace(R.id.mainFragmentHolder, new EducationFragment());
-                break;
-
-            case R.id.supportComputer:
-                alertView("Support a charity event", "Do you really want to support a charity event for $50?");
-                break;
+                default:
+                    Toast.makeText(this, String.format("The %s view is not yet implemented!", view.getId()), Toast.LENGTH_SHORT).show();
+//            case R.id.computerHome:
+//                if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
+//                    ft.replace(R.id.mainFragmentHolder, new ComputerFragment());
+//                else
+//                    Toast.makeText(this, "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
+//                break;
+//
+//
+//            case R.id.giveUpSchoolEducation:
+//                IsInSchoolNow = false;
+//                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
+//                break;
+//
+//            case R.id.giveUpWorkWork:
+//                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
+//                break;
+//
+//            case R.id.supportComputer:
+//                alertView("Support a charity event", "Do you really want to support a charity event with $50?");
+//                break;
         }
 
         ft.commit();
@@ -212,22 +216,18 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
                 }).show();
     }
 
-    public void onBuyOrWorkClick(View view)
-    {
+    public void onBuyOrWorkClick(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
         ft.commit();
     }
 
-    public void onThingsClick(View view)
-    {
+    public void onThingsClick(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
         ft.commit();
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
+    public void onFragmentInteraction(Uri uri) {}
 }

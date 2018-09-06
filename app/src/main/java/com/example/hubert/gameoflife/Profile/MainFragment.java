@@ -1,5 +1,6 @@
 package com.example.hubert.gameoflife.Profile;
 
+
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,8 +17,7 @@ import com.example.hubert.gameoflife.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-public class MainFragment extends Fragment  {
+public class MainFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 

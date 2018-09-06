@@ -398,14 +398,20 @@ public class ShopBuyFragment extends Fragment implements RecyclerViewShopBuyAdap
         if (MainActivity.Money >= ShopFragment.funList[position].getPrice())
         {
             MainActivity.Money -= ShopFragment.funList[position].getPrice();
-            if(ShopFragment.funList[position].getType().equals("Exit"))
-                MainActivity.Happiness += ShopFragment.funList[position].getGivenFun();
-            else if(ShopFragment.funList[position].getType().equals("Tv"))
-                MainActivity.MyTv = ShopFragment.funList[position];
-            else if(ShopFragment.funList[position].getType().equals("Computer"))
-                MainActivity.MyComputer = ShopFragment.funList[position];
-            else if(ShopFragment.funList[position].getType().equals("Phone"))
-                MainActivity.MyPhone = ShopFragment.funList[position];
+            switch (ShopFragment.funList[position].getType()) {
+                case "Exit":
+                    MainActivity.Happiness += ShopFragment.funList[position].getGivenFun();
+                    break;
+                case "Tv":
+                    MainActivity.MyTv = ShopFragment.funList[position];
+                    break;
+                case "Computer":
+                    MainActivity.MyComputer = ShopFragment.funList[position];
+                    break;
+                case "Phone":
+                    MainActivity.MyPhone = ShopFragment.funList[position];
+                    break;
+            }
             return true;
         } else
         {
