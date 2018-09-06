@@ -4,10 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Utils.Food;
 import com.example.hubert.gameoflife.Utils.Fun;
@@ -138,14 +141,23 @@ implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_shop,
                 container, false);
 
-        ImageView foodBuybutton = view.findViewById(R.id.foodBuyShop);
+        ImageButton foodBuybutton = view.findViewById(R.id.foodBuyShop);
         foodBuybutton.setOnClickListener(this);
 
-        ImageView medicinesBuybutton = view.findViewById(R.id.medicinesBuyShop);
+        ImageButton medicinesBuybutton = view.findViewById(R.id.medicinesBuyShop);
         medicinesBuybutton.setOnClickListener(this);
 
-        ImageView funBuybutton = view.findViewById(R.id.funBuyShop);
+        ImageButton funBuybutton = view.findViewById(R.id.funBuyShop);
         funBuybutton.setOnClickListener(this);
+
+        ImageButton lotteryBuybutton = view.findViewById(R.id.lotteryBuyShop);
+        lotteryBuybutton.setOnClickListener(this);
+
+        ImageButton houseBuybutton = view.findViewById(R.id.houseBuyShop);
+        houseBuybutton.setOnClickListener(this);
+
+        ImageButton transportBuybutton = view.findViewById(R.id.transportBuyShop);
+        transportBuybutton.setOnClickListener(this);
 
         return view;
     }
@@ -169,14 +181,31 @@ implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.foodBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.medicinesBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.funBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.lotteryBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.houseBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.transportBuyShop:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
         }
     }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.hubert.gameoflife.R;
 
@@ -64,14 +65,20 @@ implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
-        switch (v.getId()) {
+        switch (view.getId()) {
             case R.id.watchTvHome:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.sleepHome:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.computerHome:
+                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
+                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
         }
     }

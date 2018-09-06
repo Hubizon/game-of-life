@@ -84,7 +84,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/support_a_charity_event"
-            android:onClick="onOtherClicks"/>
+            android:onClick="onMainIconClick"/>
 
         <Button
             android:layout_width="160dp"

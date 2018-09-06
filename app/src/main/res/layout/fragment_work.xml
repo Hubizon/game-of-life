@@ -187,7 +187,7 @@ tools:context=".Work.WorkFragment">
             android:text="@string/give_up_work"
             android:textColor="@color/textColorOnSecondary"
             android:textSize="15sp"
-            android:onClick="onOtherClicks"/>
+            android:onClick="onMainIconClick"/>
 
     </android.support.v7.widget.CardView>
 

@@ -22,7 +22,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/foodBuyShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/medicinesBuyShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/funBuyShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/lotteryBuyShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/houseBuyShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/transportBuyShop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
