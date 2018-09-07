@@ -17,50 +17,19 @@ import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Work.FindJobFragment;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EducationFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EducationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class EducationFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
 
 
-    public EducationFragment() {
-        // Required empty public constructor
-    }
+    public EducationFragment() {}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LearnInHomeFragment.
-     */
-    public static EducationFragment newInstance(String param1, String param2) {
+    public static EducationFragment newInstance() {
         EducationFragment fragment = new EducationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -78,10 +47,10 @@ public class EducationFragment extends Fragment {
 
             case R.id.giveUpSchoolEducation:
                 MainActivity.IsInSchoolNow = false;
-                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
+                ft.replace(R.id.pager, new FindJobFragment());
 
             case R.id.learnAtHomeEducation:
-                ft.replace(R.id.mainFragmentHolder, new LearnInHomeFragment());
+                ft.replace(R.id.pager, new LearnInHomeFragment());
 
             default:
                 break;

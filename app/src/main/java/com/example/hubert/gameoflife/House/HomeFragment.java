@@ -78,7 +78,7 @@ implements View.OnClickListener{
 
             case R.id.computerHome:
                 if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
-                    ft.replace(R.id.mainFragmentHolder, new ComputerFragment());
+                    ft.replace(R.id.pager, new ComputerFragment());
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
                 break;

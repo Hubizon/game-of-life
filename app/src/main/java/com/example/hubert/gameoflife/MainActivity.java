@@ -2,7 +2,9 @@ package com.example.hubert.gameoflife;
 
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -80,20 +82,43 @@ public class MainActivity extends AppCompatActivity{
     public static int CommunicationSkills = 100;
 
 
+    private ViewPager mPager;
+    private CustomPagerAdapter mPagerAdapter;
+    private TabLayout mTabLayout;
+    private int[] tabIcons = {
+            R.drawable.profile_icon,
+            R.drawable.education_icon,
+            R.drawable.shop_icon,
+            R.drawable.girlboyfriend_icon,
+            R.drawable.house_icon
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new MainFragment());
-        ft.commit();
+        mPager = findViewById(R.id.pager);
+        mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+
+        mTabLayout = findViewById(R.id.tablayout);
+        mTabLayout.setupWithViewPager(mPager);
+        setupTabIcons();
 
         Timer timer = new Timer();
         TimerTask updateValues = new ChangeProgressBars();
         timer.scheduleAtFixedRate(updateValues, 0, 1500);
     }
+
+    private void setupTabIcons() {
+        mTabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        mTabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        mTabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        mTabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        mTabLayout.getTabAt(4).setIcon(tabIcons[4]);
+    }
+
 
     class ChangeProgressBars extends TimerTask {
         public void run() {
@@ -138,40 +163,18 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void onMainIconClick(View view) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-        switch(view.getId())
-        {
-            case R.id.profile:
-                ft.replace(R.id.mainFragmentHolder, new MainFragment());
-                break;
-
-            case R.id.educationWork:
-            case R.id.educationFindJob:
-                ft.replace(R.id.mainFragmentHolder, new EducationFragment());
-                break;
-
-            case R.id.shop:
-                ft.replace(R.id.mainFragmentHolder, new ShopFragment());
-                break;
-
-            case R.id.girlboyfriend:
-                ft.replace(R.id.mainFragmentHolder, new GirlboyfriendFragment());
-                break;
-
-            case R.id.house:
-                ft.replace(R.id.mainFragmentHolder, new HomeFragment());
-                break;
-
-                default:
-                    Toast.makeText(this, String.format("The %s view is not yet implemented!",
-                            getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
-                    return;
+    @Override
+    public void onBackPressed() {
+        if (mPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
-
-        ft.commit();
     }
+
 
     private void alertView(String title, String message) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -192,13 +195,13 @@ public class MainActivity extends AppCompatActivity{
 
     public void onBuyOrWorkClick(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.mainFragmentHolder, new ShopBuyFragment());
+        ft.replace(R.id.pager, new ShopBuyFragment());
         ft.commit();
     }
 
     public void onThingsClick(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mainFragmentHolder, new DoingSomethingFragment());
+        ft.add(R.id.pager, new DoingSomethingFragment());
         ft.commit();
     }
 }

@@ -73,7 +73,7 @@ public class WorkFragment extends Fragment {
         {
 
             case R.id.giveUpWorkWork:
-                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
+                ft.replace(R.id.pager, new FindJobFragment());
 
             default:
                 break;

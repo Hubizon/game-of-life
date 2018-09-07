@@ -233,10 +233,10 @@ public class ShopBuyFragment extends Fragment implements RecyclerViewShopBuyAdap
                 itemsPrices = itemsRewardOutsideJob;
                 break;
 
-            case R.id.educationWork:
-                itemsNames = itemsNamesOtherJob;
-                itemsPrices = itemsRewardOtherJob;
-                break;
+//            case R.id.educationWork:
+//                itemsNames = itemsNamesOtherJob;
+//                itemsPrices = itemsRewardOtherJob;
+//                break;
 
             default:
                 itemsNames = itemsNamesOfficeJob;

@@ -98,7 +98,7 @@ public class LearnInHomeFragment extends Fragment implements RecyclerViewSubject
         if(view.findViewById(R.id.subjectHomework).getVisibility() == View.VISIBLE)
         {
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.mainFragmentHolder, new DoingSomethingFragment())
+                    .add(R.id.pager, new DoingSomethingFragment())
                     .commit();
         }
     }
