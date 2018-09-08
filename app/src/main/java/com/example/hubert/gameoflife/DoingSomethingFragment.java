@@ -17,6 +17,8 @@ import java.util.TimerTask;
 
 public class DoingSomethingFragment extends Fragment {
 
+    //TODO: dialog instead of this class
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class DoingSomethingFragment extends Fragment {
         public void run() {
             switch (view.getId())
             {
-                case R.id.sleepHome:
+                /*case R.id.sleepHome:
                     MainActivity.Energy += MainActivity.MyLodging.getGivenEnergy();
                     MainActivity.Health += MainActivity.MyLodging.getGivenHealth();
                     MainActivity.Happiness += MainActivity.MyLodging.getGivenHappiness();
@@ -131,13 +133,13 @@ public class DoingSomethingFragment extends Fragment {
             }
 
 
-            ((ProgressBar)(view.findViewById(R.id.progressBar_health_doingSomething))).setProgress((MainActivity.Hungry / 10));
+            /*((ProgressBar)(view.findViewById(R.id.progressBar_health_doingSomething))).setProgress((MainActivity.Hungry / 10));
             ((ProgressBar)(view.findViewById(R.id.progressBar_hungry_doingSomething))).setProgress((MainActivity.Health / 10));
             ((ProgressBar)(view.findViewById(R.id.progressBar_energy_doingSomething))).setProgress((MainActivity.Energy / 10));
             ((ProgressBar)(view.findViewById(R.id.progressBar_happiness_doingSomething))).setProgress((MainActivity.Happiness / 10));
 
             ((TextView)(view.findViewById(R.id.time_doingSomething))).setText(MainActivity.DateYears + "." + MainActivity.DateMonths + "." + MainActivity.DateDays + " "
-                    + MainActivity.TimeHours + ":" + "00");
+                    + MainActivity.TimeHours + ":" + "00");*/
         }
     }
 }

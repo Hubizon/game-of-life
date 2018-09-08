@@ -2,6 +2,7 @@ package com.example.hubert.gameoflife.House;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -56,6 +57,8 @@ implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+
         switch (view.getId()) {
             case R.id.watchTvHome:
                 Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
@@ -66,7 +69,7 @@ implements View.OnClickListener{
                         getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.computerHome:
-                if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
+                if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), null) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), null) != null)
                 {
                     Intent intent = new Intent(getActivity().getApplicationContext(), ComputerActivity.class);
                     startActivity(intent);

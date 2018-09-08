@@ -108,12 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-<<<<<<< HEAD
                 android:src="@drawable/computer_icon" />
-=======
-                android:src="@drawable/computer_icon"
-                android:onClick="onHomeButtonClick" />
->>>>>>> 5b796326da752e41c7858a0f496df3d3076906ed
 
 
         </LinearLayout>

@@ -22,7 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Shop.BuyActivity" />
+        <activity android:name=".Shop.BuyActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".Education.LearnInHomeActivity" />
         <activity android:name=".House.ComputerActivity"></activity>
     </application>

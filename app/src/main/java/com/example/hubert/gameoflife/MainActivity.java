@@ -1,33 +1,16 @@
 package com.example.hubert.gameoflife;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.DialogInterface;
-import android.net.Uri;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.hubert.gameoflife.Education.Subject;
 import com.example.hubert.gameoflife.Girlboyfriend.Children;
 import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
-import android.widget.Toast;
 
-import com.example.hubert.gameoflife.Education.EducationFragment;
-import com.example.hubert.gameoflife.Education.LearnInHomeFragment;
-import com.example.hubert.gameoflife.Education.Subject;
-import com.example.hubert.gameoflife.Girlboyfriend.Children;
-import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
-import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
-import com.example.hubert.gameoflife.House.ComputerFragment;
-import com.example.hubert.gameoflife.House.HomeFragment;
-import com.example.hubert.gameoflife.Profile.MainFragment;
-import com.example.hubert.gameoflife.Shop.ShopBuyFragment;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.Fun;
 import com.example.hubert.gameoflife.Utils.Lodging;
@@ -35,9 +18,6 @@ import com.example.hubert.gameoflife.Utils.Lottery;
 import com.example.hubert.gameoflife.Utils.Transport;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
-import com.example.hubert.gameoflife.Work.FindJobFragment;
-import com.example.hubert.gameoflife.Work.Job;
-import com.example.hubert.gameoflife.Work.WorkFragment;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -45,8 +25,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity{
 
-
-    public static String Name = "";
+    /*public static String Name = "";
     public static int Icon = R.drawable.avatar_icon1;
     public static int Money = 750;
 
@@ -76,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
     public static Fun MyComputer = null;
     public static Fun MyTv = null;
     public static Fun MyPhone = null;
-    public static ArrayList<Lottery> OwnedLotteries = new ArrayList<>();
+    public static ArrayList<Lottery> OwnedLotteries = new ArrayList<>();*/
 
     public static Subject[] subjectsList = new Subject[] { new Subject("Mathematics", 4),
     new Subject("English", 4),
@@ -110,14 +89,14 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        /*SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
 
-        /*
+
         editor.putString(getString(R.string.saved_character_name_key), "");
         editor.putInt(getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1);
-        editor.putInt(getString(R.string.saved_character_money_key), 750);
+        editor.putInt(getString(R.string.saved_character_money_key), 10000);
         editor.putInt(getString(R.string.saved_date_years_key), 2000);
         editor.putInt(getString(R.string.saved_date_months_key), 1);
         editor.putInt(getString(R.string.saved_date_days_key), 1);
@@ -140,7 +119,7 @@ public class MainActivity extends AppCompatActivity{
         editor.putInt(getString(R.string.saved_energy_key), 750);
         editor.putInt(getString(R.string.saved_happiness_key), 750);
 
-        //json = gson.toJson(null);
+        json = gson.toJson(null);
         editor.putString(getString(R.string.saved_my_computer_key), json);
         //json = gson.toJson(null);
         editor.putString(getString(R.string.saved_my_tv_key), json);
@@ -163,7 +142,7 @@ public class MainActivity extends AppCompatActivity{
 
         Timer timer = new Timer();
         TimerTask updateValues = new UpdateValues();
-//        TimerTask updateValues = new ChangeProgressBars();
+        //  TODO: Ten timer ma dzialac w calej apce, nie tylko w tym Activity
         timer.scheduleAtFixedRate(updateValues, 0, 1500);
     }
 
@@ -178,51 +157,54 @@ public class MainActivity extends AppCompatActivity{
 
     class UpdateValues extends TimerTask {
         public void run() {
-            // do testow teraz; bedzie trzeba zrobic osobny timer z tym tylko dla mainFragment
+            SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
 
-            // koniec
+            editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750)) - 5));
+            if(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750) <= 0)
+                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750)) - 25));
+
+            editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750)) - 5));
+            if(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750) <= 0)
+                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750)) - 25));
+
+            editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750)) - 5));
+            if(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750) <= 0)
+                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750)) - 25));
 
 
-    class ChangeProgressBars extends TimerTask {
-        public void run() {
-            Hungry = Hungry - 5;
-            Health--;
-            Energy = Energy - 5;
-            Happiness = Happiness - 5;
+            editor.putInt(getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 12)) + 1));
+            if (sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 12) >= 23) {
+                editor.putInt(getResources().getString(R.string.saved_time_hours_key), 0);
+                editor.putInt(getResources().getString(R.string.saved_age_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), 8)) + 1));
+                editor.putInt(getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), 8)) + 1));
 
-             if(TimeHours >= 23)
-             {
-                 TimeHours = 0;
-                 AgeDays++;
+                for (int i = 0; i <= (subjectsList.length - 1); i++)
+                    subjectsList[i].IsTodaysHomeworkDone = false;
 
-                 for(int i = 0; i <= (subjectsList.length - 1); i++)
-                     subjectsList[i].IsTodaysHomeworkDone = false;
+                if (sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 12) >= 31) {
+                    editor.putInt(getResources().getString(R.string.saved_date_days_key), 0);
+                    if (sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 12) >= 12) {
+                        editor.putInt(getResources().getString(R.string.saved_date_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 2000)) + 1));
+                        editor.putInt(getResources().getString(R.string.saved_age_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 8)) + 1));
+                        editor.putInt(getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), 1)) + 1));
+                        editor.putInt(getResources().getString(R.string.saved_date_months_key), 0);
+                    } else
+                        editor.putInt(getResources().getString(R.string.saved_date_months_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1)) + 1));
+                } else
+                {
+                    editor.putInt(getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1)) + 1));
+                    editor.putInt(getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), 1)) + 1));
+                }
+            } else
+                editor.putInt(getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 12)) + 1));
 
-                 if(DateDays >= 31)
-                 {
-                     DateDays = 0;
-                     if(DateMonths >= 12)
-                     {
-                         DateYears++;
-                         AgeYears++;
-                         DateMonths = 0;
-                     }
-                     else
-                         DateMonths++;
-                 }
-                 else
-                     DateDays++;
-             }
-             else
-                 TimeHours++;
-
-             if(AgeYears <= 18)
-             {
-                 for(int i = 0; i < MainActivity.subjectsList.length; i++)
-                 {
-                     MainActivity.subjectsList[i].decreaseToAnotherMark(1);
-                 }
-             }
+            if (sharedPref.getInt(getResources().getString(R.string.saved_saved_age_years_key), 12) <= 18) {
+                for (int i = 0; i < MainActivity.subjectsList.length; i++) {
+                    MainActivity.subjectsList[i].decreaseToAnotherMark(1);
+                }
+            }
+            editor.apply();
         }
     }
 
