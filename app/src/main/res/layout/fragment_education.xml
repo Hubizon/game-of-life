@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Work.WorkFragment">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp">
+
+        <TextView
+            android:id="@+id/school_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/school"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/textColorOnPrimary"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/clock_icon"
+            android:layout_gravity="end"
+            android:layout_marginEnd="100dp"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:id="@+id/time_school"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="3dp"
+            tools:text="01.09 15:30"
+            android:textColor="@color/textColorOnPrimary"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+
+        <Button
+            android:id="@+id/GoToSchoolEducation"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="35dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/go_to_the_school"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp"
+            android:onClick="onThingsClick"/>
+
+        <Button
+            android:id="@+id/GoToSchoolLearnHardEducation"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:background="@color/colorSecondary"
+            android:textColor="@color/textColorOnSecondary"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/learn_hard"
+            android:onClick="onThingsClick"/>
+
+        <Button
+            android:id="@+id/GoToSchoolHangAroundEducation"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="100dp"
+            android:background="@color/colorSecondary"
+            android:onClick="onThingsClick"
+            android:text="@string/hang_around"
+            android:textColor="@color/textColorOnSecondary" />
+
+        <Button
+            android:id="@+id/learnAtHomeEducation"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="145dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/learn_at_home"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/giveUpSchoolEducation"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="195dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/give_up_school"
+            android:textColor="@color/textColorOnSecondary"
+            android:textSize="15sp"
+            android:onClick="onEducationButtonClick"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="61dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <TextView
+            android:id="@+id/criminal_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/criminal"
+            android:textColor="@color/textColorOnPrimary"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="100dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/money_icon" />
+
+        <TextView
+            android:id="@+id/money_school"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/textColorOnPrimary"
+            tools:text="$ " />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/get_new_friends"
+            android:textColor="@color/textColorOnSecondary" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/help_other_criminals"
+            android:textColor="@color/textColorOnSecondary" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="90dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/steal_something"
+            android:textColor="@color/textColorOnSecondary" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="90dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/sell_drugs"
+            android:textColor="@color/textColorOnSecondary" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="140dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/give_a_bribe_for_better_grades"
+            android:textColor="@color/textColorOnSecondary" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="140dp"
+            android:background="@color/colorSecondary"
+            android:text="@string/threat_teachers"
+            android:textColor="@color/textColorOnSecondary" />
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+</ScrollView>

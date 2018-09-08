@@ -1,0 +1,276 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hubert.gameoflife.Profile.MainFragment">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView4"
+        tools:layout_marginBottom="61dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp">
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/lodging_icon" />
+
+            <TextView
+                android:id="@+id/characterLodging"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="19dp"
+                android:text="@string/loudging"
+                android:textColor="@color/textColorOnPrimary" />
+
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/education_icon" />
+
+            <TextView
+                android:id="@+id/characterEducationWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="59dp"
+                android:text="@string/education_main"
+                android:textColor="@color/textColorOnPrimary" />
+
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="90dp"
+                android:background="@drawable/transport_icon" />
+
+            <TextView
+                android:id="@+id/characterTransport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="99dp"
+                android:text="@string/transport"
+                android:textColor="@color/textColorOnPrimary" />
+
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="130dp"
+                android:background="@drawable/girlboyfriend_icon" />
+
+            <TextView
+                android:id="@+id/characterGirlboyfriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="139dp"
+                android:text="@string/girlfriend"
+                android:textColor="@color/textColorOnPrimary" />
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="170dp"
+                android:background="@drawable/children_icon" />
+
+            <TextView
+                android:id="@+id/characterChildrens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="179dp"
+                android:text="@string/childrens"
+                android:textColor="@color/textColorOnPrimary" />
+
+        </android.support.v7.widget.CardView>
+
+    </ScrollView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/characterIcon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            tools:background="@drawable/avatar_icon1" />
+
+        <TextView
+            android:id="@+id/characterName"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="60dp"
+            android:textAlignment="center"
+            android:textColor="@color/textColorOnPrimary"
+            tools:text="Mr. Hubi" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/age_icon" />
+
+        <TextView
+            android:id="@+id/characterAge"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="17dp"
+            android:textAlignment="center"
+            android:textColor="@color/textColorOnPrimary"
+            tools:text="13 years 92 days" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/money_icon" />
+
+        <TextView
+            android:id="@+id/characterMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="50dp"
+            android:text="$"
+            android:textAlignment="center"
+            android:textColor="@color/textColorOnPrimary" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="100dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/clock_icon" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/textColorOnPrimary"
+            tools:text="01.09 15:30" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/health_icon" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_character_health"
+            style="@style/ProgressBarMain"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="22dp"
+            tools:progress="75" />
+
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/food_icon" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_character_hungry"
+            style="@style/ProgressBarMain"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="62dp"
+            tools:progress="75" />
+
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/energy_icon" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_character_energy"
+            style="@style/ProgressBarMain"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="102dp"
+            tools:progress="75" />
+
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="130dp"
+            android:background="@drawable/happiness_icon" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_character_happiness"
+            style="@style/ProgressBarMain"
+            android:layout_width="200dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="142dp"
+            tools:progress="75" />
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

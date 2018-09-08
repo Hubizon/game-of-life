@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="cardViewStyle">@style/CardView</item>
+
+        <item name="colorPrimary">@color/colorSecondary</item>Theme.AppCompat.Light.DarkActionBar
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorSecondary</item>
+    </style>
+
+    <style name="ProgressBarMain" parent="@android:style/Widget.ProgressBar.Horizontal" >
+        <item name="android:progressDrawable">@drawable/progress_bar_color</item>
+        <item name="android:progress">75</item>
+    </style>
+
+    <style name="ProgressBarTextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textColorOnSecondary</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+</resources>
