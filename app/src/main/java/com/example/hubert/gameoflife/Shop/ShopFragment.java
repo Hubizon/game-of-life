@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
 import com.example.hubert.gameoflife.Utils.Food;
 import com.example.hubert.gameoflife.Utils.Fun;
 import com.example.hubert.gameoflife.Utils.Lodging;
@@ -17,11 +16,6 @@ import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Transport;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShopFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShopFragment extends Fragment
 implements View.OnClickListener{
 

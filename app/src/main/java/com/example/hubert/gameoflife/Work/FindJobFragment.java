@@ -11,11 +11,7 @@ import android.view.ViewGroup;
 import com.example.hubert.gameoflife.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FindJobFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FindJobFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

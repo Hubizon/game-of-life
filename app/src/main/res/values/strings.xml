@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Game of Life</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="computer">Computer</string>
     <string name="play_video_games">play video games</string>

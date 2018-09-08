@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Work.FindJobFragment;

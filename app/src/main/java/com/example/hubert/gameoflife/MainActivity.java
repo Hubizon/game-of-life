@@ -3,6 +3,8 @@ package com.example.hubert.gameoflife;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -14,12 +16,28 @@ import android.view.View;
 import com.example.hubert.gameoflife.Education.Subject;
 import com.example.hubert.gameoflife.Girlboyfriend.Children;
 import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
+import android.widget.Toast;
+
+import com.example.hubert.gameoflife.Education.EducationFragment;
+import com.example.hubert.gameoflife.Education.LearnInHomeFragment;
+import com.example.hubert.gameoflife.Education.Subject;
+import com.example.hubert.gameoflife.Girlboyfriend.Children;
+import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
+import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
+import com.example.hubert.gameoflife.House.ComputerFragment;
+import com.example.hubert.gameoflife.House.HomeFragment;
+import com.example.hubert.gameoflife.Profile.MainFragment;
+import com.example.hubert.gameoflife.Shop.ShopBuyFragment;
+import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.Fun;
 import com.example.hubert.gameoflife.Utils.Lodging;
 import com.example.hubert.gameoflife.Utils.Lottery;
 import com.example.hubert.gameoflife.Utils.Transport;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
+import com.example.hubert.gameoflife.Work.FindJobFragment;
+import com.example.hubert.gameoflife.Work.Job;
+import com.example.hubert.gameoflife.Work.WorkFragment;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -42,11 +60,13 @@ public class MainActivity extends AppCompatActivity{
 
     public static Lodging MyLodging = new Lodging("Parents House", 0, 10, 5, 125, 5);
     public static Job MyJob = null;
+
+    public static boolean IsInSchoolNow = true;
     public static Transport MyTransport = new Transport("Foots", 0, 10);
     public static Girlboyfriend MyGirlboyfriend = null;
     public static Children MyChildren = null;
 
-    public static boolean IsInSchoolNow = true;
+//    public static boolean IsInSchoolNow = true;
 
     public static int Health = 750;
     public static int Hungry = 750;
@@ -143,6 +163,7 @@ public class MainActivity extends AppCompatActivity{
 
         Timer timer = new Timer();
         TimerTask updateValues = new UpdateValues();
+//        TimerTask updateValues = new ChangeProgressBars();
         timer.scheduleAtFixedRate(updateValues, 0, 1500);
     }
 
@@ -162,6 +183,8 @@ public class MainActivity extends AppCompatActivity{
             // koniec
 
 
+    class ChangeProgressBars extends TimerTask {
+        public void run() {
             Hungry = Hungry - 5;
             Health--;
             Energy = Energy - 5;
@@ -203,35 +226,35 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (mPager.getCurrentItem() == 0) {
+//            // If the user is currently looking at the first step, allow the system to handle the
+//            // Back button. This calls finish() on this activity and pops the back stack.
+//            super.onBackPressed();
+//        } else {
+//            // Otherwise, select the previous step.
+//            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+//        }
+//    }
 
 
-    private void alertView(String title, String message) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle(title)
-                //.setIcon(R.drawable.ic_launcher)
-                .setMessage(message)
-                .setNegativeButton("Nah", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialoginterface, int i) {
-                        dialoginterface.cancel();
-                    }})
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialoginterface, int i) {
-                        Money -= 50;
-                        CommunicationSkills += 15;
-                    }
-                }).show();
-    }
+//    private void alertView(String title, String message) {
+//        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+//        dialog.setTitle(title)
+//                //.setIcon(R.drawable.ic_launcher)
+//                .setMessage(message)
+//                .setNegativeButton("Nah", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialoginterface, int i) {
+//                        dialoginterface.cancel();
+//                    }})
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialoginterface, int i) {
+//                        Money -= 50;
+//                        CommunicationSkills += 15;
+//                    }
+//                }).show();
+//    }
 
     /*(public void onBuyOrWorkClick(View view) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
