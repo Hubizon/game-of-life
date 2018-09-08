@@ -25,6 +25,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity{
 
+    //TODO: make default value to sharedPrefernces
+
     /*public static String Name = "";
     public static int Icon = R.drawable.avatar_icon1;
     public static int Money = 750;

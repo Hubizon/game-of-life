@@ -70,6 +70,7 @@ public class MainFragment extends Fragment {
             SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             // TODO: Fix it: tutaj wywala blad "Only the original thread that created a view hierarchy can touch its views." (gdy jest nie zakomentowany "timer.scheduleAtFixedRate")
+            ((TextView)(view.findViewById(R.id.characterMoney))).setText(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
             ((TextView)(view.findViewById(R.id.time))).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 1) + "."
                     + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1) + "."
                     + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1) + " "
@@ -88,6 +89,7 @@ public class MainFragment extends Fragment {
 
         ((view.findViewById(R.id.characterIcon))).setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
         ((TextView)(view.findViewById(R.id.characterName))).setText(sharedPref.getString(getResources().getString(R.string.saved_character_name_key), ""));
+        ((TextView)(view.findViewById(R.id.characterMoney))).setText("$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
         ((TextView)(view.findViewById(R.id.time))).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 1) + "."
                 + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1) + "."
                 + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1) + " "
@@ -101,7 +103,8 @@ public class MainFragment extends Fragment {
 
         String json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), "");
         Lodging lodging = gson.fromJson(json, Lodging.class);
-        ((TextView)(view.findViewById(R.id.characterLodging))).setText("Lodging " + lodging.getName());
+        if(lodging != null)
+            ((TextView)(view.findViewById(R.id.characterLodging))).setText("Lodging " + lodging.getName());
 
         if(sharedPref.getBoolean(getResources().getString(R.string.saved_is_in_school_now_key), true))
             ((TextView)(view.findViewById(R.id.characterTransport))).setText("School");
@@ -109,20 +112,24 @@ public class MainFragment extends Fragment {
         {
             json = sharedPref.getString(getResources().getString(R.string.saved_my_work_key), "");
             Job job = gson.fromJson(json, Job.class);
-            ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + job.getName());
+            if(job != null)
+                ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + job.getName());
         }*/
 
         json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), "");
         Transport transport = gson.fromJson(json, Transport.class);
-        ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + transport.getName());
+        if(transport != null)
+            ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + transport.getName());
 
         /*json = sharedPref.getString(getResources().getString(R.string.saved_my_girlboyfriend_key), "");
         Girlboyfriend girlboyfriend = gson.fromJson(json, Girlboyfriend.class);
-        ((TextView)(view.findViewById(R.id.characterGirlboyfriend))).setText("Girlfriend:" + " " + girlboyfriend.getName());
+        if(girlboyfriend != null)
+            ((TextView)(view.findViewById(R.id.characterGirlboyfriend))).setText("Girlfriend:" + " " + girlboyfriend.getName());
 
         json = sharedPref.getString(getResources().getString(R.string.saved_my_children_key), "");
         Children children = gson.fromJson(json, Children.class);
-        ((TextView)(view.findViewById(R.id.characterChildren))).setText(getResources().getString(R.string.transport) + " " + children.getName());*/
+        if(children != null)
+            ((TextView)(view.findViewById(R.id.characterChildren))).setText(getResources().getString(R.string.transport) + " " + children.getName());*/
     }
 
 }
