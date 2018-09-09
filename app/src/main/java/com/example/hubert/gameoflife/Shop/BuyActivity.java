@@ -395,7 +395,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     else
                         Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 } else
-                    alertDialogSellItem(transportName, transportPrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "transport", position);
+                    alertDialogSellItem(transportName, transportPrice, ShopFragment.transportList[position].getPrice(), ShopFragment.transportList[position].getName(), "transport", position);
                 ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 

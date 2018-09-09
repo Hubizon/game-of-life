@@ -23,7 +23,7 @@ public class SharedPreferencesDefaultValues {
     public static int DefaultTimeHours = 12;
 
     private static Gson gson = new Gson();
-    private static String jsonLodging = gson.toJson(new Lodging("Parents House", 100, 10, 5, 125, 5));
+    private static String jsonLodging = gson.toJson(new Lodging("Parents House", 0, 10, 5, 125, 5));
     public static String DefaultMyLodging = jsonLodging;
     public static boolean DefaultIsInSchoolNow = true;
     public static String DefaultMyJob = null;

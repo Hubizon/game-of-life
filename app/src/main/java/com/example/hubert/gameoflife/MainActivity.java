@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.hubert.gameoflife.Education.Subject;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
