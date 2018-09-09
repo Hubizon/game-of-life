@@ -1,7 +1,5 @@
 package com.example.hubert.gameoflife.Work;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -9,19 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hubert.gameoflife.Education.LearnInHomeFragment;
-import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link WorkFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link WorkFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WorkFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";

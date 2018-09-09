@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Game of Life</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="computer">Computer</string>
     <string name="play_video_games">play video games</string>
@@ -69,4 +67,32 @@
     <string name="years">years</string>
     <string name="days">days</string>
     <string name="work">Work:</string>
+    <string name="saved_character_name_key">character_name</string>
+    <string name="saved_character_icon_key">character_icon</string>
+    <string name="saved_character_money_key">character_money</string>
+    <string name="saved_date_years_key">date_years</string>
+    <string name="saved_date_months_key">date_months</string>
+    <string name="saved_date_days_key">date_days</string>
+    <string name="saved_time_hours_key">time_hours</string>
+    <string name="saved_my_lodging_key">my_lodging</string>
+    <string name="saved_my_job_key">my_job</string>
+    <string name="saved_my_transport_key">my_transport</string>
+    <string name="saved_my_girlboyfriend_key">my_girlboyfriend</string>
+    <string name="saved_my_children_key">my_children</string>
+    <string name="saved_is_in_school_now_key">is_in_school_now</string>
+    <string name="saved_hungry_key">hungry</string>
+    <string name="saved_health_key">health</string>
+    <string name="saved_energy_key">energy</string>
+    <string name="saved_happiness_key">happiness</string>
+    <string name="saved_my_computer_key">my_computer</string>
+    <string name="saved_my_phone_key">my_phone</string>
+    <string name="saved_my_tv_key">my_tv</string>
+    <string name="saved_owned_lotteries_key">owned_lotteries</string>
+    <string name="saved_subjects_list_key">subjects_list</string>
+    <string name="send_shop_click_id">shop_click</string>
+    <string name="shared_preferences_key">shared_preferences</string>
+    <string name="saved_saved_age_years_key">age_years</string>
+    <string name="saved_age_years_key">age_years</string>
+    <string name="saved_age_days_key">age_days</string>
+    <string name="saved_my_work_key">my_work</string>
 </resources>

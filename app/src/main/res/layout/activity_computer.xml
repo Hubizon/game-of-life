@@ -57,8 +57,7 @@
             android:background="@color/colorSecondary"
             android:textColor="@color/textColorOnSecondary"
             android:layout_margin="8dp"
-            android:text="@string/play_video_games"
-            android:onClick="onThingsClick"/>
+            android:text="@string/play_video_games" />
 
         <Button
             android:id="@+id/talkComputer"
@@ -70,8 +69,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/talk_on_messengers"
-            android:onClick="onThingsClick"/>
+            android:text="@string/talk_on_messengers" />
 
         <Button
             android:id="@+id/supportComputer"
@@ -83,8 +81,7 @@
             android:layout_marginStart="176dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/support_a_charity_event"
-            android:onClick="onMainIconClick"/>
+            android:text="@string/support_a_charity_event" />
 
         <Button
             android:layout_width="160dp"

@@ -1,6 +1,8 @@
 package com.example.hubert.gameoflife.House;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +17,7 @@ import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Shop.BuyActivity;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
 
 public class HomeFragment extends Fragment
@@ -54,6 +57,8 @@ implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+
         switch (view.getId()) {
             case R.id.watchTvHome:
                 Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
@@ -64,30 +69,14 @@ implements View.OnClickListener{
                         getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.computerHome:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
-
-    public void onHomeButtonClick(View view) {
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-
-        switch(view.getId())
-        {
-
-            case R.id.computerHome:
-                if(MainActivity.MyComputer != null || MainActivity.MyPhone != null)
-                    ft.replace(R.id.pager, new ComputerFragment());
+                if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), null) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), null) != null)
+                {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ComputerActivity.class);
+                    startActivity(intent);
+                }
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
                 break;
-
-            default:
-                return;
-
         }
-
-        ft.commit();
     }
 }

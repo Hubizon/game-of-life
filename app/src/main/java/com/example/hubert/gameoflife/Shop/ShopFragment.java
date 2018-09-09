@@ -1,20 +1,12 @@
 package com.example.hubert.gameoflife.Shop;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.example.hubert.gameoflife.Education.LearnInHomeFragment;
-import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.Utils.Food;
 import com.example.hubert.gameoflife.Utils.Fun;
 import com.example.hubert.gameoflife.Utils.Lodging;
@@ -22,17 +14,8 @@ import com.example.hubert.gameoflife.Utils.Lottery;
 import com.example.hubert.gameoflife.Utils.Medicines;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Transport;
-import com.example.hubert.gameoflife.Work.FindJobFragment;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ShopFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ShopFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShopFragment extends Fragment
 implements View.OnClickListener{
 
@@ -169,30 +152,22 @@ implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.foodBuyShop:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.medicinesBuyShop:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.funBuyShop:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.lotteryBuyShop:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.houseBuyShop:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.transportBuyShop:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
         }
+
+        Intent intent = new Intent(getActivity().getApplicationContext(), BuyActivity.class);
+        intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
+        startActivity(intent);
     }
 
    /* public void onShopButtonClick(View view) {

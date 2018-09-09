@@ -106,8 +106,7 @@
             android:background="@color/colorSecondary"
             android:text="@string/learn_at_home"
             android:textColor="@color/textColorOnSecondary"
-            android:textSize="15sp"
-            android:onClick="onEducationButtonClick"/>
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/giveUpSchoolEducation"
