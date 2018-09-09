@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 public class ComputerActivity extends AppCompatActivity {
 
@@ -16,6 +17,6 @@ public class ComputerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_computer);
 
         SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        ((TextView)(findViewById(R.id.time_computer))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), 550));
+        ((TextView)(findViewById(R.id.time_computer))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
     }
 }

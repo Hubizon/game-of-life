@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,10 @@ import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Fun;
 import com.example.hubert.gameoflife.Utils.Lodging;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Utils.Transport;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -131,7 +134,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         recyclerView.setAdapter(adapter);
 
         SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), 750));
+        ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
 
         id = getIntent().getIntExtra(getResources().getString(R.string.send_shop_click_id), R.id.foodBuyShop);
         switch (id)
@@ -142,7 +145,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 for(int i = 0; i < ShopFragment.foodList.length; i++)
                     itemsPrices.add("$" + ShopFragment.foodList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY FOOD");
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), 750) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10);
                 break;
 
             case R.id.medicinesBuyShop:
@@ -151,7 +154,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 for(int i = 0; i < ShopFragment.medicinesList.length; i++)
                     itemsPrices.add("$" + ShopFragment.medicinesList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY MEDICINES");
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), 750) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
                 break;
 
             case R.id.funBuyShop:
@@ -160,7 +163,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 for(int i = 0; i < ShopFragment.funList.length; i++)
                     itemsPrices.add("$" + ShopFragment.funList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY FUN ITEMS");
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), 750) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
                 break;
 
             case R.id.lotteryBuyShop:
@@ -225,11 +228,6 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
 
-//            case R.id.educationWork:
-//                itemsNames = itemsNamesOtherJob;
-//                itemsPrices = itemsRewardOtherJob;
-//                break;
-
             default:
                 break;
         }
@@ -248,190 +246,246 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         switch (id)
         {
             case R.id.foodBuyShop:
-                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.foodList[position].getPrice())
+                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.foodList[position].getPrice())
                 {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.foodList[position].getPrice()));
-                    editor.putInt(getString(R.string.saved_hungry_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), 750) + ShopFragment.foodList[position].getGivenFood()));
-                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), 750) + ShopFragment.foodList[position].getGivenHealth()));
-                    editor.putInt(getString(R.string.saved_energy_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), 750) + ShopFragment.foodList[position].getGivenEnergy()));
-                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), 750) + ShopFragment.foodList[position].getGivenHappiness()));
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.foodList[position].getPrice()));
+                    editor.putInt(getString(R.string.saved_hungry_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) + ShopFragment.foodList[position].getGivenFood()));
+                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) + ShopFragment.foodList[position].getGivenHealth()));
+                    editor.putInt(getString(R.string.saved_energy_key), (sharedPref.getInt(getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) + ShopFragment.foodList[position].getGivenEnergy()));
+                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), 750) + ShopFragment.foodList[position].getGivenHappiness()));
                 }
                 else
                     Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), 750) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10);
+                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.medicinesBuyShop:
-                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.medicinesList[position].getPrice())
+                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.medicinesList[position].getPrice())
                 {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.medicinesList[position].getPrice()));
-                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), 750) + ShopFragment.medicinesList[position].getGivenHealth()));
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.medicinesList[position].getPrice()));
+                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) + ShopFragment.medicinesList[position].getGivenHealth()));
                 }
                 else
                     Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), 750) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
+                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.funBuyShop:
-                if("Computer".equals(ShopFragment.funList[position].getType()) && sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), null) == null)
+                String computerName = null;
+                String phoneName = null;
+                String tvName = null;
+                int computerPrice = 0;
+                int phonePrice = 0;
+                int tvPrice = 0;
+
+                String jsonComputer = sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer);
+                String jsonPhone = sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone);
+                String jsonTv = sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyTv);
+                Fun funComputer = gson.fromJson(jsonComputer, Fun.class);
+                Fun funPhone = gson.fromJson(jsonPhone, Fun.class);
+                Fun funTv = gson.fromJson(jsonTv, Fun.class);
+
+                if(funComputer != null)
+                {
+                    computerName = funComputer.getName();
+                    computerPrice = funComputer.getPrice();
+                }
+                if(funPhone != null)
+                {
+                    phoneName = funPhone.getName();
+                    phonePrice = funPhone.getPrice();
+                }
+                if(funTv != null)
+                {
+                    tvName = funTv.getName();
+                    tvPrice = funTv.getPrice();
+                }
+
+                if("Exit".equals(ShopFragment.funList[position].getType()))
+                    buyFun(position);
+
+                else if("Computer".equals(ShopFragment.funList[position].getType()) && funComputer == null)
                     buyFun(position);
                 else if("Computer".equals(ShopFragment.funList[position].getType()))
-                    if(alertDialogSellItem(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), null), ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName()))
-                        buyFun(position);
+                    alertDialogSellItem(computerName, computerPrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "fun", position);
 
-                else if(ShopFragment.funList[position].getType().equals("Phone") && sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), null) == null)
+                else if(ShopFragment.funList[position].getType().equals("Phone") && funPhone == null)
                     buyFun(position);
                 else if ("Phone".equals(ShopFragment.funList[position].getType()))
-                    if(alertDialogSellItem(sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), null), ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName()))
-                        buyFun(position);
+                    alertDialogSellItem(phoneName, phonePrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "fun", position);
 
-                else if(ShopFragment.funList[position].getType().equals("TV") && sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), null) == null)
+                else if(ShopFragment.funList[position].getType().equals("TV") && funTv == null)
                     buyFun(position);
                 else if ("TV".equals(ShopFragment.funList[position].getType()))
-                    if(alertDialogSellItem(sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), null), ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName()))
-                        buyFun(position);
+                    alertDialogSellItem(tvName, tvPrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "fun", position);
 
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), 750) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
+                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.lotteryBuyShop:
-                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.lotteryList[position].getPrice())
+                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.lotteryList[position].getPrice())
                 {
                     try {
-                        json = gson.toJson(new ArrayList<>());
-                        JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_owned_lotteries_key), json));
+                        JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_owned_lotteries_key), SharedPreferencesDefaultValues.DefaultOwnedLotteries));
                         jsonArray.put(ShopFragment.lotteryList[position]);
                         editor.putString(getString(R.string.saved_owned_lotteries_key), jsonArray.toString());
                     } catch(JSONException e)
                     { }
 
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.lotteryList[position].getPrice()));
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.lotteryList[position].getPrice()));
                 }
                 else
                     Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
+                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.houseBuyShop:
-                String LodgingName = "";
-              //  try {
-                    json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), "");
-                    Lodging lodging = gson.fromJson(json, Lodging.class);
-                    LodgingName = lodging.getName();
+                String lodgingName = null;
+                int lodgingPrice = 0;
+                json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+                gson.fromJson(json, Lodging.class);
+                gson.newBuilder().setLenient().create();
 
-                    /*Gson gson = new Gson();
-                    String toJson = gson.toJson(new Lodging("Parents House", 0, 10, 5, 125, 5));
-                    String json = gson.toJson(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), toJson));
-                    JSONObject jsonObject = new JSONObject(json);
-                    jsonObject.accumulate();
-                    LodgingName = jsonObject.getString("name");
-                } catch (JSONException t) {
-                    Log.e("My App", "Error!");
-                }*/
-                if(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), null) == null || !LodgingName.equals("Parents House"))
+                Lodging lodging = gson.fromJson(json, Lodging.class);
+                if(lodging != null)
                 {
-                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.lodgingList[position].getPrice())
+                    lodgingName = lodging.getName();
+                    lodgingPrice = lodging.getPrice();
+                }
+
+                if(18 >= sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears))
+                    Toast.makeText(view.getContext(), "You can't buy new house when you are under 18.", Toast.LENGTH_LONG).show();
+                else if(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) == null || lodgingName.equals("Foots"))
+                {
+                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.lodgingList[position].getPrice())
                     {
-                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.lodgingList[position].getPrice()));
-                        editor.putString(getResources().getString(R.string.saved_my_lodging_key), sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), null) + (ShopFragment.lodgingList[position]));
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.lodgingList[position].getPrice()));
+                        json = gson.toJson(ShopFragment.lodgingList[position]);
+                        editor.putString(getResources().getString(R.string.saved_my_lodging_key), json);
                     }
                     else
                         Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 } else
-                if(alertDialogSellItem(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), null), ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName()))
-                    editor.putString(getResources().getString(R.string.saved_my_lodging_key), sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), null) + (ShopFragment.lodgingList[position]));
+                    alertDialogSellItem(lodgingName, lodgingPrice, ShopFragment.lodgingList[position].getPrice(), ShopFragment.lodgingList[position].getName(), "lodging", position);
+                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.transportBuyShop:
-                json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), "");
+                String transportName = null;
+                int transportPrice = 0;
+                json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
                 Transport transport = gson.fromJson(json, Transport.class);
-                String TransportName = transport.getName();
-                if(sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), null) == null || TransportName.equals("Foots"))
+                if(transport != null)
                 {
-                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.transportList[position].getPrice())
+                    transportName = transport.getName();
+                    transportPrice = transport.getPrice();
+                }
+
+                if(sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport) == null || transportName.equals("Foots"))
+                {
+                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.transportList[position].getPrice())
                     {
-                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.transportList[position].getPrice()));
-                        editor.putString(getResources().getString(R.string.saved_my_transport_key), sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), null) + (ShopFragment.lodgingList[position]));
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.transportList[position].getPrice()));
+                        json = gson.toJson(ShopFragment.transportList[position]);
+                        editor.putString(getResources().getString(R.string.saved_my_transport_key), json);
                     }
                     else
                         Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 } else
-                if(alertDialogSellItem(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), null), ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName()))
-                    editor.putString(getResources().getString(R.string.saved_my_transport_key), sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), null) + (ShopFragment.lodgingList[position]));
+                    alertDialogSellItem(transportName, transportPrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "transport", position);
+                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             default:
                 break;
         }
-        if(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750) > 1000)
+        if(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) > 1000)
             editor.putInt(getString(R.string.saved_hungry_key), 1000);
-        if(sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750) > 1000)
+        if(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) > 1000)
             editor.putInt(getString(R.string.saved_health_key), 1000);
-        if(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750) > 1000)
+        if(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) > 1000)
             editor.putInt(getString(R.string.saved_energy_key), 1000);
-        if(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750) > 1000)
+        if(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) > 1000)
             editor.putInt(getString(R.string.saved_happiness_key), 1000);
 
-        editor.apply();
-        ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), 550));
-    }
+        editor.apply(); }
 
-    private boolean alertDialogSellItem(String boughtItemName, final int itemPrice, String itemName)
+    private void alertDialogSellItem(String boughtItemName, final int boughtItemPrice, final int itemPrice, String itemName, final String itemType, final int position)
     {
         final SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPref.edit();
-        final boolean[] canIBuyIt = {false};
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("You already have purchased '" + boughtItemName)
+        dialog.setTitle("You already have purchased '" + boughtItemName + "'")
                 //.setIcon(R.drawable.ic_launcher)
-                .setMessage("'Do you want to sell it for " + (itemPrice / 2) + " and buy " + itemName + "?")
+                .setMessage("'Do you want to sell it for " + (boughtItemPrice / 2) + " and " + itemName + "?")
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                          dialoginterface.cancel();
                      }})
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) + (itemPrice / 2)));
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + (boughtItemPrice / 2)));
+                        editor.apply();
 
-                        if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= itemPrice)
+                        if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= itemPrice)
                         {
-                            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - itemPrice));
-                            canIBuyIt[0] = true;
+                            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - itemPrice));
+                            Gson gson = new Gson();
+                            String json = null;
+                            switch (itemType)
+                            {
+                                case "fun":
+                                    buyFun(position);
+                                    break;
+                                case "lodging":
+                                    json = gson.toJson(ShopFragment.lodgingList[position]);
+                                    editor.putString(getResources().getString(R.string.saved_my_lodging_key), json);
+                                    break;
+                                case "transport":
+                                    json = gson.toJson(ShopFragment.transportList[position]);
+                                    editor.putString(getResources().getString(R.string.saved_my_transport_key), json);
+                                    break;
+                            }
                         }
                         else
                         {
                             Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-                            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - (itemPrice / 2)));
+                            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - (boughtItemPrice / 2)));
                         }
+                        editor.apply();
                     }
                 }).show();
-        return canIBuyIt[0];
     }
 
-    private boolean buyFun(int position)
+    private void buyFun(int position)
     {
         SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        if (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.funList[position].getPrice())
+        if (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.funList[position].getPrice())
         {
-            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.foodList[position].getPrice()));
+            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.funList[position].getPrice()));
+            Gson gson = new Gson();
+            String json = gson.toJson(ShopFragment.funList[position]);
             switch (ShopFragment.funList[position].getType()) {
+                // TODO: create enum with those types
                 case "Exit":
-                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), 750) + ShopFragment.funList[position].getGivenFun()));
+                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) + ShopFragment.funList[position].getGivenFun()));
                     break;
-                case "Tv":
-                    editor.putString(getResources().getString(R.string.saved_my_tv_key), sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), null) + (ShopFragment.funList[position]));
+                case "TV":
+                    editor.putString(getResources().getString(R.string.saved_my_tv_key), json);
                     break;
                 case "Computer":
-                    editor.putString(getResources().getString(R.string.saved_my_computer_key), sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), null) + (ShopFragment.funList[position]));
+                    editor.putString(getResources().getString(R.string.saved_my_computer_key), json);
                     break;
                 case "Phone":
-                    editor.putString(getResources().getString(R.string.saved_my_phone_key), sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), null) + (ShopFragment.funList[position]));                    break;
+                    editor.putString(getResources().getString(R.string.saved_my_phone_key), json);
             }
-            return true;
         } else
             Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-
-        return false;
+        editor.apply();
     }
 }

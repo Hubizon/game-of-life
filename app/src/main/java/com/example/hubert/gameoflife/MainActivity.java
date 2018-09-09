@@ -15,6 +15,7 @@ import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.Fun;
 import com.example.hubert.gameoflife.Utils.Lodging;
 import com.example.hubert.gameoflife.Utils.Lottery;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Utils.Transport;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
@@ -24,8 +25,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity{
-
-    //TODO: make default value to sharedPrefernces
 
     /*public static String Name = "";
     public static int Icon = R.drawable.avatar_icon1;
@@ -162,46 +161,49 @@ public class MainActivity extends AppCompatActivity{
             SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
 
-            editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750)) - 5));
-            if(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750) <= 0)
-                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750)) - 25));
+            if(!(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) > 0))
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 5));
+            if(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) <= 0)
+                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
 
-            editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750)) - 5));
-            if(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750) <= 0)
-                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750)) - 25));
+            if(!(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) > 0))
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 5));
+            if(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) <= 0)
+                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
 
-            editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750)) - 5));
-            if(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750) <= 0)
-                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750)) - 25));
+            if(!(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) > 0))
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 5));
+            if(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) <= 0)
+                editor.putInt(getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
 
 
-            editor.putInt(getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 12)) + 1));
-            if (sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 12) >= 23) {
+            editor.putInt(getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
+            if (sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) >= 23) {
                 editor.putInt(getResources().getString(R.string.saved_time_hours_key), 0);
-                editor.putInt(getResources().getString(R.string.saved_age_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), 8)) + 1));
-                editor.putInt(getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), 8)) + 1));
+                editor.putInt(getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays)) + 1));
+                editor.putInt(getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
 
                 for (int i = 0; i <= (subjectsList.length - 1); i++)
                     subjectsList[i].IsTodaysHomeworkDone = false;
 
-                if (sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 12) >= 31) {
+                if (sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) >= 31) {
                     editor.putInt(getResources().getString(R.string.saved_date_days_key), 0);
-                    if (sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 12) >= 12) {
-                        editor.putInt(getResources().getString(R.string.saved_date_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 2000)) + 1));
-                        editor.putInt(getResources().getString(R.string.saved_age_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 8)) + 1));
-                        editor.putInt(getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), 1)) + 1));
+                    if (sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) >= 12) {
+                        editor.putInt(getResources().getString(R.string.saved_date_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears)) + 1));
+                        editor.putInt(getResources().getString(R.string.saved_age_years_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears)) + 1));
+                        editor.putInt(getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays)) + 1));
                         editor.putInt(getResources().getString(R.string.saved_date_months_key), 0);
                     } else
-                        editor.putInt(getResources().getString(R.string.saved_date_months_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1)) + 1));
+                        editor.putInt(getResources().getString(R.string.saved_date_months_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths)) + 1));
                 } else
                 {
-                    editor.putInt(getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1)) + 1));
-                    editor.putInt(getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), 1)) + 1));
+                    editor.putInt(getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
+                    editor.putInt(getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays)) + 1));
                 }
             } else
-                editor.putInt(getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 12)) + 1));
+                editor.putInt(getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
 
-            if (sharedPref.getInt(getResources().getString(R.string.saved_saved_age_years_key), 12) <= 18) {
+            if (sharedPref.getInt(getResources().getString(R.string.saved_saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) <= 18) {
                 for (int i = 0; i < MainActivity.subjectsList.length; i++) {
                     MainActivity.subjectsList[i].decreaseToAnotherMark(1);
                 }

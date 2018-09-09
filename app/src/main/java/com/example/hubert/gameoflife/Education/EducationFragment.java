@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.FindJobFragment;
 
 
@@ -46,7 +47,7 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
         switch(view.getId())
         {
             case R.id.giveUpSchoolEducation:
-                editor.putBoolean(getString(R.string.saved_is_in_school_now_key), false);
+                editor.putBoolean(getString(R.string.saved_is_in_school_now_key), SharedPreferencesDefaultValues.DefaultIsInSchoolNow);
                 ft.replace(R.id.pager, new FindJobFragment());
                 break;
 

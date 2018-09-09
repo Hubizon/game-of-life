@@ -19,6 +19,7 @@ import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.BuyActivity;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 public class HomeFragment extends Fragment
 implements View.OnClickListener{
@@ -69,7 +70,7 @@ implements View.OnClickListener{
                         getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.computerHome:
-                if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), null) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), null) != null)
+                if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null)
                 {
                     Intent intent = new Intent(getActivity().getApplicationContext(), ComputerActivity.class);
                     startActivity(intent);

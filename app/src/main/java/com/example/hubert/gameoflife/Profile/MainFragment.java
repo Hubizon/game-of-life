@@ -16,9 +16,11 @@ import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Lodging;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Utils.Transport;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import java.util.Timer;
@@ -70,15 +72,17 @@ public class MainFragment extends Fragment {
             SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             // TODO: Fix it: tutaj wywala blad "Only the original thread that created a view hierarchy can touch its views." (gdy jest nie zakomentowany "timer.scheduleAtFixedRate")
-            ((TextView)(view.findViewById(R.id.characterMoney))).setText(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
-            ((TextView)(view.findViewById(R.id.time))).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 1) + "."
-                    + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1) + "."
-                    + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1) + " "
-                    + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 750) + ":" + "00");
-            ((ProgressBar)(view.findViewById(R.id.progressBar_character_hungry))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750) / 10));
-            ((ProgressBar)(view.findViewById(R.id.progressBar_character_health))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750) / 10));
-            ((ProgressBar)(view.findViewById(R.id.progressBar_character_energy))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750) / 10));
-            ((ProgressBar)(view.findViewById(R.id.progressBar_character_happiness))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750) / 10));
+            ((TextView)(view.findViewById(R.id.characterMoney))).setText(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
+            ((TextView)(view.findViewById(R.id.characterAge))).setText(sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears)
+                    + " years " + sharedPref.getInt(getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays) + " days");
+            ((TextView)(view.findViewById(R.id.time))).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) + "."
+                    + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) + "."
+                    + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
+                    + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00");
+            ((ProgressBar)(view.findViewById(R.id.progressBar_character_hungry))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10));
+            ((ProgressBar)(view.findViewById(R.id.progressBar_character_health))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10));
+            ((ProgressBar)(view.findViewById(R.id.progressBar_character_energy))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) / 10));
+            ((ProgressBar)(view.findViewById(R.id.progressBar_character_happiness))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10));
         }
     }
 
@@ -89,19 +93,21 @@ public class MainFragment extends Fragment {
 
         ((view.findViewById(R.id.characterIcon))).setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
         ((TextView)(view.findViewById(R.id.characterName))).setText(sharedPref.getString(getResources().getString(R.string.saved_character_name_key), ""));
-        ((TextView)(view.findViewById(R.id.characterMoney))).setText("$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
-        ((TextView)(view.findViewById(R.id.time))).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 1) + "."
-                + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1) + "."
-                + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1) + " "
-                + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 750) + ":" + "00");
-        ((ProgressBar)(view.findViewById(R.id.progressBar_character_hungry))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750) / 10));
-        ((ProgressBar)(view.findViewById(R.id.progressBar_character_health))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_health_key), 750) / 10));
-        ((ProgressBar)(view.findViewById(R.id.progressBar_character_energy))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750) / 10));
-        ((ProgressBar)(view.findViewById(R.id.progressBar_character_happiness))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750) / 10));
+        ((TextView)(view.findViewById(R.id.characterMoney))).setText("$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
+        ((TextView)(view.findViewById(R.id.characterAge))).setText(sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears)
+                + " years " + sharedPref.getInt(getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays) + " days");
+        ((TextView)(view.findViewById(R.id.time))).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears) + "."
+                + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) + "."
+                + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
+                + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00");
+        ((ProgressBar)(view.findViewById(R.id.progressBar_character_hungry))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10));
+        ((ProgressBar)(view.findViewById(R.id.progressBar_character_health))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10));
+        ((ProgressBar)(view.findViewById(R.id.progressBar_character_energy))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) / 10));
+        ((ProgressBar)(view.findViewById(R.id.progressBar_character_happiness))).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10));
 
         Gson gson = new Gson();
 
-        String json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), "");
+        String json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
         Lodging lodging = gson.fromJson(json, Lodging.class);
         if(lodging != null)
             ((TextView)(view.findViewById(R.id.characterLodging))).setText("Lodging " + lodging.getName());
@@ -116,7 +122,7 @@ public class MainFragment extends Fragment {
                 ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + job.getName());
         }*/
 
-        json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), "");
+        json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
         Transport transport = gson.fromJson(json, Transport.class);
         if(transport != null)
             ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + transport.getName());
