@@ -3,6 +3,7 @@ package com.example.hubert.gameoflife.Shop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.example.hubert.gameoflife.Utils.Transport;
 
 
 public class ShopFragment extends Fragment
-implements View.OnClickListener{
+    implements View.OnClickListener {
 
     public static Food[] foodList = new Food[] {
             new Food("Eat Thrashes", 0, 50, -20, 0, -15),
@@ -126,23 +127,23 @@ implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_shop,
                 container, false);
 
-        ImageButton foodBuybutton = view.findViewById(R.id.foodBuyShop);
-        foodBuybutton.setOnClickListener(this);
+        CardView foodcardview = view.findViewById(R.id.cardview_food);
+        foodcardview.setOnClickListener(this);
 
-        ImageButton medicinesBuybutton = view.findViewById(R.id.medicinesBuyShop);
-        medicinesBuybutton.setOnClickListener(this);
+        CardView medicinescardview = view.findViewById(R.id.cardview_medicines);
+        medicinescardview.setOnClickListener(this);
 
-        ImageButton funBuybutton = view.findViewById(R.id.funBuyShop);
-        funBuybutton.setOnClickListener(this);
+        CardView funcardview = view.findViewById(R.id.cardview_fun);
+        funcardview.setOnClickListener(this);
 
-        ImageButton lotteryBuybutton = view.findViewById(R.id.lotteryBuyShop);
-        lotteryBuybutton.setOnClickListener(this);
+        CardView lotterycardview = view.findViewById(R.id.cardview_lottery);
+        lotterycardview.setOnClickListener(this);
 
-        ImageButton houseBuybutton = view.findViewById(R.id.houseBuyShop);
-        houseBuybutton.setOnClickListener(this);
+        CardView housecardview = view.findViewById(R.id.cardview_house);
+        housecardview.setOnClickListener(this);
 
-        ImageButton transportBuybutton = view.findViewById(R.id.transportBuyShop);
-        transportBuybutton.setOnClickListener(this);
+        CardView transportcardview = view.findViewById(R.id.cardview_transport);
+        transportcardview.setOnClickListener(this);
 
         return view;
     }
@@ -150,46 +151,24 @@ implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent(getActivity().getApplicationContext(), BuyActivity.class);
         switch (view.getId()) {
-            case R.id.foodBuyShop:
+            case R.id.cardview_food:
                 break;
-            case R.id.medicinesBuyShop:
+            case R.id.cardview_medicines:
                 break;
-            case R.id.funBuyShop:
+            case R.id.cardview_fun:
                 break;
-            case R.id.lotteryBuyShop:
+            case R.id.cardview_lottery:
                 break;
-            case R.id.houseBuyShop:
+            case R.id.cardview_house:
                 break;
-            case R.id.transportBuyShop:
+            case R.id.cardview_transport:
                 break;
         }
-
-        Intent intent = new Intent(getActivity().getApplicationContext(), BuyActivity.class);
         intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
         startActivity(intent);
     }
-
-   /* public void onShopButtonClick(View view) {
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-
-        switch(view.getId())
-        {
-
-            case R.id.giveUpSchoolEducation:
-                MainActivity.IsInSchoolNow = false;
-                ft.replace(R.id.mainFragmentHolder, new FindJobFragment());
-
-            case R.id.learnAtHomeEducation:
-                ft.replace(R.id.mainFragmentHolder, new LearnInHomeFragment());
-
-            default:
-                break;
-
-        }
-
-        ft.commit();
-    }*/
 
 }
 

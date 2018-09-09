@@ -133,10 +133,10 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), 750));
 
-        id = getIntent().getIntExtra(getResources().getString(R.string.send_shop_click_id), R.id.foodBuyShop);
+        id = getIntent().getIntExtra(getResources().getString(R.string.send_shop_click_id), R.id.cardview_food);
         switch (id)
         {
-            case R.id.foodBuyShop:
+            case R.id.cardview_food:
                 for(int i = 0; i < ShopFragment.foodList.length; i++)
                     itemsNames.add(ShopFragment.foodList[i].getName());
                 for(int i = 0; i < ShopFragment.foodList.length; i++)
@@ -145,7 +145,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), 750) / 10);
                 break;
 
-            case R.id.medicinesBuyShop:
+            case R.id.cardview_medicines:
                 for(int i = 0; i < ShopFragment.medicinesList.length; i++)
                     itemsNames.add(ShopFragment.medicinesList[i].getName());
                 for(int i = 0; i < ShopFragment.medicinesList.length; i++)
@@ -154,7 +154,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), 750) / 10);
                 break;
 
-            case R.id.funBuyShop:
+            case R.id.cardview_fun:
                 for(int i = 0; i < ShopFragment.funList.length; i++)
                     itemsNames.add(ShopFragment.funList[i].getName());
                 for(int i = 0; i < ShopFragment.funList.length; i++)
@@ -163,7 +163,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), 750) / 10);
                 break;
 
-            case R.id.lotteryBuyShop:
+            case R.id.cardview_lottery:
                 for(int i = 0; i < ShopFragment.lotteryList.length; i++)
                     itemsNames.add(ShopFragment.lotteryList[i].getName());
                 for(int i = 0; i < ShopFragment.lotteryList.length; i++)
@@ -172,7 +172,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
 
-            case R.id.houseBuyShop:
+            case R.id.cardview_house:
                 for(int i = 0; i < ShopFragment.lodgingList.length; i++)
                     itemsNames.add(ShopFragment.lodgingList[i].getName());
                 for(int i = 0; i < ShopFragment.lodgingList.length; i++)
@@ -181,7 +181,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
 
-            case R.id.transportBuyShop:
+            case R.id.cardview_transport:
                 for(int i = 0; i < ShopFragment.transportList.length; i++)
                     itemsNames.add(ShopFragment.transportList[i].getName());
                 for(int i = 0; i < ShopFragment.transportList.length; i++)
@@ -247,7 +247,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
         switch (id)
         {
-            case R.id.foodBuyShop:
+            case R.id.cardview_food:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.foodList[position].getPrice())
                 {
                     editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.foodList[position].getPrice()));
@@ -261,7 +261,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), 750) / 10);
                 break;
 
-            case R.id.medicinesBuyShop:
+            case R.id.cardview_medicines:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.medicinesList[position].getPrice())
                 {
                     editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750)) - ShopFragment.medicinesList[position].getPrice()));
@@ -272,7 +272,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), 750) / 10);
                 break;
 
-            case R.id.funBuyShop:
+            case R.id.cardview_fun:
                 if("Computer".equals(ShopFragment.funList[position].getType()) && sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), null) == null)
                     buyFun(position);
                 else if("Computer".equals(ShopFragment.funList[position].getType()))
@@ -294,7 +294,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), 750) / 10);
                 break;
 
-            case R.id.lotteryBuyShop:
+            case R.id.cardview_lottery:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750) >= ShopFragment.lotteryList[position].getPrice())
                 {
                     try {
@@ -311,7 +311,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 break;
 
-            case R.id.houseBuyShop:
+            case R.id.cardview_house:
                 String LodgingName = "";
               //  try {
                     json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), "");
@@ -341,7 +341,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     editor.putString(getResources().getString(R.string.saved_my_lodging_key), sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), null) + (ShopFragment.lodgingList[position]));
                 break;
 
-            case R.id.transportBuyShop:
+            case R.id.cardview_transport:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), "");
                 Transport transport = gson.fromJson(json, Transport.class);
                 String TransportName = transport.getName();
