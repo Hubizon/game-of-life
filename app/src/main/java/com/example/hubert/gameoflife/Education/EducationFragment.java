@@ -4,14 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
+import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.FindJobFragment;
 
@@ -34,8 +38,12 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_education, container, false);
+        View view = inflater.inflate(R.layout.fragment_education, container, false);
+
+        Button goSchoolButton = view.findViewById(R.id.GoToSchoolEducation);
+        goSchoolButton.setOnClickListener(this);
+
+        return view;
     }
 
     @Override
@@ -55,6 +63,9 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                 Intent intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.GoToSchoolEducation:
+                DialogFragment newDialog = new MyDialogFragment();
+                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
 
             default:
                 break;
