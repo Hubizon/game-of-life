@@ -9,6 +9,7 @@ import static com.example.hubert.gameoflife.MainActivity.subjectsList;
 
 public class UpdateValues {
 
+    // TODO (3) sprawdz czy wszystko jest tu na pewno potrzebne
     public static void updateSharedPreferences(Context context, SharedPreferences sharedPref) {
         SharedPreferences.Editor editor = sharedPref.edit();
 

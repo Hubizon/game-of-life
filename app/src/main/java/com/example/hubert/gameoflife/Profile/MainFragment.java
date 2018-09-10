@@ -53,9 +53,10 @@ public class MainFragment extends Fragment {
         public void run() {
             mSharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-            // TODO (1) dodaj saved_character_money_key
-//            charactermoneytext.setText(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
+            charactermoneytext.setText(mSharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
+            // TODO (1) inaczej dodaj do ciebie tekst, tak zeby kompilator nie podpowiadal ze ten zapis jest zly
             // TODO (2) inaczej dodaj do ciebie tekst, tak zeby kompilator nie podpowiadal ze ten zapis jest zly
+            // TODO zmienic defValue
             timetext.setText(mSharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 1) + "."
                     + mSharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1) + "."
                     + mSharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1) + " "
@@ -85,8 +86,7 @@ public class MainFragment extends Fragment {
         mHandler = new Handler();
         mHandler.postDelayed(mRunnable, 1500);
 
-        // TODO co to????
-        //updateLabels(view);
+        updateLabels(view);
 
         return view;
     }
