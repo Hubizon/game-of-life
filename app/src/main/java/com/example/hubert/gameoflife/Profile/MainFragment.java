@@ -51,6 +51,9 @@ public class MainFragment extends Fragment {
     public Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
+            if (getActivity() == null) {
+
+            }
             mSharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
             charactermoneytext.setText(mSharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
@@ -82,9 +85,6 @@ public class MainFragment extends Fragment {
         healthprogress = view.findViewById(R.id.progressBar_character_health);
         energyprogress = view.findViewById(R.id.progressBar_character_energy);
         happinessprogress = view.findViewById(R.id.progressBar_character_happiness);
-
-        mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, 1500);
 
         updateLabels(view);
 
@@ -142,4 +142,16 @@ public class MainFragment extends Fragment {
             ((TextView)(view.findViewById(R.id.characterChildren))).setText(getResources().getString(R.string.transport) + " " + children.getName());*/
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mRunnable);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mHandler = new Handler();
+        mHandler.post(mRunnable);
+    }
 }
