@@ -83,7 +83,7 @@
 
             <TextView
                 android:id="@+id/characterMoney"
-                android:layout_width="8dp"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginStart="8dp"
@@ -199,6 +199,9 @@
 
     </android.support.v7.widget.CardView>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -284,9 +287,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginTop="179dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/childrens"
             android:textColor="@color/textColorOnPrimary" />
 
     </android.support.v7.widget.CardView>
+
+    </ScrollView>
 
 </LinearLayout>

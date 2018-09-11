@@ -1,6 +1,8 @@
 package com.example.hubert.gameoflife.Education;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,11 @@ import android.widget.TextView;
 
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -21,12 +28,14 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
     private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    Context context;
 
     // data is passed into the constructor
     RecyclerViewSubjectAdapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
-    }
+        this.context = context;
+        }
 
     // inflates the row layout from xml when needed
     @Override
@@ -42,10 +51,17 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
         String animal = mData.get(position);
         holder.myTextView.setText(animal);
 
-        if(MainActivity.subjectsList[position].IsTodaysHomeworkDone)
-            holder.myTextViewHomework.setVisibility(View.GONE);
-        else
-            holder.myTextViewHomework.setVisibility(View.VISIBLE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        try {
+            JSONArray jsonArray = new JSONArray(sharedPreferences.getString(context.getApplicationContext().getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+            JSONObject json = (JSONObject)jsonArray.get(position);
+            if(json.getBoolean("IsTodaysHomeworkDone"))
+                holder.myTextViewHomework.setVisibility(View.GONE);
+            else
+                holder.myTextViewHomework.setVisibility(View.VISIBLE);
+        }
+        catch (JSONException e)
+        { }
     }
 
     // total number of rows

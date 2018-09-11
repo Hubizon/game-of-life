@@ -95,4 +95,5 @@
     <string name="saved_age_years_key">age_years</string>
     <string name="saved_age_days_key">age_days</string>
     <string name="saved_my_work_key">my_work</string>
+    <string name="saved_communication_skills_key">communication_skills</string>
 </resources>

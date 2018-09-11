@@ -56,18 +56,15 @@ public class MainFragment extends Fragment {
             }
             mSharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-            charactermoneytext.setText(mSharedPref.getInt(getResources().getString(R.string.saved_character_money_key), 750));
             // TODO (1) inaczej dodaj do ciebie tekst, tak zeby kompilator nie podpowiadal ze ten zapis jest zly
-            // TODO (2) inaczej dodaj do ciebie tekst, tak zeby kompilator nie podpowiadal ze ten zapis jest zly
-            // TODO zmienic defValue
-            timetext.setText(mSharedPref.getInt(getResources().getString(R.string.saved_date_years_key), 1) + "."
-                    + mSharedPref.getInt(getResources().getString(R.string.saved_date_months_key), 1) + "."
-                    + mSharedPref.getInt(getResources().getString(R.string.saved_date_days_key), 1) + " "
-                    + mSharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), 750) + ":" + "00");
-            hungerprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_hungry_key), 750) / 10));
-            healthprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_health_key), 750) / 10));
-            energyprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_energy_key), 750) / 10));
-            happinessprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_happiness_key), 750) / 10));
+            timetext.setText(mSharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears) + "."
+                    + mSharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) + "."
+                    + mSharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
+                    + mSharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00");
+            hungerprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10));
+            healthprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10));
+            energyprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) / 10));
+            happinessprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10));
 
             mHandler.postDelayed(mRunnable, 1500);
         }
@@ -96,7 +93,7 @@ public class MainFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         ((view.findViewById(R.id.characterIcon))).setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
-        ((TextView)(view.findViewById(R.id.characterName))).setText(sharedPref.getString(getResources().getString(R.string.saved_character_name_key), ""));
+        ((TextView)(view.findViewById(R.id.characterName))).setText(sharedPref.getString(getResources().getString(R.string.saved_character_name_key), SharedPreferencesDefaultValues.DefaultName));
         ((TextView)(view.findViewById(R.id.characterMoney))).setText("$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
         ((TextView)(view.findViewById(R.id.characterAge))).setText(sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears)
                 + " years " + sharedPref.getInt(getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays) + " days");

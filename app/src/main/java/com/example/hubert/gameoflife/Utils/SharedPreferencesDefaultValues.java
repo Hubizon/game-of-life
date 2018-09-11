@@ -1,5 +1,6 @@
 package com.example.hubert.gameoflife.Utils;
 
+import com.example.hubert.gameoflife.Education.Subject;
 import com.example.hubert.gameoflife.Girlboyfriend.Children;
 import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
 import com.example.hubert.gameoflife.R;
@@ -9,6 +10,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class SharedPreferencesDefaultValues {
+
+    private static Gson gson = new Gson();
 
     public static String DefaultName = "";
     public static int DefaultIcon = R.drawable.avatar_icon1;
@@ -22,13 +25,10 @@ public class SharedPreferencesDefaultValues {
     public static int DefaultDateDays = 1;
     public static int DefaultTimeHours = 12;
 
-    private static Gson gson = new Gson();
-    private static String jsonLodging = gson.toJson(new Lodging("Parents House", 0, 10, 5, 125, 5));
-    public static String DefaultMyLodging = jsonLodging;
+    public static String DefaultMyLodging = gson.toJson(new Lodging("Parents House", 0, 10, 5, 125, 5));
     public static boolean DefaultIsInSchoolNow = true;
     public static String DefaultMyJob = null;
-    private static String jsonTransport = gson.toJson(new Transport("Foots", 0, 10));
-    public static String DefaultMyTransport = jsonTransport;
+    public static String DefaultMyTransport = gson.toJson(new Transport("Foots", 0, 10));
     public static String DefaultMyGirlboyfriend = null;
     public static String DefaultMyChildren = null;
 
@@ -40,6 +40,22 @@ public class SharedPreferencesDefaultValues {
     public static String DefaultMyComputer = null;
     public static String DefaultMyTv = null;
     public static String DefaultMyPhone = null;
-    private static String jsonLotteries = gson.toJson(new ArrayList<>());
-    public static String DefaultOwnedLotteries = jsonLotteries;
+    public static String DefaultOwnedLotteries = gson.toJson(new ArrayList<>());
+
+    static private Subject[] subjectsList = new Subject[] { new Subject("Mathematics", 4),
+            new Subject("English", 4),
+            new Subject("Languages", 4),
+            new Subject("History", 4),
+            new Subject("Chemistry", 4),
+            new Subject("Psychic", 4),
+            new Subject("Biology", 4),
+            new Subject("Information Technology", 4),
+            new Subject("Art", 4),
+            new Subject("Music", 4),
+            new Subject("Psychical Education", 4),
+            new Subject("Behavior", 4), };
+
+    public static String DefaultSubjectsList = gson.toJson(subjectsList);
+
+    public static int DefaultCommunicationsSkills = 100;
 }
