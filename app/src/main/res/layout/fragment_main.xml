@@ -9,114 +9,151 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:layout_weight="1">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/characterIcon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="10dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:gravity="center"
                 android:src="@drawable/avatar_icon1"
+                app:layout_constraintBottom_toTopOf="@+id/characterName"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:background="@drawable/avatar_icon1" />
+                tools:background=" />@drawable/avatar_icon1" />
 
             <TextView
                 android:id="@+id/characterName"
-                android:layout_width="65dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:text="Mr. Hubi"
                 android:textAlignment="center"
                 android:textColor="@color/textColorOnPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/characterIcon"
+                app:layout_constraintEnd_toEndOf="@+id/characterIcon"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/characterIcon"
                 tools:text="Mr. Hubi" />
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/age_icon"
-                app:layout_constraintStart_toEndOf="@+id/characterIcon"
-                app:layout_constraintTop_toTopOf="@+id/characterIcon" />
+                app:layout_constraintBottom_toTopOf="@+id/guideline4"
+                app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/guideline3"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/characterAge"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
+                android:gravity="center"
                 android:text="13 years 92 days"
-                android:textAlignment="center"
                 android:textColor="@color/textColorOnPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintBottom_toTopOf="@+id/guideline4"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/guideline3"
                 tools:text="13 years 92 days" />
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/money_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/characterIcon"
-                app:layout_constraintStart_toEndOf="@+id/characterIcon"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
             <TextView
                 android:id="@+id/characterMoney"
-                android:layout_width="8dp"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
+                android:gravity="center"
                 android:text="$"
-                android:textAlignment="center"
                 android:textColor="@color/textColorOnPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/clock_icon"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/time"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/time" />
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="0dp"
                 android:layout_gravity="end"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:gravity="center"
                 android:textColor="@color/textColorOnPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="01.09 15:30" />
+
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.95" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -125,168 +162,234 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:layout_weight="1.5">
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/health_icon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <ProgressBar
-            android:id="@+id/progressBar_character_health"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="22dp"
-            tools:progress="75" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/health_icon" />
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/food_icon" />
+                <ProgressBar
+                    android:id="@+id/progressBar_character_health"
+                    style="@style/ProgressBarMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    tools:progress="75" />
 
-        <ProgressBar
-            android:id="@+id/progressBar_character_hungry"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="62dp"
-            tools:progress="75" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="90dp"
-            android:background="@drawable/energy_icon" />
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/energy_icon" />
 
-        <ProgressBar
-            android:id="@+id/progressBar_character_energy"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="102dp"
-            tools:progress="75" />
+                <ProgressBar
+                    android:id="@+id/progressBar_character_energy"
+                    style="@style/ProgressBarMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    tools:progress="75" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="130dp"
-            android:background="@drawable/happiness_icon" />
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/food_icon" />
 
-        <ProgressBar
-            android:id="@+id/progressBar_character_happiness"
-            style="@style/ProgressBarMain"
-            android:layout_width="200dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="142dp"
-            tools:progress="75" />
+                <ProgressBar
+                    android:id="@+id/progressBar_character_hungry"
+                    style="@style/ProgressBarMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    tools:progress="75" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/happiness_icon" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar_character_happiness"
+                    style="@style/ProgressBarMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    tools:progress="75" />
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="2">
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/lodging_icon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/characterLodging"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="19dp"
-            android:text="@string/loudging"
-            android:textColor="@color/textColorOnPrimary" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/lodging_icon" />
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/education_icon" />
+                <TextView
+                    android:id="@+id/characterLodging"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="@string/loudging"
+                    android:textColor="@color/textColorOnPrimary" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/characterEducationWork"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="59dp"
-            android:text="@string/education_main"
-            android:textColor="@color/textColorOnPrimary" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/education_icon" />
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="90dp"
-            android:background="@drawable/transport_icon" />
+                <TextView
+                    android:id="@+id/characterEducationWork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="@string/education_main"
+                    android:textColor="@color/textColorOnPrimary" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/characterTransport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="99dp"
-            android:text="@string/transport"
-            android:textColor="@color/textColorOnPrimary" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/transport_icon" />
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="130dp"
-            android:background="@drawable/girlboyfriend_icon" />
+                <TextView
+                    android:id="@+id/characterTransport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="@string/transport"
+                    android:textColor="@color/textColorOnPrimary" />
 
-        <TextView
-            android:id="@+id/characterGirlboyfriend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="139dp"
-            android:text="@string/girlfriend"
-            android:textColor="@color/textColorOnPrimary" />
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="170dp"
-            android:background="@drawable/children_icon" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/characterChildren"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="179dp"
-            android:text="@string/childrens"
-            android:textColor="@color/textColorOnPrimary" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/girlboyfriend_icon" />
 
+                <TextView
+                    android:id="@+id/characterGirlboyfriend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="@string/girlfriend"
+                    android:textColor="@color/textColorOnPrimary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/children_icon" />
+
+                <TextView
+                    android:id="@+id/characterChildren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="@string/childrens"
+                    android:textColor="@color/textColorOnPrimary" />
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 
 </LinearLayout>
