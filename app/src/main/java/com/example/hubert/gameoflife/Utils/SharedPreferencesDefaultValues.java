@@ -13,7 +13,7 @@ public class SharedPreferencesDefaultValues {
 
     private static Gson gson = new Gson();
 
-    public static String DefaultName = "";
+    public static String DefaultName = "Mr. Hubi";
     public static int DefaultIcon = R.drawable.avatar_icon1;
     public static int DefaultMoney = 100000;
 
