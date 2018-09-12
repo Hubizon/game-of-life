@@ -13,21 +13,6 @@ import com.example.hubert.gameoflife.Utils.UpdateValues;
 
 public class MainActivity extends AppCompatActivity{
 
-    public static Subject[] subjectsList = new Subject[] { new Subject("Mathematics", 4),
-    new Subject("English", 4),
-    new Subject("Languages", 4),
-    new Subject("History", 4),
-    new Subject("Chemistry", 4),
-    new Subject("Psychic", 4),
-    new Subject("Biology", 4),
-    new Subject("Information Technology", 4),
-    new Subject("Art", 4),
-    new Subject("Music", 4),
-    new Subject("Psychical Education", 4),
-    new Subject("Behavior", 4), };
-
-    public static int CommunicationSkills = 100;
-
     private ViewPager mPager;
     private CustomPagerAdapter mPagerAdapter;
     private TabLayout mTabLayout;

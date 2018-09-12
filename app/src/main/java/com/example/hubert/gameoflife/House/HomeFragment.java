@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.BuyActivity;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
+import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 public class HomeFragment extends Fragment
@@ -55,15 +59,16 @@ implements View.OnClickListener{
     public void onClick(View view) {
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        DialogFragment newDialog;
 
         switch (view.getId()) {
             case R.id.cardview_tv:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                newDialog = new MyDialogFragment();
+                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
                 break;
             case R.id.cardview_bed:
-                Toast.makeText(getContext(), String.format("The %s view is not yet implemented!",
-                        getResources().getResourceEntryName(view.getId())), Toast.LENGTH_SHORT).show();
+                newDialog = new MyDialogFragment();
+                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
                 break;
             case R.id.cardview_computer:
                 if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null)

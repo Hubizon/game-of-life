@@ -1,34 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <ImageView
-        android:src="@drawable/ad_icon"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:scaleType="center"
-        android:background="#FFFFBB33"
-        android:contentDescription="@string/app_name" />
-    <EditText
-        android:id="@+id/username"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="4dp"
-        android:hint="@string/app_name" />
-    <EditText
-        android:id="@+id/password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="sans-serif"
-        android:hint="@string/bills"/>
+
+            <TextView
+                android:id="@+id/doingThingName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Sleeping"
+                android:textAlignment="center"
+                android:textColor="@color/textColorOnPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="100dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/clock_icon" />
+
+            <TextView
+                android:id="@+id/time_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="-20dp"
+                android:textColor="@color/textColorOnPrimary"
+                tools:text="01.09 15:30" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/money_icon" />
+
+            <TextView
+                android:id="@+id/money_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="-23dp"
+                android:text="$"
+                android:textAlignment="center"
+                android:textColor="@color/textColorOnPrimary" />
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/health_icon" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_health_dialog"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-22dp"
+                tools:progress="75" />
+
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/food_icon" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_hungry_dialog"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-20dp"
+                tools:progress="75" />
+
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/energy_icon" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_energy_dialog"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-20dp"
+                tools:progress="75" />
+
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/happiness_icon" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_happiness_dialog"
+                style="@style/ProgressBarMain"
+                android:layout_width="200dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="-20dp"
+                tools:progress="75" />
 </LinearLayout>

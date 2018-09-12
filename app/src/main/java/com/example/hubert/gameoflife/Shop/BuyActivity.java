@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Fun;
+import com.example.hubert.gameoflife.Utils.FunTypes;
 import com.example.hubert.gameoflife.Utils.Lodging;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Utils.Transport;

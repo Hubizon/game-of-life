@@ -72,7 +72,7 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
         }
 
         ft.commit();
-        editor.commit();
+        editor.apply();
     }
 
 }
