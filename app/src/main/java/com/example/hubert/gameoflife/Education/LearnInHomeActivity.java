@@ -59,9 +59,9 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
     public void onItemClick(View view, int position) {
         if(view.findViewById(R.id.subjectHomework).getVisibility() == View.VISIBLE)
         {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.pager, new DoingSomethingFragment())
-                    .commit();
+           // getSupportFragmentManager().beginTransaction()
+                   // .add(R.id.pager, new DoingSomethingFragment())
+                   // .commit();
         }
     }
 }

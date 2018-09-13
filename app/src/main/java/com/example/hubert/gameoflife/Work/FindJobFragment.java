@@ -1,18 +1,22 @@
 package com.example.hubert.gameoflife.Work;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hubert.gameoflife.Education.EducationFragment;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Shop.BuyActivity;
 
 
-
-public class FindJobFragment extends Fragment {
+public class FindJobFragment extends Fragment
+        implements View.OnClickListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -58,5 +62,45 @@ public class FindJobFragment extends Fragment {
                 container, false);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getActivity().getApplicationContext(), BuyActivity.class);
+        switch (view.getId()) {
+            case R.id.cardview_officeWork:
+                intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
+                break;
+
+            case R.id.cardview_criminalWork:
+                intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
+                break;
+
+            case R.id.cardview_artsWork:
+                intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
+                break;
+
+            case R.id.cardview_outsideWork:
+                intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
+                break;
+
+            case R.id.cardview_otherWork:
+                intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
+                break;
+
+            case R.id.cardview_educationWork:
+                Fragment newFragment = new EducationFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.pager, newFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+                break;
+
+            default:
+                break;
+        }
+        startActivity(intent);
     }
 }

@@ -165,6 +165,8 @@ public class ShopFragment extends Fragment
                 break;
             case R.id.cardview_transport:
                 break;
+            default:
+                break;
         }
         intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
         startActivity(intent);
