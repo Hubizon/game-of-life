@@ -25,27 +25,38 @@ import org.json.JSONObject;
 
 public class MyDialogFragment extends DialogFragment {
 
+    private static final String BUNDLE_ID = "bundle_id";
+
     public MyDialogFragment() {}
 
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
-    private int id;
+    private int mId;
     Gson gson = new Gson();
     String json;
     JSONArray jsonArray;
     JSONObject jsonObject;
 
-    public static MyDialogFragment newInstance() {
+    public static MyDialogFragment newInstance(int id) {
         MyDialogFragment frag = new MyDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(BUNDLE_ID, id);
+        frag.setArguments(bundle);
         return frag;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        Bundle args = getArguments();
+        if (args != null) {
+            mId = args.getInt(BUNDLE_ID);
+        }
+
         //TODO: ustaw wartosc id na id z kliknietego guziku (np R.id.cardview_bed)
-        id = 0;
+        mId = 0;
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -72,7 +83,7 @@ public class MyDialogFragment extends DialogFragment {
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        switch (id)
+        switch (mId)
         {
             case R.id.cardview_bed:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
