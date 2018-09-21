@@ -7,14 +7,11 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import com.example.hubert.gameoflife.Utils.Food;
-import com.example.hubert.gameoflife.Utils.Fun;
-import com.example.hubert.gameoflife.Utils.Lodging;
-import com.example.hubert.gameoflife.Utils.Lottery;
-import com.example.hubert.gameoflife.Utils.Medicines;
+
+import com.example.hubert.gameoflife.House.Fun;
+import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Utils.Transport;
+import com.example.hubert.gameoflife.House.Transport;
 
 
 public class ShopFragment extends Fragment
@@ -63,34 +60,33 @@ public class ShopFragment extends Fragment
     };
 
     public static Lottery[] lotteryList = new Lottery[]{
-            new Lottery("Scratchcard", 5, 0.5, 10000),
-            new Lottery("Lotto", 8, 0.01, 2000000),
-            new Lottery("SuperLotto Plus", 10, 0.005, 5000000),
+            new Lottery("Scratchcard", 5, 200, 10000),
+            new Lottery("Lotto", 8, 1000, 2000000),
+            new Lottery("SuperLotto Plus", 10, 20000, 5000000),
             new Lottery("Powerball", 12, 150, 10000000),
             new Lottery("Euro Jackpot", 14, 350, 7500000),
-            new Lottery("Mega Milions", 15, 0.075, 1500000),
-            new Lottery("Euro Millions", 20, 0.001, 10000000),
-            new Lottery("Win The Life", 100, 0.0001, 999999999),
+            new Lottery("Mega Milions", 15, 15000, 1500000),
+            new Lottery("Euro Millions", 20, 10000, 10000000),
+            new Lottery("Win The Life", 100, 100000, 999999999),
     };
 
-    public static Lodging LodgingAfter18 = new Lodging("Public Bench and Blanket from The Garbage Bin", 0, 0, -5, 75, -5);
     public static Lodging[] lodgingList = new Lodging[]{
-            new Lodging("Rent a Cheap Flat in Dangerous Neighborhood For a Month", 500, 0, -2, 100, -2),
-            new Lodging("Rent a Cheap Flat for a Month", 650, 0, -2, 100, -2),
-            new Lodging("Rent a Flat for a Month", 800, 0, 0, 125, -1),
-            new Lodging("Rent a House for a Month", 1500, 0, 2, 150, 3),
-            new Lodging("Buy a Motel for a Week", 450, 3, 1, 125, 2),
-            new Lodging("Buy a 1 Star Hotel for a Week", 500, 3, 2, 125, 3),
-            new Lodging("Buy a 2 Star Hotel for a Week", 600, 3, 3, 150, 3),
-            new Lodging("Buy a 3 Star Hotel for a Week", 750, 4, 4, 175, 4),
-            new Lodging("Buy a 4 Star Hotel for a Week", 1000, 5, 5, 200, 5),
-            new Lodging("Buy a 5 Star Hotel for a Week", 1500, 7, 7, 225, 8),
-            new Lodging("Buy Flat", 40000, 0, 0, 125, -1),
-            new Lodging("Buy Small House", 75000, 0, 1, 135, 2),
-            new Lodging("Buy Big House", 150000, 0, 2, 175, 5),
-            new Lodging("Buy Villa", 500000, 0, 8, 225, 10),
-            new Lodging("Buy Very Exclusive Villa", 2500000, 0, 10, 275, 15),
-            new Lodging("Buy Super Exclusive and Modern Villa", 50000000, 0, 12, 400, 25),
+            new Lodging("Cheap", 500,  -2, 100, -2, "rent", 30),
+            new Lodging("Cheap", 650, -2, 100, -2, "rent", 30),
+            new Lodging("Flat", 800, 0, 125, -1, "rent", 30),
+            new Lodging("House", 1500, 2, 150, 3, "rent", 30),
+            new Lodging("Motel", 450,  1, 125, 2, "rent", 7),
+            new Lodging("1 Star Hotel", 500,2, 125, 3, "rent", 7),
+            new Lodging("2 Star Hotel", 600,3, 150, 3, "rent", 7),
+            new Lodging("3 Star Hotel", 750,4, 175, 4, "rent", 7),
+            new Lodging("4 Star Hotel", 1000,5, 200, 5, "rent", 7),
+            new Lodging("5 Star Hotel", 1500,7, 225, 8, "rent", 7),
+            new Lodging("Flat", 40000,  0, 125, -1, "buy", 0),
+            new Lodging("Small House", 75000,1, 135, 2, "buy", 0),
+            new Lodging("Big House", 150000,2, 175, 5, "buy", 0),
+            new Lodging("Villa", 500000,  8,225, 10, "buy", 0),
+            new Lodging("Very Exclusive Villa", 2500000,10, 275, 15, "buy", 0),
+            new Lodging("Super Exclusive and Modern Villa", 50000000, 12, 400, 25, "buy", 0),
     };
 
     public static Transport[] transportList = new Transport[]{

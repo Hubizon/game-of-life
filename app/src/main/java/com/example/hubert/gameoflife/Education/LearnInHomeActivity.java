@@ -34,6 +34,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         ArrayList<String> subjectNames = new ArrayList<>();
+        ArrayList<String> subjectMarks = new ArrayList<>();
 
         try {
             jsonArray = new JSONArray(sharedPreferences.getString(getApplicationContext().getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
@@ -41,6 +42,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
             {
                 json  = (JSONObject) jsonArray.get(i);
                 subjectNames.add(json.get("subjectName").toString());
+                subjectMarks.add(json.get("subjectMark").toString());
             }
         }
         catch (JSONException e)
@@ -49,7 +51,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerViewSubjects);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewSubjectAdapter(this, subjectNames);
+        adapter = new RecyclerViewSubjectAdapter(this, subjectNames, subjectMarks);
         adapter.setClickListener(LearnInHomeActivity.this);
         recyclerView.setAdapter(adapter);
     }
@@ -57,11 +59,23 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
 
     @Override
     public void onItemClick(View view, int position) {
+        SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         if(view.findViewById(R.id.subjectHomework).getVisibility() == View.VISIBLE)
         {
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.pager, new DoingSomethingFragment())
-//                    .commit();
+            view.findViewById(R.id.subjectHomework).setVisibility(View.GONE);
+
+            try {
+                jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                    json  = (JSONObject) jsonArray.get(position);
+                    json.put("IsTodaysHomeworkDone", true);
+                    json.put("toAnotherMark", (json.getInt("toAnotherMark") + 5));
+                    jsonArray.put(position, json);
+                    editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
+            }
+            catch (JSONException e)
+            { }
         }
+        editor.apply();
     }
 }

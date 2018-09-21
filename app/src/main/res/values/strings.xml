@@ -91,9 +91,25 @@
     <string name="saved_subjects_list_key">subjects_list</string>
     <string name="send_shop_click_id">shop_click</string>
     <string name="shared_preferences_key">shared_preferences</string>
-    <string name="saved_saved_age_years_key">age_years</string>
     <string name="saved_age_years_key">age_years</string>
     <string name="saved_age_days_key">age_days</string>
-    <string name="saved_my_work_key">my_work</string>
     <string name="saved_communication_skills_key">communication_skills</string>
+    <string name="saved_work_relations_key">work_relations</string>
+    <string name="sleeping">Sleeping</string>
+    <string name="playing">Playing</string>
+    <string name="talking_on_messengers">Talking on messengers</string>
+    <string name="learning">Learning</string>
+    <string name="working">Working</string>
+    <string name="getting_new_friends">Getting New Friends</string>
+    <string name="stealing_something">Stealing Something</string>
+    <string name="selling_drugs">Selling Drugs</string>
+    <string name="saved_criminal_points_key">criminal_points</string>
+    <string name="saved_can_go_to_school_key">can_go_to_school</string>
+    <string name="saved_year_when_can_go_to_school_key">year_when_can_go_to_school</string>
+    <string name="saved_have_safe_key">have_safe</string>
+    <string name="saved_money_in_safe_key">money_in_safe</string>
+    <string name="saved_karma_points_key">karma</string>
+    <string name="saved_progress_making_game_key">progress_making_game</string>
+    <string name="saved_programming_skills_key">programming_skills</string>
+    <string name="saved_games_key">games</string>
 </resources>

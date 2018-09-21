@@ -1,22 +1,22 @@
-package com.example.hubert.gameoflife.Utils;
+package com.example.hubert.gameoflife.Shop;
 
 public class Lottery {
 
     private String name;
     private int price;
-    private double chancheToWin;
+    private int chanceToWin;
     private int prize;
 
-    public Lottery(String name, int price, double chancheToWin, int prize)
+    public Lottery(String name, int price, int chanceToWin, int prize)
     {
         this.name = name;
         this.price = price;
-        this.chancheToWin = chancheToWin;
+        this.chanceToWin = chanceToWin;
         this.prize = prize;
     }
 
     public String getName() { return name; }
     public int getPrice() { return price; }
-    public double getChancheToWin() { return chancheToWin; }
+    public int getChanceToWin() { return chanceToWin; }
     public int getPrize() { return prize; }
 }

@@ -25,15 +25,17 @@ import java.util.List;
 
 public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerViewSubjectAdapter.ViewHolder> {
 
-    private List<String> mData;
+    private List<String> mDataNames;
+    private List<String> mDataMarks;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
     Context context;
 
     // data is passed into the constructor
-    RecyclerViewSubjectAdapter(Context context, List<String> data) {
+    RecyclerViewSubjectAdapter(Context context, List<String> dataName, List<String> dataMarks) {
         this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+        this.mDataNames = dataName;
+        this.mDataMarks = dataMarks;
         this.context = context;
         }
 
@@ -48,8 +50,9 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.myTextView.setText(animal);
+        String subjectName = mDataNames.get(position);
+        String subjectMark = mDataMarks.get(position);
+        holder.myTextView.setText(subjectName + ": " + subjectMark);
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         try {
@@ -67,7 +70,7 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
     // total number of rows
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mDataNames.size();
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -90,7 +93,7 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
 
     // convenience method for getting data at click position
     String getItem(int id) {
-        return mData.get(id);
+        return mDataNames.get(id);
     }
 
     // allows clicks events to be caught

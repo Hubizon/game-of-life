@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.House.Lodging;
 
 import java.util.List;
 
@@ -19,14 +20,16 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private List<String> mDataNames;
     private List<String> mDataPrices;
+    private Lodging[] mDataLodgings;
     private LayoutInflater mInflater;
     private RecyclerViewShopBuyAdapter.ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    RecyclerViewShopBuyAdapter(Context context, List<String> dataNames, List<String> dataPrices) {
+    RecyclerViewShopBuyAdapter(Context context, List<String> dataNames, List<String> dataPrices, Lodging[] dataLodgings) {
         this.mInflater = LayoutInflater.from(context);
         this.mDataNames = dataNames;
         this.mDataPrices = dataPrices;
+        this.mDataLodgings = dataLodgings;
     }
 
     // inflates the row layout from xml when needed
@@ -39,7 +42,40 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(RecyclerViewShopBuyAdapter.ViewHolder holder, int position) {
-        String ItemName = mDataNames.get(position);
+        String ItemName;
+        if(mDataLodgings != null)
+        {
+            switch (mDataLodgings[position].getType())
+            {
+                case "buy":
+                    ItemName = "Buy a " + mDataNames.get(position);
+                    break;
+
+                case "rent":
+                    switch (mDataLodgings[position].getRentTime())
+                    {
+                        case 7:
+                            ItemName = "Rent a " + mDataNames.get(position) + " for a week";
+                            break;
+
+                        case 30:
+                            ItemName = "Rent a " + mDataNames.get(position) + " for a month";
+                            break;
+
+                        default:
+                            ItemName = "Rent a " + mDataNames.get(position);
+                            break;
+                    }
+                    break;
+
+                default:
+                    ItemName = mDataNames.get(position);
+                    break;
+            }
+        }
+
+        else
+            ItemName = mDataNames.get(position);
         String ItemPrice = mDataPrices.get(position);
         holder.myTextViewName.setText(ItemName);
         holder.myTextViewPrice.setText(ItemPrice);

@@ -1,6 +1,6 @@
-package com.example.hubert.gameoflife.Utils;
+package com.example.hubert.gameoflife.Shop;
 
-public class Lodging {
+public class Food {
 
     private String name;
     private int price;
@@ -9,7 +9,7 @@ public class Lodging {
     private int givenEnergy;
     private int givenHappiness;
 
-    public Lodging(String name, int price, int givenFood , int givenHealth, int givenEnergy, int givenHappiness)
+    public Food(String name, int price, int givenFood, int givenHealth, int givenEnergy, int givenHappiness)
     {
         this.name = name;
         this.price = price;

@@ -1,18 +1,23 @@
 package com.example.hubert.gameoflife;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.hubert.gameoflife.Education.Subject;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Utils.UpdateValues;
+import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity{
 
+    Gson gson = new Gson();
+    String json;
     private ViewPager mPager;
     private CustomPagerAdapter mPagerAdapter;
     private TabLayout mTabLayout;
@@ -24,13 +29,16 @@ public class MainActivity extends AppCompatActivity{
             R.drawable.house_icon
     };
 
+    static Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
 
         mPager = findViewById(R.id.pager);
-        mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), this);
         mPager.setAdapter(mPagerAdapter);
 
         mTabLayout = findViewById(R.id.tablayout);
@@ -41,7 +49,7 @@ public class MainActivity extends AppCompatActivity{
         mHandler.postDelayed(mRunnable,1000);
     }
 
-    SharedPreferences sharedPref;
+    static SharedPreferences sharedPref;
     private Handler mHandler;
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -70,10 +78,75 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mHandler.removeCallbacks(mRunnable);
+    }
+
+    public static void showDialogWithChoose(final String title, final String message, final int whichOneEvent)
+    {
+        final SharedPreferences.Editor editor = sharedPref.edit();
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(title)
+                //.setIcon(R.drawable.ic_launcher)
+                .setMessage(message)
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                        switch (whichOneEvent)
+                        {
+                            case 1:
+                                MainActivity.Die();
+                                break;
+                        }
+                        dialoginterface.cancel();
+                        //TODO: start timer
+                    }})
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                        switch (whichOneEvent)
+                        {
+                            case 1:
+                                if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 15000)
+                                    dialoginterface.cancel();
+                                else
+                                    MainActivity.Die();
+                                editor.apply();
+                                dialoginterface.cancel();
+                                break;
+
+                            case 2:
+                                editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + 25000));
+                                editor.apply();
+                                dialoginterface.cancel();
+                                break;
+
+                            default:
+                                dialoginterface.cancel();
+                                break;
+                        }
+                        //TODO: start timer
+                    }
+                }).show();
+    }
+
+    public static void showAlertDialog(final String title, final String message)
+    {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(title)
+                //.setIcon(R.drawable.ic_launcher)
+                .setMessage(message)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                        dialoginterface.cancel();
+                    }
+                })//TODO: zrobic, ze jak ktos kliknie gdzies indziej, zeby nic sie nie stalo
+                .show();
+    }
+
+    public static void Die()
+    {
+
     }
 }

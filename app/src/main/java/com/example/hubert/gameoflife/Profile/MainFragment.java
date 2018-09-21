@@ -6,27 +6,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.Girlboyfriend.Children;
-import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
-import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Utils.Lodging;
+import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.Utils.Transport;
+import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainFragment extends Fragment {
 
@@ -114,14 +105,19 @@ public class MainFragment extends Fragment {
             ((TextView)(view.findViewById(R.id.characterLodging))).setText("Lodging " + lodging.getName());
 
         if(sharedPref.getBoolean(getResources().getString(R.string.saved_is_in_school_now_key), true))
-            ((TextView)(view.findViewById(R.id.characterTransport))).setText("School");
-        /*else
+            ((TextView)(view.findViewById(R.id.characterEducationWork))).setText("School");
+        else
         {
-            json = sharedPref.getString(getResources().getString(R.string.saved_my_work_key), "");
+            json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
+            gson.fromJson(json, Job.class);
+            gson.newBuilder().setLenient().create();
             Job job = gson.fromJson(json, Job.class);
+
             if(job != null)
-                ((TextView)(view.findViewById(R.id.characterTransport))).setText(getResources().getString(R.string.transport) + " " + job.getName());
-        }*/
+                ((TextView)(view.findViewById(R.id.characterEducationWork))).setText(getResources().getString(R.string.work) + " " + job.getName());
+            else
+                ((TextView)(view.findViewById(R.id.characterEducationWork))).setText("Work: None");
+        }
 
         json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
         Transport transport = gson.fromJson(json, Transport.class);

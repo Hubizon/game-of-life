@@ -15,7 +15,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -24,10 +25,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Shop.BuyActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Shop.BuyActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".Education.LearnInHomeActivity" />
-        <activity android:name=".House.ComputerActivity"></activity>
+        <activity android:name=".House.ComputerActivity" />
+        <activity android:name=".Work.FindJobActivity" />
+        <activity android:name=".Work.ChooseJobActivity" />
     </application>
 
 </manifest>
