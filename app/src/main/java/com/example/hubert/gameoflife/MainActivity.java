@@ -141,7 +141,8 @@ public class MainActivity extends AppCompatActivity{
                     public void onClick(DialogInterface dialoginterface, int i) {
                         dialoginterface.cancel();
                     }
-                })//TODO: zrobic, ze jak ktos kliknie gdzies indziej, zeby nic sie nie stalo
+                })
+                .setCancelable(false)
                 .show();
     }
 

@@ -19,6 +19,8 @@ import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 
 public class WorkFragment extends Fragment implements View.OnClickListener {
 
+    private static final String WORK_DIALOG_TAG = "work_dialog_tag";
+
     public WorkFragment() {}
 
     public static WorkFragment newInstance() {
@@ -54,20 +56,21 @@ public class WorkFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        DialogFragment newDialog = new MyDialogFragment();
+        DialogFragment newDialog = null;
 
-        switch (view.getId())
+        int view_id = view.getId();
+        switch (view_id)
         {
             case R.id.btn_go_work:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(view_id);
                 break;
 
             case R.id.btn_work_hard:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(view_id);
                 break;
 
             case R.id.btn_hang_around:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(view_id);
                 break;
 
             case R.id.giveUpWorkWork:
@@ -82,5 +85,7 @@ public class WorkFragment extends Fragment implements View.OnClickListener {
             default:
                 break;
         }
+        if (newDialog != null)
+            newDialog.show(getActivity().getSupportFragmentManager(), WORK_DIALOG_TAG);
     }
 }

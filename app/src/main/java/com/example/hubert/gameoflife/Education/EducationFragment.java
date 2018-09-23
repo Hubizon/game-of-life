@@ -28,6 +28,8 @@ import java.util.Random;
 
 public class EducationFragment extends Fragment implements View.OnClickListener {
 
+    private static final String EDU_DIALOG_TAG = "edu_dialog_tag";
+
 
     public EducationFragment() {}
 
@@ -71,34 +73,31 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        Intent intent;
-        DialogFragment newDialog = new MyDialogFragment();
+        Intent intent = null;
+        DialogFragment newDialog = null;
         Random r = new Random();
 
-        switch(view.getId())
-        {
+        int view_id = view.getId();
+        switch(view_id) {
             case R.id.GiveUpSchool:
                 editor.putBoolean(getString(R.string.saved_is_in_school_now_key), false);
                 intent = new Intent(getActivity().getApplicationContext(), FindJobActivity.class);
-                startActivity(intent);
                 break;
 
             case R.id.LearnInHomeEducation:
                 intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
-                startActivity(intent);
                 break;
 
             case R.id.GoToSchoolEducation:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                 newDialog = MyDialogFragment.newInstance(view_id);
                 break;
 
             case R.id.getNewFriendsCriminal:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(view_id);
                 break;
 
             case R.id.stealSomethingCriminal:
-                if(r.nextInt(25) == 1)
-                {
+                if(r.nextInt(25) == 1) {
                     editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
                     Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
                     if(r.nextInt(25) == 1)
@@ -116,7 +115,7 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                 break;
 
             case R.id.sellDrugsCriminal:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(view_id);
                 break;
 
             case R.id.threatTeachersCriminal:
@@ -165,6 +164,9 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
             default:
                 break;
         }
+
+        if (intent != null) startActivity(intent);
+        else if (newDialog != null) newDialog.show(getActivity().getSupportFragmentManager(), EDU_DIALOG_TAG);
 
         editor.apply();
     }

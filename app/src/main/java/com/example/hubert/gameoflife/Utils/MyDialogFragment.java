@@ -1,13 +1,13 @@
 package com.example.hubert.gameoflife.Utils;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,69 +52,78 @@ public class MyDialogFragment extends DialogFragment  {
         return frag;
     }
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO customize
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_MinWidth);
+
+        Bundle args = getArguments();
+        Log.d("onCraate", "args: " + args);
+        if (args != null) {
+            mId = args.getInt(BUNDLE_ID);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Bundle args = getArguments();
-        if (args != null) {
-            mId = args.getInt(BUNDLE_ID);
-        }
-        //TODO: Michal!!! args == null
-
-        if(mId == R.id.cardview_safe)
-        {
+        if (mId == R.id.cardview_safe) {
             view = inflater.inflate(R.layout.dialog_safe, container, false);
-            ((TextView)view.findViewById(R.id.money_dialogsafe)).setText("Cash:   " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
-            ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText("Safe:   " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$");
+            String cashText = "Cash: " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$";
+            ((TextView)view.findViewById(R.id.money_dialogsafe)).setText(cashText);
+
+            String safeText = "Safe: " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$";
+            ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText(safeText);
         }
         else
             view = inflater.inflate(R.layout.dialog_my, container, false);
 
-        switch (mId)
-        {
+        switch (mId) {
             case R.id.cardview_bed:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.sleeping));
+                getDialog().setTitle(R.string.sleeping);
                 break;
 
             case R.id.playComputer:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.playing));
+                getDialog().setTitle(R.string.playing);
                 break;
 
             case R.id.talkComputer:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.talking_on_messengers));
+                getDialog().setTitle(R.string.talking_on_messengers);
                 break;
 
             case R.id.GoToSchoolEducation:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.learning));
+                getDialog().setTitle(R.string.learning);
                 break;
 
             case R.id.GoToSchoolLearnHardEducation:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.learning));
+                getDialog().setTitle(R.string.learning);
                 break;
 
             case R.id.GoToSchoolHangAroundEducation:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.learning));
+                getDialog().setTitle(R.string.learning);
                 break;
 
             case R.id.btn_go_work:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.working));
+                getDialog().setTitle(R.string.working);
                 break;
 
             case R.id.btn_work_hard:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.working));
+                getDialog().setTitle(R.string.working);
                 break;
 
             case R.id.btn_hang_around:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.working));
+                getDialog().setTitle(R.string.working);
                 break;
 
             case R.id.getNewFriendsCriminal:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.getting_new_friends));
+                getDialog().setTitle(R.string.getting_new_friends);
                 break;
 
             case R.id.sellDrugsCriminal:
-                ((TextView) view.findViewById(R.id.doingThingName)).setText(getResources().getString(R.string.selling_drugs));
+                getDialog().setTitle(R.string.sell_drugs);
                 break;
 
             default:
@@ -123,49 +132,36 @@ public class MyDialogFragment extends DialogFragment  {
 
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-        //TODO: Michal!!! czm to nie dziala? nic sie nie wyswietla :/
-        ((TextView) view.findViewById(R.id.money_dialog)).setText("$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
-        ((TextView) view.findViewById(R.id.time_dialog)).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears) + "."
-                + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) + "."
+        String moneyText = "$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
+        ((TextView) view.findViewById(R.id.money_dialog)).setText(moneyText);
+
+        String stringDate = sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears) + "-"
+                + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) + "-"
                 + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
-                + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00");
+                + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00";
+        ((TextView) view.findViewById(R.id.time_dialog)).setText(stringDate);
+
+
 
         return view;
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-
-        Bundle args = getArguments();
-        if (args != null) {
-            mId = args.getInt(BUNDLE_ID);
+    private Handler mHandler;
+    public Runnable mTimerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            onTimerDelay();
+            mHandler.postDelayed(mTimerRunnable, 1500);
         }
-
-        //TODO: Michal!!! mId = 0
-        if(mId == R.id.cardview_safe)
-            builder.setView(inflater.inflate(R.layout.dialog_safe, null));
-        else
-            builder.setView(inflater.inflate(R.layout.dialog_my, null));
-                // Add action buttons
-
-        //TODO: Michal!!! Zrobic timer wywolujacy ta metode
-        onTimerDelay();
-
-        return builder.create();
-    }
+    };
 
     private void onTimerDelay()
     {
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
+        Log.d(MyDialogFragment.class.getSimpleName(), "mId: " + mId);
         switch (mId)
         {
             case R.id.cardview_bed:
@@ -459,4 +455,17 @@ public class MyDialogFragment extends DialogFragment  {
         ((TextView)view.findViewById(R.id.money_dialogsafe)).setText("Cash:   " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
         ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText("Safe:   " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$");
     }*/
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mTimerRunnable);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mHandler = new Handler();
+        mHandler.post(mTimerRunnable);
+    }
 }
