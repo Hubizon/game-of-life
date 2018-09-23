@@ -112,4 +112,8 @@
     <string name="saved_progress_making_game_key">progress_making_game</string>
     <string name="saved_programming_skills_key">programming_skills</string>
     <string name="saved_games_key">games</string>
+    <string name="write_a_book">write a book</string>
+    <string name="saved_books_key">books</string>
+    <string name="saved_drawings_key">drawings</string>
+    <string name="saved_movies_key">movies</string>
 </resources>

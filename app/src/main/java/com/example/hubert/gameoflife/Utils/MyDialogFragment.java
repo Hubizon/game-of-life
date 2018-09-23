@@ -249,12 +249,13 @@ public class MyDialogFragment extends DialogFragment  {
 
                     JSONArray toJsonArray = new JSONArray();
                     toJsonArray.put(gameScore);
-                    toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths));
                     Random random = new Random();
                     if(random.nextInt(500) < gameScore)//bestseller
                         toJsonArray.put(true);
                     else
                         toJsonArray.put(false);
+                    toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears));
+                    toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths));
 
                     try
                     {

@@ -19,12 +19,12 @@ import static com.example.hubert.gameoflife.MainActivity.showDialogWithChoose;
 
 public class UpdateValues {
 
-    static JSONArray jsonArray;
-    static Gson gson = new Gson();
-    static JSONObject json = null;
+    private static JSONArray jsonArray;
+    private static Gson gson = new Gson();
+    private static JSONObject json = null;
 
-    static SharedPreferences sharedPreferences;
-    static Context contextThis;
+    private static SharedPreferences sharedPreferences;
+    private static Context contextThis;
 
     public static void updateSharedPreferences(Context context, SharedPreferences sharedPref) {
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -101,7 +101,60 @@ public class UpdateValues {
 
     private static void getPayment()//from e.g. "make a game", "write a book"
     {
-        //TODO
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        try
+        {
+            JSONArray jsonArrayGames = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_games_key), SharedPreferencesDefaultValues.DefaultGamesList));
+            JSONArray jsonArrayDrawings = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_books_key), SharedPreferencesDefaultValues.DefaultBooksList));
+            JSONArray jsonArrayBooks = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_drawings_key), SharedPreferencesDefaultValues.DefaultDrawingsList));
+            JSONArray jsonArrayMovies = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_movies_key), SharedPreferencesDefaultValues.DefaultMoviesList));
+
+            if(jsonArrayGames.length() == 0)
+            {
+                int moneyFromGames = 0;
+                for(int i = 0; i < jsonArrayGames.length(); i++)
+                {
+                    JSONArray jsonArray = jsonArrayGames.getJSONArray(i);
+                    Random random = new Random();
+                    int moneyFromGame = jsonArray.getInt(0) * (random.nextInt(350 - 650) + 650);
+                    if(jsonArray.getBoolean(1))
+                        moneyFromGame *= 2.5;
+
+                    if(jsonArray.getInt(2) >= sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears))
+                    {
+                        if((jsonArray.getInt(3) + 10) > 12)
+                        {
+                            if((jsonArray.getInt(3) + 10) - 12 == sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths))
+                            {
+                                jsonArray.remove(i);
+                                editor.putString(contextThis.getResources().getString(R.string.saved_games_key), jsonArray.toString());
+                                //TODO: sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
+                            }
+                        }
+                        else
+                        {
+                            if((jsonArray.getInt(3) + 10) == sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths))
+                            {
+                                jsonArray.remove(i);
+                                editor.putString(contextThis.getResources().getString(R.string.saved_games_key), jsonArray.toString());
+                                //TODO: sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
+                            }
+                        }
+                    }
+
+                    moneyFromGames += moneyFromGame;
+                }
+
+                editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), moneyFromGames);
+                showAlertDialog("You got payment from your created games!", "You got " + moneyFromGames + "$");
+            }
+
+            //TODO: zrobić to z pozostałymi
+        }
+        catch (JSONException e)
+        { }
+
+        editor.apply();
     }
 
     private static void randomEvents()

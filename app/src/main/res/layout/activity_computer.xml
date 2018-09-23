@@ -134,7 +134,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/write_a_poem"/>
+            android:text="@string/write_a_book"/>
 
         <Button
             android:id="@+id/recordMoviesComputer"
