@@ -1,13 +1,17 @@
 package com.example.hubert.gameoflife.Education;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.example.hubert.gameoflife.House.ComputerActivity;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
@@ -20,6 +24,7 @@ import java.util.ArrayList;
 
 public class LearnInHomeActivity extends AppCompatActivity implements RecyclerViewSubjectAdapter.ItemClickListener {
 
+    private static final int PAGE_NUMBER = 1;
 
     RecyclerViewSubjectAdapter adapter;
     static JSONArray jsonArray;
@@ -77,5 +82,24 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
             { }
         }
         editor.apply();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                finish();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LearnInHomeActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.INTENT_PAGE, PAGE_NUMBER);
+        startActivity(intent);
+        finish();
     }
 }

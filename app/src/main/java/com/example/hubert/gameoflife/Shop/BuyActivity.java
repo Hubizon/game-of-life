@@ -2,17 +2,21 @@ package com.example.hubert.gameoflife.Shop;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.House.ComputerActivity;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
@@ -24,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBuyAdapter.ItemClickListener{
+
+    private static final int PAGE_NUMBER = 2;
 
     private int id;
     View view;
@@ -370,5 +376,24 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         } else
             Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
         editor.apply();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                finish();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(BuyActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.INTENT_PAGE, PAGE_NUMBER);
+        startActivity(intent);
+        finish();
     }
 }

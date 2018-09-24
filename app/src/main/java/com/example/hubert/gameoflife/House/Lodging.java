@@ -10,6 +10,14 @@ public class Lodging {
     private String type;
     private int rentTime;
 
+    public enum HappinessStatus {
+        EXCITED,
+        JOYFUL,
+        CALM,
+        GLOOMY,
+        SORROWFUL
+    }
+
     public Lodging(String name, int price, int givenHealth, int givenEnergy, int givenHappiness/*TODO: zrobic enum z tyhc typow*/, String type, int rentTime)
     {
         this.name = name;

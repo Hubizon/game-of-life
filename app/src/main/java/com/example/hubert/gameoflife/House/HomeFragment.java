@@ -89,8 +89,8 @@ implements View.OnClickListener{
                     newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
                 else
                 {
-                    final Context context = getActivity().getApplicationContext();
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                    final Context context = getContext();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
                     dialog.setTitle("You don't have the safe!")
                             //.setIcon(R.drawable.ic_launcher)
                             .setMessage("Do you want to buy it for 25000$?")
@@ -112,6 +112,7 @@ implements View.OnClickListener{
                                 }
                             }).show();
                     //TODO: Michal!!! error "java.lang.IllegalStateException: You need to use a Theme.AppCompat theme (or descendant) with this activity."
+                    //TODO Hubert!! powinno byc OK
 
                 }
                 break;

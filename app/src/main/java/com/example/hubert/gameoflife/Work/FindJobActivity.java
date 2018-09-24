@@ -12,15 +12,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hubert.gameoflife.Education.EducationFragment;
+import com.example.hubert.gameoflife.Education.LearnInHomeActivity;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.BuyActivity;
 
 public class FindJobActivity extends AppCompatActivity
         implements View.OnClickListener{
+
+    private static final int PAGE_NUMBER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,7 @@ public class FindJobActivity extends AppCompatActivity
 
             case R.id.cardview_educationWork:
                 //TODO: Michal!!! wywala :c
+                //TODO Hubert!! co ty tu chcesz zrobic? Na razie tu dzije sie jakas czarna magia xd
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 EducationFragment fragment = new EducationFragment();
@@ -87,6 +93,25 @@ public class FindJobActivity extends AppCompatActivity
             default:
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                finish();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(FindJobActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.INTENT_PAGE, PAGE_NUMBER);
+        startActivity(intent);
+        finish();
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.hubert.gameoflife;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -14,7 +15,9 @@ import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Utils.UpdateValues;
 import com.google.gson.Gson;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
+
+    public static final String INTENT_PAGE = "intent_page";
 
     Gson gson = new Gson();
     String json;
@@ -40,6 +43,11 @@ public class MainActivity extends AppCompatActivity{
         mPager = findViewById(R.id.pager);
         mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), this);
         mPager.setAdapter(mPagerAdapter);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(INTENT_PAGE)) {
+            mPager.setCurrentItem(intent.getIntExtra(INTENT_PAGE, 0));
+        }
 
         mTabLayout = findViewById(R.id.tablayout);
         mTabLayout.setupWithViewPager(mPager);
