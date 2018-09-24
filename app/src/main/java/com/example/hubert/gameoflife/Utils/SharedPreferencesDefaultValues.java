@@ -75,8 +75,9 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultWritingSkills = 0;
     public static final int DefaultRecordingSkills = 0;
 
-    public static final String DefaultGamesList = null;
-    public static final String DefaultDrawingsList = null;
-    public static final String DefaultBooksList = null;
-    public static final String DefaultMoviesList = null;
+    // TODO NIGDY NIE DAWAJ NULL! godzine nad tym bledem siedzialem..
+    public static final String DefaultGamesList = "";
+    public static final String DefaultDrawingsList = "";
+    public static final String DefaultBooksList = "";
+    public static final String DefaultMoviesList = "";
 }
