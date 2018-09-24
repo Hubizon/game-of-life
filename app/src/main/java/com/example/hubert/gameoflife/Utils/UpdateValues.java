@@ -167,15 +167,15 @@ public class UpdateValues {
         Random rnd = new Random();
         //TODO: zrobic, zeby nie zadzialalo jak ktos wylaczy aplikacje podczas dialogu
 
-        switch (rnd.nextInt(10))
+        switch (rnd.nextInt(100000))
         {
             case 1:
-                //TODO: stop timer
+                //TODO: Michal!!! zastopuj timer tu xd
                 drawGoodEvent(context);
                 break;
 
             case 2:
-                //TODO stop timer
+                //TODO Michal!!! zastopuj timer tu xd
                 drawBadEvent(context);
                 break;
         }

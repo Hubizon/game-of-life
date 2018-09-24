@@ -23,6 +23,7 @@ import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.BuyActivity;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
+import com.example.hubert.gameoflife.Utils.MyDialogSafeFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 public class HomeFragment extends Fragment
@@ -66,28 +67,26 @@ implements View.OnClickListener{
     public void onClick(View view) {
 
         final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        DialogFragment newDialog = new MyDialogFragment();
+        Intent intent = null;
+        DialogFragment newDialog = null;
 
         switch (view.getId()) {
             case R.id.cardview_tv:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(view.getId());
                 break;
             case R.id.cardview_bed:
-                newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(view.getId());
                 break;
             case R.id.cardview_computer:
                 if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null)
                 {
-                    Intent intent = new Intent(getActivity().getApplicationContext(), ComputerActivity.class);
-                    startActivity(intent);
+                    intent = new Intent(getActivity().getApplicationContext(), ComputerActivity.class);
                 }
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cardview_safe:
-                if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-                    newDialog.show(getActivity().getSupportFragmentManager(), "MY_DIALOG");
-                else
+                if(!sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
                 {
                     final Context context = getContext();
                     AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
@@ -111,11 +110,13 @@ implements View.OnClickListener{
                                         Toast.makeText(context, "Unfortunately you don't have enough money to buy this", Toast.LENGTH_SHORT).show();
                                 }
                             }).show();
-                    //TODO: Michal!!! error "java.lang.IllegalStateException: You need to use a Theme.AppCompat theme (or descendant) with this activity."
-                    //TODO Hubert!! powinno byc OK
-
                 }
+                else
+                    newDialog = MyDialogSafeFragment.newInstance();
                 break;
         }
+
+        if (intent != null) startActivity(intent);
+        else if (newDialog != null) newDialog.show(getActivity().getSupportFragmentManager(), "home_dialog_tag");
     }
 }
