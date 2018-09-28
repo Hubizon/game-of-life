@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,15 @@ import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.MyDialogSafeFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class HomeFragment extends Fragment
-implements View.OnClickListener{
+    implements View.OnClickListener {
+
 
     public HomeFragment() {}
 
@@ -60,6 +67,9 @@ implements View.OnClickListener{
         CardView safecardview = view.findViewById(R.id.cardview_safe);
         safecardview.setOnClickListener(this);
 
+        CardView adcardview = view.findViewById(R.id.cardview_ad);
+        adcardview.setOnClickListener(this);
+
         return view;
     }
 
@@ -86,8 +96,7 @@ implements View.OnClickListener{
                     Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cardview_safe:
-                if(!sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-                {
+                if(!sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe)) {
                     final Context context = getContext();
                     AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
                     dialog.setTitle("You don't have the safe!")
@@ -114,6 +123,13 @@ implements View.OnClickListener{
                 else
                     newDialog = MyDialogSafeFragment.newInstance();
                 break;
+
+            case R.id.cardview_ad:
+                if (MainActivity.mRewardedVideoAd.isLoaded()) {
+                    MainActivity.mRewardedVideoAd.show();
+                } else {
+                    Toast.makeText(getContext(), "There are currently no ads!", Toast.LENGTH_SHORT).show();
+                }
         }
 
         if (intent != null) startActivity(intent);

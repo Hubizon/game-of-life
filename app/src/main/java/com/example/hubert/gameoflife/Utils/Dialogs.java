@@ -1,10 +1,17 @@
 package com.example.hubert.gameoflife.Utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.Window;
+import android.view.WindowManager;
 
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 
 public class Dialogs {
@@ -69,6 +76,24 @@ public class Dialogs {
                 })
                 .setCancelable(false)
                 .show();
+    }
+
+    public static void showResumeDialog(Context context, final MenuItem item, final Runnable runnable) {
+        Dialog resumeDialog = new Dialog(context) {
+            @Override
+            public boolean onTouchEvent(@NonNull MotionEvent event) {
+                this.dismiss();
+                MainActivity.onResumeDialogClicked(item, runnable);
+                return true;
+            }
+        };
+        resumeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        resumeDialog.setContentView(R.layout.dialog_stop);
+        final Window window = resumeDialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        window.setBackgroundDrawableResource(R.color.translucent_black);
+        resumeDialog.show();
     }
 
 }
