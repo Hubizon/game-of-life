@@ -133,10 +133,35 @@
                 android:layout_marginStart="8dp"
                 tools:progress="75" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/happiness_icon" />
+
+            <ProgressBar
+                android:id="@+id/progressBar_happiness_dialog"
+                style="@style/ProgressBarMain"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                tools:progress="75" />
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/textToDoingThing"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -151,6 +176,7 @@
 
     <ProgressBar
         android:id="@+id/progressBar_doing_thing"
+        android:visibility="gone"
         style="@style/ProgressBarMain"
         android:layout_width="match_parent"
         android:layout_height="10dp"

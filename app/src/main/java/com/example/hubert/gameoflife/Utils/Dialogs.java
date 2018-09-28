@@ -51,7 +51,7 @@ public class Dialogs {
                                 dialoginterface.cancel();
                                 break;
                         }
-                        //TODO: start timer
+                        //TODO: Michal!!! start timer
                     }
                 }).show();
     }
