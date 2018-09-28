@@ -50,6 +50,10 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
 
         Button goSchoolButton = view.findViewById(R.id.GoToSchoolEducation);
         goSchoolButton.setOnClickListener(this);
+        Button goSchoolHardButton = view.findViewById(R.id.GoToSchoolLearnHardEducation);
+        goSchoolHardButton.setOnClickListener(this);
+        Button goSchoolHangAroundButton = view.findViewById(R.id.GoToSchoolHangAroundEducation);
+        goSchoolHangAroundButton.setOnClickListener(this);
         Button learnInHomeButton = view.findViewById(R.id.LearnInHomeEducation);
         learnInHomeButton.setOnClickListener(this);
         Button giveUpSchoolButton = view.findViewById(R.id.GiveUpSchool);
@@ -62,9 +66,6 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
         sellDrugsButton.setOnClickListener(this);
         Button threatTeachersButton = view.findViewById(R.id.threatTeachersCriminal);
         threatTeachersButton.setOnClickListener(this);
-
-
-
 
         return view;
     }

@@ -67,17 +67,17 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        DialogFragment newDialog = new MyDialogFragment();
+        DialogFragment newDialog = null;
         SharedPreferences.Editor editor = sharedPref.edit();
 
         switch (v.getId())
         {
             case R.id.playComputer:
-                newDialog.show(getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(v.getId());
                 break;
 
             case R.id.talkComputer:
-                newDialog.show(getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(v.getId());
                 break;
 
             case  R.id.supportComputer:
@@ -85,23 +85,24 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.makeGameComputer:
-                newDialog.show(getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(v.getId());
                 break;
 
             case R.id.drawSomethingComputer:
-                newDialog.show(getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(v.getId());
                 break;
 
             case R.id.writePoemComputer:
-                newDialog.show(getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(v.getId());
                 break;
 
             case R.id.recordMoviesComputer:
-                newDialog.show(getSupportFragmentManager(), "MY_DIALOG");
+                newDialog = MyDialogFragment.newInstance(v.getId());
                 break;
         }
-
         editor.apply();
+
+        if (newDialog != null) newDialog.show(getSupportFragmentManager(), "home_dialog_tag");
     }
 
     private void showDialog(final String title, final String message)
@@ -125,7 +126,7 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
                         }
                         else
                             Toast.makeText(getApplicationContext(), "You don't have enough money to do this", Toast.LENGTH_SHORT).show();
-
+                        editor.apply();
                     }
                 }).show();
     }

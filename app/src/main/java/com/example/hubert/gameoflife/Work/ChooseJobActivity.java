@@ -169,5 +169,7 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
                 break;
         }
         editor.apply();
+
+        //TODO: Michal!!!
     }
 }

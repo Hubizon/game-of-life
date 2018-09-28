@@ -48,15 +48,15 @@ public class ShopFragment extends Fragment
     };
 
     public static Fun[] funList = new Fun[]{
-            new Fun("Go to The Cinema", "Exit",15, 50),
-            new Fun("Old Phone", "Phone", 50, 100),
-            new Fun("Black and White TV", "TV", 75, 125),
-            new Fun("Wooden PC", "Computer",100, 150),
-            new Fun("TV", "TV", 200, 250),
-            new Fun("Smartphone", "Phone", 400, 350),
-            new Fun("Computer", "Computer",650, 500),
-            new Fun("Plasma TV", "TV",1000, 750),
-            new Fun("Modern Computer", "Computer", 1500, 1000),
+            new Fun("Go to The Cinema", "Exit",15, 40),
+            new Fun("Old Phone", "Phone", 50, 40),
+            new Fun("Black and White TV", "TV", 75, 40),
+            new Fun("Wooden PC", "Computer",100, 50),
+            new Fun("TV", "TV", 200, 60),
+            new Fun("Smartphone", "Phone", 400, 60),
+            new Fun("Computer", "Computer",650, 70),
+            new Fun("Plasma TV", "TV",1000, 85),
+            new Fun("Modern Computer", "Computer", 1500, 100),
     };
 
     public static Lottery[] lotteryList = new Lottery[]{

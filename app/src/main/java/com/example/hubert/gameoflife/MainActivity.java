@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setupTabIcons();
 
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable,1000);
+        mHandler.postDelayed(mRunnable,1500);
     }
 
     static SharedPreferences sharedPref;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
             UpdateValues.updateSharedPreferences(MainActivity.this, sharedPref);
-            mHandler.postDelayed(mRunnable,1000);
+            mHandler.postDelayed(mRunnable,1500);
         }
     };
 

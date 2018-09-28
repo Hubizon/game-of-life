@@ -98,6 +98,26 @@ public class UpdateValues {
         editor.apply();
 
         randomEvents(context);
+
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) < 0)
+            editor.putInt(context.getResources().getString(R.string.saved_health_key), 500);
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) > 1000)
+            editor.putInt(context.getResources().getString(R.string.saved_health_key), 1000);
+
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) < 0)
+            editor.putInt(context.getResources().getString(R.string.saved_hungry_key), 500);
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) > 1000)
+            editor.putInt(context.getResources().getString(R.string.saved_hungry_key), 1000);
+
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) < 0)
+            editor.putInt(context.getResources().getString(R.string.saved_energy_key), 500);
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) > 1000)
+            editor.putInt(context.getResources().getString(R.string.saved_energy_key), 1000);
+
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) < 0)
+            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 500);
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) > 1000)
+            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 1000);
     }
 
     private static void getPayment(final Context context)//from e.g. "make a game", "write a book"

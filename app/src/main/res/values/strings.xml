@@ -116,4 +116,8 @@
     <string name="saved_books_key">books</string>
     <string name="saved_drawings_key">drawings</string>
     <string name="saved_movies_key">movies</string>
+    <string name="recording_movies">Recording Movies</string>
+    <string name="writing_poem">Writing Poem</string>
+    <string name="drawing_something">Drawing Somethings</string>
+    <string name="making_computer_game">Making Computer</string>
 </resources>

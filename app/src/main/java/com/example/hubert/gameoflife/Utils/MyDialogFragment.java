@@ -86,6 +86,22 @@ public class MyDialogFragment extends DialogFragment  {
                 getDialog().setTitle(R.string.talking_on_messengers);
                 break;
 
+            case R.id.makeGameComputer:
+                getDialog().setTitle(R.string.making_computer_game);
+                break;
+
+            case R.id.drawSomethingComputer:
+                getDialog().setTitle(R.string.drawing_something);
+                break;
+
+            case R.id.writePoemComputer:
+                getDialog().setTitle(R.string.writing_poem);
+                break;
+
+            case R.id.recordMoviesComputer:
+                getDialog().setTitle(R.string.recording_movies);
+                break;
+
             case R.id.GoToSchoolEducation:
                 getDialog().setTitle(R.string.learning);
                 break;
@@ -209,16 +225,20 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.makeGameComputer:
+                //TODO: z jakiegoś powodu tutaj nie aktualizuje się nic.
+                // Wykonują sięte instrukcję i jest wszystko dobrze, ale
+                // wogóle nie aktualizuje się layout :/
                 editor.putInt(getResources().getString(R.string.saved_progress_making_game_key), (sharedPref.getInt(getResources().getString(R.string.saved_progress_making_game_key), SharedPreferencesDefaultValues.DefaultProgressProgramming) + 1));
                 editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 1));
                 editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
                 editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 3));
                 editor.apply();
 
-                if(!(sharedPref.getInt(getResources().getString(R.string.saved_progress_making_game_key), SharedPreferencesDefaultValues.DefaultProgressProgramming) >= 100))
+                if(sharedPref.getInt(getResources().getString(R.string.saved_progress_making_game_key), SharedPreferencesDefaultValues.DefaultProgressProgramming) >= 5)
                 {
                     editor.putInt(getResources().getString(R.string.saved_progress_making_game_key), (sharedPref.getInt(getResources().getString(R.string.saved_progress_making_game_key), SharedPreferencesDefaultValues.DefaultProgressProgramming) + 1));
                     editor.putInt(getResources().getString(R.string.saved_programming_skills_key), (sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key), SharedPreferencesDefaultValues.DefaultProgrammingSkills) + 2));
+                    editor.putInt(getResources().getString(R.string.saved_progress_making_game_key), 0);
 
                     JSONObject jsonObject;
                     int gameScore = 0;
@@ -391,11 +411,13 @@ public class MyDialogFragment extends DialogFragment  {
 
             case R.id.getNewFriendsCriminal:
                 editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 3));
-                editor.putInt(getResources().getString(R.string.saved_criminal_points_key), (sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) + 3));
+                editor.putInt(getResources().getString(R.string.saved_criminal_points_key), (sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) + 2));
                 break;
 
             case R.id.sellDrugsCriminal:
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 5));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 6));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 2));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 3));
 
                 Random r = new Random();
                 if(r.nextInt(100) == 1)
@@ -417,6 +439,27 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
         }
+
+        if(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) < 0)
+            editor.putInt(getResources().getString(R.string.saved_health_key), 0);
+        if(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) > 1000)
+            editor.putInt(getResources().getString(R.string.saved_health_key), 1000);
+
+        if(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) < 0)
+            editor.putInt(getResources().getString(R.string.saved_hungry_key), 0);
+        if(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) > 1000)
+            editor.putInt(getResources().getString(R.string.saved_hungry_key), 1000);
+
+        if(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) < 0)
+            editor.putInt(getResources().getString(R.string.saved_energy_key), 0);
+        if(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) > 1000)
+            editor.putInt(getResources().getString(R.string.saved_energy_key), 1000);
+
+        if(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) < 0)
+            editor.putInt(getResources().getString(R.string.saved_happiness_key), 0);
+        if(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) > 1000)
+            editor.putInt(getResources().getString(R.string.saved_happiness_key), 1000);
+
         editor.apply();
 
         ((TextView)view.findViewById(R.id.money_dialog)).setText("$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
