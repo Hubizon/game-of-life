@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -21,6 +22,7 @@ import com.example.hubert.gameoflife.Education.LearnInHomeActivity;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.BuyActivity;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 public class FindJobActivity extends AppCompatActivity
         implements View.OnClickListener{
@@ -81,13 +83,9 @@ public class FindJobActivity extends AppCompatActivity
                 break;
 
             case R.id.cardview_educationWork:
-                //TODO: Michal!!! wywala :c
-                //TODO Hubert!! co ty tu chcesz zrobic? Na razie tu dzije sie jakas czarna magia xd
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                EducationFragment fragment = new EducationFragment();
-                fragmentTransaction.add(R.id.pager, fragment);
-                fragmentTransaction.commit();
+                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getApplicationContext().getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+                sharedPref.edit().putBoolean(getApplicationContext().getResources().getString(R.string.saved_is_in_school_now_key), SharedPreferencesDefaultValues.DefaultIsInSchoolNow).apply();
+                onBackPressed();
                 break;
 
             default:

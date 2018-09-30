@@ -1,26 +1,38 @@
 package com.example.hubert.gameoflife;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+import com.example.hubert.gameoflife.Utils.Dialogs;
 import com.example.hubert.gameoflife.Utils.UpdateValues;
-import com.google.gson.Gson;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements RewardedVideoAdListener{
+
+    private static final int TIMER_LOOP_TIME = 1000;
 
     public static final String INTENT_PAGE = "intent_page";
+    private static AnimatedVectorDrawable mPlayDrawable;
+    private static AnimatedVectorDrawable mPauseDrawable;
 
-    Gson gson = new Gson();
-    String json;
+    public static RewardedVideoAd mRewardedVideoAd;
     private ViewPager mPager;
     private CustomPagerAdapter mPagerAdapter;
     private TabLayout mTabLayout;
@@ -36,9 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
+
+        MobileAds.initialize(this, getResources().getString(R.string.MY_ADMOB_APP_ID));
 
         mPager = findViewById(R.id.pager);
         mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), this);
@@ -53,18 +68,25 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mPager);
         setupTabIcons();
 
+        mPlayDrawable = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_play_pause);
+        mPauseDrawable = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_pause_play);
+
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        loadRewardedVideoAd();
+
         mHandler = new Handler();
-        mHandler.postDelayed(mRunnable,1500);
+        mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
     }
 
     static SharedPreferences sharedPref;
-    private Handler mHandler;
+    private static Handler mHandler;
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
             sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
             UpdateValues.updateSharedPreferences(MainActivity.this, sharedPref);
-            mHandler.postDelayed(mRunnable,1500);
+            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
         }
     };
 
@@ -75,6 +97,31 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.getTabAt(2).setIcon(tabIcons[2]);
         mTabLayout.getTabAt(3).setIcon(tabIcons[3]);
         mTabLayout.getTabAt(4).setIcon(tabIcons[4]);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.game_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_pause:
+                item.setIcon(mPauseDrawable);
+                mPauseDrawable.start();
+                mHandler.removeCallbacks(mRunnable);
+                Dialogs.showResumeDialog(this, item, mRunnable);
+                return true;
+            case R.id.menu_item_setings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                //settings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -91,4 +138,57 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         mHandler.removeCallbacks(mRunnable);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("test", "please work1!!");
+    }
+
+
+    public static void onResumeDialogClicked(MenuItem item, Runnable runnable) {
+        item.setIcon(mPlayDrawable);
+        mPlayDrawable.start();
+        mHandler.postDelayed(runnable, TIMER_LOOP_TIME);
+    }
+
+
+    private void loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd(getString(R.string.TEST_SAMPLE_ADMOB_REWARDED),
+                new AdRequest.Builder().build());
+    }
+
+    @Override
+    public void onRewardedVideoAdLoaded() {
+        Toast.makeText(this, "Ad is available!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRewardedVideoAdOpened() {}
+
+    @Override
+    public void onRewardedVideoStarted() {}
+
+    @Override
+    public void onRewardedVideoAdClosed() {
+        loadRewardedVideoAd();
+    }
+
+    @Override
+    public void onRewarded(RewardItem rewardItem) {
+        Toast.makeText(this, "onRewarded! currency: " + rewardItem.getType() + "  amount: " +
+                rewardItem.getAmount(), Toast.LENGTH_LONG).show();
+        SharedPreferences sharedPref = this.getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        int currentMoney = sharedPref.getInt(getString(R.string.saved_character_money_key), 0) + rewardItem.getAmount();
+        sharedPref.edit().putInt(getString(R.string.saved_character_money_key), currentMoney).apply();
+    }
+
+    @Override
+    public void onRewardedVideoAdLeftApplication() {}
+
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int i) {}
+
+    @Override
+    public void onRewardedVideoCompleted() {}
 }

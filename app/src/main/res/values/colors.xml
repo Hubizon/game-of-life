@@ -8,4 +8,7 @@
     <color name="colorSecondaryDark">#8e0000</color>
     <color name="textColorOnPrimary">#222</color>
     <color name="textColorOnSecondary">#fff</color>
+    <color name="colorDisabled">#808080</color>
+
+    <color name="translucent_black">#80000000</color>
 </resources>

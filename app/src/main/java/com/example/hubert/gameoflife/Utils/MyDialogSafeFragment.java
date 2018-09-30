@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,8 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
+    EditText moneyEdit;
+
     View view;
 
     public static MyDialogSafeFragment newInstance() {
@@ -49,7 +53,7 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_MinWidth);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_NoActionBar_MinWidth);
     }
 
     @Nullable
@@ -67,11 +71,41 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
 
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-        Button despositButton = view.findViewById(R.id.despositSafe);
-        despositButton.setOnClickListener(this);
+        final Button depositButton = view.findViewById(R.id.despositSafe);
+        depositButton.setAlpha(.5f);
+        depositButton.setEnabled(false);
+        depositButton.setOnClickListener(this);
 
-        Button wiothdrawButton = view.findViewById(R.id.withdrawSafe);
-        wiothdrawButton.setOnClickListener(this);
+        final Button withdrawButton = view.findViewById(R.id.withdrawSafe);
+        withdrawButton.setAlpha(.5f);
+        withdrawButton.setEnabled(false);
+        withdrawButton.setOnClickListener(this);
+
+        moneyEdit = view.findViewById(R.id.amountOfCashToDespositWithdraw);
+        moneyEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().trim().length() == 0 || s.toString().trim().length() > 10){
+                    depositButton.setAlpha(.5f);
+                    withdrawButton.setAlpha(.5f);
+
+                    depositButton.setEnabled(false);
+                    withdrawButton.setEnabled(false);
+                } else {
+                    depositButton.setAlpha(1);
+                    withdrawButton.setAlpha(1);
+
+                    withdrawButton.setEnabled(true);
+                    depositButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         return view;
     }
@@ -81,10 +115,9 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
     public void onClick(View v) {
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
-        int amountOfCashToDespositWithdraw = Integer.valueOf(((EditText)view.findViewById(R.id.amountOfCashToDespositWithdraw)).getText().toString());
 
-        //TODO: Michal!!! getView().getId() + - 1 :/
-        switch (getView().getId())
+        int amountOfCashToDespositWithdraw = Integer.valueOf(((EditText)view.findViewById(R.id.amountOfCashToDespositWithdraw)).getText().toString());
+        switch (v.getId())
         {
             case R.id.despositSafe:
                 if(amountOfCashToDespositWithdraw <= 0)

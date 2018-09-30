@@ -126,8 +126,6 @@ public class UpdateValues {
         try
         {
             //TODO co jakis czas tu sie wywala
-            Log.d("test", "sharedPref: "+ sharedPreferences.toString());
-            Log.d("test", "contextThis: " + contextThis.toString());
             JSONArray jsonArrayGames = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_games_key), SharedPreferencesDefaultValues.DefaultGamesList));
             JSONArray jsonArrayDrawings = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_books_key), SharedPreferencesDefaultValues.DefaultBooksList));
             JSONArray jsonArrayBooks = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_drawings_key), SharedPreferencesDefaultValues.DefaultDrawingsList));
