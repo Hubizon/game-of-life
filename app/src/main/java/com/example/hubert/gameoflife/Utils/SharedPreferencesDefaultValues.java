@@ -25,8 +25,10 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultDateDays = 1;
     public static final int DefaultTimeHours = 12;
 
-    public static final String DefaultMyLodging = gson.toJson(new Lodging("Parents House", 0,  5, 125, 5, "default", 0));
-    public static Lodging DefaultMyLodgingAfter18 = new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5, "default", 0);
+    public static final int DefaultDayWeek = 1;
+
+    public static final String DefaultMyLodging = gson.toJson(new Lodging("Parents House", 0,  5, 125, 5));
+    public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
     public static final boolean DefaultIsInSchoolNow = true;
     public static final String DefaultMyJob = null;
     public static final String DefaultMyTransport = gson.toJson(new Transport("Foots", 0, 10));
@@ -46,9 +48,10 @@ public class SharedPreferencesDefaultValues {
 
     static private final Subject[] subjectsList = new Subject[] { new Subject("Mathematics", 4),
             new Subject("English", 4),
+            new Subject("Mathematics", 4),
             new Subject("Languages", 4),
             new Subject("History", 4),
-            new Subject("Chemistry", 4),
+            new Subject("Geographic", 4),
             new Subject("Psychic", 4),
             new Subject("Biology", 4),
             new Subject("Information Technology", 4),
@@ -63,6 +66,11 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultCriminalPoints = 100;
     public final static int DefaultKarmaPoints = 70;
 
+    public static final int DefaultProgrammingSkills = 0;
+    public static final int DefaultDrawingSkills = 0;
+    public static final int DefaultWritingSkills = 0;
+    public static final int DefaultRecordingSkills = 0;
+
     public static final int DefaultWorkRelations = 500;
 
     public static final int DefaultProgressProgramming = 0;
@@ -70,14 +78,9 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultProgressWriting = 0;
     public static final int DefaultProgressRecording = 0;
 
-    public static final int DefaultProgrammingSkills = 0;
-    public static final int DefaultDrawingSkills = 0;
-    public static final int DefaultWritingSkills = 0;
-    public static final int DefaultRecordingSkills = 0;
-
     // TODO NIGDY NIE DAWAJ NULL! godzine nad tym bledem siedzialem..
-    public static final String DefaultGamesList = "";
-    public static final String DefaultDrawingsList = "";
-    public static final String DefaultBooksList = "";
-    public static final String DefaultMoviesList = "";
+    public static final String DefaultGamesList = gson.toJson(new ArrayList<>());
+    public static final String DefaultDrawingsList = gson.toJson(new ArrayList<>());
+    public static final String DefaultBooksList = gson.toJson(new ArrayList<>());
+    public static final String DefaultMoviesList = gson.toJson(new ArrayList<>());
 }

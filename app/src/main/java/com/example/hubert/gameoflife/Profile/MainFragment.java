@@ -55,7 +55,7 @@ public class MainFragment extends Fragment {
             energyprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) / 10));
             happinessprogress.setProgress((mSharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10));
 
-            mHandler.postDelayed(mRunnable, 1500);
+            mHandler.postDelayed(mRunnable, 1000);
         }
     };
 

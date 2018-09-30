@@ -10,23 +10,13 @@ public class Lodging {
     private String type;
     private int rentTime;
 
-    public enum HappinessStatus {
-        EXCITED,
-        JOYFUL,
-        CALM,
-        GLOOMY,
-        SORROWFUL
-    }
-
-    public Lodging(String name, int price, int givenHealth, int givenEnergy, int givenHappiness/*TODO: zrobic enum z tyhc typow*/, String type, int rentTime)
+    public Lodging(String name, int price, int givenHealth, int givenEnergy, int givenHappiness)
     {
         this.name = name;
         this.price = price;
         this.givenHealth = givenHealth;
         this.givenEnergy = givenEnergy;
         this.givenHappiness = givenHappiness;
-        this.type = type;
-        this.rentTime = rentTime;
     }
 
     public String getName() { return name; }

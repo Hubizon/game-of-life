@@ -3,6 +3,7 @@ package com.example.hubert.gameoflife.Education;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.View;
 import com.example.hubert.gameoflife.House.ComputerActivity;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
@@ -80,6 +82,11 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
             }
             catch (JSONException e)
             { }
+        }
+        else
+        {
+            DialogFragment newDialog = MyDialogFragment.newInstance(view.getId());
+            newDialog.show(getSupportFragmentManager(), String.valueOf(position));
         }
         editor.apply();
     }

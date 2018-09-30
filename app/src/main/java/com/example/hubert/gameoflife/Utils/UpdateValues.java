@@ -50,8 +50,29 @@ public class UpdateValues {
             editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), 0);
             editor.putInt(context.getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays)) + 1));
             editor.putInt(context.getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
+            editor.putInt(context.getResources().getString(R.string.saved_day_week_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
 
-            // TODO: Czy to nie bedzie za wolno dzialac? (Jak tak bedzie sie robilo co chwile, a juz teraz na chwile zacina apke
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDayWeek) == 1)
+                getPayment(context);
+
+            String jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+            Lodging lodging = gson.fromJson(jsonString, Lodging.class);
+
+            if(lodging != null)
+                if("rent".equals(lodging.getType()))
+                    if(lodging.getRentTime() <= sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0))
+                    {
+                        if(sharedPref.getInt(context.getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) <= 18)
+                            editor.putString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+                        else
+                            editor.putString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodgingAfter18);
+
+                        editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), 0);
+                        showAlertDialog(context,"Your time of rental has ended", "You came to the street!");
+                    }
+                    else
+                        editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0) + 1));
+
             try {
                 jsonArray = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                 for (int i = 0; i <= (jsonArray.length() - 1); i++)
@@ -70,11 +91,10 @@ public class UpdateValues {
                 if (sharedPref.getInt(context.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) >= 12) {
                     editor.putInt(context.getResources().getString(R.string.saved_date_years_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears)) + 1));
                     editor.putInt(context.getResources().getString(R.string.saved_age_years_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears)) + 1));
-                    editor.putInt(context.getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays)) + 1));
+                    editor.putInt(context.getResources().getString(R.string.saved_age_days_key), 0);
                     editor.putInt(context.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths);
                 } else
                     editor.putInt(context.getResources().getString(R.string.saved_date_months_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths)) + 1));
-                getPayment(context);
             } else
             {
                 editor.putInt(context.getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
@@ -95,29 +115,29 @@ public class UpdateValues {
             } catch (JSONException e) { }
         }
 
-        editor.apply();
-
         randomEvents(context);
 
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) < 0)
-            editor.putInt(context.getResources().getString(R.string.saved_health_key), 500);
+            editor.putInt(context.getResources().getString(R.string.saved_health_key), 0);
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) > 1000)
             editor.putInt(context.getResources().getString(R.string.saved_health_key), 1000);
 
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) < 0)
-            editor.putInt(context.getResources().getString(R.string.saved_hungry_key), 500);
+            editor.putInt(context.getResources().getString(R.string.saved_hungry_key), 0);
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) > 1000)
             editor.putInt(context.getResources().getString(R.string.saved_hungry_key), 1000);
 
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) < 0)
-            editor.putInt(context.getResources().getString(R.string.saved_energy_key), 500);
+            editor.putInt(context.getResources().getString(R.string.saved_energy_key), 0);
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) > 1000)
             editor.putInt(context.getResources().getString(R.string.saved_energy_key), 1000);
 
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) < 0)
-            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 500);
+            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 0);
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) > 1000)
             editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 1000);
+
+        editor.apply();
     }
 
     private static void getPayment(final Context context)//from e.g. "make a game", "write a book"
@@ -131,47 +151,71 @@ public class UpdateValues {
             JSONArray jsonArrayBooks = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_drawings_key), SharedPreferencesDefaultValues.DefaultDrawingsList));
             JSONArray jsonArrayMovies = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_movies_key), SharedPreferencesDefaultValues.DefaultMoviesList));
 
-            if(jsonArrayGames.length() == 0)
+            for(int x = 0; x < 5; x++)
             {
-                int moneyFromGames = 0;
-                for(int i = 0; i < jsonArrayGames.length(); i++)
+                JSONArray jsonArrayThing = null;
+                switch (x)
                 {
-                    JSONArray jsonArray = jsonArrayGames.getJSONArray(i);
-                    Random random = new Random();
-                    int moneyFromGame = jsonArray.getInt(0) * (random.nextInt(350 - 650) + 650);
-                    if(jsonArray.getBoolean(1))
-                        moneyFromGame *= 2.5;
+                    case 1:
+                        jsonArrayThing = jsonArrayGames;
+                        break;
 
-                    if(jsonArray.getInt(2) >= sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears))
-                    {
-                        if((jsonArray.getInt(3) + 10) > 12)
-                        {
-                            if((jsonArray.getInt(3) + 10) - 12 == sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths))
-                            {
-                                jsonArray.remove(i);
-                                editor.putString(contextThis.getResources().getString(R.string.saved_games_key), jsonArray.toString());
-                                //TODO: sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
-                            }
-                        }
-                        else
-                        {
-                            if((jsonArray.getInt(3) + 10) == sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths))
-                            {
-                                jsonArray.remove(i);
-                                editor.putString(contextThis.getResources().getString(R.string.saved_games_key), jsonArray.toString());
-                                //TODO: sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
-                            }
-                        }
-                    }
+                    case 2:
+                        jsonArrayThing = jsonArrayDrawings;
+                        break;
 
-                    moneyFromGames += moneyFromGame;
+                    case 3:
+                        jsonArrayThing = jsonArrayBooks;
+                        break;
+
+                    case 4:
+                        jsonArrayThing = jsonArrayMovies;
+                        break;
                 }
 
-                editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), moneyFromGames);
-                showAlertDialog(context, "You got payment from your created games!", "You got " + moneyFromGames + "$");
-            }
+                if(jsonArrayThing != null)
+                {
+                    if(jsonArrayThing.length() > 0)
+                    {
+                        int moneyFromGames = 0;
+                        for(int i = 0; i < jsonArrayThing.length(); i++)
+                        {
+                            JSONArray jsonArray = jsonArrayThing.getJSONArray(i);
+                            Random random = new Random();
+                            int moneyFromGame = (jsonArray.getInt(0) * random.nextInt(5) + 10);
+                            if(jsonArray.getBoolean(1))
+                                moneyFromGame *= 2.5;
 
-            //TODO: zrobić to z pozostałymi
+                            if(jsonArray.getInt(2) >= sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears))
+                            {
+                                if((jsonArray.getInt(3) + 10) > 12)
+                                {
+                                    if((jsonArray.getInt(3) + 10) - 12 == sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths))
+                                    {
+                                        jsonArray.remove(i);
+                                        editor.putString(contextThis.getResources().getString(R.string.saved_games_key), jsonArray.toString());
+                                        //TODO: sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
+                                    }
+                                }
+                                else
+                                {
+                                    if((jsonArray.getInt(3) + 10) == sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths))
+                                    {
+                                        jsonArray.remove(i);
+                                        editor.putString(contextThis.getResources().getString(R.string.saved_games_key), jsonArray.toString());
+                                        //TODO: sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
+                                    }
+                                }
+                            }
+
+                            moneyFromGames += moneyFromGame;
+                        }
+
+                        editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + moneyFromGames);
+                        showAlertDialog(context, "You got payment from your created games!", "You got " + moneyFromGames + "$");
+                    }
+                }
+            }
         }
         catch (JSONException e)
         { }

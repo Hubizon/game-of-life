@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.House.Lodging;
 
@@ -20,7 +22,6 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private List<String> mDataNames;
     private List<String> mDataPrices;
-    private Lodging[] mDataLodgings;
     private LayoutInflater mInflater;
     private RecyclerViewShopBuyAdapter.ItemClickListener mClickListener;
 
@@ -29,7 +30,6 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
         this.mInflater = LayoutInflater.from(context);
         this.mDataNames = dataNames;
         this.mDataPrices = dataPrices;
-        this.mDataLodgings = dataLodgings;
     }
 
     // inflates the row layout from xml when needed
@@ -42,43 +42,14 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(RecyclerViewShopBuyAdapter.ViewHolder holder, int position) {
-        String ItemName;
-        if(mDataLodgings != null)
-        {
-            switch (mDataLodgings[position].getType())
-            {
-                case "buy":
-                    ItemName = "Buy a " + mDataNames.get(position);
-                    break;
-
-                case "rent":
-                    switch (mDataLodgings[position].getRentTime())
-                    {
-                        case 7:
-                            ItemName = "Rent a " + mDataNames.get(position) + " for a week";
-                            break;
-
-                        case 30:
-                            ItemName = "Rent a " + mDataNames.get(position) + " for a month";
-                            break;
-
-                        default:
-                            ItemName = "Rent a " + mDataNames.get(position);
-                            break;
-                    }
-                    break;
-
-                default:
-                    ItemName = mDataNames.get(position);
-                    break;
-            }
-        }
-
-        else
-            ItemName = mDataNames.get(position);
+        String ItemName = mDataNames.get(position);
         String ItemPrice = mDataPrices.get(position);
+
         holder.myTextViewName.setText(ItemName);
         holder.myTextViewPrice.setText(ItemPrice);
+
+        if(mDataNames.get(1).equals(ShopFragment.transportList[1].getName()) || mDataNames.get(1).equals(ShopFragment.lodgingList[1].getName()))
+            holder.mySpinnerBuyMethod.setVisibility(View.VISIBLE);
     }
 
     // total number of rows
@@ -92,11 +63,13 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextViewName;
         TextView myTextViewPrice;
+        Spinner mySpinnerBuyMethod;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTextViewName = itemView.findViewById(R.id.shopBuyItemName);
             myTextViewPrice = itemView.findViewById(R.id.shopBuyItemPrice);
+            mySpinnerBuyMethod = itemView.findViewById(R.id.buy_method_spinner);
             itemView.setOnClickListener(this);
         }
 

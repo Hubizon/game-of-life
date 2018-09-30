@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
+import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Work.ChooseJobActivity;
+import com.example.hubert.gameoflife.Work.CriminalJob;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
 
@@ -88,18 +90,26 @@ public class MyDialogFragment extends DialogFragment  {
 
             case R.id.makeGameComputer:
                 getDialog().setTitle(R.string.making_computer_game);
+                view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.drawSomethingComputer:
                 getDialog().setTitle(R.string.drawing_something);
+                view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.writePoemComputer:
                 getDialog().setTitle(R.string.writing_poem);
+                view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.recordMoviesComputer:
                 getDialog().setTitle(R.string.recording_movies);
+                view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.GoToSchoolEducation:
@@ -112,6 +122,17 @@ public class MyDialogFragment extends DialogFragment  {
 
             case R.id.GoToSchoolHangAroundEducation:
                 getDialog().setTitle(R.string.learning);
+                break;
+
+            case R.id.subjectHomework:
+                try {
+                    JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                    JSONObject jsonObject = (JSONObject)(jsonArray.get(Integer.valueOf(getTag())));
+
+                    getDialog().setTitle(R.string.learning + jsonObject.getInt("subjectName"));
+                }
+                catch (JSONException e)
+                { }
                 break;
 
             case R.id.btn_go_work:
@@ -163,7 +184,7 @@ public class MyDialogFragment extends DialogFragment  {
         @Override
         public void run() {
             onTimerDelay();
-            mHandler.postDelayed(mTimerRunnable, 1500);
+            mHandler.postDelayed(mTimerRunnable, timerDelay);
         }
     };
 
@@ -171,6 +192,7 @@ public class MyDialogFragment extends DialogFragment  {
     {
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
+        Random r = new Random();
 
         Log.d(MyDialogFragment.class.getSimpleName(), "mId: " + mId);
         switch (mId)
@@ -219,78 +241,25 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.talkComputer:
-                editor.putInt(getResources().getString(R.string.saved_communication_skills_key), ((sharedPref.getInt(getResources().getString(R.string.saved_communication_skills_key), SharedPreferencesDefaultValues.DefaultCommunicationsSkills)) + 2));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 1));
+                editor.putInt(getResources().getString(R.string.saved_communication_skills_key), ((sharedPref.getInt(getResources().getString(R.string.saved_communication_skills_key), SharedPreferencesDefaultValues.DefaultCommunicationsSkills)) + 20));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 10));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 10));
                 break;
 
             case R.id.makeGameComputer:
-                //TODO: z jakiegoś powodu tutaj nie aktualizuje się nic.
-                // Wykonują sięte instrukcję i jest wszystko dobrze, ale
-                // wogóle nie aktualizuje się layout :/
-                editor.putInt(getResources().getString(R.string.saved_progress_making_game_key), (sharedPref.getInt(getResources().getString(R.string.saved_progress_making_game_key), SharedPreferencesDefaultValues.DefaultProgressProgramming) + 1));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 3));
-                editor.apply();
-
-                if(sharedPref.getInt(getResources().getString(R.string.saved_progress_making_game_key), SharedPreferencesDefaultValues.DefaultProgressProgramming) >= 5)
-                {
-                    editor.putInt(getResources().getString(R.string.saved_progress_making_game_key), (sharedPref.getInt(getResources().getString(R.string.saved_progress_making_game_key), SharedPreferencesDefaultValues.DefaultProgressProgramming) + 1));
-                    editor.putInt(getResources().getString(R.string.saved_programming_skills_key), (sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key), SharedPreferencesDefaultValues.DefaultProgrammingSkills) + 2));
-                    editor.putInt(getResources().getString(R.string.saved_progress_making_game_key), 0);
-
-                    JSONObject jsonObject;
-                    int gameScore = 0;
-                    try
-                    {
-                        JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                        for(int i = 0; i < jsonArray.length(); i++)
-                        {
-                            jsonObject = jsonArray.getJSONObject(i);
-                            if("Information Technology".equals(jsonObject.get("subjectName")))
-                            {
-                                gameScore = (jsonObject.getInt("subjectMark") * 10) + (sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key), SharedPreferencesDefaultValues.DefaultProgrammingSkills));
-                                return;
-                            }
-                        }
-                    }
-                    catch (JSONException e)
-                    { }
-
-                    JSONArray toJsonArray = new JSONArray();
-                    toJsonArray.put(gameScore);
-                    Random random = new Random();
-                    if(random.nextInt(500) < gameScore)//bestseller
-                        toJsonArray.put(true);
-                    else
-                        toJsonArray.put(false);
-                    toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears));
-                    toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths));
-
-                    try
-                    {
-                        JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_games_key), SharedPreferencesDefaultValues.DefaultGamesList));
-                        jsonArray.put(toJsonArray);
-                        editor.putString(getResources().getString(R.string.saved_games_key), jsonArray.toString());
-                    }
-                    catch (JSONException e)
-                    { }
-
-                    editor.apply();
-                }
+                editor.putString(getResources().getString(R.string.saved_games_key), doSomething(getResources().getString(R.string.saved_progress_making_game_key), getResources().getString(R.string.saved_programming_skills_key), getResources().getString(R.string.saved_games_key), "Information Technology"));
                 break;
 
             case R.id.drawSomethingComputer:
-                //TODO: fill it
+                editor.putString(getResources().getString(R.string.saved_drawings_key), doSomething(getResources().getString(R.string.saved_progress_making_drawings_key), getResources().getString(R.string.saved_drawing_skills_key), getResources().getString(R.string.saved_games_key), "Art"));
                 break;
 
             case R.id.writePoemComputer:
-                //TODO: fill it
+                editor.putString(getResources().getString(R.string.saved_books_key), doSomething(getResources().getString(R.string.saved_progress_making_book_key), getResources().getString(R.string.saved_writing_skills_key), getResources().getString(R.string.saved_games_key), "English"));
                 break;
 
             case R.id.recordMoviesComputer:
-                //TODO: fill it
+                editor.putString(getResources().getString(R.string.saved_movies_key), doSomething(getResources().getString(R.string.saved_progress_making_movies_key), getResources().getString(R.string.saved_recording_skills_key), getResources().getString(R.string.saved_games_key), "Music"));
                 break;
 
             case R.id.GoToSchoolEducation:
@@ -307,9 +276,9 @@ public class MyDialogFragment extends DialogFragment  {
                 { }//TODO: to musi byc wszedzie!
                 editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 2));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 3));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 5));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 40));
                 break;
 
             case R.id.GoToSchoolLearnHardEducation:
@@ -326,9 +295,9 @@ public class MyDialogFragment extends DialogFragment  {
                 { }
                 editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 4));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 7));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 20));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 43));
                 break;
 
             case R.id.GoToSchoolHangAroundEducation:
@@ -345,81 +314,190 @@ public class MyDialogFragment extends DialogFragment  {
                 { }
                 editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 25));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 25));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 18));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 60));
+                break;
+
+            case R.id.subjectHomework:
+                try {
+                    jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                    jsonObject = (JSONObject)(jsonArray.get(Integer.valueOf(getTag())));
+
+                    jsonObject.put("toAnotherMark", (jsonObject.getInt("toAnotherMark") + 40));
+                    jsonArray.put(Integer.valueOf(getTag()), jsonObject);
+                }
+                catch (JSONException e)
+                { }
+                editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
+
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 45));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 50));
                 break;
 
             case R.id.btn_go_work:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
                 Job mJob = gson.fromJson(json, Job.class);
+                int subjectMark = 3;
 
                 if(mJob != null)
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + mJob.getSalary()));
+                {
+                    try {
+                        jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                        for (int i = 0; i <= jsonArray.length(); i++)
+                        {
+                            jsonObject = (JSONObject) jsonArray.get(i);
+                            if(mJob.getSubjectNameNeededToWork().equals(jsonObject.getString("subjectName")))
+                            {
+                                subjectMark = jsonObject.getInt("subjectMark");
+                                break;
+                            }
+                        }
+                    }
+                    catch (JSONException e)
+                    { }
+
+                    int additionalSkills = 50;
+                    if(mJob.getAdditionalSkillsRes() != 0)
+                        additionalSkills = sharedPref.getInt(getResources().getString(mJob.getAdditionalSkillsRes()), 50);
+                    double salary = (mJob.getSalary() * (((100.0 - mJob.getMarkRatio() * 3.0) + subjectMark * mJob.getMarkRatio()) / 100.0 ) * ((100.0 + ((additionalSkills - 50.0) / 5.0)) / 100.0));
+                    if(salary <= 0)
+                        salary = mJob.getSalary() * 0.10;
+
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int)Math.round(salary));
+                }
+
                 editor.putInt(getResources().getString(R.string.saved_work_relations_key), ((sharedPref.getInt(getResources().getString(R.string.saved_work_relations_key), SharedPreferencesDefaultValues.DefaultWorkRelations)) + 5));
 
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 3));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 7));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 40));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 66));
 
-                for(int i = 0; i < ChooseJobActivity.criminalJobsList.length; i++)
-                    if(mJob == ChooseJobActivity.criminalJobsList[i])
+                if(mJob instanceof CriminalJob)
+                    if(r.nextInt(((CriminalJob)mJob).getChanceToGetBusted()) == 1)
                     {
-                        Random r = new Random();
-                        if(r.nextInt(50) == 1)
-                        {
-                            editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-                            Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
-                            if(r.nextInt(25) == 1)
-                                if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-                                {
-                                    editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-                                    Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
-                                }
-                        }
-                        else
-                            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + 25));
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
+                        Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                        if(r.nextInt(25) == 1)
+                            if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
+                            {
+                                editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
+                                Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                            }
                     }
-
+               //editor.apply();
                 break;
 
             case R.id.btn_work_hard:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
                 Job mJobWorkHard = gson.fromJson(json, Job.class);
+                int subjectMarkWorkHard = 3;
 
                 if(mJobWorkHard != null)
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + (int)(mJobWorkHard.getSalary() * 1.3)));
+                {
+                    try {
+                        jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                        for (int i = 0; i <= jsonArray.length(); i++)
+                        {
+                            if(mJobWorkHard.getSubjectNameNeededToWork().equals(jsonArray.get(i)))
+                            {
+                                jsonObject = (JSONObject) jsonArray.get(i);
+                                subjectMarkWorkHard = jsonObject.getInt("subjectMark");
+                                break;
+                            }
+                        }
+                    }
+                    catch (JSONException e)
+                    { }
+
+                    int additionalSkills = sharedPref.getInt(getResources().getString(mJobWorkHard.getAdditionalSkillsRes()), 50);
+                    double salary = (mJobWorkHard.getSalary() * (((100 - mJobWorkHard.getMarkRatio() * 3) + subjectMarkWorkHard * mJobWorkHard.getMarkRatio()) / 100 ) * ((100 + ((additionalSkills - 50) / 5)) / 100));
+                    if(salary <= 0)
+                        salary = mJobWorkHard.getSalary() * 0.10;
+
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int)Math.round(salary));
+                }
                 editor.putInt(getResources().getString(R.string.saved_work_relations_key), ((sharedPref.getInt(getResources().getString(R.string.saved_work_relations_key), SharedPreferencesDefaultValues.DefaultWorkRelations)) + 20));
 
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 10));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 2));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 15));
+                //TODO: więcej hajsu za ciężkie pracowanie
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 100));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 80));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 150));
+
+                if(mJobWorkHard instanceof CriminalJob)
+                    if(r.nextInt(((CriminalJob)mJobWorkHard).getChanceToGetBusted()) == 1)
+                    {
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
+                        Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                        if(r.nextInt(25) == 1)
+                            if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
+                            {
+                                editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
+                                Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                            }
+                    }
                 break;
 
             case R.id.btn_hang_around:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
                 Job mJobHangAround = gson.fromJson(json, Job.class);
+                int subjectMarkHangAround = 3;
 
                 if(mJobHangAround != null)
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + (int)(mJobHangAround.getSalary() * 0.7)));
+                {
+                    try {
+                        jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                        for (int i = 0; i <= jsonArray.length(); i++)
+                        {
+                            if(mJobHangAround.getSubjectNameNeededToWork().equals(jsonArray.get(i)))
+                            {
+                                jsonObject = (JSONObject) jsonArray.get(i);
+                                subjectMarkHangAround = jsonObject.getInt("subjectMark");
+                                break;
+                            }
+                        }
+                    }
+                    catch (JSONException e)
+                    { }
+
+                    int additionalSkills = sharedPref.getInt(getResources().getString(mJobHangAround.getAdditionalSkillsRes()), 50);
+                    double salary = (mJobHangAround.getSalary() * (((100 - mJobHangAround.getMarkRatio() * 3) + subjectMarkHangAround * mJobHangAround.getMarkRatio()) / 100 ) * ((100 + ((additionalSkills - 50) / 5)) / 100));
+                    if(salary <= 0)
+                        salary = mJobHangAround.getSalary() * 0.10;
+
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int)Math.round(salary));
+                }
                 editor.putInt(getResources().getString(R.string.saved_work_relations_key), ((sharedPref.getInt(getResources().getString(R.string.saved_work_relations_key), SharedPreferencesDefaultValues.DefaultWorkRelations)) - 15));
 
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 20));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 30));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 90));
+
+                if(mJobHangAround instanceof CriminalJob)
+                    if(r.nextInt(((CriminalJob)mJobHangAround).getChanceToGetBusted()) == 1)
+                    {
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
+                        Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                        if(r.nextInt(25) == 1)
+                            if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
+                            {
+                                editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
+                                Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                            }
+                    }
                 break;
 
             case R.id.getNewFriendsCriminal:
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 3));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 90));
                 editor.putInt(getResources().getString(R.string.saved_criminal_points_key), (sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) + 2));
                 break;
 
             case R.id.sellDrugsCriminal:
-                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 6));
-                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 2));
-                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 3));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 180));
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 60));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 90));
 
-                Random r = new Random();
                 if(r.nextInt(100) == 1)
                 {
                     editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
@@ -474,36 +552,53 @@ public class MyDialogFragment extends DialogFragment  {
         ((ProgressBar)view.findViewById(R.id.progressBar_happiness_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
     }
 
-    //TODO: don't delete it!  make it work
-    /*@Override
-    onClick()
-    {
-        sharedPref = sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        editor = sharedPref.edit();
-        int amountOfCashToDespositWithdraw = Integer.valueOf(((EditText)view.findViewById(R.id.amountOfCashToDespositWithdraw)).getText().toString());
+    private String doSomething(String resSavedProgress, String resSavedSkills, String resSavedList, String subjectToThing) {
+        editor.putInt(resSavedProgress, (sharedPref.getInt(resSavedProgress, SharedPreferencesDefaultValues.DefaultProgressProgramming) + 1));
+        editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 1));
+        editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
+        editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 3));
 
-        switch (mId)
-        {
-            case R.id.despositSafe:
-                if(amountOfCashToDespositWithdraw == 0)
-                    Toast.makeText(getActivity().getApplicationContext(), ("Amount to the Deposit must be other than 0"), Toast.LENGTH_LONG).show();
-                else if(amountOfCashToDespositWithdraw > sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney))
-                    Toast.makeText(getActivity().getApplicationContext(), ("You don't have enough money to deposit!"), Toast.LENGTH_LONG).show();
-                else
-                {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - amountOfCashToDespositWithdraw);
-                    editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), (sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe)) + amountOfCashToDespositWithdraw);
+        ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).setProgress(((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress() + 1);
+        editor.putInt(resSavedProgress, ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress());
+
+        if (sharedPref.getInt(resSavedProgress, 0) >= 100) {
+            editor.putInt(resSavedSkills, (sharedPref.getInt(resSavedSkills, 0) + 2));
+            editor.putInt(resSavedSkills, 0);
+
+            JSONObject jsonObject;
+            int gameScore = 0;
+            try {
+                JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsonObject = jsonArray.getJSONObject(i);
+                    if (subjectToThing.equals(jsonObject.get("subjectName"))) {
+                        gameScore = (jsonObject.getInt("subjectMark") * 10) + (sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key),0));
+                        break;
+                    }
                 }
-                break;
-            case R.id.withdrawSafe:
+            } catch (JSONException e) {
+            }
 
-                break;
+            JSONArray toJsonArray = new JSONArray();
+            toJsonArray.put(gameScore);
+            Random random = new Random();
+            if (random.nextInt(500) < gameScore)//bestseller
+                toJsonArray.put(true);
+            else
+                toJsonArray.put(false);
+            toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears));
+            toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths));
+
+            try {
+                JSONArray jsonArray = new JSONArray(sharedPref.getString(resSavedList, SharedPreferencesDefaultValues.DefaultGamesList));
+                jsonArray.put(toJsonArray);
+                return jsonArray.toString();
+                //editor.putString(getResources().getString(R.string.saved_games_key), jsonArray.toString());
+            } catch (JSONException e) {
+            }
         }
-
-        editor.apply();
-        ((TextView)view.findViewById(R.id.money_dialogsafe)).setText("Cash:   " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
-        ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText("Safe:   " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$");
-    }*/
+        return "";
+    }
 
     @Override
     public void onPause() {
@@ -511,9 +606,15 @@ public class MyDialogFragment extends DialogFragment  {
         mHandler.removeCallbacks(mTimerRunnable);
     }
 
+    int timerDelay = 1000;
     @Override
     public void onStart() {
         super.onStart();
+
+        json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
+        Transport transport = gson.fromJson(json, Transport.class);
+        timerDelay = 1000 - (transport.getSpeed() * 35);
+
         mHandler = new Handler();
         mHandler.post(mTimerRunnable);
     }

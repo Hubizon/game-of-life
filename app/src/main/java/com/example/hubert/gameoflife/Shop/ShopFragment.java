@@ -48,15 +48,15 @@ public class ShopFragment extends Fragment
     };
 
     public static Fun[] funList = new Fun[]{
-            new Fun("Go to The Cinema", "Exit",15, 40),
-            new Fun("Old Phone", "Phone", 50, 40),
-            new Fun("Black and White TV", "TV", 75, 40),
-            new Fun("Wooden PC", "Computer",100, 50),
-            new Fun("TV", "TV", 200, 60),
-            new Fun("Smartphone", "Phone", 400, 60),
-            new Fun("Computer", "Computer",650, 70),
-            new Fun("Plasma TV", "TV",1000, 85),
-            new Fun("Modern Computer", "Computer", 1500, 100),
+            new Fun("Go to The Cinema", "Exit",15, 120),
+            new Fun("Old Phone", "Phone", 50, 120),
+            new Fun("Black and White TV", "TV", 150, 180),
+            new Fun("Wooden PC", "Computer",100, 150),
+            new Fun("TV", "TV", 200, 180),
+            new Fun("Smartphone", "Phone", 400, 180),
+            new Fun("Computer", "Computer",650, 220),
+            new Fun("Plasma TV", "TV",1000, 360),
+            new Fun("Modern Computer", "Computer", 1500, 300),
     };
 
     public static Lottery[] lotteryList = new Lottery[]{
@@ -70,36 +70,36 @@ public class ShopFragment extends Fragment
             new Lottery("Win The Life", 100, 100000, 999999999),
     };
 
+    // TODO: jeżeli nic nie robisz to to Ci się dodaje
     public static Lodging[] lodgingList = new Lodging[]{
-            new Lodging("Cheap", 500,  -2, 100, -2, "rent", 30),
-            new Lodging("Cheap", 650, -2, 100, -2, "rent", 30),
-            new Lodging("Flat", 800, 0, 125, -1, "rent", 30),
-            new Lodging("House", 1500, 2, 150, 3, "rent", 30),
-            new Lodging("Motel", 450,  1, 125, 2, "rent", 7),
-            new Lodging("1 Star Hotel", 500,2, 125, 3, "rent", 7),
-            new Lodging("2 Star Hotel", 600,3, 150, 3, "rent", 7),
-            new Lodging("3 Star Hotel", 750,4, 175, 4, "rent", 7),
-            new Lodging("4 Star Hotel", 1000,5, 200, 5, "rent", 7),
-            new Lodging("5 Star Hotel", 1500,7, 225, 8, "rent", 7),
-            new Lodging("Flat", 40000,  0, 125, -1, "buy", 0),
-            new Lodging("Small House", 75000,1, 135, 2, "buy", 0),
-            new Lodging("Big House", 150000,2, 175, 5, "buy", 0),
-            new Lodging("Villa", 500000,  8,225, 10, "buy", 0),
-            new Lodging("Very Exclusive Villa", 2500000,10, 275, 15, "buy", 0),
-            new Lodging("Super Exclusive and Modern Villa", 50000000, 12, 400, 25, "buy", 0),
+            new Lodging("Cheap Flat in the dangerous district", 150,  -2, 100, -2),
+            new Lodging("Cheap Flat", 185, -2, 100, -2),
+            new Lodging("Flat", 220, 0, 125, -1),
+            new Lodging("House", 425, 2, 150, 3),
+            new Lodging("Motel", 550,  1, 125, 2),
+            new Lodging("1 Star Hotel", 675,2, 125, 3),
+            new Lodging("2 Star Hotel", 800,3, 150, 3),
+            new Lodging("3 Star Hotel", 1000,4, 175, 4),
+            new Lodging("4 Star Hotel", 1350,5, 200, 5),
+            new Lodging("5 Star Hotel", 2000,7, 225, 8),
+            new Lodging("Small House", 350,1, 135, 2),
+            new Lodging("Big House", 750,2, 175, 5),
+            new Lodging("Villa", 2500,  8,225, 10),
+            new Lodging("Very Exclusive Villa", 7500,10, 275, 15),
+            new Lodging("Super Exclusive and Modern Villa", 15000, 12, 400, 25),
     };
 
     public static Transport[] transportList = new Transport[]{
-            new Transport("Buy a Boots", 100, 9),
-            new Transport("Buy a Skateboard", 250, 8),
-            new Transport("Buy a Bicycle", 650, 7),
-            new Transport("Buy a Bus Ticket for The Whole Life", 1500, 6),
-            new Transport("Buy a Motorcycle", 3500, 5),
-            new Transport("Buy a Car", 20000, 4),
-            new Transport("Buy a Sports Car", 100000, 3),
-            new Transport("Buy a Aeroplane Ticket for The Whole Life", 5000000, 2),
-            new Transport("Buy a Rocket", 25000000, 1),
-            new Transport("Buy a Teleporter", 100000000, 0),
+            new Transport("Boots", 100, 9),
+            new Transport("Skateboard", 250, 8),
+            new Transport("Bicycle", 650, 7),
+            new Transport("Bus Ticket for The Whole Life", 1500, 6),
+            new Transport("Motorcycle", 3500, 5),
+            new Transport("Car", 20000, 4),
+            new Transport("Sports Car", 100000, 3),
+            new Transport("Aeroplane", 5000000, 2),
+            new Transport("Rocket", 25000000, 1),
+            new Transport("Teleporter", 100000000, 0),
     };
 
 
@@ -148,7 +148,7 @@ public class ShopFragment extends Fragment
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getActivity().getApplicationContext(), BuyActivity.class);
-        switch (view.getId()) {
+        /*switch (view.getId()) {
             case R.id.cardview_food:
                 break;
             case R.id.cardview_medicines:
@@ -163,7 +163,7 @@ public class ShopFragment extends Fragment
                 break;
             default:
                 break;
-        }
+        }*/
         intent.putExtra(getResources().getString(R.string.send_shop_click_id), view.getId());
         startActivity(intent);
     }

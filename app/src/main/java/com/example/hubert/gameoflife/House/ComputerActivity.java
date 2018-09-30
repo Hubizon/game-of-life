@@ -84,6 +84,12 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
                 showDialog("Support a Charity Event", "Are you sure you want to support a charity event for 100$?");
                 break;
 
+            case R.id.buyLotteries:
+                Intent intent = new Intent(getApplicationContext(), BuyActivity.class);
+                intent.putExtra(getResources().getString(R.string.send_shop_click_id), v.getId());
+                startActivity(intent);
+                break;
+
             case R.id.makeGameComputer:
                 newDialog = MyDialogFragment.newInstance(v.getId());
                 break;

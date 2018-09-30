@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBuyAdapter.ItemClickListener{
+import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
+
+public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBuyAdapter.ItemClickListener {
 
     private static final int PAGE_NUMBER = 2;
 
@@ -77,7 +80,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
                 break;
 
-            case R.id.cardview_lottery:
+            case R.id.buyLotteries:
                 for(int i = 0; i < ShopFragment.lotteryList.length; i++)
                     itemsNames.add(ShopFragment.lotteryList[i].getName());
                 for(int i = 0; i < ShopFragment.lotteryList.length; i++)
@@ -206,10 +209,9 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     alertDialogSellItem(tvName, tvPrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "fun", position);
 
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
-                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
-            case R.id.cardview_lottery:
+            case R.id.buyLotteries:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.lotteryList[position].getPrice())
                 {
                     editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.lotteryList[position].getPrice()));
@@ -226,27 +228,18 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 else
                     Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.cardview_house:
-                String lodgingName = null;
-                int lodgingPrice = 0;
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
                 //TODO: zobaczy czy dziala bez tego
-               // gson.fromJson(json, Lodging.class);
-               // gson.newBuilder().setLenient().create();
+                gson.fromJson(json, Lodging.class);
+                gson.newBuilder().setLenient().create();
 
                 Lodging lodging = gson.fromJson(json, Lodging.class);
-                if(lodging != null)
-                {
-                    lodgingName = lodging.getName();
-                    lodgingPrice = lodging.getPrice();
-                }
 
-                if(18 >= sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears))
-                    Toast.makeText(view.getContext(), "You can't buy new house when you are under 18.", Toast.LENGTH_LONG).show();
-                else if(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) == null || lodgingName.equals("Foots"))
+
+                if(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) == null || json.equals(SharedPreferencesDefaultValues.DefaultMyLodging) || json.equals(SharedPreferencesDefaultValues.DefaultMyLodgingAfter18))
                 {
                     if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.lodgingList[position].getPrice())
                     {
@@ -257,33 +250,40 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     else
                         Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 } else
-                    alertDialogSellItem(lodgingName, lodgingPrice, ShopFragment.lodgingList[position].getPrice(), ShopFragment.lodgingList[position].getName(), "lodging", position);
-                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
+                    //TODO: nie dostawać kasy za kupienie nowego domu (jeżeli to jest wypożyczony), tylko np. "You still have rented [name]. Are you sure
+                    // you want to buy this for [price]?
+                    /*if("rent".equals(lodging.getType()))
+                        ;
+                    else if(json.equals(SharedPreferencesDefaultValues.DefaultMyLodging))
+                        ;
+                    else*/
+                        alertDialogSellItem(lodging.getName(), lodging.getPrice(), ShopFragment.lodgingList[position].getPrice(), ShopFragment.lodgingList[position].getName(), "lodging", position);
+
                 break;
 
             case R.id.cardview_transport:
-                String transportName = null;
-                int transportPrice = 0;
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
                 Transport transport = gson.fromJson(json, Transport.class);
-                if(transport != null)
-                {
-                    transportName = transport.getName();
-                    transportPrice = transport.getPrice();
-                }
 
-                if(sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport) == null || transportName.equals("Foots"))
+                double transportPriceDouble = ShopFragment.transportList[position].getPrice();
+                if("Rent for a month".equals(String.valueOf(((Spinner)view.findViewById(R.id.buy_method_spinner)).getSelectedItem())))
+                    transportPriceDouble *= 4.75;
+                else if("Buy".equals(String.valueOf(((Spinner)view.findViewById(R.id.buy_method_spinner)).getSelectedItem())))
+                    transportPriceDouble *= 25.0;
+                int transportPrice = (int)Math.round(transportPriceDouble);
+
+                if(sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport) == null || json.equals(SharedPreferencesDefaultValues.DefaultMyTransport))
                 {
-                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.transportList[position].getPrice())
+                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= transportPrice)
                     {
-                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.transportList[position].getPrice()));
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - transportPrice));
                         json = gson.toJson(ShopFragment.transportList[position]);
                         editor.putString(getResources().getString(R.string.saved_my_transport_key), json);
                     }
                     else
                         Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 } else
-                    alertDialogSellItem(transportName, transportPrice, ShopFragment.transportList[position].getPrice(), ShopFragment.transportList[position].getName(), "transport", position);
+                    alertDialogSellItem(transport.getName(), transport.getPrice(), transportPrice, ShopFragment.transportList[position].getName(), "transport", position);
                 ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
@@ -300,6 +300,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
             editor.putInt(getString(R.string.saved_happiness_key), 1000);
 
         editor.apply();
+
+        ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
     }
 
     private void alertDialogSellItem(String boughtItemName, final int boughtItemPrice, final int itemPrice, String itemName, final String itemType, final int position)
@@ -324,7 +326,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                         {
                             editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - itemPrice));
                             Gson gson = new Gson();
-                            String json = null;
+                            String json;
                             switch (itemType)
                             {
                                 case "fun":

@@ -24,7 +24,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class MainActivity extends AppCompatActivity
-    implements RewardedVideoAdListener{
+    implements RewardedVideoAdListener {
 
     private static final int TIMER_LOOP_TIME = 1000;
 
@@ -75,9 +75,16 @@ public class MainActivity extends AppCompatActivity
         mRewardedVideoAd.setRewardedVideoAdListener(this);
         loadRewardedVideoAd();
 
-        mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+        //TODO: tak na razie
+        if(isFirstTimeOpenedActivity)
+        {
+            mHandler = new Handler();
+            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+            isFirstTimeOpenedActivity = false;
+        }
+
     }
+    static boolean isFirstTimeOpenedActivity = true;
 
     static SharedPreferences sharedPref;
     private static Handler mHandler;
@@ -142,6 +149,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        //TODO Michal!!! Co to jest!? XDDD
         Log.d("test", "please work1!!");
     }
 
@@ -154,6 +162,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void loadRewardedVideoAd() {
+        //TODO: zastopować timer w trakcie reklamy
         mRewardedVideoAd.loadAd(getString(R.string.TEST_SAMPLE_ADMOB_REWARDED),
                 new AdRequest.Builder().build());
     }
