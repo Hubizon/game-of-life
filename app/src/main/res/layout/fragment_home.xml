@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/homeGrid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,15 +20,24 @@
         android:id="@+id/cardview_tv"
         style="@style/MyCardViewStyle">
 
-        <LinearLayout
-            style="@style/MyLinearLayoutStyleInCardView">
+        <FrameLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:contentDescription="TODO"
-                android:src="@drawable/tv_icon" />
+                android:contentDescription="@string/tv"
+                app:srcCompat="@drawable/tv_icon" />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/tv"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
 
     </android.support.v7.widget.CardView>
 
@@ -36,15 +46,23 @@
         android:id="@+id/cardview_bed"
         style="@style/MyCardViewStyle">
 
-        <LinearLayout
-            style="@style/MyLinearLayoutStyleInCardView">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:contentDescription="TODO"
-                android:src="@drawable/bed_icon" />
+                android:contentDescription="@string/sleep"
+                app:srcCompat="@drawable/bed_icon" />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/sleep"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+        </FrameLayout>
     </android.support.v7.widget.CardView>
 
     <!-- Row 2 -->
@@ -54,14 +72,24 @@
         android:id="@+id/cardview_computer"
         style="@style/MyCardViewStyle">
 
-        <LinearLayout
-            style="@style/MyLinearLayoutStyleInCardView">
+        <FrameLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:src="@drawable/computer_icon" />
+                android:contentDescription="@string/computer"
+                app:srcCompat="@drawable/computer_icon" />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/computer"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
     </android.support.v7.widget.CardView>
 
     <!-- Column 2 -->
@@ -69,15 +97,24 @@
         android:id="@+id/cardview_ad"
         style="@style/MyCardViewStyle">
 
-        <LinearLayout
-            style="@style/MyLinearLayoutStyleInCardView">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:contentDescription="TODO"
-                android:src="@drawable/ad_icon" />
+                android:contentDescription="@string/safe"
+                app:srcCompat="@drawable/ad_icon" />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/safe"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
     </android.support.v7.widget.CardView>
 
     <!-- Row 2 -->
@@ -87,15 +124,24 @@
         android:id="@+id/cardview_safe"
         style="@style/MyCardViewStyle">
 
-        <LinearLayout
-            style="@style/MyLinearLayoutStyleInCardView">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:src="@drawable/safe_icon"
-                android:contentDescription="TODO"/>
+                app:srcCompat="@drawable/safe_icon"
+                android:contentDescription="@string/safe"/>
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/safe"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
     </android.support.v7.widget.CardView>
 
     <!-- Column 2 -->
@@ -103,14 +149,22 @@
         android:id="@+id/cardview_todo2"
         style="@style/MyCardViewStyle">
 
-        <LinearLayout
-            style="@style/MyLinearLayoutStyleInCardView">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
                 android:contentDescription="TODO"/>
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
     </android.support.v7.widget.CardView>
 
 </GridLayout>

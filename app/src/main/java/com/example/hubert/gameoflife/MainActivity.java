@@ -75,8 +75,11 @@ public class MainActivity extends AppCompatActivity
         mRewardedVideoAd.setRewardedVideoAdListener(this);
         loadRewardedVideoAd();
 
-        mHandler = new Handler();
-        mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+        if (mHandler == null) {
+            Log.d("test", "the Handler is null!");
+            mHandler = new Handler();
+            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+        }
     }
 
     static SharedPreferences sharedPref;
@@ -137,12 +140,6 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         mHandler.removeCallbacks(mRunnable);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("test", "please work1!!");
     }
 
 

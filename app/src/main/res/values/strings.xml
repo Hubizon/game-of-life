@@ -119,8 +119,24 @@
     <string name="settings">Settings</string>
     <string name="play">Play</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_computer">Computer</string>
+    <string name="title_home">Home</string>
+    <string name="title_find_job">Find job</string>
     <string name="MY_ADMOB_APP_ID">ca-app-pub-3337866636093645~1700225876</string>
     <string name="TEST_SAMPLE_ADMOB_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
+
+    <string name="food">Food</string>
+    <string name="medicine">Medicine</string>
+    <string name="fun">Relaxation</string>
+    <string name="tickets">Lottery</string>
+    <string name="transportDesc">Transport</string>
+    <string name="house">Place</string>
+    <string name="clock">clock</string>
+    <string name="tv">TV</string>
+    <string name="sleep">Sleep</string>
+    <string name="advertisement">Ad</string>
+    <string name="safe">Safe</string>
 
     <!-- Strings related to Settings -->
 

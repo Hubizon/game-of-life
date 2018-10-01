@@ -35,6 +35,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn_in_home);
+        setTitle(R.string.title_home);
 
         SharedPreferences sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 

@@ -33,6 +33,7 @@ public class FindJobActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_job);
+        setTitle(R.string.title_find_job);
 
         CardView officeWorkCardview = findViewById(R.id.cardview_officeWork);
         officeWorkCardview.setOnClickListener(this);

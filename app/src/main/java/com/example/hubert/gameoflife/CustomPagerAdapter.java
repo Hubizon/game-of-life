@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import com.example.hubert.gameoflife.Education.EduFragment;
 import com.example.hubert.gameoflife.Education.EducationFragment;
 import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
 import com.example.hubert.gameoflife.House.HomeFragment;
@@ -31,11 +32,12 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-                SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-                if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_in_school_now_key), SharedPreferencesDefaultValues.DefaultIsInSchoolNow))
-                    return EducationFragment.newInstance();
-                else
-                    return WorkFragment.newInstance();
+//                SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+//                if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_in_school_now_key), SharedPreferencesDefaultValues.DefaultIsInSchoolNow))
+//                    return EducationFragment.newInstance();
+//                else
+//                    return WorkFragment.newInstance();
+                return EduFragment.newInstance();
             case 2:
                 return ShopFragment.newInstance();
             case 3:
@@ -47,22 +49,22 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
         }
     }
 
-//    @Nullable
-//    @Override
-//    public CharSequence getPageTitle(int position) {
-//        switch (position) {
-//            case 1:
-//                return "Edu";
-//            case 2:
-//                return "Shop";
-//            case 3:
-//                return "Love";
-//            case 4:
-//                return "Home";
-//            default:
-//                return "Profile";
-//        }
-//    }
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 1:
+                return "Edu";
+            case 2:
+                return "Shop";
+            case 3:
+                return "Love";
+            case 4:
+                return "Home";
+            default:
+                return "Main";
+        }
+    }
 
     @Override
     public int getCount() {
