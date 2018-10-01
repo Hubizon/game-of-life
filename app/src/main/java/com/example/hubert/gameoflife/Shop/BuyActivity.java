@@ -41,6 +41,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
+        setTitle(R.string.title_shop);
         view = new View(this);
 
         ArrayList<String> itemsNames = new ArrayList<>();

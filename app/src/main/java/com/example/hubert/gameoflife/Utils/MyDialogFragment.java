@@ -156,6 +156,7 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             default:
+                getDialog().setTitle(R.string.sell_drugs);
                 break;
         }
 

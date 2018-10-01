@@ -32,6 +32,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mHandler = new Handler();
     }
 
     private TextView charactermoneytext, timetext;
@@ -134,15 +135,14 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mHandler.removeCallbacks(mRunnable);
+    public void onStart() {
+        super.onStart();
+        mHandler.post(mRunnable);
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        mHandler = new Handler();
-        mHandler.post(mRunnable);
+    public void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mRunnable);
     }
 }

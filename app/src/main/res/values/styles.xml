@@ -43,7 +43,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_margin">20dp</item>
         <item name="android:background">@color/colorPrimary</item>
+        <item name="android:paddingBottom">20dp</item>
     </style>
 
     <style name="MyLinearLayoutStyleInCardView">

@@ -75,16 +75,12 @@ public class MainActivity extends AppCompatActivity
         mRewardedVideoAd.setRewardedVideoAdListener(this);
         loadRewardedVideoAd();
 
-        //TODO: tak na razie
-        if(isFirstTimeOpenedActivity)
-        {
+        if (mHandler == null) {
+            Log.d("test", "the Handler is null!");
             mHandler = new Handler();
             mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
-            isFirstTimeOpenedActivity = false;
         }
-
     }
-    static boolean isFirstTimeOpenedActivity = true;
 
     static SharedPreferences sharedPref;
     private static Handler mHandler;
@@ -144,13 +140,6 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         mHandler.removeCallbacks(mRunnable);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //TODO Michal!!! Co to jest!? XDDD
-        Log.d("test", "please work1!!");
     }
 
 

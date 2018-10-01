@@ -1,4 +1,5 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,77 +10,167 @@
     android:padding="14dp"
     android:rowCount="3">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview_food"
-            style="@style/MyCardViewStyle">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_food"
+        style="@style/MyCardViewStyle">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:layout_gravity="center"
-                android:src="@drawable/food_icon_color"
-                android:contentDescription="TODO"/>
+                android:layout_width="128dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/food"
+                app:srcCompat="@drawable/ic_apple" />
 
-        </android.support.v7.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/food"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
 
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview_medicines"
-            style="@style/MyCardViewStyle">
+        </FrameLayout>
 
-            <ImageView
-                style="@style/MyImageViewInCardViewStyle"
-                android:layout_gravity="center"
-                android:src="@drawable/medicines_icon_color"
-                android:contentDescription="TODO" />
+    </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview_fun"
-            style="@style/MyCardViewStyle">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_medicines"
+        style="@style/MyCardViewStyle">
 
-            <ImageView
-                style="@style/MyImageViewInCardViewStyle"
-                android:layout_gravity="center"
-                android:src="@drawable/fun_icon_color"
-                android:contentDescription="TODO" />
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview_lottery"
-            style="@style/MyCardViewStyle">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:layout_gravity="center"
-                android:src="@drawable/lottery_icon_color"
-                android:contentDescription="TODO" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/medicine"
+                app:srcCompat="@drawable/ic_medicine" />
 
-        </android.support.v7.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/medicine"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview_house"
-            style="@style/MyCardViewStyle">
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_fun"
+        style="@style/MyCardViewStyle">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:layout_gravity="center"
-                android:src="@drawable/house_icon_color"
-                android:contentDescription="TODO" />
+                android:layout_width="match_parent"
+                android:contentDescription="@string/fun"
+                app:srcCompat="@drawable/ic_rooftop" />
 
-        </android.support.v7.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/fun"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview_transport"
-            style="@style/MyCardViewStyle">
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_lottery"
+        style="@style/MyCardViewStyle">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:layout_gravity="center"
-                android:src="@drawable/transport_icon_color"
-                android:contentDescription="TODO" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/tickets"
+                app:srcCompat="@drawable/ic_tickets" />
 
-        </android.support.v7.widget.CardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/tickets"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_house"
+        style="@style/MyCardViewStyle">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/MyImageViewInCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/house"
+                app:srcCompat="@drawable/ic_house" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/house"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_transport"
+        style="@style/MyCardViewStyle">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                style="@style/MyImageViewInCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/transportDesc"
+                app:srcCompat="@drawable/ic_car" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/transportDesc"
+                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
 
 </GridLayout>

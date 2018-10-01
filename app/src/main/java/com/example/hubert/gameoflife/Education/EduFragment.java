@@ -4,14 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.Education.expandable.ChildList;
+import com.example.hubert.gameoflife.Education.expandable.MyExpandableRecyclerAdapter;
+import com.example.hubert.gameoflife.Education.expandable.ParentList;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
@@ -21,19 +28,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
-public class EducationFragment extends Fragment implements View.OnClickListener {
+public class EduFragment extends Fragment implements View.OnClickListener{
 
-    private static final String EDU_DIALOG_TAG = "edu_dialog_tag";
+    private static final String EDU_DIALOG_TAG = "edu_dialog_tag2";
 
+    public static final String TITLE_SCHOOL = "School";
+    public static final String TITLE_CRIMINAL = "Criminal";
+    public static final String TITLE_WORK = "Work";
 
-    public EducationFragment() {}
+    private RecyclerView recycler_view;
+    private MyExpandableRecyclerAdapter adapter;
 
-    public static EducationFragment newInstance() {
-        EducationFragment fragment = new EducationFragment();
-        return fragment;
+    public EduFragment() {}
+
+    public static EduFragment newInstance() {
+        return new EduFragment();
     }
 
     @Override
@@ -42,28 +56,59 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_education, container, false);
+        View view = inflater.inflate(R.layout.fragment_edu, container, false);
 
-        Button goSchoolButton = view.findViewById(R.id.GoToSchoolEducation);
-        goSchoolButton.setOnClickListener(this);
-        Button goSchoolHardButton = view.findViewById(R.id.GoToSchoolLearnHardEducation);
-        goSchoolHardButton.setOnClickListener(this);
-        Button goSchoolHangAroundButton = view.findViewById(R.id.GoToSchoolHangAroundEducation);
-        goSchoolHangAroundButton.setOnClickListener(this);
-        Button learnInHomeButton = view.findViewById(R.id.LearnInHomeEducation);
-        learnInHomeButton.setOnClickListener(this);
-        Button giveUpSchoolButton = view.findViewById(R.id.GiveUpSchool);
-        giveUpSchoolButton.setOnClickListener(this);
-        Button getNewFriendsButton = view.findViewById(R.id.getNewFriendsCriminal);
-        getNewFriendsButton.setOnClickListener(this);
-        Button stealSomethingButton = view.findViewById(R.id.stealSomethingCriminal);
-        stealSomethingButton.setOnClickListener(this);
-        Button sellDrugsButton = view.findViewById(R.id.sellDrugsCriminal);
-        sellDrugsButton.setOnClickListener(this);
-        Button threatTeachersButton = view.findViewById(R.id.threatTeachersCriminal);
-        threatTeachersButton.setOnClickListener(this);
+        recycler_view = view.findViewById(R.id.recycler_Expand);
+        recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        final List<ParentList> Parent = new ArrayList<>();
+        final List<ChildList> ChildSchool = new ArrayList<>();
+        final List<ChildList> ChildCriminal = new ArrayList<>();
+        final List<ChildList> ChildWork = new ArrayList<>();
+
+
+        ChildSchool.add(new ChildList("Go to school"));
+        ChildSchool.add(new ChildList("learn hard"));
+        ChildSchool.add(new ChildList("hand around"));
+        ChildSchool.add(new ChildList("learn at home"));
+        ChildSchool.add(new ChildList("Give up school"));
+        Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
+
+        ChildWork.add(new ChildList("Start working"));
+        ChildWork.add(new ChildList("work hard"));
+        ChildWork.add(new ChildList("give up work"));
+        Parent.add(new ParentList(TITLE_WORK, ChildWork));
+
+        ChildCriminal.add(new ChildList("Get new friends"));
+        ChildCriminal.add(new ChildList("steal stuff"));
+        ChildCriminal.add(new ChildList("sell drugs"));
+        ChildCriminal.add(new ChildList("threat teachers"));
+        Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
+
+        RecyclerView.ItemAnimator animator = recycler_view.getItemAnimator();
+        if (animator instanceof DefaultItemAnimator) {
+            ((DefaultItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
+
+        adapter = new MyExpandableRecyclerAdapter(Parent, getContext());
+        recycler_view.setAdapter(adapter);
+
+//        Button goSchoolButton = view.findViewById(R.id.GoToSchoolEducation);
+//        goSchoolButton.setOnClickListener(this);
+//        Button learnInHomeButton = view.findViewById(R.id.LearnInHomeEducation);
+//        learnInHomeButton.setOnClickListener(this);
+//        Button giveUpSchoolButton = view.findViewById(R.id.GiveUpSchool);
+//        giveUpSchoolButton.setOnClickListener(this);
+//        Button getNewFriendsButton = view.findViewById(R.id.getNewFriendsCriminal);
+//        getNewFriendsButton.setOnClickListener(this);
+//        Button stealSomethingButton = view.findViewById(R.id.stealSomethingCriminal);
+//        stealSomethingButton.setOnClickListener(this);
+//        Button sellDrugsButton = view.findViewById(R.id.sellDrugsCriminal);
+//        sellDrugsButton.setOnClickListener(this);
+//        Button threatTeachersButton = view.findViewById(R.id.threatTeachersCriminal);
+//        threatTeachersButton.setOnClickListener(this);
 
         return view;
     }
@@ -88,7 +133,7 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                 break;
 
             case R.id.GoToSchoolEducation:
-                 newDialog = MyDialogFragment.newInstance(view_id);
+                newDialog = MyDialogFragment.newInstance(view_id);
                 break;
 
             case R.id.getNewFriendsCriminal:
@@ -137,8 +182,9 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                         jsonArray.put(jsonArray.length() - 1, jsonObject);
                         editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
                     }
-                    catch (JSONException e)
-                    { }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else
                 {
@@ -155,8 +201,9 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                         jsonArray.put(rnd, jsonObject);
                         editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
                     }
-                    catch (JSONException e)
-                    { }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
 
@@ -170,4 +217,16 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
         editor.apply();
     }
 
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        adapter.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        adapter.onRestoreInstanceState(savedInstanceState);
+    }
 }
