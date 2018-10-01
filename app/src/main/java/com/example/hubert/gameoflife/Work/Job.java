@@ -1,6 +1,9 @@
 package com.example.hubert.gameoflife.Work;
 
 import com.example.hubert.gameoflife.Education.Subject;
+import com.example.hubert.gameoflife.House.Fun;
+import com.example.hubert.gameoflife.House.Lodging;
+import com.example.hubert.gameoflife.House.Transport;
 
 public class Job {
     private String name;
@@ -8,17 +11,16 @@ public class Job {
     private int salaryNo2;
     private int salaryNo3;
     private int markRatio;
-    private String subjectNameNeededToWork;
     private int additionalSkillsRes;
 
-    public Job(String name, int salary, int salaryNo2, int salaryNo3, int markRatio, String subjectNameNeededToWork, int additionalSkillsRes)
+    public Job(String name, int salary, int salaryNo2, int salaryNo3, int markRatio, int additionalSkillsRes,
+               Fun minFunNeeded, Lodging minLodgingNeeded, Transport minTransportNeeded)
     {
         this.name = name;
         this.salary = salary;
         this.salaryNo2 = salaryNo2;
         this.salaryNo3 = salaryNo3;
         this.markRatio = markRatio;
-        this.subjectNameNeededToWork = subjectNameNeededToWork;
         this.additionalSkillsRes = additionalSkillsRes;
     }
 
@@ -27,6 +29,5 @@ public class Job {
     public int getSalaryNo2() { return salaryNo2; }
     public int getSalaryNo3() { return salaryNo3; }
     public int getMarkRatio() { return markRatio; }
-    public String getSubjectNameNeededToWork() { return subjectNameNeededToWork; }
     public int getAdditionalSkillsRes() { return additionalSkillsRes; }
 }

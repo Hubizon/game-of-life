@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
@@ -21,48 +22,74 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
     View view;
 
     //TODO: zrobic listę z przedmiotów
+    /*
     public static Job[] officeJobsList = new Job[] {
             new Job("Lawyer", 80, 90, 100, 15, "History", R.string.saved_communication_skills_key),
             new Job("Reporter", 50, 65, 80, 5, "English", R.string.saved_communication_skills_key),
             new Job("Engraver", 65, 75, 85, 7, "Art", R.string.saved_communication_skills_key),
             new Job("Programmer", 60, 75, 90, 7, "Information Technology", R.string.saved_programming_skills_key),
-            new Job("Businessman", 80, 110, 150, 50, "All", R.string.saved_communication_skills_key),
+            new Job("Businessman", 80, 110, 150, 50, "All", R.string.saved_communication_skills_key)
+     };
+     */
+    public static Job[] officeJobsList = new Job[] {
+            new Job("Salesperson", 20, 30, 50, 1,  0, null, null, ShopFragment.transportList[0]),
+            new Job("Dustman", 45, 50, 65, 1, 0, null, null, ShopFragment.transportList[0]),
+            new Job("Teacher", 30, 55, 75, 5,  R.string.saved_communication_skills_key, ShopFragment.funList[0], ShopFragment.lodgingList[0], ShopFragment.transportList[4]),
+            new Job("Painter", 45, 60, 85, 10,  R.string.saved_drawing_skills_key, ShopFragment.funList[3], ShopFragment.lodgingList[1], ShopFragment.transportList[0]),
+            new Job("YouTuber", 30, 75, 85, 5,  R.string.saved_recording_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[2], ShopFragment.transportList[1]),
+            new Job("Programmer", 60, 75, 90, 7,  R.string.saved_programming_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[3], ShopFragment.transportList[5]),
+            new Job("Footballer", 60, 65, 120, 5,  0, ShopFragment.funList[5], ShopFragment.lodgingList[3], ShopFragment.transportList[5]),
+            new Job("Scientist", 40, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[5]),
+            new Job("Doctor", 60, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[5]),
+            new Job("Lawyer", 80, 90, 100, 15,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[6]),
+            new Job("Businessman", 80, 110, 150, 50,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[6]),
+
+
+
+            /*new CriminalJob("Thief", 45, 55, 65, 0, "", R.string.saved_criminal_points_key, 75),
+            new CriminalJob("Drug dealer", 60, 75, 90, 0, "", R.string.saved_criminal_points_key, 40),
+            new CriminalJob("Terrorist", 70, 75, 80, 0, "", R.string.saved_criminal_points_key, 25),
+            new CriminalJob("Kidnap kids", 75, 85, 95, 0, "", R.string.saved_criminal_points_key, 20),
+            new CriminalJob("Mafia member", 90, 100, 110, 0, "", R.string.saved_criminal_points_key, 15),
+            new CriminalJob("Assasin", 125, 140, 160, 0, "", R.string.saved_criminal_points_key, 10),*/
     };
 
+
+
     public static CriminalJob[] criminalJobsList = new CriminalJob[] {
-            new CriminalJob("Pickpocket", 30, 35, 45, 0, "", R.string.saved_criminal_points_key, 125),
+            /*new CriminalJob("Pickpocket", 30, 35, 45, 0, "", R.string.saved_criminal_points_key, 125),
             new CriminalJob("Thief", 45, 55, 65, 0, "", R.string.saved_criminal_points_key, 75),
             new CriminalJob("Drug dealer", 60, 75, 90, 0, "", R.string.saved_criminal_points_key, 40),
             new CriminalJob("Terrorist", 70, 75, 80, 0, "", R.string.saved_criminal_points_key, 25),
             new CriminalJob("Kidnap kids", 75, 85, 95, 0, "", R.string.saved_criminal_points_key, 20),
             new CriminalJob("Mafia member", 90, 100, 110, 0, "", R.string.saved_criminal_points_key, 15),
-            new CriminalJob("Assasin", 125, 140, 160, 0, "", R.string.saved_criminal_points_key, 10),
+            new CriminalJob("Assasin", 125, 140, 160, 0, "", R.string.saved_criminal_points_key, 10),*/
     };
 
     public static Job[] artsWorksList = new Job[] {
-            new Job("Writer", 40, 60, 90, 10, "English", R.string.saved_drawing_skills_key),
-            new Job("Painter", 45, 60, 85, 10, "English", R.string.saved_drawing_skills_key),
+            /*new Job("Writer", 40, 60, 90, 10, "English", R.string.saved_drawing_skills_key),
+            new Job("Painter", 45, 60, 85, 10, "English", R.string.saved_drawing_skills_key),*/
     };
 
     public static Job[] outsideWorksList = new Job[] {
-            new Job("Footballer", 60, 65, 120, 5, "Psychical Education", 0),
+            /*new Job("Footballer", 60, 65, 120, 5, "Psychical Education", 0),
             new Job("Basketball Player", 55, 70, 115, 5, "Psychical Education", 0),
             new Job("Swimmer", 50, 75, 85, 5, "Psychical Education", 0),
             new Job("Runner", 40, 50, 85, 5, "Psychical Education", 0),
             new Job("Swimmer", 40, 50, 90, 5, "Psychical Education", 0),
             new Job("Cyclist", 40, 50, 100, 5, "Psychical Education", 0),
             new Job("Geologist", 55, 65, 75, 15, "Biology", 0),
-            new Job("Dustman", 45, 50, 65, 1, "Psychical Education", 0),
+            new Job("Dustman", 45, 50, 65, 1, "Psychical Education", 0),**/
     };
 
     public static Job[] otherWorksList = new Job[] {
-            new Job("YouTuber", 30, 75, 85, 5, "English", R.string.saved_recording_skills_key),
+            /*new Job("YouTuber", 30, 75, 85, 5, "English", R.string.saved_recording_skills_key),
             new Job("Streamer", 25, 75, 85, 5, "English", R.string.saved_recording_skills_key),
             new Job("Blogger", 35, 75, 85, 5, "English", R.string.saved_communication_skills_key),
             new Job("Doctor", 60, 75, 95, 50, "Biology", 0),
             new Job("Teacher", 30, 55, 75, 5, "All", R.string.saved_communication_skills_key),
             new Job("Scientist", 40, 75, 95, 50, "All", 0),
-            new Job("Salesperson", 20, 30, 50, 1, "Mathematics", 0),
+            new Job("Salesperson", 20, 30, 50, 1, "Mathematics", 0),*/
     };
 
     @Override
