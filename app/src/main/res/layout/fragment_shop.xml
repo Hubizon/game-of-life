@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/transport"
+                android:text="@string/transportDesc"
                 android:textAppearance="@android:style/TextAppearance.Material.Button" />
 
         </FrameLayout>
