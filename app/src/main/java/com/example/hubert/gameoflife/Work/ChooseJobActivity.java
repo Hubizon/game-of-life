@@ -8,11 +8,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.hubert.gameoflife.Education.Skill;
+import com.example.hubert.gameoflife.House.Fun;
+import com.example.hubert.gameoflife.House.Lodging;
+import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -32,17 +41,18 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
      };
      */
     public static Job[] officeJobsList = new Job[] {
-            new Job("Salesperson", 20, 30, 50, 1,  0, null, null, ShopFragment.transportList[0]),
-            new Job("Dustman", 45, 50, 65, 1, 0, null, null, ShopFragment.transportList[0]),
-            new Job("Teacher", 30, 55, 75, 5,  R.string.saved_communication_skills_key, ShopFragment.funList[0], ShopFragment.lodgingList[0], ShopFragment.transportList[4]),
-            new Job("Painter", 45, 60, 85, 10,  R.string.saved_drawing_skills_key, ShopFragment.funList[3], ShopFragment.lodgingList[1], ShopFragment.transportList[0]),
-            new Job("YouTuber", 30, 75, 85, 5,  R.string.saved_recording_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[2], ShopFragment.transportList[1]),
-            new Job("Programmer", 60, 75, 90, 7,  R.string.saved_programming_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[3], ShopFragment.transportList[5]),
-            new Job("Footballer", 60, 65, 120, 5,  0, ShopFragment.funList[5], ShopFragment.lodgingList[3], ShopFragment.transportList[5]),
-            new Job("Scientist", 40, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[5]),
-            new Job("Doctor", 60, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[5]),
-            new Job("Lawyer", 80, 90, 100, 15,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[6]),
-            new Job("Businessman", 80, 110, 150, 50,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[6]),
+            new Job("Beggar", 20, 30, 50, 1,  0, null, null, null, null),
+            new Job("Salesperson", 20, 30, 50, 1,  0, null, null, ShopFragment.transportList[0], null),
+            new Job("Dustman", 45, 50, 65, 1, 0, null, null, ShopFragment.transportList[0], null),
+            new Job("Teacher", 30, 55, 75, 5,  R.string.saved_communication_skills_key, ShopFragment.funList[1], ShopFragment.lodgingList[0], ShopFragment.transportList[2], null ),
+            new Job("Painter", 45, 60, 85, 10,  R.string.saved_drawing_skills_key, ShopFragment.funList[3], ShopFragment.lodgingList[1], ShopFragment.transportList[3], null),
+            new Job("YouTuber", 30, 75, 85, 5,  R.string.saved_recording_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[2], ShopFragment.transportList[1], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool }),
+            new Job("Programmer", 60, 75, 90, 7,  R.string.saved_programming_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[3], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool, SharedPreferencesDefaultValues.PassHighSchool }),
+            new Job("Footballer", 60, 65, 120, 5,  0, ShopFragment.funList[5], ShopFragment.lodgingList[3], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassHighSchool }),
+            new Job("Scientist", 40, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool }),
+            new Job("Doctor", 60, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool, SharedPreferencesDefaultValues.PassHighSchool }),
+            new Job("Lawyer", 80, 90, 100, 15,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[6], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool, SharedPreferencesDefaultValues.PassHighSchool, SharedPreferencesDefaultValues.StudyAtCollage }),
+            new Job("Businessman", 80, 110, 150, 50,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[6], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool }),
 
 
 
@@ -153,7 +163,7 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerViewChooseWork);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ChooseJobAdapter(this, worksNames, worksSalary);
+        adapter = new ChooseJobAdapter(this, officeJobsList);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
@@ -166,10 +176,87 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
         SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
+        String json;
 
-        switch (id) {
+        Job job = officeJobsList[position];
+        String toToast = "";
+        if(job != null) {
+            if (job.getMinFunNeeded() != null) {
+                switch (job.getMinFunNeeded().getType()) {
+                    case "Phone":
+                        if (sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
+                            json = sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone);
+                            Fun mFun = gson.fromJson(json, Fun.class);
+                            if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
+                                toToast += "\n" + job.getMinFunNeeded().getName();
+                        } else
+                            toToast += "\n" + job.getMinFunNeeded().getName();
+                        break;
+
+                    case "TV":
+                        if (sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
+                            json = sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone);
+                            Fun mFun = gson.fromJson(json, Fun.class);
+                            if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
+                                toToast += "\n" + job.getMinFunNeeded().getName();
+                        } else
+                            toToast += "\n" + job.getMinFunNeeded().getName();
+                        break;
+
+                    case "Computer":
+                        if (sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null) {
+                            json = sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer);
+                            Fun mFun = gson.fromJson(json, Fun.class);
+                            if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
+                                toToast += "\n" + job.getMinFunNeeded().getName();
+                        } else
+                            toToast += "\n" + job.getMinFunNeeded().getName();
+                        break;
+                }
+            }
+
+            if (job.getMinLodgingNeeded() != null) {
+                if (!sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodging) || sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodgingAfter18)) {
+                    json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+                    Lodging mLodging = gson.fromJson(json, Lodging.class);
+                    if (mLodging.getPrice() <= job.getMinFunNeeded().getPrice())
+                        toToast += "\n" + job.getMinLodgingNeeded().getName();
+                } else
+                    toToast += "\n" + job.getMinLodgingNeeded().getName();
+            }
+
+            if (job.getMinTransportNeeded() != null) {
+                if (!sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport).equals(SharedPreferencesDefaultValues.DefaultMyTransport)) {
+                    json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
+                    Transport mTransport = gson.fromJson(json, Transport.class);
+                    if (mTransport.getPrice() <= job.getMinTransportNeeded().getPrice())
+                        toToast += "\n" + job.getMinTransportNeeded().getName();
+                } else
+                    toToast += "\n" + job.getMinTransportNeeded().getName();
+            }
+
+            if (job.getSkillsNeeded() != null) {
+                try {
+                    JSONArray jsonArray = new JSONArray(gson.toJson(job.getSkillsNeeded()));
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        if (!jsonObject.getBoolean("isLearned"))
+                            toToast += "\n" + jsonObject.getString("name");
+                    }
+                } catch (JSONException e) {
+                }
+            }
+
+            if (toToast.equals("")) {
+                editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
+                editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(job));
+            } else
+                Toast.makeText(this, "Unfortunately, you don't have a:" + toToast, Toast.LENGTH_SHORT).show();
+        }
+
+        /*switch (id) {
             case R.id.cardview_officeWork:
-                // Może zrobić, że da się tylko od pewnej oceny
                 editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
                 editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(officeJobsList[position]));
                 break;
@@ -196,7 +283,7 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
 
             default:
                 break;
-        }
+        }*/
         editor.apply();
     }
 }

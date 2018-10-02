@@ -220,6 +220,7 @@
     <string name="saved_recording_skills_key">recording_skills</string>
     <string name="saved_writing_skills_key">writing_skills</string>
     <string name="saved_drawing_skills_key">drawing_skills</string>
+    <string name="saved_skills_education_list_skey">skills_education_list</string>
 
     <string-array name="buy_method_array">
         <item>Buy</item>

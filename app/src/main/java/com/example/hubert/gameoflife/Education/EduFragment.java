@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -129,7 +131,13 @@ public class EduFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.LearnInHomeEducation:
-                intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
+                //intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
+                //TODO: open SkillsFragment
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SkillsFragment fragment = new SkillsFragment();
+                fragmentTransaction.add(R.id.pagerSkills, fragment);
+                fragmentTransaction.commit();
                 break;
 
             case R.id.GoToSchoolEducation:

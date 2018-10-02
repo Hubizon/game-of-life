@@ -62,13 +62,20 @@ public class SharedPreferencesDefaultValues {
             new Subject("Psychical Education", 4),
             new Subject("Behavior", 4), };
 
-    static private final Skill[] skillsEducationList = new Skill[] {
-            new Skill("Pass Primary School", 100, 10),
-            new Skill("Pass Secondary School", 750, 15),
-            new Skill("Pass High School", 2500, 20),
-            new Skill("General training", 7500, 25),
-            new Skill("Study At Collage", 12500, 30),
-            new Skill("Get A Master's Degree", 25000, 35),};
+    public static Skill PassPrimarySchool = new Skill("Pass Primary School", 100, 10);
+    public static Skill PassSecondarySchool = new Skill("Pass Secondary School", 750, 15);
+    public static Skill PassHighSchool = new Skill("Pass High School", 2500, 20);
+    public static Skill GeneralTraing = new Skill("General training", 7500, 25);
+    public static Skill StudyAtCollage = new Skill("Study At Collage", 12500, 30);
+    public static Skill GetAMastersDegree = new Skill("Get A Master's Degree", 25000, 35);
+    private static final Skill[] skillsEducationList = new Skill[] {
+            PassPrimarySchool,
+            PassSecondarySchool,
+            PassHighSchool,
+            GeneralTraing,
+            StudyAtCollage,
+            GetAMastersDegree,
+    };
 
     static private final Skill[] skillsCriminalList = new Skill[] {
             new Skill("Weapon Skills Beginner", 100, 10),

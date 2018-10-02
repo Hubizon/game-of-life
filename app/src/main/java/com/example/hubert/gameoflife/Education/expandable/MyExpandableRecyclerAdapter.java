@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +15,11 @@ import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Education.EduFragment;
 import com.example.hubert.gameoflife.Education.LearnInHomeActivity;
+import com.example.hubert.gameoflife.Education.SkillsFragment;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+import com.example.hubert.gameoflife.Work.ChooseJobActivity;
 import com.example.hubert.gameoflife.Work.FindJobActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
@@ -101,7 +105,11 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                              newDialog = MyDialogFragment.newInstance(view_id);
                             break;
                         case learn_at_home_index:
-                            intent = new Intent(mContext.getApplicationContext(), LearnInHomeActivity.class);
+                            FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            SkillsFragment fragment = new SkillsFragment();
+                            fragmentTransaction.add(R.id.pagerSkills, fragment);
+                            fragmentTransaction.commit();
                             break;
                         case give_up_school_index:
                             editor.putBoolean(mContext.getString(R.string.saved_is_in_school_now_key), false);
@@ -186,7 +194,7 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                         case give_up_work_index:
                             editor.putString(mContext.getString(R.string.saved_my_job_key), null);
 
-                            Intent intentWork = new Intent(mContext.getApplicationContext(), FindJobActivity.class);
+                            Intent intentWork = new Intent(mContext.getApplicationContext(), ChooseJobActivity.class);
                             mContext.startActivity(intentWork);
                             break;
                     }
