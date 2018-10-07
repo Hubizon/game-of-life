@@ -34,14 +34,16 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
     private int lastItemColor;
 
     // data is passed into the constructor
-    ChooseJobAdapter(Context context, Job[] jobs) {
+    ChooseJobAdapter(Context context, Job[] mDataJobs) {
         this.mInflater = LayoutInflater.from(context);
-        Job[] mDataJobs = jobs;
+
 
         lastItemColor = ContextCompat.getColor(context, R.color.colorDark);
         SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json;
+        int lastPosition = 0;
+        // Dodać opcję, żeby wyświetały się wszystkie
 
         for(int i = 0; i < mDataJobs.length; i++) {
             Job job = mDataJobs[i];
@@ -111,25 +113,25 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
                             if (!jsonObject.getBoolean("isLearned"))
                                 canDoThisWork = false;
                         }
-                    } catch (JSONException e) {
-                    }
+                    } catch (JSONException e)
+                    { }
                 }
 
                 if (canDoThisWork) {
                     mDataNames.add(mDataJobs[i].getName());
                     mDataPrices.add(mDataJobs[i].getSalary() + "$");
-                    mDataJobs[i] = null;
+                   // mDataJobs[i]
+                }
+                else
+                {
+                    lastPosition = i;
+                    break;
                 }
             }
         }
 
-        for (int x = 0; x < mDataJobs.length; x++) {
-            if (mDataJobs[x] != null) {
-                mDataNames.add(mDataJobs[x].getName());
-                mDataPrices.add(mDataJobs[x].getSalary() + "$");
-                return;
-            }
-        }
+        mDataNames.add(mDataJobs[lastPosition].getName());
+        mDataPrices.add(mDataJobs[lastPosition ].getSalary() + "$");
     }
 
     // inflates the row layout from xml when needed

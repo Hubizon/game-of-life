@@ -54,7 +54,7 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
         String subjectMark = mDataMarks.get(position);
         holder.myTextView.setText(subjectName + ": " + subjectMark);
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        /*SharedPreferences sharedPreferences = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         try {
             JSONArray jsonArray = new JSONArray(sharedPreferences.getString(context.getApplicationContext().getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
             JSONObject json = (JSONObject)jsonArray.get(position);
@@ -64,7 +64,7 @@ public class RecyclerViewSubjectAdapter extends RecyclerView.Adapter<RecyclerVie
                 holder.myTextViewHomework.setVisibility(View.VISIBLE);
         }
         catch (JSONException e)
-        { }
+        { }*/
     }
 
     // total number of rows

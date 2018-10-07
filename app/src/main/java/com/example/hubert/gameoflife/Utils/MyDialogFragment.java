@@ -1,12 +1,16 @@
 package com.example.hubert.gameoflife.Utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +19,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.Education.EduFragment;
+import com.example.hubert.gameoflife.Education.LearnInHomeActivity;
+import com.example.hubert.gameoflife.Education.SkillsFragment;
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Work.ChooseJobActivity;
 import com.example.hubert.gameoflife.Work.CriminalJob;
+import com.example.hubert.gameoflife.Work.FindJobActivity;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
 
@@ -47,10 +55,38 @@ public class MyDialogFragment extends DialogFragment  {
     JSONArray jsonArray;
     JSONObject jsonObject;
 
+    static String title;
+    static int position;
+
+    private static final int go_to_school_index = 0;
+    private static final int learn_hard_index = 3;
+    private static final int hang_around_index = 2;
+    private static final int learn_at_home_index = 1;
+    private static final int give_up_school_index = 4;
+
+    private static final int get_new_friends_index = 0;
+    private static final int steal_stuff_index = 1;
+    private static final int sell_drugs_index = 2;
+    private static final int threat_teacher_index = 3;
+
+    private static final int start_working_index = 0;
+    private static final int work_hard_index = 2;
+    private static final int give_up_work_index = 1;
+
     public static MyDialogFragment newInstance(int id) {
         MyDialogFragment frag = new MyDialogFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(BUNDLE_ID, id);
+        frag.setArguments(bundle);
+        return frag;
+    }
+
+    public static MyDialogFragment newInstanceWithPosition(int id, String toTitle, int toPosition) {
+        MyDialogFragment frag = new MyDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(BUNDLE_ID, id);
+        title = toTitle;
+        position = toPosition;
         frag.setArguments(bundle);
         return frag;
     }
@@ -74,6 +110,39 @@ public class MyDialogFragment extends DialogFragment  {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.dialog_my, container, false);
+
+        if(mId == R.id.list_item_artist_name)
+        {
+            if (title.equals(EduFragment.TITLE_SCHOOL)) {
+                switch (position) {
+                    case go_to_school_index:
+                        //TODO: zrobić to jakoś inaczej np. wszystko w tym
+                        mId = R.id.GoToSchoolEducation;
+                        break;
+                    case hang_around_index:
+                        //mId = R.id.GoToSchoolEducation;
+                        break;
+                }
+            } else if (title.equals(EduFragment.TITLE_CRIMINAL)) {
+                switch (position) {
+                    case get_new_friends_index:
+                        mId = R.id.getNewFriendsCriminal;
+                        break;
+                    case sell_drugs_index:
+                        mId = R.id.sellDrugsCriminal;
+                        break;
+                }
+            } else if (title.equals(EduFragment.TITLE_WORK)) {
+                switch (position) {
+                    case start_working_index:
+                        mId = R.id.btn_go_work;
+                        break;
+                    case work_hard_index:
+                       // mId = R.id.GoToSchoolEducation;
+                        break;
+                }
+            }
+        }
 
         switch (mId) {
             case R.id.cardview_bed:
@@ -125,14 +194,14 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.subjectHomework:
-                try {
+                /*try {
                     JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                     JSONObject jsonObject = (JSONObject)(jsonArray.get(Integer.valueOf(getTag())));
 
                     getDialog().setTitle(R.string.learning + jsonObject.getInt("subjectName"));
                 }
                 catch (JSONException e)
-                { }
+                { }*/
                 break;
 
             case R.id.btn_go_work:
@@ -264,9 +333,9 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.GoToSchoolEducation:
-                try {
+                /*try {
                     jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                    for (int i = 0; i <= jsonArray.length(); i++)//TODO: jezeli zadziala to zmienic wszedzie (jsonArray.length() - 1) na jsonArray.length()
+                    for (int i = 0; i <= jsonArray.length(); i++)
                     {
                         jsonObject = (JSONObject) jsonArray.get(i);
                         jsonObject.put("toAnotherMark", (jsonObject.getInt("toAnotherMark") + 5));
@@ -274,8 +343,8 @@ public class MyDialogFragment extends DialogFragment  {
                     }
                 }
                 catch (JSONException e)
-                { }//TODO: to musi byc wszedzie!
-                editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
+                { }*/
+                editor.putInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints);
 
                 editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
                 editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
@@ -283,7 +352,7 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.GoToSchoolLearnHardEducation:
-                try {
+                /*try {
                     jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                     for (int i = 0; i <= jsonArray.length(); i++)
                     {
@@ -293,7 +362,7 @@ public class MyDialogFragment extends DialogFragment  {
                     }
                 }
                 catch (JSONException e)
-                { }
+                { }*/
                 editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
                 editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 20));
@@ -302,7 +371,7 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.GoToSchoolHangAroundEducation:
-                try {
+                /*try {
                     jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                     for (int i = 0; i <= jsonArray.length(); i++)
                     {
@@ -312,7 +381,7 @@ public class MyDialogFragment extends DialogFragment  {
                     }
                 }
                 catch (JSONException e)
-                { }
+                { }*/
                 editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
                 editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 25));
@@ -321,7 +390,7 @@ public class MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.subjectHomework:
-                try {
+                /*try {
                     jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                     jsonObject = (JSONObject)(jsonArray.get(Integer.valueOf(getTag())));
 
@@ -329,7 +398,7 @@ public class MyDialogFragment extends DialogFragment  {
                     jsonArray.put(Integer.valueOf(getTag()), jsonObject);
                 }
                 catch (JSONException e)
-                { }
+                { }*/
                 editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
                 editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
@@ -344,7 +413,7 @@ public class MyDialogFragment extends DialogFragment  {
 
                 if(mJob != null)
                 {
-                    try {
+                    /*try {
                         jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                         /*for (int i = 0; i <= jsonArray.length(); i++)
                         {
@@ -354,10 +423,10 @@ public class MyDialogFragment extends DialogFragment  {
                                 subjectMark = jsonObject.getInt("subjectMark");
                                 break;
                             }
-                        }*/
+                        }
                     }
                     catch (JSONException e)
-                    { }
+                    { }*/
 
                     int additionalSkills = 50;
                     if(mJob.getAdditionalSkillsRes() != 0)
@@ -397,9 +466,9 @@ public class MyDialogFragment extends DialogFragment  {
 
                 if(mJobWorkHard != null)
                 {
-                    try {
+                    /*try {
                         jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                        /*for (int i = 0; i <= jsonArray.length(); i++)
+                        for (int i = 0; i <= jsonArray.length(); i++)
                         {
                             if(mJobWorkHard.getSubjectNameNeededToWork().equals(jsonArray.get(i)))
                             {
@@ -407,10 +476,10 @@ public class MyDialogFragment extends DialogFragment  {
                                 subjectMarkWorkHard = jsonObject.getInt("subjectMark");
                                 break;
                             }
-                        }*/
+                        }
                     }
                     catch (JSONException e)
-                    { }
+                    { }*/
 
                     int additionalSkills = sharedPref.getInt(getResources().getString(mJobWorkHard.getAdditionalSkillsRes()), 50);
                     double salary = (mJobWorkHard.getSalary() * (((100 - mJobWorkHard.getMarkRatio() * 3) + subjectMarkWorkHard * mJobWorkHard.getMarkRatio()) / 100 ) * ((100 + ((additionalSkills - 50) / 5)) / 100));
@@ -447,9 +516,9 @@ public class MyDialogFragment extends DialogFragment  {
 
                 if(mJobHangAround != null)
                 {
-                    try {
+                    /*try {
                         jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                        /*for (int i = 0; i <= jsonArray.length(); i++)
+                        for (int i = 0; i <= jsonArray.length(); i++)
                         {
                             if(mJobHangAround.getSubjectNameNeededToWork().equals(jsonArray.get(i)))
                             {
@@ -457,10 +526,10 @@ public class MyDialogFragment extends DialogFragment  {
                                 subjectMarkHangAround = jsonObject.getInt("subjectMark");
                                 break;
                             }
-                        }*/
+                        }
                     }
                     catch (JSONException e)
-                    { }
+                    { }*/
 
                     int additionalSkills = sharedPref.getInt(getResources().getString(mJobHangAround.getAdditionalSkillsRes()), 50);
                     double salary = (mJobHangAround.getSalary() * (((100 - mJobHangAround.getMarkRatio() * 3) + subjectMarkHangAround * mJobHangAround.getMarkRatio()) / 100 ) * ((100 + ((additionalSkills - 50) / 5)) / 100));
@@ -566,7 +635,7 @@ public class MyDialogFragment extends DialogFragment  {
             editor.putInt(resSavedSkills, (sharedPref.getInt(resSavedSkills, 0) + 2));
             editor.putInt(resSavedSkills, 0);
 
-            JSONObject jsonObject;
+            /*JSONObject jsonObject;
             int gameScore = 0;
             try {
                 JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
@@ -577,8 +646,10 @@ public class MyDialogFragment extends DialogFragment  {
                         break;
                     }
                 }
-            } catch (JSONException e) {
-            }
+            } catch (JSONException e)
+            { }*/
+
+            int gameScore = sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints)/ 10 + sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key),0);
 
             JSONArray toJsonArray = new JSONArray();
             toJsonArray.put(gameScore);

@@ -44,7 +44,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
         ArrayList<String> subjectNames = new ArrayList<>();
         ArrayList<String> subjectMarks = new ArrayList<>();
 
-        try {
+        /*try {
             jsonArray = new JSONArray(sharedPreferences.getString(getApplicationContext().getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
             for (int i = 0; i <= (jsonArray.length() - 1); i++)
             {
@@ -54,7 +54,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
             }
         }
         catch (JSONException e)
-        { }
+        { }*/
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerViewSubjects);
@@ -73,7 +73,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
         {
             view.findViewById(R.id.subjectHomework).setVisibility(View.GONE);
 
-            try {
+            /*try {
                 jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                     json  = (JSONObject) jsonArray.get(position);
                     json.put("IsTodaysHomeworkDone", true);
@@ -82,7 +82,7 @@ public class LearnInHomeActivity extends AppCompatActivity implements RecyclerVi
                     editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
             }
             catch (JSONException e)
-            { }
+            { }*/
         }
         else
         {

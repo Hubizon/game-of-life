@@ -36,6 +36,8 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultMyGirlboyfriend = null;
     public static final String DefaultMyChildren = null;
 
+    public static final int DefaultWorkPosition = 0;
+
     public static final int DefaultHealth = 750;
     public static final int DefaultHungry = 750;
     public static final int DefaultEnergy = 750;
@@ -47,7 +49,7 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultOwnedLotteries = gson.toJson(new ArrayList<>());
     public static final boolean DefaultHaveSafe = false;
 
-    static private final Subject[] subjectsList = new Subject[] {
+    /*static private final Subject[] subjectsList = new Subject[] {
             new Subject("Mathematics", 4),
             new Subject("English", 4),
             new Subject("Mathematics", 4),
@@ -60,7 +62,7 @@ public class SharedPreferencesDefaultValues {
             new Subject("Art", 4),
             new Subject("Music", 4),
             new Subject("Psychical Education", 4),
-            new Subject("Behavior", 4), };
+            new Subject("Behavior", 4), };*/
 
     public static Skill PassPrimarySchool = new Skill("Pass Primary School", 100, 10);
     public static Skill PassSecondarySchool = new Skill("Pass Secondary School", 750, 15);
@@ -88,7 +90,8 @@ public class SharedPreferencesDefaultValues {
     static private final Skill[] skillsSpecialList = new Skill[] {
             new Skill("Driving Skills", 100, 10),};
 
-    public static final String DefaultSubjectsList = gson.toJson(subjectsList);
+    //public static final String DefaultSubjectsList = gson.toJson(subjectsList);
+    public static final int DefaultEducationPoints = 100;
     public static final String DefaultSkillsEducationList = gson.toJson(skillsEducationList);
     public static final String DefaultSkillsCriminalList = gson.toJson(skillsCriminalList);
     public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);

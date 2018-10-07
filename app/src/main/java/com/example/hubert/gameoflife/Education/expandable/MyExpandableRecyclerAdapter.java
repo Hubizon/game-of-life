@@ -40,9 +40,9 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
     private static final int INDEX_CRIMINAL = 2;
 
     private static final int go_to_school_index = 0;
-    private static final int learn_hard_index = 1;
+    private static final int learn_hard_index = 3;
     private static final int hang_around_index = 2;
-    private static final int learn_at_home_index = 3;
+    private static final int learn_at_home_index = 1;
     private static final int give_up_school_index = 4;
 
     private static final int get_new_friends_index = 0;
@@ -51,8 +51,8 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
     private static final int threat_teacher_index = 3;
 
     private static final int start_working_index = 0;
-    private static final int work_hard_index = 1;
-    private static final int give_up_work_index = 2;
+    private static final int work_hard_index = 2;
+    private static final int give_up_work_index = 1;
 
     Context mContext;
 
@@ -96,13 +96,13 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                 if (group.getTitle().equals(EduFragment.TITLE_SCHOOL)) {
                     switch (childIndex) {
                         case go_to_school_index:
-                            newDialog = MyDialogFragment.newInstance(view_id);
+                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), go_to_school_index);
                             break;
                         case learn_hard_index:
                             intent = new Intent(mContext.getApplicationContext(), LearnInHomeActivity.class);
                             break;
                          case hang_around_index:
-                             newDialog = MyDialogFragment.newInstance(view_id);
+                             newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), hang_around_index);
                             break;
                         case learn_at_home_index:
                             FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
@@ -119,6 +119,8 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                 } else if (group.getTitle().equals(EduFragment.TITLE_CRIMINAL)) {
                     switch (childIndex) {
                         case get_new_friends_index:
+                            //editor.putInt(mContext.getResources().getString(R.string.saved_criminal_points_key), sharedPref.getInt(mContext.getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) + 2);
+                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), get_new_friends_index);
                             break;
                         case steal_stuff_index:
                             if(r.nextInt(25) == 1) {
@@ -138,12 +140,12 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                             }
                             break;
                         case sell_drugs_index:
-                            newDialog = MyDialogFragment.newInstance(view_id);
+                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), sell_drugs_index);
                             break;
                         case threat_teacher_index:
                             if(r.nextInt(5) == 1)
                             {
-                                try {
+                                /*try {
                                     JSONArray jsonArray = new JSONArray(sharedPref.getString(mContext.getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                                     JSONObject jsonObject = (JSONObject)(jsonArray.get(jsonArray.length() - 1));
                                     if(jsonObject.getInt("subjectMark") <= 1)
@@ -161,11 +163,25 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                                     editor.putString(mContext.getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
                                 }
                                 catch (JSONException e)
-                                { }
+                                { }*/
+
+                                if(sharedPref.getInt(mContext.getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) >= 500)
+                                {
+                                    Toast.makeText(mContext.getApplicationContext(), ("Teacher reported this and you have now 2x weaker grades!"), Toast.LENGTH_LONG).show();
+                                    editor.putInt(mContext.getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(mContext.getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) / 2);
+                                }
+                                else
+                                {
+                                    Toast.makeText(mContext.getApplicationContext(), ("Teacher reported this and you've got 1 from all subjects!"), Toast.LENGTH_LONG).show();
+                                    editor.putInt(mContext.getResources().getString(R.string.saved_education_points_key), 0);
+                                }
                             }
                             else
                             {
-                                try
+                                Toast.makeText(mContext.getApplicationContext(), ("You have now a little better marks"), Toast.LENGTH_LONG).show();
+                                editor.putInt(mContext.getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(mContext.getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 50);
+
+                                /*try
                                 {
                                     JSONArray jsonArray = new JSONArray(sharedPref.getString(mContext.getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                                     int rnd = r.nextInt(jsonArray.length());
@@ -179,17 +195,17 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                                     editor.putString(mContext.getString(R.string.saved_subjects_list_key), jsonArray.toString());
                                 }
                                 catch (JSONException e)
-                                { }
+                                { }*/
                             }
                             break;
                     }
                 } else if (group.getTitle().equals(EduFragment.TITLE_WORK)) {
                     switch (childIndex) {
                         case start_working_index:
-                            newDialog = MyDialogFragment.newInstance(view_id);
+                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), start_working_index);
                             break;
                         case work_hard_index:
-                            newDialog = MyDialogFragment.newInstance(view_id);
+                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), work_hard_index);
                             break;
                         case give_up_work_index:
                             editor.putString(mContext.getString(R.string.saved_my_job_key), null);

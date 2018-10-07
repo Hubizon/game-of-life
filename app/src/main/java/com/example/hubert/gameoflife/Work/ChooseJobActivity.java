@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAdapter.ItemClickListener{
 
-    private int id;
+    int id;
     View view;
 
     //TODO: zrobic listę z przedmiotów
@@ -40,7 +40,7 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
             new Job("Businessman", 80, 110, 150, 50, "All", R.string.saved_communication_skills_key)
      };
      */
-    public static Job[] officeJobsList = new Job[] {
+    public static final Job[] officeJobsList = new Job[] {
             new Job("Beggar", 20, 30, 50, 1,  0, null, null, null, null),
             new Job("Salesperson", 20, 30, 50, 1,  0, null, null, ShopFragment.transportList[0], null),
             new Job("Dustman", 45, 50, 65, 1, 0, null, null, ShopFragment.transportList[0], null),
@@ -251,6 +251,7 @@ public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAda
             if (toToast.equals("")) {
                 editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
                 editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(job));
+                //TODO: Michal!!! Wlacz tu fragment edu
             } else
                 Toast.makeText(this, "Unfortunately, you don't have a:" + toToast, Toast.LENGTH_SHORT).show();
         }

@@ -16,15 +16,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Education.expandable.ChildList;
 import com.example.hubert.gameoflife.Education.expandable.MyExpandableRecyclerAdapter;
 import com.example.hubert.gameoflife.Education.expandable.ParentList;
+import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.FindJobActivity;
+import com.example.hubert.gameoflife.Work.Job;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,23 +75,37 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         final List<ChildList> ChildCriminal = new ArrayList<>();
         final List<ChildList> ChildWork = new ArrayList<>();
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
+        Job job = gson.fromJson(json, Job.class);
+        if(job != null)
+        {
+            view.findViewById(R.id.cardViewWorkInfo).setVisibility(View.VISIBLE);
+            ((TextView)view.findViewById(R.id.work_name)).setText("Work: " + job.getName());
+            ((ProgressBar)view.findViewById(R.id.ProgressBar_work_position)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), SharedPreferencesDefaultValues.DefaultWorkPosition));
+        }
 
         ChildSchool.add(new ChildList("Go to school"));
-        ChildSchool.add(new ChildList("learn hard"));
-        ChildSchool.add(new ChildList("hand around"));
-        ChildSchool.add(new ChildList("learn at home"));
-        ChildSchool.add(new ChildList("Give up school"));
+        //ChildSchool.add(new ChildList("learn hard"));
+        //ChildSchool.add(new ChildList("hand around"));
+        ChildSchool.add(new ChildList("Get some skills"));
+        //ChildSchool.add(new ChildList("Give up school"));
         Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
 
         ChildWork.add(new ChildList("Start working"));
-        ChildWork.add(new ChildList("work hard"));
-        ChildWork.add(new ChildList("give up work"));
+        //ChildWork.add(new ChildList("work hard"));
+
+        if(job == null)
+            ChildWork.add(new ChildList("Find a Job"));
+        else
+            ChildWork.add(new ChildList("Give up work"));
         Parent.add(new ParentList(TITLE_WORK, ChildWork));
 
         ChildCriminal.add(new ChildList("Get new friends"));
-        ChildCriminal.add(new ChildList("steal stuff"));
-        ChildCriminal.add(new ChildList("sell drugs"));
-        ChildCriminal.add(new ChildList("threat teachers"));
+        ChildCriminal.add(new ChildList("Steal stuff"));
+        ChildCriminal.add(new ChildList("Sell drugs"));
+        ChildCriminal.add(new ChildList("Threat teachers"));
         Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
 
         RecyclerView.ItemAnimator animator = recycler_view.getItemAnimator();
@@ -173,7 +192,7 @@ public class EduFragment extends Fragment implements View.OnClickListener{
             case R.id.threatTeachersCriminal:
                 if(r.nextInt(5) == 1)
                 {
-                    try {
+                    /*try {
                         JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                         JSONObject jsonObject = (JSONObject)(jsonArray.get(jsonArray.length() - 1));
                         if(jsonObject.getInt("subjectMark") <= 1)
@@ -190,13 +209,25 @@ public class EduFragment extends Fragment implements View.OnClickListener{
                         jsonArray.put(jsonArray.length() - 1, jsonObject);
                         editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
                     }
-                    catch (JSONException e) {
-                        e.printStackTrace();
+                    catch (JSONException e)
+                    { }*/
+
+                    if(sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) >= 500)
+                    {
+                        Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you have now 2x weaker grades!"), Toast.LENGTH_LONG).show();
+                        editor.putInt(getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) / 2);
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you've got 1 from all subjects!"), Toast.LENGTH_LONG).show();
+                        editor.putInt(getResources().getString(R.string.saved_education_points_key), 0);
                     }
                 }
                 else
                 {
-                    try
+                    Toast.makeText(getActivity().getApplicationContext(), ("You have now a little better marks"), Toast.LENGTH_LONG).show();
+                    editor.putInt(getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 50);
+                    /*try
                     {
                         JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                         int rnd = r.nextInt(jsonArray.length());
@@ -209,9 +240,8 @@ public class EduFragment extends Fragment implements View.OnClickListener{
                         jsonArray.put(rnd, jsonObject);
                         editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
                     }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    catch (JSONException e)
+                    { }*/
                 }
                 break;
 

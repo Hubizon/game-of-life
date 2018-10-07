@@ -73,7 +73,7 @@ public class UpdateValues {
                     else
                         editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0) + 1));
 
-            try {
+            /*try {
                 jsonArray = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                 for (int i = 0; i <= (jsonArray.length() - 1); i++)
                 {
@@ -83,7 +83,7 @@ public class UpdateValues {
                 }
             }
             catch (JSONException e)
-            { }
+            { }*/
             editor.putString(context.getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
             if (sharedPref.getInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) >= 31) {
@@ -104,7 +104,7 @@ public class UpdateValues {
             editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
 
         if (sharedPref.getInt(context.getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) <= 18) {
-            try {
+            /*try {
                 jsonArray = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                 for (int i = 0; i < jsonArray.length(); i++) {
                     json = (JSONObject) jsonArray.get(i);
@@ -112,7 +112,7 @@ public class UpdateValues {
                     jsonArray.put(i, json);
                 }
 
-            } catch (JSONException e) { }
+            } catch (JSONException e) { }*/
         }
 
         randomEvents(context);

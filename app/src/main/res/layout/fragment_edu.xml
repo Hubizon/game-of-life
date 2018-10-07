@@ -10,7 +10,7 @@
     android:background="#FFFFFF">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/cardViewWorkInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -19,7 +19,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,7 +29,7 @@
             android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/school_name"
+                android:id="@+id/work_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -71,105 +73,24 @@
                 android:text="@string/position"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/school_name" />
+                app:layout_constraintTop_toBottomOf="@+id/work_name"
+                android:textSize="14sp"
+                android:textStyle="italic"/>
 
             <ProgressBar
-                android:id="@+id/ProgressBar_work_relations"
+                android:id="@+id/ProgressBar_work_position"
                 style="@style/ProgressBarMain"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/position_work"
                 tools:progress="50" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/relations"
-                android:textColor="#666"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ProgressBar_work_relations" />
-
-            <Button
-                android:id="@+id/button"
-                style="@android:style/Widget.Material.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="@string/ask_for_promotion"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/ProgressBar_EmployeeSatisfaction"
-                app:layout_constraintTop_toBottomOf="@+id/ProgressBar_EmployeeSatisfaction" />
-
-            <ProgressBar
-                android:id="@+id/ProgressBar_EmployeeSatisfaction"
-                style="@style/ProgressBarMain"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
-                tools:progress="50" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/employee_satisfaction"
-                android:textColor="#666"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ProgressBar_EmployeeSatisfaction" />
-
-            <TextView
-                android:id="@+id/companysRevenuesMonth"
-                android:layout_width="wrap_content"
-                android:layout_height="26dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/company_s_revenues_month"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
-
-            <TextView
-                android:id="@+id/employeeSallaryMonth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/employee_sallary_month"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/companysRevenuesMonth" />
-
-            <TextView
-                android:id="@+id/BillsMonth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/bills_month"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/employeeSallaryMonth" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
@@ -183,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintTop_toBottomOf="@+id/cardViewWorkInfo" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_Expand"

@@ -120,7 +120,7 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
             case R.id.threatTeachersCriminal:
                 if(r.nextInt(5) == 1)
                 {
-                    try {
+                    /*try {
                         JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                         JSONObject jsonObject = (JSONObject)(jsonArray.get(jsonArray.length() - 1));
                         if(jsonObject.getInt("subjectMark") <= 1)
@@ -138,11 +138,24 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                         editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
                     }
                     catch (JSONException e)
-                    { }
+                    { }*/
+
+                    if(sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) >= 500)
+                    {
+                        Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you have now 2x weaker grades!"), Toast.LENGTH_LONG).show();
+                        editor.putInt(getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) / 2);
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you've got 1 from all subjects!"), Toast.LENGTH_LONG).show();
+                        editor.putInt(getResources().getString(R.string.saved_education_points_key), 0);
+                    }
                 }
                 else
                 {
-                    try
+                    Toast.makeText(getActivity().getApplicationContext(), ("You have now a little better marks"), Toast.LENGTH_LONG).show();
+                    editor.putInt(getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 50);
+                    /*try
                     {
                         JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
                         int rnd = r.nextInt(jsonArray.length());
@@ -156,7 +169,7 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                         editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
                     }
                     catch (JSONException e)
-                    { }
+                    { }*/
                 }
                 break;
 
