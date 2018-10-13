@@ -14,7 +14,7 @@
 
         <path
             android:name="v"
-            android:fillColor="@color/colorPrimaryDark"
+            android:fillColor="@color/primaryDarkColor"
             android:pathData="@string/eavd_path_play"/>
 
     </group>

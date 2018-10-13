@@ -16,6 +16,7 @@
     <string name="other">Other: $</string>
     <string name="pay_bills">pay bills</string>
     <string name="school">School:</string>
+    <string name="school_text">School</string>
     <string name="mon_fri">Mon - Fri</string>
     <string name="go_to_the_school">go to the school</string>
     <string name="learn_hard">Learn hard</string>
@@ -125,6 +126,7 @@
     <string name="title_find_job">Find job</string>
     <string name="MY_ADMOB_APP_ID">ca-app-pub-3337866636093645~1700225876</string>
     <string name="TEST_SAMPLE_ADMOB_REWARDED">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="no_children">No children</string>
 
     <string name="food">Food</string>
     <string name="medicine">Medicine</string>

@@ -13,12 +13,12 @@
 
             <path
                 android:name="play1"
-                android:fillColor="@color/colorPrimaryDark"
+                android:fillColor="?attr/colorPrimaryDark"
                 android:pathData="M 6 5 L 6 19 L 10 19 L 10 5 Z" />
 
             <path
                 android:name="play2"
-                android:fillColor="@color/colorPrimaryDark"
+                android:fillColor="?attr/colorPrimaryDark"
                 android:pathData="M 14 19 L 18 19 L 18 5 L 14 5 Z" />
         </vector>
     </aapt:attr>

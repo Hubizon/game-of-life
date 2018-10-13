@@ -1,14 +1,38 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="cardViewStyle">@style/CardView</item>
 
-        <item name="colorPrimary">@color/colorSecondary</item>Theme.AppCompat.Light.DarkActionBar
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/colorSecondary</item>
+    <!-- Use this to switch to Dark theme -->
+    <style name="MyDarkTheme" parent="Theme.AppCompat.DayNight"/>
+
+
+    <!-- Use this theme in Manifest by default -->
+    <style name="MyLightTheme" parent="Theme.AppCompat.DayNight"/>
+
+    <!-- Base light theme containing all styles -->
+    <style name="Theme.AppCompat.Light" parent="Theme.AppCompat.Light.DarkActionBar"/>
+
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="cardViewStyle" parent="Base.CardView"/>
+
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="colorControlActivated">@color/secondaryColor</item>
+
+        <item name="actionBarTheme">@style/ToolbarStyle</item>
+
+        <item name="android:windowBackground">@color/primaryColor</item>
     </style>
+
+    <style name="ToolbarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
+    </style>
+
 
     <style name="ProgressBarMain" parent="@android:style/Widget.ProgressBar.Horizontal" >
         <item name="android:progressDrawable">@drawable/progress_bar_color</item>
@@ -19,11 +43,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/textColorOnSecondary</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
         <item name="android:textSize">15sp</item>
     </style>
 
     <style name="MyCardViewStyle">
+        <item name="cardBackgroundColor">@color/primaryColor</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_marginBottom">16dp</item>
@@ -44,7 +69,7 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:layout_margin">20dp</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/primaryColor</item>
         <item name="android:paddingBottom">20dp</item>
     </style>
 

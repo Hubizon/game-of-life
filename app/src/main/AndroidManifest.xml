@@ -16,16 +16,16 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/MY_ADMOB_APP_ID"/>
-
+            android:value="@string/MY_ADMOB_APP_ID" />
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/SplashTheme"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -46,7 +46,8 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".Credits"></activity>
     </application>
 
 </manifest>

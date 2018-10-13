@@ -22,7 +22,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginBottom="8dp"
             android:textSize="16sp"
-            android:textColor="@color/textColorOnPrimary"/>
+            android:textColor="@color/primaryTextColor"/>
 
         <ImageView
             android:layout_width="20dp"
@@ -40,7 +40,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="20dp"
-            android:textColor="@color/textColorOnPrimary"
+            android:textColor="@color/primaryTextColor"
             android:visibility="invisible"
             tools:text="01.09 15:30" />
 
@@ -60,17 +60,17 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="35dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/go_to_the_school"
-            android:textColor="@color/textColorOnSecondary"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="15sp" />
 
         <Button
             android:id="@+id/GoToSchoolLearnHardEducation"
             android:layout_width="160dp"
             android:layout_height="40dp"
-            android:background="@color/colorSecondary"
-            android:textColor="@color/textColorOnSecondary"
+            android:background="@color/secondaryColor"
+            android:textColor="@color/secondaryTextColor"
             android:layout_marginTop="100dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
@@ -85,9 +85,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="176dp"
             android:layout_marginTop="100dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/hang_around"
-            android:textColor="@color/textColorOnSecondary" />
+            android:textColor="@color/secondaryTextColor" />
 
         <Button
             android:id="@+id/LearnInHomeEducation"
@@ -97,9 +97,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="145dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/learn_at_home"
-            android:textColor="@color/textColorOnSecondary"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="15sp" />
 
         <Button
@@ -110,9 +110,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="195dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/give_up_school"
-            android:textColor="@color/textColorOnSecondary"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="15sp"/>
 
 
@@ -132,7 +132,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:text="@string/criminal"
-            android:textColor="@color/textColorOnPrimary"
+            android:textColor="@color/primaryTextColor"
             android:textSize="16sp" />
 
         <ImageView
@@ -149,7 +149,7 @@
             android:layout_height="20dp"
             android:layout_marginStart="250dp"
             android:layout_marginTop="3dp"
-            android:textColor="@color/textColorOnPrimary"
+            android:textColor="@color/primaryTextColor"
             tools:text="$ " />
 
         <Button
@@ -160,9 +160,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="40dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/get_new_friends"
-            android:textColor="@color/textColorOnSecondary" />
+            android:textColor="@color/secondaryTextColor" />
 
         <Button
             android:id="@+id/stealSomethingCriminal"
@@ -172,9 +172,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="90dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/steal_something"
-            android:textColor="@color/textColorOnSecondary" />
+            android:textColor="@color/secondaryTextColor" />
 
         <Button
             android:id="@+id/sellDrugsCriminal"
@@ -184,9 +184,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="176dp"
             android:layout_marginTop="90dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/sell_drugs"
-            android:textColor="@color/textColorOnSecondary" />
+            android:textColor="@color/secondaryTextColor" />
 
 
         <Button
@@ -197,9 +197,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="140dp"
-            android:background="@color/colorSecondary"
+            android:background="@color/secondaryColor"
             android:text="@string/threat_teachers"
-            android:textColor="@color/textColorOnSecondary" />
+            android:textColor="@color/secondaryTextColor" />
 
     </android.support.v7.widget.CardView>
 
