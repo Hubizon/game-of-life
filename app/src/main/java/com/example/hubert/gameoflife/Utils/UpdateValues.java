@@ -84,7 +84,7 @@ public class UpdateValues {
             }
             catch (JSONException e)
             { }*/
-            editor.putString(context.getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
+            //editor.putString(context.getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
             if (sharedPref.getInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) >= 31) {
                 editor.putInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays);

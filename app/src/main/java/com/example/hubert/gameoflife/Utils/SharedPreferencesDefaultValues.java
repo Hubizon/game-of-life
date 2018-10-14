@@ -33,8 +33,10 @@ public class SharedPreferencesDefaultValues {
     public static final boolean DefaultIsInSchoolNow = true;
     public static final String DefaultMyJob = null;
     public static final String DefaultMyTransport = gson.toJson(new Transport("Foots", 0, 10));
-    public static final String DefaultMyGirlboyfriend = null;
-    public static final String DefaultMyChildren = null;
+    public static final String DefaultLove = null;
+    public static final int DefaultLoveRelations = 250;
+    public static final int DefaultLoveRelationshipLevel = 1;
+    //public static final String DefaultMyChildren = null;
 
     public static final int DefaultWorkPosition = 0;
 

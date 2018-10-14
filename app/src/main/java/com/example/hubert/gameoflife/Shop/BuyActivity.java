@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -380,6 +381,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
             Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
         editor.apply();
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

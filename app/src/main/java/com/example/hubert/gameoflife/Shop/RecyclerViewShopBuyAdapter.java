@@ -5,12 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.House.Lodging;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -25,17 +29,34 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
     private LayoutInflater mInflater;
     private RecyclerViewShopBuyAdapter.ItemClickListener mClickListener;
 
+    Context context;
+
     // data is passed into the constructor
     RecyclerViewShopBuyAdapter(Context context, List<String> dataNames, List<String> dataPrices, Lodging[] dataLodgings) {
         this.mInflater = LayoutInflater.from(context);
         this.mDataNames = dataNames;
         this.mDataPrices = dataPrices;
+        this.context = context;
     }
 
     // inflates the row layout from xml when needed
     @Override
     public RecyclerViewShopBuyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_shopbuy_row, parent, false);
+
+        Spinner spinner = view.findViewById(R.id.buy_method_spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                int i = 0;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
+
         return new RecyclerViewShopBuyAdapter.ViewHolder(view);
     }
 

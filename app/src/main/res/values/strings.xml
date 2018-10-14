@@ -224,6 +224,9 @@
     <string name="saved_work_position_key">work_position</string>
     <string name="saved_work_position_points_key">work_position_points</string>
     <string name="saved_education_points_key">education_points</string>
+    <string name="saved_love_key">love</string>
+    <string name="saved_love_relations_key">love_relations</string>
+    <string name="saved_love_relationship_level_key">love_relationship_level</string>
 
     <string-array name="buy_method_array">
         <item>Buy</item>

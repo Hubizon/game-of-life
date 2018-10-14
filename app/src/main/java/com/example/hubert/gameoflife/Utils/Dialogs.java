@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
@@ -41,7 +42,7 @@ public class Dialogs {
                         {
                             case 1:
                                 if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 15000)
-                                    dialoginterface.cancel();
+                                    editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 15000));
                                 else
                                    // Die();
                                 editor.apply();
@@ -52,6 +53,35 @@ public class Dialogs {
                                 editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + 25000));
                                 editor.apply();
                                 dialoginterface.cancel();
+                                break;
+
+                            case 3:
+                                if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 100)
+                                {
+                                    editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 100));
+                                    editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) + 50));
+                                }
+                                else
+                                    Toast.makeText(context, "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
+                                editor.apply();
+                                dialoginterface.cancel();
+                                break;
+
+                            case 4:
+                                if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 75)
+                                {
+                                    editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 75));
+                                    editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) + 40));
+                                }
+                                else
+                                    Toast.makeText(context, "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
+                                editor.apply();
+                                dialoginterface.cancel();
+                                break;
+
+                            case 5:
+                                editor.putString(context.getResources().getString(R.string.saved_love_key), null);
+                                editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
                                 break;
 
                             default:
