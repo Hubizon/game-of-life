@@ -26,8 +26,10 @@
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:contentDescription="@string/tv"
-                app:srcCompat="@drawable/tv_icon" />
+                app:srcCompat="@drawable/ic_television" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,8 +54,10 @@
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:contentDescription="@string/sleep"
-                app:srcCompat="@drawable/bed_icon" />
+                app:srcCompat="@drawable/ic_zzz" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -111,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/safe"
+                android:text="@string/advertisement"
                 android:textAppearance="@android:style/TextAppearance.Material.Button" />
 
         </FrameLayout>
@@ -130,8 +134,10 @@
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                app:srcCompat="@drawable/safe_icon"
-                android:contentDescription="@string/safe"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/safe"
+                app:srcCompat="@drawable/ic_strongbox" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -155,13 +161,17 @@
 
             <ImageView
                 style="@style/MyImageViewInCardViewStyle"
-                android:contentDescription="TODO"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/transportDesc"
+                app:srcCompat="@drawable/ic_stationary_bike" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
+                android:text="Fitness"
                 android:textAppearance="@android:style/TextAppearance.Material.Button" />
 
         </FrameLayout>

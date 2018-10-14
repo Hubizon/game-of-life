@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.hubert.gameoflife.MainActivity"
-    android:background="@color/colorPrimary"
+    android:background="@color/primaryLightColor"
     tools:layout_editor_absoluteY="25dp"
     tools:layout_editor_absoluteX="0dp">
 

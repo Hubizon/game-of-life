@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     private TabLayout mTabLayout;
     private int[] tabIcons = {
             R.drawable.profile_icon,
-            R.drawable.education_icon,
+            R.drawable.ic_education,
             R.drawable.shop_icon,
             R.drawable.girlboyfriend_icon,
             R.drawable.house_icon
@@ -49,8 +51,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
+        if (isDark) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         context = this;
 
         MobileAds.initialize(this, getResources().getString(R.string.MY_ADMOB_APP_ID));

@@ -16,7 +16,7 @@
                 android:rotation="0.0">
                 <path
                     android:name="path"
-                    android:fillColor="@color/colorPrimaryDark"
+                    android:fillColor="@color/primaryDarkColor"
                     android:pathData="@string/eavd_path_play" />
             </group>
         </vector>

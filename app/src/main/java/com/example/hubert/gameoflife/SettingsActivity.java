@@ -16,7 +16,9 @@ import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -38,6 +40,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
      */
+    public static final String DARK_SWITCH_KEY = "dark_mode_switch";
+
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -177,6 +181,26 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("example_text"));
+
+            Preference switchPref = findPreference(DARK_SWITCH_KEY);
+            switchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    boolean darkThemeOn = (boolean) o;
+
+                    if (darkThemeOn) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        Log.d("test", "darkthemeOn is true");
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    }
+                    getActivity().recreate();
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
+
         }
 
         @Override

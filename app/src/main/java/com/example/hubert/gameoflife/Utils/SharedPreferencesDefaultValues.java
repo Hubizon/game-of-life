@@ -28,7 +28,7 @@ public class SharedPreferencesDefaultValues {
 
     public static final int DefaultDayWeek = 1;
 
-    public static final String DefaultMyLodging = gson.toJson(new Lodging("Parents House", 0,  5, 125, 5));
+    public static final String DefaultMyLodging = gson.toJson(new Lodging("Parents' House", 0,  5, 125, 5));
     public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
     public static final boolean DefaultIsInSchoolNow = true;
     public static final String DefaultMyJob = null;
@@ -38,7 +38,10 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultLoveRelationshipLevel = 1;
     //public static final String DefaultMyChildren = null;
 
-    public static final int DefaultWorkPosition = 0;
+    /*public static final int DefaultWorkPosition = 0;
+    public static final String DefaultMyTransport = gson.toJson(new Transport("On foot", 0, 10));
+    public static final String DefaultMyGirlboyfriend = "None";
+    public static final String DefaultMyChildren = "None";*/
 
     public static final int DefaultHealth = 750;
     public static final int DefaultHungry = 750;
