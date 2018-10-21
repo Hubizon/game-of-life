@@ -229,6 +229,8 @@
     <string name="saved_love_key">love</string>
     <string name="saved_love_relations_key">love_relations</string>
     <string name="saved_love_relationship_level_key">love_relationship_level</string>
+    <string name="saved_sexuality_key">sexuality</string>
+    <string name="saved_love_name_key">love_name</string>
 
     <string-array name="buy_method_array">
         <item>Buy</item>

@@ -20,7 +20,7 @@
         android:layout_marginTop="8dp">
 
         <TextView
-            android:id="@+id/girlboyfriend_name"
+            android:id="@+id/love_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -61,6 +61,7 @@
             tools:progress="75" />
 
         <TextView
+            android:id="@+id/relations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"

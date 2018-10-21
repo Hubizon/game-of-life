@@ -11,9 +11,11 @@ import java.util.ArrayList;
 
 public class SharedPreferencesDefaultValues {
 
+    public static final int DefaultWorkPosition = 1;
     private static final Gson gson = new Gson();
 
     public static final String DefaultName = "Mr. Hubi";
+    public static final String DefaultSexuality = "girl";
     public static final int DefaultIcon = R.drawable.avatar_icon1;
     public static final int DefaultMoney = 500000;
     public static final int DefaultMoneyInSafe = 0;
@@ -34,7 +36,7 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultMyJob = null;
     public static final String DefaultMyTransport = gson.toJson(new Transport("Foots", 0, 10));
     public static final String DefaultLove = null;
-    public static final int DefaultLoveRelations = 250;
+    public static final int DefaultLoveRelations = 50;
     public static final int DefaultLoveRelationshipLevel = 1;
     //public static final String DefaultMyChildren = null;
 

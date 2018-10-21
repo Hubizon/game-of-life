@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.hubert.gameoflife.Girlboyfriend.Children;
-import com.example.hubert.gameoflife.Girlboyfriend.Girlboyfriend;
+import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
@@ -142,10 +142,10 @@ public class MainFragment extends Fragment {
             transporttext.setText(transport.getName());
 
         json = sharedPref.getString(getResources().getString(R.string.saved_my_girlboyfriend_key), "");
-        Girlboyfriend girlboyfriend = gson.fromJson(json, Girlboyfriend.class);
+        Love love = gson.fromJson(json, Love.class);
         String girlString = "Girlfriend: ";
-        if(girlboyfriend != null)
-            girlString = girlString + girlboyfriend.getName();
+        if(love != null)
+            girlString = girlString + love.getName();
         else {
             girlString = "Single";
         }

@@ -6,10 +6,9 @@ public class Love  {
     private String name;
     private int age;
 
-    public Love(String name, int age)
+    public Love(String name)
     {
         this.name = name;
-        this.age = age;
     }
 
     public String getName() { return name; }
