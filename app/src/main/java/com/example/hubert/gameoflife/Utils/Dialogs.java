@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.SettingsActivity;
 
 public class Dialogs {
 
@@ -21,7 +22,14 @@ public class Dialogs {
     {
         final SharedPreferences.Editor editor = sharedPref.edit();
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        AlertDialog.Builder dialog;
+
+        boolean isDark = sharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
+        if (isDark) {
+            dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
+        } else {
+            dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        }
         dialog.setTitle(title)
                 //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
@@ -97,9 +105,16 @@ public class Dialogs {
                 }).show();
     }
 
-    public static void showAlertDialog(Context context, String title, final String message)
+    public static void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
     {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        AlertDialog.Builder dialog;
+
+        boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
+        if (isDark) {
+            dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
+        } else {
+            dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        }
         dialog.setTitle(title)
                 //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)

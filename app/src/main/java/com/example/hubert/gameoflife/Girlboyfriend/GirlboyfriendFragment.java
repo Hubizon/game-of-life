@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.SettingsActivity;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
@@ -154,12 +156,12 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
                                 if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) <= 1)
                                 {
-                                    showAlertDialog(getContext(), "Engagement", "You successful were engagement!");
+                                    showAlertDialog(getContext(), sharedPref,"Engagement", "You successful were engagement!");
                                     editor.putInt(getResources().getString(R.string.saved_love_relationship_level_key), 2);
                                 }
                                 else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2)
                                 {
-                                    showAlertDialog(getContext(), "Getting married", "You successful got married!");
+                                    showAlertDialog(getContext(), sharedPref, "Getting married", "You successful got married!");
                                     editor.putInt(getResources().getString(R.string.saved_love_relationship_level_key), 3);
                                 }
 
@@ -174,24 +176,24 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                             else
                             {
                                 if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) <= 1)
-                                    showAlertDialog(getContext(), "Engagement", "Unfortunately your love didn't accept your engagement request");
+                                    showAlertDialog(getContext(), sharedPref, "Engagement", "Unfortunately your love didn't accept your engagement request");
                                 else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2)
-                                    showAlertDialog(getContext(), "Getting married", "Unfortunately your love didn't accept your married request");
+                                    showAlertDialog(getContext(), sharedPref, "Getting married", "Unfortunately your love didn't accept your married request");
                                 editor.putInt(getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) - 75));
                             }
                         }
                         else
                         {
                             if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) <= 1)
-                                showAlertDialog(getContext(), "Engagement", "Unfortunately your love didn't accept your engagement request");
+                                showAlertDialog(getContext(), sharedPref, "Engagement", "Unfortunately your love didn't accept your engagement request");
                             else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2)
-                                showAlertDialog(getContext(), "Getting married", "Unfortunately your love didn't accept your married request");
+                                showAlertDialog(getContext(), sharedPref, "Getting married", "Unfortunately your love didn't accept your married request");
                             editor.putInt(getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) - 75));
                         }
                     }
                 }
                 else
-                    showAlertDialog(getContext(), "Increasing relationship level", "Unfortunately you have max relationship level");
+                    showAlertDialog(getContext(), sharedPref, "Increasing relationship level", "Unfortunately you have max relationship level");
                 break;
 
             case R.id.button_love_buyGift:
@@ -235,9 +237,9 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                     editor.putString(getResources().getString(R.string.saved_love_name_key), love.getName());
 
                     if("girl".equals(sharedPref.getString(getResources().getString(R.string.saved_sexuality_key), SharedPreferencesDefaultValues.DefaultSexuality)))
-                        showAlertDialog(getContext(), "Found love", "You successful found love! Her name is " + love.getName());
+                        showAlertDialog(getContext(), sharedPref, "Found love", "You successful found love! Her name is " + love.getName());
                     else
-                        showAlertDialog(getContext(), "Found love", "You successful found love! His name is " + love.getName());
+                        showAlertDialog(getContext(), sharedPref, "Found love", "You successful found love! His name is " + love.getName());
                     editor.apply();
 
                     view.findViewById(R.id.girlboyfriend_status).setVisibility(View.VISIBLE);
@@ -274,7 +276,14 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
         final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+        AlertDialog.Builder dialog;
+
+        boolean isDark = sharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
+        if (isDark) {
+            dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Dialog_Alert);
+        } else {
+            dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+        }
         dialog.setTitle(title)
                 //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
