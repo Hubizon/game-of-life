@@ -82,16 +82,17 @@ public class HomeFragment extends Fragment
 
         switch (view.getId()) {
             case R.id.cardview_tv:
-                newDialog = MyDialogFragment.newInstance(view.getId());
+                if(sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyTv) != null)
+                    newDialog = MyDialogFragment.newInstance(view.getId());
+                else
+                    Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a televisor", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cardview_bed:
                 newDialog = MyDialogFragment.newInstance(view.getId());
                 break;
             case R.id.cardview_computer:
                 if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null)
-                {
                     intent = new Intent(getActivity().getApplicationContext(), ComputerActivity.class);
-                }
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
                 break;

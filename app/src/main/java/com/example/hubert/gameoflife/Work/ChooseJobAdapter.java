@@ -134,6 +134,33 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
                                 canDoThisWork = false;
                         }
                     } catch (JSONException e) { }
+
+                    if(job instanceof CriminalJob)
+                    {
+                        CriminalJob criminalJob = (CriminalJob)job;
+                        if(criminalJob.getWeaponsNeeded() != null)
+                        {
+                            try {
+                                JSONArray weaponsNeeded = new JSONArray(gson.toJson(criminalJob.getWeaponsNeeded()));
+                                JSONArray allWeapons = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_weapons_list_key), SharedPreferencesDefaultValues.DefaultWeapons));
+                                for (int y = 0; y < weaponsNeeded.length(); y++) {
+                                    JSONObject jsonObject = weaponsNeeded.getJSONObject(y);
+
+                                    boolean haveThisWeapon = false;
+                                    for (int x = 0; x < allWeapons.length(); x++) {
+                                        JSONObject jsonObjectWeapon = allWeapons.getJSONObject(x);
+                                        if(jsonObject.getString("name").equals(jsonObjectWeapon.getString("name")))
+                                            if(jsonObjectWeapon.getBoolean("isBought")) {
+                                                haveThisWeapon = true;
+                                                break;
+                                            }
+                                    }
+                                    if (!haveThisWeapon)
+                                        canDoThisWork = false;
+                                }
+                            } catch (JSONException e) { }
+                        }
+                    }
                 }
 
                 if (canDoThisWork) {

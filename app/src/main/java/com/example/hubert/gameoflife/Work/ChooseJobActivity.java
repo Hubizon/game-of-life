@@ -18,6 +18,7 @@ import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
+import com.example.hubert.gameoflife.Shop.Weapon;
 import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
@@ -49,8 +50,15 @@ import static com.example.hubert.gameoflife.Shop.ShopFragment.SportsCar;
 import static com.example.hubert.gameoflife.Shop.ShopFragment.Tv;
 import static com.example.hubert.gameoflife.Shop.ShopFragment.Villa;
 import static com.example.hubert.gameoflife.Shop.ShopFragment.WoodenPc;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.ak47;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.bombs;
 import static com.example.hubert.gameoflife.Shop.ShopFragment.funList;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.grenades;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.knife;
 import static com.example.hubert.gameoflife.Shop.ShopFragment.lodgingList;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.pistol;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.rocketLauncher;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.sniperRifle;
 import static com.example.hubert.gameoflife.Shop.ShopFragment.transportList;
 import static com.example.hubert.gameoflife.Utils.Arrays.GeneralTraing;
 import static com.example.hubert.gameoflife.Utils.Arrays.GetAMastersDegree;
@@ -111,13 +119,13 @@ public class ChooseJobActivity extends AppCompatActivity{
     };
 
     public static CriminalJob[] criminalJobsList = new CriminalJob[] {
-            new CriminalJob("Pickpocket", 40, 45, 50, null, null, null,null, null, new Skill[] { ThiefSkillsBeginner }, 125),
-            new CriminalJob("Thief", 55, 65, 80, OldPhone, null, null, CheapFlat, Bicycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate },75),
-            new CriminalJob("Drug dealer", 70, 75, 1000, Smartphone, null, null, SmallHouse, Motorcycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner }, 40),
-            new CriminalJob("Terrorist", 80, 85, 100, Smartphone, WoodenPc, null, House, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate },25),
-            new CriminalJob("Kidnap kids", 90, 100, 115, Smartphone, Computer, BlackAndWhiteTv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 20),
-            new CriminalJob("Mafia member", 95, 120, 160, Smartphone, ModernComputer, Tv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 15),
-            new CriminalJob("Assassin", 125, 160, 250, Smartphone, ModernComputer, PlasmaTv, Villa, SportsCar,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced, WeaponSkillsAdvanced }, 10),
+            new CriminalJob("Pickpocket", 40, 45, 50, null, null, null,null, null, new Skill[] { ThiefSkillsBeginner }, 125, null),
+            new CriminalJob("Thief", 55, 65, 80, OldPhone, null, null, CheapFlat, Bicycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate },75, new Weapon[] { knife }),
+            new CriminalJob("Drug dealer", 70, 75, 1000, Smartphone, null, null, SmallHouse, Motorcycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner }, 40, new Weapon[] { knife, pistol, grenades }),
+            new CriminalJob("Terrorist", 80, 85, 100, Smartphone, WoodenPc, null, House, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate },25, new Weapon[] { knife, pistol, grenades, ak47, bombs }),
+            new CriminalJob("Kidnap kids", 90, 100, 115, Smartphone, Computer, BlackAndWhiteTv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 20, new Weapon[] { knife, pistol, grenades, ak47, bombs }),
+            new CriminalJob("Mafia member", 95, 120, 160, Smartphone, ModernComputer, Tv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 15, new Weapon[] { knife, pistol, grenades, ak47, bombs, sniperRifle }),
+            new CriminalJob("Assassin", 125, 160, 250, Smartphone, ModernComputer, PlasmaTv, Villa, SportsCar,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced, WeaponSkillsAdvanced }, 10, new Weapon[] { knife, pistol, grenades, ak47, bombs, sniperRifle, rocketLauncher }),
     };
 
 

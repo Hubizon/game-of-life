@@ -53,6 +53,9 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
         Button supportComputer = findViewById(R.id.supportComputer);
         supportComputer.setOnClickListener(this);
 
+        Button buyLotteries = findViewById(R.id.buyLotteries);
+        buyLotteries.setOnClickListener(this);
+
         Button makeGameComputer = findViewById(R.id.makeGameComputer);
         makeGameComputer.setOnClickListener(this);
 

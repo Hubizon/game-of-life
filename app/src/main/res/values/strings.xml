@@ -231,6 +231,7 @@
     <string name="saved_love_name_key">love_name</string>
     <string name="saved_skills_criminal_list_key">skills_criminal_list</string>
     <string name="saved_skills_education_list_key">skills_education_list</string>
+    <string name="saved_weapons_list_key">weapons_list</string>
 
     <string-array name="buy_method_array">
         <item>Buy</item>
