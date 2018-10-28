@@ -26,9 +26,15 @@ import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.House.Transport;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.example.hubert.gameoflife.Shop.ShopFragment.lotteryList;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.weaponList;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
 
 public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBuyAdapter.ItemClickListener {
@@ -83,10 +89,31 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 break;
 
             case R.id.buyLotteries:
-                for(int i = 0; i < ShopFragment.lotteryList.length; i++)
-                    itemsNames.add(ShopFragment.lotteryList[i].getName());
-                for(int i = 0; i < ShopFragment.lotteryList.length; i++)
-                    itemsPrices.add("$" + ShopFragment.lotteryList[i].getPrice());
+                for(int i = 0; i < lotteryList.length; i++)
+                    itemsNames.add(lotteryList[i].getName());
+                for(int i = 0; i < lotteryList.length; i++)
+                    itemsPrices.add("$" + lotteryList[i].getPrice());
+                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY LOTTERIES");
+                findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
+                break;
+
+            case R.id.cardview_blackmarket:
+                JSONArray jsonArray;
+                JSONObject jsonObject;
+                try {
+                    jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_weapons_list_key), SharedPreferencesDefaultValues.DefaultWeapons));
+                    for(int i = 0; i < jsonArray.length(); i++)
+                    {
+                        jsonObject = jsonArray.getJSONObject(i);
+                        if(!jsonObject.getBoolean("isBought"))
+                        {
+                            itemsNames.add(weaponList[i].getName());
+                            itemsPrices.add("$" + weaponList[i].getPrice());
+                        }
+                    }
+
+                } catch (JSONException e) { }
+
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY LOTTERIES");
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
@@ -212,11 +239,11 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
                 break;
-
+//TODO: jak będą karne alert dialogi to żeby zapobiec wychodzeniu z apki, żeby się nie odjeła kasa, to napoczątku odejmować, a potem najwyżej dodawać
             case R.id.buyLotteries:
-                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.lotteryList[position].getPrice())
+                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= lotteryList[position].getPrice())
                 {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.lotteryList[position].getPrice()));
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - lotteryList[position].getPrice()));
 
                     Random random = new Random();
                     if(random.nextInt(ShopFragment.lotteryList[position].getChanceToWin()) == 1)
@@ -231,6 +258,33 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 else
                     Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 break;
+
+            case R.id.cardview_blackmarket:
+            {
+                JSONArray jsonArray;
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_weapons_list_key), SharedPreferencesDefaultValues.DefaultWeapons));
+                    for(int s = 0; s < jsonArray.length(); s++)
+                    {
+                        jsonObject = jsonArray.getJSONObject(s);
+                        if(((TextView)view.findViewById(R.id.shopBuyItemName)).getText().equals(jsonObject.getString("name")))
+                            break;
+                    }
+                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= jsonObject.getInt("price"))
+                    {
+                        if (!jsonObject.getBoolean("isBought")) {
+                            jsonObject.put("isBought", true);
+                            jsonArray.put(position, jsonObject);
+                            editor.putString(getResources().getString(R.string.saved_weapons_list_key), jsonArray.toString());
+                            editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - jsonObject.getInt("price"));
+                            Toast.makeText(this, "You successful bought " + jsonObject.getString("name") + "!", Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(this, "You already have had buy it!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) { }
+                break;
+            }
 
             case R.id.cardview_house:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);

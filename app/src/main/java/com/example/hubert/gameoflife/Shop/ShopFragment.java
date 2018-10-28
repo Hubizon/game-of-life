@@ -83,6 +83,26 @@ public class ShopFragment extends Fragment
     };
 
 
+    public static Weapon knife = new Weapon("Knife", 20);
+    public static Weapon pistol = new Weapon("Pistol", 50);
+    public static Weapon grenades = new Weapon("Grenades", 150);
+    public static Weapon ak47 = new Weapon("AK-47", 350);
+    public static Weapon bombs = new Weapon("Bombs", 600);
+    public static Weapon sniperRifle = new Weapon("Sniper Rifle", 1000);
+    public static Weapon rocketLauncher = new Weapon("Rocket Launcher", 2500);
+
+    public static Weapon[] weaponList = new Weapon[]
+    {
+        knife,
+        pistol,
+        grenades,
+        ak47,
+        sniperRifle,
+        bombs,
+        rocketLauncher,
+    };
+
+
     public static Lodging CheapFlatInTheDangerousDistrict = new Lodging("Cheap Flat in the dangerous district", 150,  -2, 100, -2);
     public static Lodging CheapFlat = new Lodging("Cheap Flat", 185, -2, 100, -2);
     public static Lodging Flat = new Lodging("Flat", 220, 0, 125, -1);
@@ -172,8 +192,8 @@ public class ShopFragment extends Fragment
         CardView funcardview = view.findViewById(R.id.cardview_fun);
         funcardview.setOnClickListener(this);
 
-        CardView lotterycardview = view.findViewById(R.id.cardview_lottery);
-        lotterycardview.setOnClickListener(this);
+        CardView blackmarketcardview = view.findViewById(R.id.cardview_blackmarket);
+        blackmarketcardview.setOnClickListener(this);
 
         CardView housecardview = view.findViewById(R.id.cardview_house);
         housecardview.setOnClickListener(this);

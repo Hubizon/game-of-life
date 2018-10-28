@@ -1,10 +1,14 @@
 package com.example.hubert.gameoflife.Utils;
 
 import com.example.hubert.gameoflife.Education.Skill;
+import com.example.hubert.gameoflife.Education.SkillsActivity;
+import com.example.hubert.gameoflife.Education.SkillsFragment;
 import com.example.hubert.gameoflife.Education.Subject;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Shop.BuyActivity;
+import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -81,6 +85,7 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultSkillsEducationList = gson.toJson(Arrays.skillsEducationList);
     public static final String DefaultSkillsCriminalList = gson.toJson(Arrays.skillsCriminalList);
     //public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
+    public static final String DefaultWeapons = gson.toJson(ShopFragment.weaponList);
 
     public static final int DefaultCommunicationsSkills = 100;
     public static final int DefaultCriminalPoints = 100;

@@ -69,8 +69,9 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
         holder.myTextViewName.setText(ItemName);
         holder.myTextViewPrice.setText(ItemPrice);
 
-        if(mDataNames.get(1).equals(ShopFragment.transportList[1].getName()) || mDataNames.get(1).equals(ShopFragment.lodgingList[1].getName()))
-            holder.mySpinnerBuyMethod.setVisibility(View.VISIBLE);
+        if(mDataNames != null)
+            if(mDataNames.get(0).equals(ShopFragment.transportList[0].getName()) || mDataNames.get(0).equals(ShopFragment.lodgingList[0].getName()))
+                holder.mySpinnerBuyMethod.setVisibility(View.VISIBLE);
     }
 
     // total number of rows
