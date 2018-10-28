@@ -10,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -23,6 +24,8 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -42,6 +45,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * to reflect its new value.
      */
     public static final String DARK_SWITCH_KEY = "dark_mode_switch";
+    public static final String NAME_EDIT_KEY = "name_edit";
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
@@ -91,14 +95,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     };
 
-    /**
-     * Helper method to determine if the device has an extra-large screen. For
-     * example, 10" tablets are extra-large.
-     */
-    private static boolean isXLargeTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_XLARGE;
-    }
 
     /**
      * Binds a preference's summary to its value. More specifically, when the
@@ -125,6 +121,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new GeneralPreferenceFragment()).commit();
     }
 
     /**
@@ -138,22 +136,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onIsMultiPane() {
-        return isXLargeTablet(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.pref_headers, target);
-    }
 
     /**
      * This method stops fragment injection in malicious applications.
@@ -181,7 +163,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"));
+            bindPreferenceSummaryToValue(findPreference(NAME_EDIT_KEY));
 
             Preference switchPref = findPreference(DARK_SWITCH_KEY);
             switchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -201,14 +183,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     editor.putBoolean(DARK_SWITCH_KEY, darkThemeOn);
                     editor.apply();
 
-
                     getActivity().recreate();
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     startActivity(intent);
                     return true;
                 }
             });
-
         }
 
         @Override
@@ -221,6 +201,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             return super.onOptionsItemSelected(item);
         }
     }
+
 
     /**
      * This fragment shows notification preferences only. It is used when the
