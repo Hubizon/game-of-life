@@ -67,7 +67,7 @@ public class UpdateValues {
                 editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
                 editor.putInt(context.getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel);
 
-                showAlertDialog(context, "Break up", "Your love broke up with you!");
+                showAlertDialog(context, sharedPref, "Break up", "Your love broke up with you!");
             }
         }
 
@@ -94,7 +94,7 @@ public class UpdateValues {
                             editor.putString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodgingAfter18);
 
                         editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), 0);
-                        showAlertDialog(context,"Your time of rental has ended", "You came to the street!");
+                        showAlertDialog(context,sharedPref, "Your time of rental has ended", "You came to the street!");
                     }
                     else
                         editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0) + 1));
@@ -238,7 +238,7 @@ public class UpdateValues {
                         }
 
                         editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + moneyFromGames);
-                        showAlertDialog(context, "You got payment from your created games!", "You got " + moneyFromGames + "$");
+                        showAlertDialog(context, sharedPreferences, "You got payment from your created games!", "You got " + moneyFromGames + "$");
                     }
                 }
             }
@@ -285,7 +285,7 @@ public class UpdateValues {
 
                 case 2: case 3: case 4: case 5: case 6:
                     int rndFoundMoney = rnd.nextInt(15) * 100;
-                    showAlertDialog(context,"You found " + rndFoundMoney, "");
+                    showAlertDialog(context,sharedPreferences, "You found " + rndFoundMoney, "");
                     editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + rndFoundMoney));
                     break;
             }
@@ -325,7 +325,7 @@ public class UpdateValues {
                     {
                         if(lodging2.getPrice() != 0 && "buy".equals(lodging2.getType()))
                         {
-                            showAlertDialog(context, "Your house was burned!", ("You got recompensation" + (lodging2.getPrice() / 2)));
+                            showAlertDialog(context, sharedPreferences, "Your house was burned!", ("You got recompensation" + (lodging2.getPrice() / 2)));
                             editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (lodging2.getPrice() / 2)));
                             editor.putString(contextThis.getResources().getString(R.string.saved_my_lodging_key), null);
                         }
@@ -342,7 +342,7 @@ public class UpdateValues {
                     {
                         if(transport.getPrice() != 0)
                         {
-                            showAlertDialog(context, ("Somebody stole your " + transport.getName()), ("You got recompensation" + (transport.getPrice() / 2)));
+                            showAlertDialog(context, sharedPreferences, ("Somebody stole your " + transport.getName()), ("You got recompensation" + (transport.getPrice() / 2)));
                             editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (transport.getPrice() / 2)));
                             editor.putString(contextThis.getResources().getString(R.string.saved_my_transport_key), null);
                         }
@@ -352,7 +352,7 @@ public class UpdateValues {
 
 
                 case 5:
-                    showAlertDialog(context,"You've been robbed!", "Somebody stole " + (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) / 2) + "$");
+                    showAlertDialog(context,sharedPreferences,"You've been robbed!", "Somebody stole " + (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) / 2) + "$");
                     editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) / 2));
                     break;
 
@@ -361,7 +361,7 @@ public class UpdateValues {
                     {
                         if(sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) > 0)
                         {
-                            showAlertDialog(context, "You've been robbed!", "Somebody stole " + (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoney) / 2) + "$ from your safe!");
+                            showAlertDialog(context, sharedPreferences, "You've been robbed!", "Somebody stole " + (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoney) / 2) + "$ from your safe!");
                             editor.putInt(contextThis.getResources().getString(R.string.saved_money_in_safe_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) / 2));
                         }
                     }

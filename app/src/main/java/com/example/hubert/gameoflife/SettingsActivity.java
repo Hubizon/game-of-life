@@ -3,6 +3,7 @@ package com.example.hubert.gameoflife;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -191,9 +192,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     if (darkThemeOn) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                         Log.d("test", "darkthemeOn is true");
+
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     }
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(DARK_SWITCH_KEY, darkThemeOn);
+                    editor.apply();
+
+
                     getActivity().recreate();
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     startActivity(intent);
