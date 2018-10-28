@@ -47,17 +47,29 @@ public class ShopFragment extends Fragment
             new Medicines("Go to World Class Hospital", 300, 1000)
     };
 
+
+    public static Fun GoToTheCinema = new Fun("Go to The Cinema", "Exit",15, 120);
+    public static Fun OldPhone = new Fun("Old Phone", "Phone", 50, 120);
+    public static Fun BlackAndWhiteTv = new Fun("Black and White TV", "TV", 150, 180);
+    public static Fun WoodenPc =  new Fun("Wooden PC", "Computer",100, 150);
+    public static Fun Tv = new Fun("TV", "TV", 200, 180);
+    public static Fun Smartphone = new Fun("Smartphone", "Phone", 400, 180);
+    public static Fun Computer = new Fun("Computer", "Computer",650, 220);
+    public static Fun PlasmaTv = new Fun("Plasma TV", "TV",1000, 360);
+    public static Fun ModernComputer = new Fun("Modern Computer", "Computer", 1500, 300);
+
     public static Fun[] funList = new Fun[]{
-            new Fun("Go to The Cinema", "Exit",15, 120),
-            new Fun("Old Phone", "Phone", 50, 120),
-            new Fun("Black and White TV", "TV", 150, 180),
-            new Fun("Wooden PC", "Computer",100, 150),
-            new Fun("TV", "TV", 200, 180),
-            new Fun("Smartphone", "Phone", 400, 180),
-            new Fun("Computer", "Computer",650, 220),
-            new Fun("Plasma TV", "TV",1000, 360),
-            new Fun("Modern Computer", "Computer", 1500, 300),
+            GoToTheCinema,
+            OldPhone,
+            BlackAndWhiteTv,
+            WoodenPc,
+            Tv,
+            Smartphone,
+            Computer,
+            PlasmaTv,
+            ModernComputer,
     };
+
 
     public static Lottery[] lotteryList = new Lottery[]{
             new Lottery("Scratchcard", 5, 200, 10000),
@@ -70,36 +82,64 @@ public class ShopFragment extends Fragment
             new Lottery("Win The Life", 100, 100000, 999999999),
     };
 
-    // TODO: jeżeli nic nie robisz to to Ci się dodaje
+
+    public static Lodging CheapFlatInTheDangerousDistrict = new Lodging("Cheap Flat in the dangerous district", 150,  -2, 100, -2);
+    public static Lodging CheapFlat = new Lodging("Cheap Flat", 185, -2, 100, -2);
+    public static Lodging Flat = new Lodging("Flat", 220, 0, 125, -1);
+    public static Lodging House = new Lodging("House", 425, 2, 150, 3);
+    public static Lodging Motel = new Lodging("Motel", 550,  1, 125, 2);
+    public static Lodging Hotel1 = new Lodging("1 Star Hotel", 675,2, 125, 3);
+    public static Lodging Hotel2 = new Lodging("2 Star Hotel", 800,3, 150, 3);
+    public static Lodging Hotel3 = new Lodging("3 Star Hotel", 1000,4, 175, 4);
+    public static Lodging Hotel4 =  new Lodging("4 Star Hotel", 1350,5, 200, 5);
+    public static Lodging Hotel5 = new Lodging("5 Star Hotel", 2000,7, 225, 8);
+    public static Lodging SmallHouse = new Lodging("Small House", 350,1, 135, 2);
+    public static Lodging BigHouse =  new Lodging("Big House", 750,2, 175, 5);
+    public static Lodging Villa = new Lodging("Villa", 2500,  8,225, 10);
+    public static Lodging VeryExclusiveVilla = new Lodging("Very Exclusive Villa", 7500,10, 275, 15);
+    public static Lodging SuperExclusiveAndModernVilla = new Lodging("Super Exclusive and Modern Villa", 15000, 12, 400, 25);
+
     public static Lodging[] lodgingList = new Lodging[]{
-            new Lodging("Cheap Flat in the dangerous district", 150,  -2, 100, -2),
-            new Lodging("Cheap Flat", 185, -2, 100, -2),
-            new Lodging("Flat", 220, 0, 125, -1),
-            new Lodging("House", 425, 2, 150, 3),
-            new Lodging("Motel", 550,  1, 125, 2),
-            new Lodging("1 Star Hotel", 675,2, 125, 3),
-            new Lodging("2 Star Hotel", 800,3, 150, 3),
-            new Lodging("3 Star Hotel", 1000,4, 175, 4),
-            new Lodging("4 Star Hotel", 1350,5, 200, 5),
-            new Lodging("5 Star Hotel", 2000,7, 225, 8),
-            new Lodging("Small House", 350,1, 135, 2),
-            new Lodging("Big House", 750,2, 175, 5),
-            new Lodging("Villa", 2500,  8,225, 10),
-            new Lodging("Very Exclusive Villa", 7500,10, 275, 15),
-            new Lodging("Super Exclusive and Modern Villa", 15000, 12, 400, 25),
+            CheapFlatInTheDangerousDistrict,
+            CheapFlat,
+            Flat,
+            House,
+            Motel,
+            Hotel1,
+            Hotel2,
+            Hotel3,
+            Hotel4,
+            Hotel5,
+            SmallHouse,
+            BigHouse,
+            Villa,
+            VeryExclusiveVilla,
+            SuperExclusiveAndModernVilla
     };
 
+
+    public static Transport Boots = new Transport("Boots", 100, 9);
+    public static Transport Skateboard = new Transport("Skateboard", 250, 8);
+    public static Transport Bicycle = new Transport("Bicycle", 650, 7);
+    public static Transport Bus = new Transport("Bus", 1500, 6);
+    public static Transport Motorcycle = new Transport("Motorcycle", 3500, 5);
+    public static Transport Car = new Transport("Car", 20000, 4);
+    public static Transport SportsCar = new Transport("Sports Car", 100000, 3);
+    public static Transport Aeroplane = new Transport("Aeroplane", 5000000, 2);
+    public static Transport Rocket = new Transport("Rocket", 25000000, 1);
+    public static Transport Teleporter = new Transport("Teleporter", 100000000, 0);
+
     public static Transport[] transportList = new Transport[]{
-            new Transport("Boots", 100, 9),
-            new Transport("Skateboard", 250, 8),
-            new Transport("Bicycle", 650, 7),
-            new Transport("Bus Ticket for The Whole Life", 1500, 6),
-            new Transport("Motorcycle", 3500, 5),
-            new Transport("Car", 20000, 4),
-            new Transport("Sports Car", 100000, 3),
-            new Transport("Aeroplane", 5000000, 2),
-            new Transport("Rocket", 25000000, 1),
-            new Transport("Teleporter", 100000000, 0),
+            Boots,
+            Skateboard,
+            Bicycle,
+            Bus,
+            Motorcycle,
+            Car,
+            SportsCar,
+            Aeroplane,
+            Rocket,
+            Teleporter,
     };
 
 

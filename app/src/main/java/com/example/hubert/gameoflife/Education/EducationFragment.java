@@ -17,10 +17,6 @@ import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.FindJobActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Random;
 
 
@@ -84,7 +80,8 @@ public class EducationFragment extends Fragment implements View.OnClickListener 
                 break;
 
             case R.id.LearnInHomeEducation:
-                intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
+                //intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
+                intent = new Intent(getActivity().getApplicationContext(), SkillsActivity.class);
                 break;
 
             case R.id.GoToSchoolEducation:

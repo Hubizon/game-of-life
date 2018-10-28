@@ -2,6 +2,8 @@ package com.example.hubert.gameoflife.Work;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
+import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
@@ -25,266 +28,132 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ChooseJobActivity extends AppCompatActivity implements ChooseJobAdapter.ItemClickListener{
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Bicycle;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.BigHouse;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.BlackAndWhiteTv;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Boots;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Car;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.CheapFlat;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.CheapFlatInTheDangerousDistrict;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Computer;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Flat;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Hotel3;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.House;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.ModernComputer;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Motorcycle;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.OldPhone;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.PlasmaTv;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.SmallHouse;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Smartphone;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.SportsCar;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Tv;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.Villa;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.WoodenPc;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.funList;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.lodgingList;
+import static com.example.hubert.gameoflife.Shop.ShopFragment.transportList;
+import static com.example.hubert.gameoflife.Utils.Arrays.GeneralTraing;
+import static com.example.hubert.gameoflife.Utils.Arrays.GetAMastersDegree;
+import static com.example.hubert.gameoflife.Utils.Arrays.PassHighSchool;
+import static com.example.hubert.gameoflife.Utils.Arrays.PassPrimarySchool;
+import static com.example.hubert.gameoflife.Utils.Arrays.PassSecondarySchool;
+import static com.example.hubert.gameoflife.Utils.Arrays.StudyAtCollage;
+import static com.example.hubert.gameoflife.Utils.Arrays.ThiefSkillsAdvanced;
+import static com.example.hubert.gameoflife.Utils.Arrays.ThiefSkillsBeginner;
+import static com.example.hubert.gameoflife.Utils.Arrays.ThiefSkillsIntermediate;
+import static com.example.hubert.gameoflife.Utils.Arrays.WeaponSkillsAdvanced;
+import static com.example.hubert.gameoflife.Utils.Arrays.WeaponSkillsBeginner;
+import static com.example.hubert.gameoflife.Utils.Arrays.WeaponSkillsIntermediate;
 
-    int id;
-    View view;
+public class ChooseJobActivity extends AppCompatActivity{
 
-    //TODO: zrobic listę z przedmiotów
-    /*
-    public static Job[] officeJobsList = new Job[] {
+
+    private ViewPager mPager;
+    private CustomPagerJobAdapter mPagerAdapter;
+    private TabLayout mTabLayout;
+    private int[] tabIcons = {
+            R.drawable.profile_icon,
+            R.drawable.education_icon,
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_skills);
+
+        mPager = findViewById(R.id.pagerSkills);
+        mPagerAdapter = new CustomPagerJobAdapter(getSupportFragmentManager(), this);
+        mPager.setAdapter(mPagerAdapter);
+
+        mTabLayout = findViewById(R.id.tablayoutskills);
+        mTabLayout.setupWithViewPager(mPager);
+        setupTabIcons();
+    }
+
+    private void setupTabIcons() {
+        mTabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        mTabLayout.getTabAt(1).setIcon(tabIcons[1]);
+    }
+
+    public static final Job[] officeJobsList = new Job[] {
+            new Job("Beggar", 5, 3, 35, 0,  0, null,null, null, null, null, null),
+            new Job("Salesperson", 15, 20, 25, 1,  0, OldPhone, null, null,null, Boots, new Skill[] { PassPrimarySchool}),
+            new Job("Dustman", 20, 25, 30, 1, 0, OldPhone, WoodenPc,null, CheapFlatInTheDangerousDistrict, Boots, new Skill[] { PassPrimarySchool}),
+            new Job("Painter", 35, 40, 45, 5,  R.string.saved_drawing_skills_key, Smartphone, WoodenPc, BlackAndWhiteTv, CheapFlat, Bicycle, new Skill[] { PassPrimarySchool, PassSecondarySchool }),
+            new Job("Teacher", 30, 40, 45, 25,  R.string.saved_communication_skills_key, Smartphone, Computer, BlackAndWhiteTv, CheapFlat, Bicycle, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool }),
+            new Job("YouTuber", 30, 50, 95, 3,  R.string.saved_recording_skills_key, Smartphone,ModernComputer, Tv, Flat, Motorcycle, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing }),
+            new Job("Programmer", 45, 55, 70, 10,  R.string.saved_programming_skills_key, Smartphone,ModernComputer, Tv, SmallHouse, Motorcycle, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage }),
+            new Job("Footballer", 40, 70, 110, 5,  0, Smartphone,ModernComputer, Tv, SmallHouse, Car, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage }),
+            new Job("Scientist", 50, 65, 90, 50,  0, Smartphone, ModernComputer, PlasmaTv, House, Car, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
+            new Job("Doctor", 65, 80, 100, 50,  0, Smartphone,ModernComputer, PlasmaTv, Hotel3, Car, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
+            new Job("Lawyer", 80, 120, 150, 15,  R.string.saved_communication_skills_key, Smartphone,ModernComputer, PlasmaTv, BigHouse, SportsCar, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
+            new Job("Businessman", 100, 140, 200, 50,  R.string.saved_communication_skills_key, Smartphone, ModernComputer, PlasmaTv, Villa, SportsCar, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
+    };
+
+    public static CriminalJob[] criminalJobsList = new CriminalJob[] {
+            new CriminalJob("Pickpocket", 40, 45, 50, null, null, null,null, null, new Skill[] { ThiefSkillsBeginner }, 125),
+            new CriminalJob("Thief", 55, 65, 80, OldPhone, null, null, CheapFlat, Bicycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate },75),
+            new CriminalJob("Drug dealer", 70, 75, 1000, Smartphone, null, null, SmallHouse, Motorcycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner }, 40),
+            new CriminalJob("Terrorist", 80, 85, 100, Smartphone, WoodenPc, null, House, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate },25),
+            new CriminalJob("Kidnap kids", 90, 100, 115, Smartphone, Computer, BlackAndWhiteTv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 20),
+            new CriminalJob("Mafia member", 95, 120, 160, Smartphone, ModernComputer, Tv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 15),
+            new CriminalJob("Assassin", 125, 160, 250, Smartphone, ModernComputer, PlasmaTv, Villa, SportsCar,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced, WeaponSkillsAdvanced }, 10),
+    };
+
+
+
+    /*public static Job[] officeJobsList = new Job[] {
             new Job("Lawyer", 80, 90, 100, 15, "History", R.string.saved_communication_skills_key),
             new Job("Reporter", 50, 65, 80, 5, "English", R.string.saved_communication_skills_key),
             new Job("Engraver", 65, 75, 85, 7, "Art", R.string.saved_communication_skills_key),
             new Job("Programmer", 60, 75, 90, 7, "Information Technology", R.string.saved_programming_skills_key),
             new Job("Businessman", 80, 110, 150, 50, "All", R.string.saved_communication_skills_key)
      };
-     */
-    public static final Job[] officeJobsList = new Job[] {
-            new Job("Beggar", 20, 30, 50, 1,  0, null, null, null, null),
-            new Job("Salesperson", 20, 30, 50, 1,  0, null, null, ShopFragment.transportList[0], null),
-            new Job("Dustman", 45, 50, 65, 1, 0, null, null, ShopFragment.transportList[0], null),
-            new Job("Teacher", 30, 55, 75, 5,  R.string.saved_communication_skills_key, ShopFragment.funList[1], ShopFragment.lodgingList[0], ShopFragment.transportList[2], null ),
-            new Job("Painter", 45, 60, 85, 10,  R.string.saved_drawing_skills_key, ShopFragment.funList[3], ShopFragment.lodgingList[1], ShopFragment.transportList[3], null),
-            new Job("YouTuber", 30, 75, 85, 5,  R.string.saved_recording_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[2], ShopFragment.transportList[1], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool }),
-            new Job("Programmer", 60, 75, 90, 7,  R.string.saved_programming_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[3], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool, SharedPreferencesDefaultValues.PassHighSchool }),
-            new Job("Footballer", 60, 65, 120, 5,  0, ShopFragment.funList[5], ShopFragment.lodgingList[3], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassHighSchool }),
-            new Job("Scientist", 40, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool }),
-            new Job("Doctor", 60, 75, 95, 50,  0, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[5], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool, SharedPreferencesDefaultValues.PassHighSchool }),
-            new Job("Lawyer", 80, 90, 100, 15,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[4], ShopFragment.transportList[6], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool, SharedPreferencesDefaultValues.PassHighSchool, SharedPreferencesDefaultValues.StudyAtCollage }),
-            new Job("Businessman", 80, 110, 150, 50,  R.string.saved_communication_skills_key, ShopFragment.funList[8], ShopFragment.lodgingList[5], ShopFragment.transportList[6], new Skill[] { SharedPreferencesDefaultValues.PassPrimarySchool, SharedPreferencesDefaultValues.PassSecondarySchool }),
 
-
-
-            /*new CriminalJob("Thief", 45, 55, 65, 0, "", R.string.saved_criminal_points_key, 75),
-            new CriminalJob("Drug dealer", 60, 75, 90, 0, "", R.string.saved_criminal_points_key, 40),
-            new CriminalJob("Terrorist", 70, 75, 80, 0, "", R.string.saved_criminal_points_key, 25),
-            new CriminalJob("Kidnap kids", 75, 85, 95, 0, "", R.string.saved_criminal_points_key, 20),
-            new CriminalJob("Mafia member", 90, 100, 110, 0, "", R.string.saved_criminal_points_key, 15),
-            new CriminalJob("Assasin", 125, 140, 160, 0, "", R.string.saved_criminal_points_key, 10),*/
-    };
-
-
-
-    public static CriminalJob[] criminalJobsList = new CriminalJob[] {
-            /*new CriminalJob("Pickpocket", 30, 35, 45, 0, "", R.string.saved_criminal_points_key, 125),
-            new CriminalJob("Thief", 45, 55, 65, 0, "", R.string.saved_criminal_points_key, 75),
-            new CriminalJob("Drug dealer", 60, 75, 90, 0, "", R.string.saved_criminal_points_key, 40),
-            new CriminalJob("Terrorist", 70, 75, 80, 0, "", R.string.saved_criminal_points_key, 25),
-            new CriminalJob("Kidnap kids", 75, 85, 95, 0, "", R.string.saved_criminal_points_key, 20),
-            new CriminalJob("Mafia member", 90, 100, 110, 0, "", R.string.saved_criminal_points_key, 15),
-            new CriminalJob("Assasin", 125, 140, 160, 0, "", R.string.saved_criminal_points_key, 10),*/
-    };
-
-    public static Job[] artsWorksList = new Job[] {
-            /*new Job("Writer", 40, 60, 90, 10, "English", R.string.saved_drawing_skills_key),
-            new Job("Painter", 45, 60, 85, 10, "English", R.string.saved_drawing_skills_key),*/
+   public static Job[] artsWorksList = new Job[] {
+            new Job("Writer", 40, 60, 90, 10, "English", R.string.saved_drawing_skills_key),
+            new Job("Painter", 45, 60, 85, 10, "English", R.string.saved_drawing_skills_key),
     };
 
     public static Job[] outsideWorksList = new Job[] {
-            /*new Job("Footballer", 60, 65, 120, 5, "Psychical Education", 0),
+            new Job("Footballer", 60, 65, 120, 5, "Psychical Education", 0),
             new Job("Basketball Player", 55, 70, 115, 5, "Psychical Education", 0),
             new Job("Swimmer", 50, 75, 85, 5, "Psychical Education", 0),
             new Job("Runner", 40, 50, 85, 5, "Psychical Education", 0),
             new Job("Swimmer", 40, 50, 90, 5, "Psychical Education", 0),
             new Job("Cyclist", 40, 50, 100, 5, "Psychical Education", 0),
             new Job("Geologist", 55, 65, 75, 15, "Biology", 0),
-            new Job("Dustman", 45, 50, 65, 1, "Psychical Education", 0),**/
+            new Job("Dustman", 45, 50, 65, 1, "Psychical Education", 0),
     };
 
     public static Job[] otherWorksList = new Job[] {
-            /*new Job("YouTuber", 30, 75, 85, 5, "English", R.string.saved_recording_skills_key),
+            new Job("YouTuber", 30, 75, 85, 5, "English", R.string.saved_recording_skills_key),
             new Job("Streamer", 25, 75, 85, 5, "English", R.string.saved_recording_skills_key),
             new Job("Blogger", 35, 75, 85, 5, "English", R.string.saved_communication_skills_key),
             new Job("Doctor", 60, 75, 95, 50, "Biology", 0),
             new Job("Teacher", 30, 55, 75, 5, "All", R.string.saved_communication_skills_key),
             new Job("Scientist", 40, 75, 95, 50, "All", 0),
-            new Job("Salesperson", 20, 30, 50, 1, "Mathematics", 0),*/
-    };
+            new Job("Salesperson", 20, 30, 50, 1, "Mathematics", 0),
+    };*/
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_job);
-        view = new View(this);
-
-        ArrayList<String> worksNames = new ArrayList<>();
-        ArrayList<String> worksSalary = new ArrayList<>();
-
-        SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        ((TextView) (findViewById(R.id.money_choose_work))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
-
-        id = getIntent().getIntExtra(getResources().getString(R.string.send_shop_click_id), R.id.cardview_food);
-        switch (id) {
-            case R.id.cardview_officeWork:
-                for(int i = 0; i < officeJobsList.length; i++)
-                    worksNames.add(officeJobsList[i].getName());
-                for(int i = 0; i < officeJobsList.length; i++)
-                    worksSalary.add("$" + officeJobsList[i].getSalary());
-                ((TextView) (findViewById(R.id.workToChoose))).setText("OFFICE WORK");
-                break;
-
-            case R.id.cardview_criminalWork:
-                for(int i = 0; i < criminalJobsList.length; i++)
-                    worksNames.add(criminalJobsList[i].getName());
-                for(int i = 0; i < criminalJobsList.length; i++)
-                    worksSalary.add("$" + criminalJobsList[i].getSalary());
-                ((TextView) (findViewById(R.id.workToChoose))).setText("CRIMINAL WORK");
-                break;
-
-            case R.id.cardview_artsWork:
-                for(int i = 0; i < artsWorksList.length; i++)
-                    worksNames.add(artsWorksList[i].getName());
-                for(int i = 0; i < artsWorksList.length; i++)
-                    worksSalary.add("$" + artsWorksList[i].getSalary());
-                ((TextView) (findViewById(R.id.workToChoose))).setText("ARTS WORK");
-                break;
-
-            case R.id.cardview_outsideWork:
-                for(int i = 0; i < outsideWorksList.length; i++)
-                    worksNames.add(outsideWorksList[i].getName());
-                for(int i = 0; i < outsideWorksList.length; i++)
-                    worksSalary.add("$" + outsideWorksList[i].getSalary());
-                ((TextView) (findViewById(R.id.workToChoose))).setText("OUTSIDE WORK");
-                break;
-
-            case R.id.cardview_otherWork:
-                for(int i = 0; i < otherWorksList.length; i++)
-                    worksNames.add(otherWorksList[i].getName());
-                for(int i = 0; i < otherWorksList.length; i++)
-                    worksSalary.add("$" + otherWorksList[i].getSalary());
-                ((TextView) (findViewById(R.id.workToChoose))).setText("OTHER WORK");
-                break;
-
-            default:
-                break;
-        }
-
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewChooseWork);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ChooseJobAdapter(this, officeJobsList);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
-    }
-
-    ChooseJobAdapter adapter;
-
-    @Override
-    public void onItemClick(View view, int position) {
-
-        SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        Gson gson = new Gson();
-        String json;
-
-        Job job = officeJobsList[position];
-        String toToast = "";
-        if(job != null) {
-            if (job.getMinFunNeeded() != null) {
-                switch (job.getMinFunNeeded().getType()) {
-                    case "Phone":
-                        if (sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
-                            json = sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone);
-                            Fun mFun = gson.fromJson(json, Fun.class);
-                            if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
-                                toToast += "\n" + job.getMinFunNeeded().getName();
-                        } else
-                            toToast += "\n" + job.getMinFunNeeded().getName();
-                        break;
-
-                    case "TV":
-                        if (sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
-                            json = sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone);
-                            Fun mFun = gson.fromJson(json, Fun.class);
-                            if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
-                                toToast += "\n" + job.getMinFunNeeded().getName();
-                        } else
-                            toToast += "\n" + job.getMinFunNeeded().getName();
-                        break;
-
-                    case "Computer":
-                        if (sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null) {
-                            json = sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer);
-                            Fun mFun = gson.fromJson(json, Fun.class);
-                            if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
-                                toToast += "\n" + job.getMinFunNeeded().getName();
-                        } else
-                            toToast += "\n" + job.getMinFunNeeded().getName();
-                        break;
-                }
-            }
-
-            if (job.getMinLodgingNeeded() != null) {
-                if (!sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodging) || sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodgingAfter18)) {
-                    json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
-                    Lodging mLodging = gson.fromJson(json, Lodging.class);
-                    if (mLodging.getPrice() <= job.getMinFunNeeded().getPrice())
-                        toToast += "\n" + job.getMinLodgingNeeded().getName();
-                } else
-                    toToast += "\n" + job.getMinLodgingNeeded().getName();
-            }
-
-            if (job.getMinTransportNeeded() != null) {
-                if (!sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport).equals(SharedPreferencesDefaultValues.DefaultMyTransport)) {
-                    json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
-                    Transport mTransport = gson.fromJson(json, Transport.class);
-                    if (mTransport.getPrice() <= job.getMinTransportNeeded().getPrice())
-                        toToast += "\n" + job.getMinTransportNeeded().getName();
-                } else
-                    toToast += "\n" + job.getMinTransportNeeded().getName();
-            }
-
-            if (job.getSkillsNeeded() != null) {
-                try {
-                    JSONArray jsonArray = new JSONArray(gson.toJson(job.getSkillsNeeded()));
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        if (!jsonObject.getBoolean("isLearned"))
-                            toToast += "\n" + jsonObject.getString("name");
-                    }
-                } catch (JSONException e) {
-                }
-            }
-
-            if (toToast.equals("")) {
-                editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
-                editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(job));
-                //TODO: Michal!!! Wlacz tu fragment edu
-            } else
-                Toast.makeText(this, "Unfortunately, you don't have a:" + toToast, Toast.LENGTH_SHORT).show();
-        }
-
-        /*switch (id) {
-            case R.id.cardview_officeWork:
-                editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
-                editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(officeJobsList[position]));
-                break;
-
-            case R.id.cardview_criminalWork:
-                editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
-                editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(criminalJobsList[position]));
-                break;
-
-            case R.id.cardview_artsWork:
-                editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
-                editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(artsWorksList[position]));
-                break;
-
-            case R.id.cardview_outsideWork:
-                editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
-                editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(outsideWorksList[position]));
-                break;
-
-            case R.id.cardview_otherWork:
-                editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
-                editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(otherWorksList[position]));
-                break;
-
-            default:
-                break;
-        }*/
-        editor.apply();
-    }
 }

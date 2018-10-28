@@ -1,28 +1,34 @@
 package com.example.hubert.gameoflife.Education;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.hubert.gameoflife.CustomPagerAdapter;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.RecyclerViewShopBuyAdapter;
+import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -51,40 +57,43 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
 
     RecyclerViewSkillsAdapter adapter;
 
-    private ViewPager mPager;
-    private CustomPagerAdapter mPagerAdapter;
-    private TabLayout mTabLayout;
-    private int[] tabIcons = {
-            R.drawable.profile_icon,
-            R.drawable.education_icon,
-            R.drawable.shop_icon,
-            R.drawable.girlboyfriend_icon,
-            R.drawable.house_icon
-    };
+    static int page = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_skills, container, false);
 
-        mPager = view.findViewById(R.id.pager);
-        mPagerAdapter = new CustomPagerAdapter(getActivity().getSupportFragmentManager(), getContext());
-        mPager.setAdapter(mPagerAdapter);
-
-        mTabLayout = view.findViewById(R.id.tablayout);
-        mTabLayout.setupWithViewPager(mPager);
-        setupTabIcons();
-
         ArrayList<String> mSkillsNames = new ArrayList<>();
         ArrayList<String> mSkillsPrices = new ArrayList<>();
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         try {
-            JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_skills_education_list_skey), SharedPreferencesDefaultValues.DefaultSkillsEducationList));
+            JSONArray jsonArray = new JSONArray();
+            JSONObject jsonObject;
+            if(page == 1) {
+                JSONArray defaultJsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_skills_education_list_key), SharedPreferencesDefaultValues.DefaultSkillsEducationList));
+                for(int i = 0; i < defaultJsonArray.length(); i++)
+                {
+                    jsonObject = defaultJsonArray.getJSONObject(i);
+                    if(!jsonObject.getBoolean("isBought"))
+                        jsonArray.put(jsonObject);
+                }
+                page++;
+            } else {
+                JSONArray defaultJsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_skills_criminal_list_key), SharedPreferencesDefaultValues.DefaultSkillsCriminalList));
+                for(int i = 0; i < defaultJsonArray.length(); i++)
+                {
+                    jsonObject = defaultJsonArray.getJSONObject(i);
+                    if(!jsonObject.getBoolean("isBought"))
+                        jsonArray.put(jsonObject);
+                }
+                page = 1;
+            }
 
             for(int i = 0; i < jsonArray.length(); i++)
             {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                jsonObject = jsonArray.getJSONObject(i);
                 if(!jsonObject.getBoolean("isLearned"))
                 {
                     mSkillsNames.add(jsonObject.getString("name"));
@@ -104,16 +113,81 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
         return view;
     }
 
-    private void setupTabIcons() {
-        mTabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        mTabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        mTabLayout.getTabAt(2).setIcon(tabIcons[2]);
-        mTabLayout.getTabAt(3).setIcon(tabIcons[3]);
-        mTabLayout.getTabAt(4).setIcon(tabIcons[4]);
-    }
+
 
     @Override
     public void onItemClick(View view, int position) {
-        //TODO: fill it
+        boolean isEduPage = true;
+
+        for(int i = 0; i < Arrays.skillsEducationList.length; i++)
+        {
+            if(((TextView)view.findViewById(R.id.skillName)).getText().equals(Arrays.skillsEducationList[i].getName()))
+            {
+                isEduPage = true;
+                position = i;
+            }
+            else if(((TextView)view.findViewById(R.id.skillName)).getText().equals(Arrays.skillsCriminalList[i].getName()))
+            {
+                isEduPage = false;
+                position = i;
+            }
+        }
+
+
+        if(isEduPage)
+            alertDialogLearnSkill(position, Arrays.skillsEducationList, SharedPreferencesDefaultValues.DefaultSkillsEducationList, getResources().getString(R.string.saved_skills_education_list_key), Arrays.skillsEducationList[position].getName());
+        else
+            alertDialogLearnSkill(position, Arrays.skillsCriminalList, SharedPreferencesDefaultValues.DefaultSkillsCriminalList, getResources().getString(R.string.saved_skills_criminal_list_key), Arrays.skillsCriminalList[position].getName());
+    }
+
+    private void alertDialogLearnSkill(final int position, final Skill[] skills, final String defaultSkills, final String resSavedList, String skillName)
+    {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+        dialog.setTitle("Buying skill")
+                //.setIcon(R.drawable.ic_launcher)
+                .setMessage("Are you sure you want to buy and learn " + skillName + "?")
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                        dialoginterface.cancel();
+                        //TODO: start timer
+                    }})
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+
+                        SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        JSONArray jsonArray;
+                        JSONObject jsonObject;
+
+                        if(skills[position].getPrice() <= sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney))
+                        {
+                            if(!skills[position].getIsBought())
+                            {
+                                try
+                                {
+                                    jsonArray = new JSONArray(sharedPref.getString(resSavedList, defaultSkills));
+                                    jsonObject = jsonArray.getJSONObject(position);
+                                    if(!jsonObject.getBoolean("isBought"))
+                                    {
+                                        jsonObject.put("isBought", true);
+                                        jsonArray.put(position, jsonObject);
+                                        editor.putString(resSavedList, jsonArray.toString());
+                                        editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - jsonObject.getInt("price"));
+                                        Toast.makeText(getContext(), "You successful bought " + skills[position].getName() + "!", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                        Toast.makeText(getContext(), "You already have had buy it!", Toast.LENGTH_SHORT).show();
+                                }
+                                catch (JSONException e)
+                                { }
+                            }
+                            else
+                                Toast.makeText(getContext(), "You already have had buy it!", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            Toast.makeText(getContext(), "Unfortunately you don't have enough money to but this", Toast.LENGTH_SHORT).show();
+                        editor.apply();
+                    }
+                }).show();
     }
 }

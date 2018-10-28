@@ -33,6 +33,10 @@ public class RecyclerViewSkillsAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public RecyclerViewSkillsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_skills_row, parent, false);
+
+        if(mDataNames.isEmpty())
+            view.findViewById(R.id.no_available_skills_info).setVisibility(View.VISIBLE);
+
         return new RecyclerViewSkillsAdapter.ViewHolder(view);
     }
 
@@ -57,12 +61,12 @@ public class RecyclerViewSkillsAdapter extends RecyclerView.Adapter<RecyclerView
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myTextViewName;
         TextView myTextViewPrice;
-        Spinner mySpinnerBuyMethod;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTextViewName = itemView.findViewById(R.id.skillName);
             myTextViewPrice = itemView.findViewById(R.id.skillPrice);
+            itemView.setOnClickListener(this);
         }
 
         @Override

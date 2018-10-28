@@ -83,10 +83,7 @@
             android:id="@+id/button_love_buyGift"
             android:layout_width="155dp"
             android:layout_height="40dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="80dp"
+            android:layout_margin="8dp"
             android:background="@color/secondaryColor"
             android:text="@string/buy_her_a_gift"
             android:textColor="@color/secondaryTextColor"
@@ -99,7 +96,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="179dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="8dp"
             android:background="@color/secondaryColor"
             android:text="@string/take_her_somewhere"
             android:textColor="@color/secondaryTextColor"
@@ -112,9 +109,22 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="137dp"
+            android:layout_marginTop="62dp"
             android:background="@color/secondaryColor"
             android:text="@string/broke_up_with_her"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/button_love_SearchLove"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="110dp"
+            android:background="@color/secondaryColor"
+            android:text="@string/search_for_a_girlfriend"
             android:textColor="@color/secondaryTextColor"
             android:textSize="15sp" />
 
@@ -124,7 +134,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginRight="8dp"
+        android:visibility="gone">
 
 
         <TextView
@@ -207,18 +218,7 @@
             android:textColor="@color/secondaryTextColor"
             android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/button_love_SearchLove"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="200dp"
-            android:background="@color/secondaryColor"
-            android:text="@string/search_for_a_girlfriend"
-            android:textColor="@color/secondaryTextColor"
-            android:textSize="15sp" />
+
 
     </android.support.v7.widget.CardView>
 

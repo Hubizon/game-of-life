@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.example.hubert.gameoflife.Work;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -6,19 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.hubert.gameoflife.Education.EduFragment;
 import com.example.hubert.gameoflife.Education.SkillsFragment;
-import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
-import com.example.hubert.gameoflife.House.HomeFragment;
-import com.example.hubert.gameoflife.Profile.MainFragment;
-import com.example.hubert.gameoflife.Shop.ShopFragment;
 
-public class CustomPagerSkillsAdapter extends FragmentPagerAdapter {
-
-    private static final int NUM_PAGES = 3;
+public class CustomPagerJobAdapter extends FragmentPagerAdapter {
+    private static final int NUM_PAGES = 2;
     Context context;
 
-    public CustomPagerSkillsAdapter(FragmentManager fm, Context context) {
+    public CustomPagerJobAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
@@ -33,13 +27,11 @@ public class CustomPagerSkillsAdapter extends FragmentPagerAdapter {
 //                    return EducationFragment.newInstance();
 //                else
 //                    return WorkFragment.newInstance();
-                return SkillsFragment.newInstance();
+                return ChooseJobFragment.newInstance();
             case 2:
-                return SkillsFragment.newInstance();
-            case 3:
-            return SkillsFragment.newInstance();
+                return ChooseJobFragment.newInstance();
             default:
-                return SkillsFragment.newInstance();
+                return ChooseJobFragment.newInstance();
         }
     }
 

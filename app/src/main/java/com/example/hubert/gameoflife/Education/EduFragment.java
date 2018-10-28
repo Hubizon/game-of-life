@@ -8,8 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,17 +21,12 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.Education.expandable.ChildList;
 import com.example.hubert.gameoflife.Education.expandable.MyExpandableRecyclerAdapter;
 import com.example.hubert.gameoflife.Education.expandable.ParentList;
-import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.FindJobActivity;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -152,11 +145,12 @@ public class EduFragment extends Fragment implements View.OnClickListener{
             case R.id.LearnInHomeEducation:
                 //intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
                 //TODO: open SkillsFragment
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                intent = new Intent(getActivity().getApplicationContext(), SkillsActivity.class);
+               /* FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 SkillsFragment fragment = new SkillsFragment();
                 fragmentTransaction.add(R.id.pagerSkills, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
                 break;
 
             case R.id.GoToSchoolEducation:

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Education.SkillsFragment">
+    tools:context=".Education.SkillsFragment"
+    android:background="@color/primaryColor">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewSkills"
@@ -12,13 +13,13 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pagerSkills"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        tools:layout="@layout/fragment_main"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp"/>
+    <TextView
+        android:id="@+id/no_available_skills_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have all available skills."
+        android:textSize="20sp"
+        android:layout_margin="50dp"
+        android:visibility="gone"/>
 
 </FrameLayout>

@@ -72,10 +72,10 @@ public class MainFragment extends Fragment {
         agetext = view.findViewById(R.id.characterAge);
 
         lodgingtext = view.findViewById(R.id.characterLodging);
-        educationtext = view.findViewById(R.id.characterEducationWork);
+        //educationtext = view.findViewById(R.id.characterEducationWork);
         transporttext = view.findViewById(R.id.characterTransport);
         girltext = view.findViewById(R.id.characterGirlboyfriend);
-        childtext = view.findViewById(R.id.characterChildren);
+        //childtext = view.findViewById(R.id.characterChildren);
 
         hungerprogress = view.findViewById(R.id.progressBar_character_hungry);
         healthprogress = view.findViewById(R.id.progressBar_character_health);
@@ -88,9 +88,7 @@ public class MainFragment extends Fragment {
     }
 
     private void updateLabels(View view) {
-        SharedPreferences sharedPref = null;
-        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         ((view.findViewById(R.id.characterIcon))).setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
 
@@ -121,7 +119,7 @@ public class MainFragment extends Fragment {
         if(lodging != null)
             lodgingtext.setText(lodging.getName());
 
-        if(sharedPref.getBoolean(getResources().getString(R.string.saved_is_in_school_now_key), true))
+      /*  if(sharedPref.getBoolean(getResources().getString(R.string.saved_is_in_school_now_key), true))
             educationtext.setText(getString(R.string.school_text));
         else
         {
@@ -134,14 +132,14 @@ public class MainFragment extends Fragment {
                 educationtext.setText(job.getName());
             else
                 educationtext.setText("-");
-        }
+        }*/
 
         json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
         Transport transport = gson.fromJson(json, Transport.class);
         if(transport != null)
             transporttext.setText(transport.getName());
 
-        json = sharedPref.getString(getResources().getString(R.string.saved_my_girlboyfriend_key), "");
+        json = sharedPref.getString(getResources().getString(R.string.saved_love_key), "");
         Love love = gson.fromJson(json, Love.class);
         String girlString = "Girlfriend: ";
         if(love != null)
@@ -153,10 +151,10 @@ public class MainFragment extends Fragment {
 
         json = sharedPref.getString(getResources().getString(R.string.saved_my_children_key), "");
         Children children = gson.fromJson(json, Children.class);
-        if(children != null)
+        /*if(children != null)
             childtext.setText(children.getName());
         else
-            childtext.setText(getString(R.string.no_children));
+            childtext.setText(getString(R.string.no_children));*/
     }
 
     @Override

@@ -47,7 +47,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".Credits"></activity>
+        <activity android:name=".Credits" />
+        <activity android:name=".Education.SkillsActivity"></activity>
     </application>
 
 </manifest>

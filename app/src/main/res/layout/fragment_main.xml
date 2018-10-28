@@ -299,7 +299,7 @@
                     android:hint="@string/loudging"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
-
+            <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -321,7 +321,7 @@
                     android:text="@string/education_main"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
-
+            -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -366,7 +366,7 @@
                     android:text="@string/girlfriend"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
-
+            <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -388,7 +388,7 @@
                     android:text="@string/childrens"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
+            -->
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

@@ -4,10 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +12,14 @@ import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Education.EduFragment;
 import com.example.hubert.gameoflife.Education.LearnInHomeActivity;
-import com.example.hubert.gameoflife.Education.SkillsFragment;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Education.SkillsActivity;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.ChooseJobActivity;
 import com.example.hubert.gameoflife.Work.FindJobActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Random;
@@ -105,11 +98,12 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                              newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), hang_around_index);
                             break;
                         case learn_at_home_index:
-                            FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
+                            /*FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             SkillsFragment fragment = new SkillsFragment();
                             fragmentTransaction.add(R.id.pagerSkills, fragment);
-                            fragmentTransaction.commit();
+                            fragmentTransaction.commit();*/
+                            intent = new Intent(mContext.getApplicationContext(), SkillsActivity.class);
                             break;
                         case give_up_school_index:
                             editor.putBoolean(mContext.getString(R.string.saved_is_in_school_now_key), false);

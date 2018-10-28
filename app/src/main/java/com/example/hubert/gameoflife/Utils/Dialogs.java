@@ -88,6 +88,10 @@ public class Dialogs {
                                 editor.apply();
                                 break;
 
+                            case 6:
+
+                                break;
+
                             default:
                                 dialoginterface.cancel();
                                 break;

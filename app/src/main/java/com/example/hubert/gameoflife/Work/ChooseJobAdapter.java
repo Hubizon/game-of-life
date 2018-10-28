@@ -34,104 +34,141 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
     private int lastItemColor;
 
     // data is passed into the constructor
-    ChooseJobAdapter(Context context, Job[] mDataJobs) {
+    //static int lastPosition;
+    static int lastPositionPage1;
+    static int lastPositionPage2;
+
+    ChooseJobAdapter(Context context, Job[] mDataJobs, int page) {
         this.mInflater = LayoutInflater.from(context);
-
-
         lastItemColor = ContextCompat.getColor(context, R.color.colorDark);
         SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json;
-        int lastPosition = 0;
-        // Dodać opcję, żeby wyświetały się wszystkie
+        if(page == 1)
+            lastPositionPage1 = 100;
+        else
+            lastPositionPage2 = 100;
 
         for(int i = 0; i < mDataJobs.length; i++) {
             Job job = mDataJobs[i];
             boolean canDoThisWork = true;
-            if (job != null) {
-                if (job.getMinFunNeeded() != null) {
-                    switch (job.getMinFunNeeded().getType()) {
-                        case "Phone":
-                            if (sharedPref.getString(context.getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
-                                json = sharedPref.getString(context.getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone);
-                                Fun mFun = gson.fromJson(json, Fun.class);
-                                if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
-                                    canDoThisWork = false;
-                            } else
-                                canDoThisWork = false;
-                            break;
-
-                        case "TV":
-                            if (sharedPref.getString(context.getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
-                                json = sharedPref.getString(context.getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone);
-                                Fun mFun = gson.fromJson(json, Fun.class);
-                                if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
-                                    canDoThisWork = false;
-                            } else
-                                canDoThisWork = false;
-                            break;
-
-                        case "Computer":
-                            if (sharedPref.getString(context.getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null) {
-                                json = sharedPref.getString(context.getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer);
-                                Fun mFun = gson.fromJson(json, Fun.class);
-                                if (mFun.getGivenFun() <= job.getMinFunNeeded().getGivenFun())
-                                    canDoThisWork = false;
-                            } else
-                                canDoThisWork = false;
-                            break;
-                    }
-                }
-
-
-                if (job.getMinLodgingNeeded() != null) {
-                    if (!sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodging) || sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodgingAfter18)) {
-                        json = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
-                        Lodging mLodging = gson.fromJson(json, Lodging.class);
-                        if (mLodging.getPrice() <= job.getMinFunNeeded().getPrice())
+            if (job != null)
+            {
+                if (job.getMinPhoneNeeded() != null) {
+                    if (sharedPref.getString(context.getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
+                        json = sharedPref.getString(context.getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone);
+                        Fun mFun = gson.fromJson(json, Fun.class);
+                        if (mFun.getGivenFun() < job.getMinPhoneNeeded().getGivenFun())
                             canDoThisWork = false;
                     } else
                         canDoThisWork = false;
+                }
+                if(job.getMinTvNeeded() != null)
+                {
+                    if (sharedPref.getString(context.getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
+                        json = sharedPref.getString(context.getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone);
+                        Fun mFun = gson.fromJson(json, Fun.class);
+                        if (mFun.getGivenFun() < job.getMinTvNeeded().getGivenFun())
+                            canDoThisWork = false;
+                    } else
+                        canDoThisWork = false;
+                }
+                if(job.getMinComputerNeeded() != null)
+                {
+                    if (sharedPref.getString(context.getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null) {
+                        json = sharedPref.getString(context.getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer);
+                        Fun mFun = gson.fromJson(json, Fun.class);
+                        if (mFun.getGivenFun() < job.getMinComputerNeeded().getGivenFun())
+                            canDoThisWork = false;
+                    } else
+                        canDoThisWork = false;
+                }
+
+                if (job.getMinLodgingNeeded() != null) {
+                    //     if (!sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodging) || sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging).equals(SharedPreferencesDefaultValues.DefaultMyLodgingAfter18)) {
+                    json = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+                    Lodging mLodging = gson.fromJson(json, Lodging.class);
+                    if (mLodging.getPrice() < job.getMinLodgingNeeded().getPrice())
+                        canDoThisWork = false;
+                    // } else
+                    //     canDoThisWork = false;
                 }
 
                 if (job.getMinTransportNeeded() != null) {
-                    if (!sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport).equals(SharedPreferencesDefaultValues.DefaultMyTransport)) {
-                        json = sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
-                        Transport mTransport = gson.fromJson(json, Transport.class);
-                        if (mTransport.getPrice() <= job.getMinTransportNeeded().getPrice())
-                            canDoThisWork = false;
-                    } else
+                    //   if (!sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport).equals(SharedPreferencesDefaultValues.DefaultMyTransport)) {
+                    json = sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
+                    Transport mTransport = gson.fromJson(json, Transport.class);
+                    if (mTransport.getPrice() < job.getMinTransportNeeded().getPrice())
                         canDoThisWork = false;
+                    //   } else
+                    //      canDoThisWork = false;
                 }
 
                 if (job.getSkillsNeeded() != null) {
                     try {
-                        JSONArray jsonArray = new JSONArray(gson.toJson(job.getSkillsNeeded()));
+                        JSONArray skillsNeeded = new JSONArray(gson.toJson(job.getSkillsNeeded()));
+                        JSONArray eduSkills = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_skills_education_list_key), SharedPreferencesDefaultValues.DefaultSkillsEducationList));
+                        JSONArray crimSkills = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_skills_criminal_list_key), SharedPreferencesDefaultValues.DefaultSkillsEducationList));
 
-                        for (int x = 0; x < jsonArray.length(); x++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(x);
-                            if (!jsonObject.getBoolean("isLearned"))
+                        for (int y = 0; y < skillsNeeded.length(); y++) {
+                            JSONObject jsonObject = skillsNeeded.getJSONObject(i);
+
+                            boolean haveThisSkill = false;
+                            for (int x = 0; x < eduSkills.length(); x++) {
+                                JSONObject jsonObjectSkill = eduSkills.getJSONObject(x);
+                                if(jsonObject.getString("name").equals(jsonObjectSkill.getString("name")))
+                                    if(jsonObjectSkill.getBoolean("isBought")) {
+                                        haveThisSkill = true;
+                                        break;
+                                    }
+                            }
+                            for (int x = 0; x < crimSkills.length(); x++) {
+                                JSONObject jsonObjectSkill = crimSkills.getJSONObject(x);
+                                if(jsonObject.getString("name").equals(jsonObjectSkill.getString("name")))
+                                    if(jsonObjectSkill.getBoolean("isBought")) {
+                                        haveThisSkill = true;
+                                        break;
+                                    }
+                            }
+                            if (!haveThisSkill)
                                 canDoThisWork = false;
                         }
-                    } catch (JSONException e)
-                    { }
+                    } catch (JSONException e) { }
                 }
 
                 if (canDoThisWork) {
                     mDataNames.add(mDataJobs[i].getName());
                     mDataPrices.add(mDataJobs[i].getSalary() + "$");
-                   // mDataJobs[i]
+                    //mDataJobs[i]
                 }
                 else
                 {
-                    lastPosition = i;
+                    if(page == 1)
+                        lastPositionPage1 = i;
+                    else
+                        lastPositionPage2 = i;
                     break;
                 }
             }
         }
-
-        mDataNames.add(mDataJobs[lastPosition].getName());
-        mDataPrices.add(mDataJobs[lastPosition ].getSalary() + "$");
+        if(page == 1)
+        {
+            if(lastPositionPage1 != 100 || mDataNames.isEmpty())
+            {
+                for(int i = lastPositionPage1; i < mDataJobs.length; i++) {
+                    mDataNames.add(mDataJobs[i].getName());
+                    mDataPrices.add(mDataJobs[i].getSalary() + "$");
+                }
+            }
+        }
+        else
+            if(lastPositionPage2 != 0 || mDataNames.isEmpty())
+            {
+                for(int i = lastPositionPage2; i < mDataJobs.length; i++) {
+                    mDataNames.add(mDataJobs[i].getName());
+                    mDataPrices.add(mDataJobs[i].getSalary() + "$");
+                }
+            }
     }
 
     // inflates the row layout from xml when needed
@@ -141,6 +178,8 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
         return new ChooseJobAdapter.ViewHolder(view);
     }
 
+    static int page = 1;
+    static boolean isFirstTime0 = true;
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ChooseJobAdapter.ViewHolder holder, int position) {
@@ -148,8 +187,20 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
         String ItemPrice = mDataPrices.get(position);
         holder.myTextViewName.setText(ItemName);
         holder.myTextViewPrice.setText(ItemPrice);
-        if(position == (mDataNames.size() - 1))
-            holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);
+
+        if(position == 0)
+        {
+            isFirstTime0 = !isFirstTime0;
+        }
+
+        if(!isFirstTime0)
+        {
+            if(position >= lastPositionPage1 && lastPositionPage1 != 100)
+                holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);
+        }
+        else
+            if(position >= lastPositionPage2 && lastPositionPage2 != 100)
+                holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);
     }
 
     // total number of rows

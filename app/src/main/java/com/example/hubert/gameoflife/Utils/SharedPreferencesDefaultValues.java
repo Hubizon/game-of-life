@@ -71,37 +71,16 @@ public class SharedPreferencesDefaultValues {
             new Subject("Psychical Education", 4),
             new Subject("Behavior", 4), };*/
 
-    public static Skill PassPrimarySchool = new Skill("Pass Primary School", 100, 10);
-    public static Skill PassSecondarySchool = new Skill("Pass Secondary School", 750, 15);
-    public static Skill PassHighSchool = new Skill("Pass High School", 2500, 20);
-    public static Skill GeneralTraing = new Skill("General training", 7500, 25);
-    public static Skill StudyAtCollage = new Skill("Study At Collage", 12500, 30);
-    public static Skill GetAMastersDegree = new Skill("Get A Master's Degree", 25000, 35);
-    private static final Skill[] skillsEducationList = new Skill[] {
-            PassPrimarySchool,
-            PassSecondarySchool,
-            PassHighSchool,
-            GeneralTraing,
-            StudyAtCollage,
-            GetAMastersDegree,
-    };
 
-    static private final Skill[] skillsCriminalList = new Skill[] {
-            new Skill("Weapon Skills Beginner", 100, 10),
-            new Skill("Weapon Skills Intermediate", 750, 15),
-            new Skill("Weapon Skills Advanced", 2500, 20),
-            new Skill("Thief Skills Beginner", 100, 10),
-            new Skill("Thief Skills Beginner", 750, 15),
-            new Skill("Thief Skills Beginner", 2500, 20),};
 
     static private final Skill[] skillsSpecialList = new Skill[] {
             new Skill("Driving Skills", 100, 10),};
 
     //public static final String DefaultSubjectsList = gson.toJson(subjectsList);
     public static final int DefaultEducationPoints = 100;
-    public static final String DefaultSkillsEducationList = gson.toJson(skillsEducationList);
-    public static final String DefaultSkillsCriminalList = gson.toJson(skillsCriminalList);
-    public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
+    public static final String DefaultSkillsEducationList = gson.toJson(Arrays.skillsEducationList);
+    public static final String DefaultSkillsCriminalList = gson.toJson(Arrays.skillsCriminalList);
+    //public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
 
     public static final int DefaultCommunicationsSkills = 100;
     public static final int DefaultCriminalPoints = 100;
