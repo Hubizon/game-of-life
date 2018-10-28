@@ -11,42 +11,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:layout_weight="1">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/characterIcon"
+
+            <Spinner
+                android:id="@+id/spinner"
+                style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="95dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
                 android:gravity="center"
-                android:src="@drawable/avatar_icon1"
+                android:dropDownWidth="match_parent"
+                android:popupBackground="#66000000"
                 app:layout_constraintBottom_toTopOf="@+id/characterName"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:background=" />@drawable/avatar_icon1" />
-
-            <TextView
-                android:id="@+id/characterName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textAlignment="center"
-                android:textColor="@color/primaryTextColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/characterIcon"
-                app:layout_constraintStart_toStartOf="@+id/characterIcon"
-                tools:text="Mr. Hubi" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:background="@drawable/avatar_icon1" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -61,11 +52,24 @@
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
+                android:id="@+id/characterName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/spinner"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="@+id/spinner"
+                tools:text="Mr. Hubi" />
+
+            <TextView
                 android:id="@+id/characterAge"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="13 years 92 days"
                 android:textColor="@color/primaryTextColor"
@@ -78,8 +82,8 @@
                 android:id="@+id/imageView4"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/money_icon"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintDimensionRatio="1:1"
@@ -90,8 +94,8 @@
                 android:id="@+id/characterMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="$"
                 android:textColor="@color/primaryTextColor"
@@ -116,8 +120,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:textColor="@color/primaryTextColor"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -299,7 +303,6 @@
                     android:hint="@string/loudging"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
-            <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -321,7 +324,6 @@
                     android:text="@string/education_main"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
-            -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -366,7 +368,6 @@
                     android:text="@string/girlfriend"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
-            <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -388,7 +389,6 @@
                     android:text="@string/childrens"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
-            -->
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -4,6 +4,8 @@ package com.example.hubert.gameoflife.Profile;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -11,8 +13,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.hubert.gameoflife.Girlboyfriend.Children;
@@ -86,16 +90,20 @@ public class MainFragment extends Fragment {
         energyprogress = view.findViewById(R.id.progressBar_character_energy);
         happinessprogress = view.findViewById(R.id.progressBar_character_happiness);
 
-        charactericon = view.findViewById(R.id.characterIcon);
-        updateLabels();
+        //charactericon = view.findViewById(R.id.characterIcon);
 
+        Spinner iconSpinner = view.findViewById(R.id.spinner);
+        SpinnerIconAdapter spinnerIconAdapter = new SpinnerIconAdapter(getContext(), iconSpinner.getWidth());
+        iconSpinner.setAdapter(spinnerIconAdapter);
+
+        updateLabels();
         return view;
     }
 
     private void updateLabels() {
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-        charactericon.setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
+       // charactericon.setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
 
         String moneyStirng = "$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
         charactermoneytext.setText(moneyStirng);
