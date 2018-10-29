@@ -16,4 +16,7 @@
         android:singleLine="true"
         android:title="@string/pref_title_display_name" />
 
+    <Preference android:title="Go to credits"
+    android:key="creditsButton"
+    android:summary="Awesome people"/>
 </PreferenceScreen>

@@ -149,7 +149,7 @@
     </string>
 
     <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
+    <string name="pref_default_display_name">Mr. Hubi</string>
 
     <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
     <string-array name="pref_example_list_titles">
@@ -233,6 +233,7 @@
     <string name="saved_skills_education_list_key">skills_education_list</string>
     <string name="saved_weapons_list_key">weapons_list</string>
 
+    <string name="skills">Skills</string>
     <string-array name="buy_method_array">
         <item>Buy</item>
         <item>Rent for a week</item>

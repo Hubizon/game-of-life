@@ -189,6 +189,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return true;
                 }
             });
+
+            Preference credits = findPreference("creditsButton");
+            credits.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getContext(), Credits.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
         }
 
         @Override
