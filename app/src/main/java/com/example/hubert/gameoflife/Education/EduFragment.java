@@ -144,7 +144,6 @@ public class EduFragment extends Fragment implements View.OnClickListener{
 
             case R.id.LearnInHomeEducation:
                 //intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
-                //TODO: open SkillsFragment
                 intent = new Intent(getActivity().getApplicationContext(), SkillsActivity.class);
                /* FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

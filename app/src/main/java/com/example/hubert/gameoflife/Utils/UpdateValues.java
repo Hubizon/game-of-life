@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
+import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -15,6 +18,7 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
+import static com.example.hubert.gameoflife.MainActivity.Die;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showDialogWithChoose;
 
@@ -63,12 +67,17 @@ public class UpdateValues {
 
             if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) <= 0)
             {
-                editor.putString(context.getResources().getString(R.string.saved_love_key), null);
-                editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
-                editor.putInt(context.getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel);
-
-                showAlertDialog(context, sharedPref, "Break up", "Your love broke up with you!");
+                showAlertDialog(context, sharedPref, "Break up", "Your partner broke up with you!");
+                Love.BreakUp(context);
             }
+        }
+
+        if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_sad_key), false))
+        {
+            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 3));
+            editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0));
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) <= 0)
+                editor.putBoolean(context.getResources().getString(R.string.saved_is_sad_key), false);
         }
 
         if (sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) >= 23) {
@@ -171,7 +180,7 @@ public class UpdateValues {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         try
         {
-            //TODO co jakis czas tu sie wywala
+            //co jakis czas tu sie wywala
             JSONArray jsonArrayGames = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_games_key), SharedPreferencesDefaultValues.DefaultGamesList));
             JSONArray jsonArrayDrawings = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_books_key), SharedPreferencesDefaultValues.DefaultBooksList));
             JSONArray jsonArrayBooks = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_drawings_key), SharedPreferencesDefaultValues.DefaultDrawingsList));
@@ -220,7 +229,7 @@ public class UpdateValues {
                                     {
                                         jsonArray.remove(i);
                                         editor.putString(contextThis.getResources().getString(R.string.saved_games_key), jsonArray.toString());
-                                        //TODO: sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
+                                        // sprawdzić to (czy automatycznie się przesuwa, czy będzie trzeba to jakoś zrobić if(!jsonArray.getInt[i].isNull))
                                     }
                                 }
                                 else
@@ -255,7 +264,7 @@ public class UpdateValues {
         Random rnd = new Random();
         //TODO: zrobic, zeby nie zadzialalo jak ktos wylaczy aplikacje podczas dialogu
 
-        switch (rnd.nextInt(100000))
+        switch (rnd.nextInt(1000))
         {
             case 1:
                 //TODO: Michal!!! zastopuj timer tu xd
@@ -300,6 +309,7 @@ public class UpdateValues {
         Random rnd = new Random();
         String json;
         final int karmaPoints = sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints);
+        Lodging lodging;
         if(rnd.nextInt(100) > 100 - karmaPoints)
         {
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -310,9 +320,15 @@ public class UpdateValues {
                 gson.fromJson(json, Lodging.class);
                 gson.newBuilder().setLenient().create();
 
-                Lodging lodging = gson.fromJson(json, Lodging.class);
-                if("Rent a Cheap Flat in Dangerous Neighborhood For a Month".equals(lodging.getName()))
+                lodging = gson.fromJson(json, Lodging.class);
+                if(ShopFragment.CheapFlatInTheDangerousDistrict.getName().equals(lodging.getName()))
+                {
+                    if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 15000)
+                        editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 15000));
+                    else
+                        editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
                     showDialogWithChoose(sharedPreferences, context,"You were attacked by criminalist!", "Do you want to go to the hospital for 15 000 or order the grave?", 1);
+                }
                 break;
 
                 case 3:
@@ -320,18 +336,18 @@ public class UpdateValues {
                     gson.fromJson(json, Lodging.class);
                     gson.newBuilder().setLenient().create();
 
-                    Lodging lodging2 = gson.fromJson(json, Lodging.class);
-                    if(lodging2 != null )
+                    lodging = gson.fromJson(json, Lodging.class);
+                    if(lodging != null )
                     {
-                        if(lodging2.getPrice() != 0 && "buy".equals(lodging2.getType()))
+                        if(lodging.getPrice() != 0 && "buy".equals(lodging.getType()))
                         {
-                            showAlertDialog(context, sharedPreferences, "Your house was burned!", ("You got recompensation" + (lodging2.getPrice() / 2)));
-                            editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (lodging2.getPrice() / 2)));
+                            showAlertDialog(context, sharedPreferences, "Your house was burned!", ("You got recompensation" + (lodging.getPrice() / 2)));
+                            editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (lodging.getPrice() / 2)));
                             editor.putString(contextThis.getResources().getString(R.string.saved_my_lodging_key), null);
                         }
                     }
                     break;
-
+//TODO: dodać smutek po zerwaniu
                 case 4:
                     json = sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
                     gson.fromJson(json, Transport.class);
@@ -348,8 +364,6 @@ public class UpdateValues {
                         }
                     }
                     break;
-
-
 
                 case 5:
                     showAlertDialog(context,sharedPreferences,"You've been robbed!", "Somebody stole " + (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) / 2) + "$");

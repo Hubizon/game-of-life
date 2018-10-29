@@ -239,7 +239,6 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
                 break;
-//TODO: jak będą karne alert dialogi to żeby zapobiec wychodzeniu z apki, żeby się nie odjeła kasa, to napoczątku odejmować, a potem najwyżej dodawać
             case R.id.buyLotteries:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= lotteryList[position].getPrice())
                 {
@@ -288,7 +287,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
             case R.id.cardview_house:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
-                //TODO: zobaczy czy dziala bez tego
+                // zobaczyc czy dziala bez tego
                 gson.fromJson(json, Lodging.class);
                 gson.newBuilder().setLenient().create();
 
@@ -418,7 +417,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
             Gson gson = new Gson();
             String json = gson.toJson(ShopFragment.funList[position]);
             switch (ShopFragment.funList[position].getType()) {
-                // TODO: create enum with those types
+                //  create enum with those types
                 case "Exit":
                     editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) + ShopFragment.funList[position].getGivenFun()));
                     break;

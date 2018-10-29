@@ -214,11 +214,13 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
             case R.id.button_love_brokeUp:
                 if(sharedPref.getString(getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) != null)
+                {
                     if("girl".equals(sharedPref.getString(getResources().getString(R.string.saved_sexuality_key), SharedPreferencesDefaultValues.DefaultSexuality)))
                         showDialogWithChoose("Break up", "Are you want to break up with her?", 3);
                     else
                         showDialogWithChoose("Break up", "Are you want to break up with him?", 3);
-
+                    Love.BreakUp(getContext());
+                }
                 break;
 
             case R.id.button_love_SearchLove:

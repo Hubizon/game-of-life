@@ -92,7 +92,7 @@ public class SharedPreferencesDefaultValues {
     public final static int DefaultKarmaPoints = 70;
     public static final int DefaultWorkRelations = 500;
 
-    // TODO NIGDY NIE DAWAJ NULL! godzine nad tym bledem siedzialem..
+    //NIGDY NIE DAWAJ NULL! godzine nad tym bledem siedzialem..
     public static final String DefaultGamesList = gson.toJson(new ArrayList<>());
     public static final String DefaultDrawingsList = gson.toJson(new ArrayList<>());
     public static final String DefaultBooksList = gson.toJson(new ArrayList<>());

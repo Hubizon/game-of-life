@@ -98,7 +98,7 @@ public class MyDialogFragment extends DialogFragment  {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO customize
+        // customize
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
         if (isDark) {
@@ -125,7 +125,7 @@ public class MyDialogFragment extends DialogFragment  {
             if (title.equals(EduFragment.TITLE_SCHOOL)) {
                 switch (position) {
                     case go_to_school_index:
-                        //TODO: zrobić to jakoś inaczej np. wszystko w tym
+                        //zrobić to jakoś inaczej np. wszystko w tym
                         mId = R.id.GoToSchoolEducation;
                         break;
                     case hang_around_index:
@@ -499,7 +499,7 @@ public class MyDialogFragment extends DialogFragment  {
                 }
                 editor.putInt(getResources().getString(R.string.saved_work_relations_key), ((sharedPref.getInt(getResources().getString(R.string.saved_work_relations_key), SharedPreferencesDefaultValues.DefaultWorkRelations)) + 20));
 
-                //TODO: więcej hajsu za ciężkie pracowanie
+                //więcej hajsu za ciężkie pracowanie
                 editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 100));
                 editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 80));
                 editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 150));

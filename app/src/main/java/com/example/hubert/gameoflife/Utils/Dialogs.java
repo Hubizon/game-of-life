@@ -16,6 +16,8 @@ import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 
+import static com.example.hubert.gameoflife.MainActivity.Die;
+
 public class Dialogs {
 
     public static void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
@@ -38,7 +40,7 @@ public class Dialogs {
                         switch (whichOneEvent)
                         {
                             case 1:
-                                //Die();
+                                Die();
                                 break;
                         }
                         dialoginterface.cancel();
@@ -49,10 +51,8 @@ public class Dialogs {
                         switch (whichOneEvent)
                         {
                             case 1:
-                                if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 15000)
-                                    editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 15000));
-                                else
-                                   // Die();
+                                if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) < 0)
+                                    Die();
                                 editor.apply();
                                 dialoginterface.cancel();
                                 break;
