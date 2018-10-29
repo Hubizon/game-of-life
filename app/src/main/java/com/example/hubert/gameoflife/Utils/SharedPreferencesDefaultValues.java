@@ -1,13 +1,9 @@
 package com.example.hubert.gameoflife.Utils;
 
 import com.example.hubert.gameoflife.Education.Skill;
-import com.example.hubert.gameoflife.Education.SkillsActivity;
-import com.example.hubert.gameoflife.Education.SkillsFragment;
-import com.example.hubert.gameoflife.Education.Subject;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Shop.BuyActivity;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.google.gson.Gson;
 

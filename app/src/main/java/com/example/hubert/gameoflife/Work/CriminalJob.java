@@ -22,6 +22,7 @@ public class CriminalJob extends Job{
         this.weaponsNeeded = weaponsNeeded;
     }
 
+    //TODO: używać tego! xD
     public int getChanceToGetBusted() { return chanceToGetBusted; }
     public Weapon[] getWeaponsNeeded() { return weaponsNeeded; }
 }

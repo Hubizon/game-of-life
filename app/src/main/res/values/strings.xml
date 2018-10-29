@@ -12,7 +12,7 @@
     <string name="draw_something">Draw something</string>
     <string name="write_a_poem">Write a poem</string>
     <string name="record_movies">Record movies</string>
-    <!--<string name="bills">Bills</string>-->-->
+    <!--<string name="bills">Bills</string>&ndash;&gt;-->
     <!--<string name="electricity">Electricity: $</string>-->
     <string name="other">Other: $</string>
     <!--<string name="pay_bills">pay bills</string>-->
@@ -49,7 +49,7 @@
     <string name="transport">Transport: </string>
     <string name="girlfriend">Girlfriend: </string>
     <string name="boyfriend">Boyfriend: </string>
-    <string name="childrens">Children: </string>
+    <string name="children">Children: </string>
     <string name="job">Job:</string>
     <string name="position">Position:</string>
     <string name="ask_for_promotion">Ask for promotion</string>
@@ -58,7 +58,7 @@
     <!--<string name="days_to_deathline">Days to deathline:</string>-->
     <!--<string name="go_to_the_work">go to the work</string>-->
     <!--<string name="work_hard">Work hard</string>-->
-    <!--<string name="hang_around">Hang Around</string>-->
+    <string name="hang_around">Hang Around</string><!---->
     <string name="give_up_work">give up work</string>
     <!--<string name="employee_satisfaction">Employee satisfaction</string>-->
     <!--<string name="company_s_revenues_month">Company\'s revenues/month: $</string>-->
@@ -149,7 +149,7 @@
     <string name="saved_love_key" translatable="false">love</string>
     <string name="saved_love_relations_key" translatable="false">love_relations</string>
     <string name="saved_love_relationship_level_key" translatable="false">love_relationship_level</string>
-    <!--<string name="saved_sexuality_key" translatable="false">sexuality</string>-->
+    <string name="saved_sexuality_key" translatable="false">sexuality</string>
     <string name="saved_love_name_key" translatable="false">love_name</string>
     <string name="saved_skills_criminal_list_key" translatable="false">skills_criminal_list</string>
     <string name="saved_skills_education_list_key" translatable="false">skills_education_list</string>

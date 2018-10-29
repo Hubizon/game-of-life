@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Education.EduFragment;
-import com.example.hubert.gameoflife.Education.LearnInHomeActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Education.SkillsActivity;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.ChooseJobActivity;
-import com.example.hubert.gameoflife.Work.FindJobActivity;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
@@ -33,6 +31,7 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
     private static final int INDEX_CRIMINAL = 2;
 
     private static final int go_to_school_index = 0;
+    private static final int get_some_skills = 1;
     private static final int learn_hard_index = 3;
     private static final int hang_around_index = 2;
     private static final int learn_at_home_index = 1;
@@ -91,24 +90,28 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                         case go_to_school_index:
                             newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), go_to_school_index);
                             break;
-                        case learn_hard_index:
-                            intent = new Intent(mContext.getApplicationContext(), LearnInHomeActivity.class);
+
+                        case get_some_skills:
+                            intent = new Intent(mContext.getApplicationContext(), SkillsActivity.class);
                             break;
-                         case hang_around_index:
-                             newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), hang_around_index);
-                            break;
-                        case learn_at_home_index:
+//                        case learn_hard_index:
+//                           // intent = new Intent(mContext.getApplicationContext(), LearnInHomeActivity.class);
+//                            break;
+//                         case hang_around_index:
+//                             newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), hang_around_index);
+//                            break;
+                       // case learn_at_home_index:
                             /*FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             SkillsFragment fragment = new SkillsFragment();
                             fragmentTransaction.add(R.id.pagerSkills, fragment);
                             fragmentTransaction.commit();*/
-                            intent = new Intent(mContext.getApplicationContext(), SkillsActivity.class);
-                            break;
-                        case give_up_school_index:
-                            editor.putBoolean(mContext.getString(R.string.saved_is_in_school_now_key), false);
-                            intent = new Intent(mContext.getApplicationContext(), FindJobActivity.class);
-                            break;
+                           // intent = new Intent(mContext.getApplicationContext(), SkillsActivity.class);
+                          //  break;
+                      //  case give_up_school_index:
+                          //  editor.putBoolean(mContext.getString(R.string.saved_is_in_school_now_key), false);
+                            //intent = new Intent(mContext.getApplicationContext(), FindJobActivity.class);
+                           // break;
                     }
                 } else if (group.getTitle().equals(EduFragment.TITLE_CRIMINAL)) {
                     switch (childIndex) {
@@ -195,12 +198,12 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                     }
                 } else if (group.getTitle().equals(EduFragment.TITLE_WORK)) {
                     switch (childIndex) {
-                        case start_working_index:
-                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), start_working_index);
-                            break;
-                        case work_hard_index:
-                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), work_hard_index);
-                            break;
+//                        case start_working_index:
+//                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), start_working_index);
+//                            break;
+//                        case work_hard_index:
+//                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), work_hard_index);
+//                            break;
                         case give_up_work_index:
                             editor.putString(mContext.getString(R.string.saved_my_job_key), null);
 
@@ -217,12 +220,10 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
             }
 
         });
-
     }
 
     @Override
     public void onBindGroupViewHolder(MyParentViewHolder holder, int flatPosition, final ExpandableGroup group) {
         holder.setParentTitle(group);
     }
-
 }
