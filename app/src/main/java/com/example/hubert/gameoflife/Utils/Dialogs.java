@@ -111,6 +111,7 @@ public class Dialogs {
 
     public static void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
     {
+        //TODO: po co sharedPraferences?                          tu xd
         AlertDialog.Builder dialog;
 
         boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);

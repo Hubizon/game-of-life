@@ -17,7 +17,7 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultName = "Mr. Hubi";
     public static final String DefaultSexuality = "girl";
     public static final int DefaultIcon = R.drawable.avatar_icon1;
-    public static final int DefaultMoney = 500000;
+    public static final int DefaultMoney = 5000;
     public static final int DefaultMoneyInSafe = 0;
 
     public static final int DefaultAgeYears = 19;
@@ -81,12 +81,15 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultSkillsEducationList = gson.toJson(Arrays.skillsEducationList);
     public static final String DefaultSkillsCriminalList = gson.toJson(Arrays.skillsCriminalList);
     //public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
-    public static final String DefaultWeapons = gson.toJson(ShopFragment.weaponList);
+    public static final String DefaultWeapons = gson.toJson(Arrays.weaponList);
+    public static final String DefaultOfficeJobsList = gson.toJson(Arrays.officeJobsList);
+    public static final String DefaultCriminalJobsList = gson.toJson(Arrays.criminalJobsList);
 
     public static final int DefaultCommunicationsSkills = 100;
     public static final int DefaultCriminalPoints = 100;
     public final static int DefaultKarmaPoints = 70;
-    public static final int DefaultWorkRelations = 500;
+    public final static int DefaultWorkPositionPoints = 75;
+    //public static final int DefaultWorkRelations = 100;
 
     //NIGDY NIE DAWAJ NULL! godzine nad tym bledem siedzialem..
     public static final String DefaultGamesList = gson.toJson(new ArrayList<>());

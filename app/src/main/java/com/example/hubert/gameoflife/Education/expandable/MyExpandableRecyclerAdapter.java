@@ -16,6 +16,8 @@ import com.example.hubert.gameoflife.Education.SkillsActivity;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.Work.ChooseJobActivity;
+import com.example.hubert.gameoflife.Work.Job;
+import com.google.gson.Gson;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
@@ -198,9 +200,13 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                     }
                 } else if (group.getTitle().equals(EduFragment.TITLE_WORK)) {
                     switch (childIndex) {
-//                        case start_working_index:
-//                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), start_working_index);
-//                            break;
+                        case start_working_index:
+                            Gson gson = new Gson();
+                            String json = sharedPref.getString(mContext.getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
+                            Job mJob = gson.fromJson(json, Job.class);
+                            if(mJob != null)
+                                newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), start_working_index);
+                            break;
 //                        case work_hard_index:
 //                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), work_hard_index);
 //                            break;

@@ -264,13 +264,13 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                     else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2)
                         loveStatus.setText("Status: marry");
 
-                    progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+                    progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
                 }
                 break;
         }
 
         editor.apply();
-        progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+        progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
     }
 
     private void showDialogWithChoose(final String title, final String message, final int whichOneEvent)
@@ -315,7 +315,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                     Toast.makeText(getContext(), "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
 
                                 editor.apply();
-                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
                                 dialoginterface.cancel();
                                 break;
 
@@ -330,7 +330,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                     Toast.makeText(getContext(), "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
 
                                 editor.apply();
-                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
                                 dialoginterface.cancel();
                                 break;
 

@@ -22,15 +22,20 @@ import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
+import com.example.hubert.gameoflife.Work.CriminalJob;
+import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.Random;
 
-public class MyDialogFragment extends DialogFragment  {
+import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
+
+public class  MyDialogFragment extends DialogFragment  {
 
     private static final String BUNDLE_ID = "bundle_id";
 
@@ -114,29 +119,27 @@ public class MyDialogFragment extends DialogFragment  {
             if (title.equals(EduFragment.TITLE_SCHOOL)) {
                 switch (position) {
                     case go_to_school_index:
-                        //zrobić to jakoś inaczej np. wszystko w tym
-                        //mId = R.id.GoToSchoolEducation;
+                        getDialog().setTitle(R.string.learning);
                         break;
                     case hang_around_index:
-                        //mId = R.id.GoToSchoolEducation;
+
                         break;
                 }
             } else if (title.equals(EduFragment.TITLE_CRIMINAL)) {
                 switch (position) {
                     case get_new_friends_index:
-                        //mId = R.id.getNewFriendsCriminal;
+
                         break;
                     case sell_drugs_index:
-                        //mId = R.id.sellDrugsCriminal;
+
                         break;
                 }
             } else if (title.equals(EduFragment.TITLE_WORK)) {
                 switch (position) {
                     case start_working_index:
-                        //mId = R.id.btn_go_work;
-                        break;
+                        getDialog().setTitle(R.string.working);
                     case work_hard_index:
-                       // mId = R.id.GoToSchoolEducation;
+
                         break;
                 }
             }
@@ -178,52 +181,7 @@ public class MyDialogFragment extends DialogFragment  {
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
-
-//            case R.id.GoToSchoolEducation:
-//                getDialog().setTitle(R.string.learning);
-//                break;
-//
-//            case R.id.GoToSchoolLearnHardEducation:
-//                getDialog().setTitle(R.string.learning);
-//                break;
-//
-//            case R.id.GoToSchoolHangAroundEducation:
-//                getDialog().setTitle(R.string.learning);
-//                break;
-
-//            case R.id.subjectHomework:
-//                /*try {
-//                    JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                    JSONObject jsonObject = (JSONObject)(jsonArray.get(Integer.valueOf(getTag())));
-//
-//                    getDialog().setTitle(R.string.learning + jsonObject.getInt("subjectName"));
-//                }
-//                catch (JSONException e)
-//                { }*/
-//                break;
-
-            /*case R.id.btn_go_work:
-                getDialog().setTitle(R.string.working);
-                break;
-
-            case R.id.btn_work_hard:
-                getDialog().setTitle(R.string.working);
-                break;
-
-            case R.id.btn_hang_around:
-                getDialog().setTitle(R.string.working);
-                break;*/
-
-//            case R.id.getNewFriendsCriminal:
-//                getDialog().setTitle(R.string.getting_new_friends);
-//                break;
-//
-//            case R.id.sellDrugsCriminal:
-//                getDialog().setTitle(R.string.sell_drugs);
-//                break;
-
             default:
-                getDialog().setTitle(R.string.sell_drugs);
                 break;
         }
 
@@ -238,10 +196,10 @@ public class MyDialogFragment extends DialogFragment  {
                 + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00";
         ((TextView) view.findViewById(R.id.time_dialog)).setText(stringDate);
 
-        ((ProgressBar)view.findViewById(R.id.progressBar_health_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
-        ((ProgressBar)view.findViewById(R.id.progressBar_hungry_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10);
-        ((ProgressBar)view.findViewById(R.id.progressBar_energy_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) / 10);
-        ((ProgressBar)view.findViewById(R.id.progressBar_happiness_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
+        ((ProgressBar)view.findViewById(R.id.progressBar_health_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
+        ((ProgressBar)view.findViewById(R.id.progressBar_hungry_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
+        ((ProgressBar)view.findViewById(R.id.progressBar_energy_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy));
+        ((ProgressBar)view.findViewById(R.id.progressBar_happiness_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
 
         return view;
     }
@@ -261,6 +219,127 @@ public class MyDialogFragment extends DialogFragment  {
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         Random r = new Random();
+
+        if(mId == R.id.list_item_artist_name)
+        {
+            if (title.equals(EduFragment.TITLE_SCHOOL)) {
+                switch (position) {
+                    case go_to_school_index:
+                        editor.putInt(getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 10);
+                        editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 35));
+                        editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 35));
+                        editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 45));
+                        break;
+                }
+            } else if (title.equals(EduFragment.TITLE_CRIMINAL)) {
+                switch (position) {
+                    case get_new_friends_index:
+
+                        break;
+                    case sell_drugs_index:
+
+                        break;
+                }
+            } else if (title.equals(EduFragment.TITLE_WORK)) {
+                switch (position) {
+                    case start_working_index:
+                        json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
+                        try {
+                            jsonObject = new JSONObject(json);
+                        } catch (JSONException e ) { }
+                        Job mJob = gson.fromJson(json, Job.class);
+                        int educationPoints = sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints);
+                        //int workPosition = sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), SharedPreferencesDefaultValues.DefaultWorkPosition);
+
+                        if(mJob != null)
+                        {
+                            double salary;
+                            salary = mJob.getSalary();
+
+                            double moneyFromAdditionalSkills = 0;
+                            if(mJob.getAdditionalSkillsRes() != 0)
+                            {
+                                int additionalSkills = sharedPref.getInt(getResources().getString(mJob.getAdditionalSkillsRes()), 50);
+                                moneyFromAdditionalSkills = (salary * 0.1 * (Math.sqrt(90.0 + additionalSkills / 10.0))) - salary;
+                            }
+
+                            double moneyFromEducation = ((salary * 0.1 * (Math.sqrt(85.0 + educationPoints * 0.1))) - salary) * (Math.sqrt(mJob.getMarkRatio()));
+
+                            salary = salary + moneyFromAdditionalSkills + moneyFromEducation;
+
+//                            salary = (mJob.getSalary() * (((100.0 - mJob.getMarkRatio() * 3.0) + subjectMark * mJob.getMarkRatio()) / 100.0 ) * ((100.0 + ((additionalSkills - 50.0) / 5.0)) / 100.0));
+//                            if(salary <= 0)
+//                                salary = mJob.getSalary() * 0.10;
+
+                            editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int)Math.round(salary));
+                        }
+
+                        Random random = new Random();
+                        if(random.nextInt(1000) <= mJob.getPositionPoints() && mJob.getPositionPoints() > 900)
+                        {
+                            try {
+                                jsonObject.put("position", jsonObject.getInt("position") + 1);
+                                jsonObject.put("positionPoints", 75);
+                                jsonObject.put("salary", Math.round(jsonObject.getLong("salary") * (1 + 0.01 * jsonObject.getLong("salaryIncrease"))));
+                                editor.putString(getResources().getString(R.string.saved_my_job_key), jsonObject.toString());
+
+                            }
+                            catch (JSONException e) { }
+
+                            /*mJob.setPosition(mJob.getPosition() + 1);
+                            mJob.setPositionPoints(75);
+                            mJob.setSalary(Math.round(mJob.getSalary() * 0.10 * mJob.getSalaryIncrease()));*/
+                            showAlertDialog(getContext(), sharedPref, "Promotion", "Congratulation! You got promotion in the work!");
+                        }
+
+                        try {
+                            JSONArray jsonArrayOfficeJobs = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_office_jobs_list_key), SharedPreferencesDefaultValues.DefaultOfficeJobsList));
+                            JSONArray jsonArrayCriminalJobs = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_criminal_jobs_list_key), SharedPreferencesDefaultValues.DefaultCriminalJobsList));
+                            jsonObject.put("positionPoints", (jsonObject.getInt("positionPoints") + 15));
+
+                            for (int i = 0; i < jsonArrayOfficeJobs.length(); i++) {
+                                JSONObject object = jsonArrayOfficeJobs.getJSONObject(i);
+                                if (object.getString("name").equals(jsonObject.getString("name"))) {
+                                    jsonArrayOfficeJobs.put(i, jsonObject);
+                                    editor.putString(getResources().getString(R.string.saved_office_jobs_list_key), jsonArrayOfficeJobs.toString());
+                                    editor.putString(getResources().getString(R.string.saved_my_job_key), jsonObject.toString());
+                                    editor.apply();
+                                    break;
+                                }
+                            }
+                            for (int i = 0; i < jsonArrayCriminalJobs.length(); i++) {
+                                JSONObject object = jsonArrayCriminalJobs.getJSONObject(i);
+                                if (object.getString("name").equals(jsonObject.getString("name"))) {
+                                    jsonArrayCriminalJobs.put(i, jsonObject);
+                                    editor.putString(getResources().getString(R.string.saved_criminal_points_key), jsonArrayCriminalJobs.toString());
+                                    editor.putString(getResources().getString(R.string.saved_my_job_key), jsonObject.toString());
+                                    editor.apply();
+                                    break;
+                                }
+                            }
+                        }
+                        catch (JSONException e) { }
+
+                        editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
+                        editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 30));
+                        editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 50));
+
+                        if(mJob instanceof CriminalJob)
+                            if(r.nextInt(((CriminalJob)mJob).getChanceToGetBusted()) == 1)
+                            {
+                                editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
+                                Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                                if(r.nextInt(25) == 1)
+                                    if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
+                                    {
+                                        editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
+                                        Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                                    }
+                            }
+                        break;
+                }
+            }
+        }
 
         Log.d(MyDialogFragment.class.getSimpleName(), "mId: " + mId);
         switch (mId)
@@ -330,257 +409,6 @@ public class MyDialogFragment extends DialogFragment  {
                 editor.putString(getResources().getString(R.string.saved_movies_key), doSomething(getResources().getString(R.string.saved_progress_making_movies_key), getResources().getString(R.string.saved_recording_skills_key), getResources().getString(R.string.saved_games_key), "Music"));
                 break;
 
-//            case R.id.GoToSchoolEducation:
-//                /*try {
-//                    jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                    for (int i = 0; i <= jsonArray.length(); i++)
-//                    {
-//                        jsonObject = (JSONObject) jsonArray.get(i);
-//                        jsonObject.put("toAnotherMark", (jsonObject.getInt("toAnotherMark") + 5));
-//                        jsonArray.put(i, jsonObject);
-//                    }
-//                }
-//                catch (JSONException e)
-//                { }*/
-//                editor.putInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints);
-//
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 40));
-//                break;
-
-//            case R.id.GoToSchoolLearnHardEducation:
-//                /*try {
-//                    jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                    for (int i = 0; i <= jsonArray.length(); i++)
-//                    {
-//                        jsonObject = (JSONObject) jsonArray.get(i);
-//                        jsonObject.put("toAnotherMark", (jsonObject.getInt("toAnotherMark") + 10));
-//                        jsonArray.put(i, jsonObject);
-//                    }
-//                }
-//                catch (JSONException e)
-//                { }*/
-//                editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
-//
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 20));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 43));
-//                break;
-
-//            case R.id.GoToSchoolHangAroundEducation:
-//                /*try {
-//                    jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                    for (int i = 0; i <= jsonArray.length(); i++)
-//                    {
-//                        jsonObject = (JSONObject) jsonArray.get(i);
-//                        jsonObject.put("toAnotherMark", (jsonObject.getInt("toAnotherMark") - 15));
-//                        jsonArray.put(i, jsonObject);
-//                    }
-//                }
-//                catch (JSONException e)
-//                { }*/
-//                editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
-//
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 25));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 18));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 60));
-//                break;
-
-//            case R.id.subjectHomework:
-//                /*try {
-//                    jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                    jsonObject = (JSONObject)(jsonArray.get(Integer.valueOf(getTag())));
-//
-//                    jsonObject.put("toAnotherMark", (jsonObject.getInt("toAnotherMark") + 40));
-//                    jsonArray.put(Integer.valueOf(getTag()), jsonObject);
-//                }
-//                catch (JSONException e)
-//                { }*/
-//                editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
-//
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 45));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 50));
-//                break;
-
-//            case R.id.btn_go_work:
-//                json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
-//                Job mJob = gson.fromJson(json, Job.class);
-//                int subjectMark = 3;
-//
-//                if(mJob != null)
-//                {
-//                    /*try {
-//                        jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                        /*for (int i = 0; i <= jsonArray.length(); i++)
-//                        {
-//                            jsonObject = (JSONObject) jsonArray.get(i);
-//                            if(mJob.getSubjectNameNeededToWork().equals(jsonObject.getString("subjectName")))
-//                            {
-//                                subjectMark = jsonObject.getInt("subjectMark");
-//                                break;
-//                            }
-//                        }
-//                    }
-//                    catch (JSONException e)
-//                    { }*/
-//
-//                    int additionalSkills = 50;
-//                    if(mJob.getAdditionalSkillsRes() != 0)
-//                        additionalSkills = sharedPref.getInt(getResources().getString(mJob.getAdditionalSkillsRes()), 50);
-//                    double salary = (mJob.getSalary() * (((100.0 - mJob.getMarkRatio() * 3.0) + subjectMark * mJob.getMarkRatio()) / 100.0 ) * ((100.0 + ((additionalSkills - 50.0) / 5.0)) / 100.0));
-//                    if(salary <= 0)
-//                        salary = mJob.getSalary() * 0.10;
-//
-//                    editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int)Math.round(salary));
-//                }
-//
-//                editor.putInt(getResources().getString(R.string.saved_work_relations_key), ((sharedPref.getInt(getResources().getString(R.string.saved_work_relations_key), SharedPreferencesDefaultValues.DefaultWorkRelations)) + 5));
-//
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 40));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 66));
-//
-//                if(mJob instanceof CriminalJob)
-//                    if(r.nextInt(((CriminalJob)mJob).getChanceToGetBusted()) == 1)
-//                    {
-//                        editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-//                        Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
-//                        if(r.nextInt(25) == 1)
-//                            if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-//                            {
-//                                editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-//                                Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
-//                            }
-//                    }
-//               //editor.apply();
-//                break;
-//
-//            case R.id.btn_work_hard:
-//                json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
-//                Job mJobWorkHard = gson.fromJson(json, Job.class);
-//                int subjectMarkWorkHard = 3;
-//
-//                if(mJobWorkHard != null)
-//                {
-//                    /*try {
-//                        jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                        for (int i = 0; i <= jsonArray.length(); i++)
-//                        {
-//                            if(mJobWorkHard.getSubjectNameNeededToWork().equals(jsonArray.get(i)))
-//                            {
-//                                jsonObject = (JSONObject) jsonArray.get(i);
-//                                subjectMarkWorkHard = jsonObject.getInt("subjectMark");
-//                                break;
-//                            }
-//                        }
-//                    }
-//                    catch (JSONException e)
-//                    { }*/
-//
-//                    int additionalSkills = sharedPref.getInt(getResources().getString(mJobWorkHard.getAdditionalSkillsRes()), 50);
-//                    double salary = (mJobWorkHard.getSalary() * (((100 - mJobWorkHard.getMarkRatio() * 3) + subjectMarkWorkHard * mJobWorkHard.getMarkRatio()) / 100 ) * ((100 + ((additionalSkills - 50) / 5)) / 100));
-//                    if(salary <= 0)
-//                        salary = mJobWorkHard.getSalary() * 0.10;
-//
-//                    editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int)Math.round(salary));
-//                }
-//                editor.putInt(getResources().getString(R.string.saved_work_relations_key), ((sharedPref.getInt(getResources().getString(R.string.saved_work_relations_key), SharedPreferencesDefaultValues.DefaultWorkRelations)) + 20));
-//
-//                //więcej hajsu za ciężkie pracowanie
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 100));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 80));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 150));
-//
-//                if(mJobWorkHard instanceof CriminalJob)
-//                    if(r.nextInt(((CriminalJob)mJobWorkHard).getChanceToGetBusted()) == 1)
-//                    {
-//                        editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-//                        Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
-//                        if(r.nextInt(25) == 1)
-//                            if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-//                            {
-//                                editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-//                                Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
-//                            }
-//                    }
-//                break;
-//
-//            case R.id.btn_hang_around:
-//                json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
-//                Job mJobHangAround = gson.fromJson(json, Job.class);
-//                int subjectMarkHangAround = 3;
-//
-//                if(mJobHangAround != null)
-//                {
-//                    /*try {
-//                        jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-//                        for (int i = 0; i <= jsonArray.length(); i++)
-//                        {
-//                            if(mJobHangAround.getSubjectNameNeededToWork().equals(jsonArray.get(i)))
-//                            {
-//                                jsonObject = (JSONObject) jsonArray.get(i);
-//                                subjectMarkHangAround = jsonObject.getInt("subjectMark");
-//                                break;
-//                            }
-//                        }
-//                    }
-//                    catch (JSONException e)
-//                    { }*/
-//
-//                    int additionalSkills = sharedPref.getInt(getResources().getString(mJobHangAround.getAdditionalSkillsRes()), 50);
-//                    double salary = (mJobHangAround.getSalary() * (((100 - mJobHangAround.getMarkRatio() * 3) + subjectMarkHangAround * mJobHangAround.getMarkRatio()) / 100 ) * ((100 + ((additionalSkills - 50) / 5)) / 100));
-//                    if(salary <= 0)
-//                        salary = mJobHangAround.getSalary() * 0.10;
-//
-//                    editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int)Math.round(salary));
-//                }
-//                editor.putInt(getResources().getString(R.string.saved_work_relations_key), ((sharedPref.getInt(getResources().getString(R.string.saved_work_relations_key), SharedPreferencesDefaultValues.DefaultWorkRelations)) - 15));
-//
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 30));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 90));
-//
-//                if(mJobHangAround instanceof CriminalJob)
-//                    if(r.nextInt(((CriminalJob)mJobHangAround).getChanceToGetBusted()) == 1)
-//                    {
-//                        editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-//                        Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
-//                        if(r.nextInt(25) == 1)
-//                            if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-//                            {
-//                                editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-//                                Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
-//                            }
-//                    }
-//                break;
-//
-//            case R.id.getNewFriendsCriminal:
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 90));
-//                editor.putInt(getResources().getString(R.string.saved_criminal_points_key), (sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) + 2));
-//                break;
-//
-//            case R.id.sellDrugsCriminal:
-//                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 180));
-//                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 60));
-//                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 90));
-//
-//                if(r.nextInt(100) == 1)
-//                {
-//                    editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-//                    Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
-//                    if(r.nextInt(25) == 1)
-//                        if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-//                        {
-//                            editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-//                            Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
-//                        }
-//                }
-//                else
-//                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + 25));
-//                break;
-
             default:
                 break;
 
@@ -614,10 +442,10 @@ public class MyDialogFragment extends DialogFragment  {
                 + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
                 + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00");
 
-        ((ProgressBar)view.findViewById(R.id.progressBar_health_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
-        ((ProgressBar)view.findViewById(R.id.progressBar_hungry_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10);
-        ((ProgressBar)view.findViewById(R.id.progressBar_energy_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) / 10);
-        ((ProgressBar)view.findViewById(R.id.progressBar_happiness_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
+        ((ProgressBar)view.findViewById(R.id.progressBar_health_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
+        ((ProgressBar)view.findViewById(R.id.progressBar_hungry_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
+        ((ProgressBar)view.findViewById(R.id.progressBar_energy_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy));
+        ((ProgressBar)view.findViewById(R.id.progressBar_happiness_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
     }
 
     private String doSomething(String resSavedProgress, String resSavedSkills, String resSavedList, String subjectToThing) {

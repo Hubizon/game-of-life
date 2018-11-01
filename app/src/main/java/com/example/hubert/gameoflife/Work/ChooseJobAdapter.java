@@ -221,7 +221,7 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
 //            isFirstTime0 = !isFirstTime0;
 //        }
 
-        if(!mDataNames.get(0).equals(ChooseJobActivity.criminalJobsList[0].getName()))
+        if(!mDataNames.get(0).equals(Arrays.criminalJobsList[0].getName()))
         {
             if(position >= lastPositionPage1 && lastPositionPage1 != 100)
                 holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);

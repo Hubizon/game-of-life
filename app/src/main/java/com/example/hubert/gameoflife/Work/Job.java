@@ -7,9 +7,8 @@ import com.example.hubert.gameoflife.House.Transport;
 
 public class Job {
     private String name;
-    private int salary;
-    private int salaryNo2;
-    private int salaryNo3;
+    private long salary;
+    private int salaryIncrease;
     private int markRatio;
     private int additionalSkillsRes;
     private Fun minPhoneNeeded;
@@ -18,14 +17,15 @@ public class Job {
     private Lodging minLodgingNeeded;
     private Transport minTransportNeeded;
     private Skill[] skillsNeeded;
+    private int position = 1;
+    private int positionPoints = 75;
 
-    public Job(String name, int salary, int salaryNo2, int salaryNo3, int markRatio, int additionalSkillsRes,
+    public Job(String name, long salary, int salaryIncrease, int markRatio, int additionalSkillsRes,
                Fun minPhoneNeeded, Fun minComputerNeeded, Fun minTvNeeded, Lodging minLodgingNeeded, Transport minTransportNeeded, Skill[] skillsNeeded)
     {
         this.name = name;
         this.salary = salary;
-        this.salaryNo2 = salaryNo2;
-        this.salaryNo3 = salaryNo3;
+        this.salaryIncrease = salaryIncrease;
         this.markRatio = markRatio;
         this.additionalSkillsRes = additionalSkillsRes;
         this.minPhoneNeeded = minPhoneNeeded;
@@ -37,9 +37,8 @@ public class Job {
     }
 
     public String getName() { return name; }
-    public int getSalary() { return salary; }
-    public int getSalaryNo2() { return salaryNo2; }
-    public int getSalaryNo3() { return salaryNo3; }
+    public long getSalary() { return salary; }
+    public int getSalaryIncrease() { return salaryIncrease; }
     public int getMarkRatio() { return markRatio; }
     public int getAdditionalSkillsRes() { return additionalSkillsRes; }
     public Fun getMinPhoneNeeded() { return minPhoneNeeded; }
@@ -48,4 +47,10 @@ public class Job {
     public Lodging getMinLodgingNeeded() { return minLodgingNeeded; }
     public Transport getMinTransportNeeded() { return minTransportNeeded; }
     public Skill[] getSkillsNeeded() { return skillsNeeded; }
+    public int getPosition() { return position; }
+    public int getPositionPoints() { return positionPoints; }
+
+    public void setSalary(long salary) { this.salary = salary; }
+    public void setPosition(int position) { this.position = position; }
+    public void setPositionPoints(int positionPoints) { this.positionPoints = positionPoints; }
 }
