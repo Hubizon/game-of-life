@@ -4,19 +4,26 @@ package com.example.hubert.gameoflife.Profile;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.hubert.gameoflife.Girlboyfriend.Children;
 import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.House.Lodging;
+import com.example.hubert.gameoflife.SettingsActivity;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.Work.Job;
@@ -39,6 +46,7 @@ public class MainFragment extends Fragment {
 
     private TextView characternametext, charactermoneytext, timetext, moneytext, agetext, lodgingtext, educationtext, transporttext, girltext, childtext;
     private ProgressBar hungerprogress, healthprogress, energyprogress, happinessprogress;
+    private ImageView charactericon;
 
     private SharedPreferences mSharedPref;
     private Handler mHandler;
@@ -82,17 +90,20 @@ public class MainFragment extends Fragment {
         energyprogress = view.findViewById(R.id.progressBar_character_energy);
         happinessprogress = view.findViewById(R.id.progressBar_character_happiness);
 
-        updateLabels(view);
+        //charactericon = view.findViewById(R.id.characterIcon);
 
+        Spinner iconSpinner = view.findViewById(R.id.spinner);
+        SpinnerIconAdapter spinnerIconAdapter = new SpinnerIconAdapter(getContext(), iconSpinner.getWidth());
+        iconSpinner.setAdapter(spinnerIconAdapter);
+
+        updateLabels();
         return view;
     }
 
-    private void updateLabels(View view) {
+    private void updateLabels() {
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-        ((view.findViewById(R.id.characterIcon))).setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
-
-        characternametext.setText(sharedPref.getString(getResources().getString(R.string.saved_character_name_key), SharedPreferencesDefaultValues.DefaultName));
+       // charactericon.setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
 
         String moneyStirng = "$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
         charactermoneytext.setText(moneyStirng);
@@ -161,6 +172,10 @@ public class MainFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mHandler.post(mRunnable);
+
+        SharedPreferences sharedPrefSettings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String nameChange = sharedPrefSettings.getString(SettingsActivity.NAME_EDIT_KEY, SharedPreferencesDefaultValues.DefaultName);
+        characternametext.setText(nameChange);
     }
 
     @Override
