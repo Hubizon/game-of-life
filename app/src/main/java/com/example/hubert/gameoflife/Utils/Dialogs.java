@@ -15,8 +15,11 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 import static com.example.hubert.gameoflife.MainActivity.Die;
+import static com.example.hubert.gameoflife.MainActivity.startTimer;
+import static com.example.hubert.gameoflife.MainActivity.stopTimer;
 
 public class Dialogs {
 
@@ -42,6 +45,15 @@ public class Dialogs {
                             case 1:
                                 Die();
                                 break;
+
+                            case 6:
+                                editor.putInt(context.getResources().getString(R.string.saved_karma_points_key), sharedPref.getInt(context.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints) - 10);
+                                break;
+
+                            case 7:
+                                //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
+                                //TODO: wyczyścic sharedpref
+                                break;
                         }
                         dialoginterface.cancel();
                         //TODO: start timer
@@ -58,7 +70,7 @@ public class Dialogs {
                                 break;
 
                             case 2:
-                                editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + 25000));
+                                editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + 2500));
                                 editor.apply();
                                 dialoginterface.cancel();
                                 break;
@@ -97,7 +109,13 @@ public class Dialogs {
                                 break;
 
                             case 6:
+                                editor.putInt(context.getResources().getString(R.string.saved_karma_points_key), sharedPref.getInt(context.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints) + 10);
+                                editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), true);
+                                editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 1000));
+                                break;
 
+                            case 7:
+                                // TODO: Wyświetlić reklamę
                                 break;
 
                             default:
@@ -111,8 +129,8 @@ public class Dialogs {
 
     public static void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
     {
-        //TODO: po co sharedPraferences?                          tu xd
         AlertDialog.Builder dialog;
+        stopTimer(sharedPreferences, context);
 
         boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
@@ -125,6 +143,7 @@ public class Dialogs {
                 .setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        startTimer();
                         dialoginterface.cancel();
                     }
                 })
