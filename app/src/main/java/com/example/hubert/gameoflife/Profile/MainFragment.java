@@ -174,7 +174,9 @@ public class MainFragment extends Fragment {
         mHandler.post(mRunnable);
 
         SharedPreferences sharedPrefSettings = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String nameChange = sharedPrefSettings.getString(SettingsActivity.NAME_EDIT_KEY, SharedPreferencesDefaultValues.DefaultName);
+        //String nameChange = sharedPrefSettings.getString(/*SettingsActivity.NAME_EDIT_KEY*/, SharedPreferencesDefaultValues.DefaultName);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        String nameChange = sharedPref.getString(getResources().getString(R.string.saved_character_name_key), SharedPreferencesDefaultValues.DefaultName);
         characternametext.setText(nameChange);
     }
 

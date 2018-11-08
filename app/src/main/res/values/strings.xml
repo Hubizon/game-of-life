@@ -244,10 +244,18 @@
 
 
     <string name="skills">Skills</string>
+    <string name="saved_is_first_time_key">is_first_time</string>
+    <string name="saved_sex_key">sex</string>
+    <string name="saved_do_borrow_money_key">do_borrow_money</string>
     <string-array name="buy_method_array">
         <item>Buy</item>
         <item>Rent for a week</item>
         <item>Rent for a month</item>
+    </string-array>
+
+    <string-array name="sexuality_array">
+        <item>Men</item>
+        <item>Women</item>
     </string-array>
 
 </resources>

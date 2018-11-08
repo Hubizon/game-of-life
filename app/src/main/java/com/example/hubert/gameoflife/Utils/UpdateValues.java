@@ -2,14 +2,11 @@ package com.example.hubert.gameoflife.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
 import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -18,7 +15,6 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
-import static com.example.hubert.gameoflife.MainActivity.Die;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showDialogWithChoose;
 
@@ -94,6 +90,7 @@ public class UpdateValues {
             Lodging lodging = gson.fromJson(jsonString, Lodging.class);
 
             if(lodging != null)
+            {
                 if("rent".equals(lodging.getType()))
                     if(lodging.getRentTime() <= sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0))
                     {
@@ -107,19 +104,29 @@ public class UpdateValues {
                     }
                     else
                         editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0) + 1));
+            }
 
-            /*try {
-                jsonArray = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                for (int i = 0; i <= (jsonArray.length() - 1); i++)
+            if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
+            {
+                editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+                Random random = new Random();
+                switch ( random.nextInt(2))
                 {
-                    json  = (JSONObject) jsonArray.get(i);
-                    json.put("IsTodaysHomeworkDone", false);
-                    jsonArray.put(i, json);
+                    case 0:
+                        showAlertDialog(context,sharedPref, "Neighbour loan", "Neighbour returned your money.");
+                        editor.putInt(context.getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + 1000);
+                        break;
+
+                    case 1:
+                        showAlertDialog(context,sharedPref, "Neighbour loan", "Neighbour returned your money and additionally gave you 500$!");
+                        editor.putInt(context.getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + 1500);
+                        break;
+
+                    case 2:
+                        showAlertDialog(context,sharedPref, "Neighbour loan", "Neighbour stole your money and run out from city.");
+                        break;
                 }
             }
-            catch (JSONException e)
-            { }*/
-            //editor.putString(context.getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
 
             if (sharedPref.getInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) >= 31) {
                 editor.putInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays);
@@ -264,7 +271,7 @@ public class UpdateValues {
         Random rnd = new Random();
         //TODO: zrobic, zeby nie zadzialalo jak ktos wylaczy aplikacje podczas dialogu
 
-        switch (rnd.nextInt(1000))
+        switch (rnd.nextInt(5000))
         {
             case 1:
                 //TODO: Michal!!! zastopuj timer tu xd
@@ -286,16 +293,22 @@ public class UpdateValues {
         if(rnd.nextInt(100) < karmaPoints)
         {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            switch (rnd.nextInt(7))
+            switch (rnd.nextInt(50))
             {
                 case 1:
-                    showDialogWithChoose(sharedPreferences, context,"Some rich man won the lottery and want to give you 25000$!", "Do you want to accept it?", 2);
+                    showDialogWithChoose(sharedPreferences, context,"Some rich man won the lottery and want to give you 2500$!", "Do you want to accept it?", 2);
                     break;
 
                 case 2: case 3: case 4: case 5: case 6:
-                    int rndFoundMoney = rnd.nextInt(15) * 100;
-                    showAlertDialog(context,sharedPreferences, "You found " + rndFoundMoney, "");
+                    int rndFoundMoney = rnd.nextInt(25) * 100 + 500;
+                        showAlertDialog(context,sharedPreferences, "You found " + rndFoundMoney, "");
                     editor.putInt(contextThis.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(contextThis.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + rndFoundMoney));
+                    break;
+
+                case 7: case 8: case 9:
+                    if(sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) != null)
+                        if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) > 1250)
+                            showDialogWithChoose(sharedPreferences, context, "Neighbour loan", "Your neighbour want to borrow 1000$. Do you want to give it to him?", 6);
                     break;
             }
             editor.apply();
@@ -347,8 +360,8 @@ public class UpdateValues {
                         }
                     }
                     break;
-//TODO: dodać smutek po zerwaniu
-                case 4:
+
+                    case 4:
                     json = sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
                     gson.fromJson(json, Transport.class);
                     gson.newBuilder().setLenient().create();
@@ -380,6 +393,12 @@ public class UpdateValues {
                         }
                     }
                     break;
+
+                case 7: case 8: case 9:
+                    if(sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) != null)
+                        if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) > 1250)
+                            showDialogWithChoose(sharedPreferences, context, "Neighbour loan", "Your neighbour want to borrow 1000$. Do you want to give it to him?", 6);
+                break;
             }
             editor.apply();
         }
