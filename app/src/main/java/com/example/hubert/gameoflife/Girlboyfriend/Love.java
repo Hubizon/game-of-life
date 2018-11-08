@@ -1,10 +1,17 @@
 package com.example.hubert.gameoflife.Girlboyfriend;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
+
+import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+
+import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
 
 public class Love  {
     private String name;
-    private int age;
+   // private int age;
 
     public Love(String name)
     {
@@ -12,6 +19,17 @@ public class Love  {
     }
 
     public String getName() { return name; }
+  //  public int getAge() { return age; }
 
-    public int getAge() { return age; }
+    public static void BreakUp(Context context)
+    {
+        SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(context.getResources().getString(R.string.saved_love_key), null);
+        editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
+        editor.putInt(context.getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel);
+        editor.putBoolean(context.getResources().getString(R.string.saved_is_sad_key), true);
+        editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 100);
+        editor.apply();
+    }
 }

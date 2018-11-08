@@ -33,8 +33,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.example.hubert.gameoflife.Shop.ShopFragment.lotteryList;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.weaponList;
+import static com.example.hubert.gameoflife.Utils.Arrays.foodList;
+import static com.example.hubert.gameoflife.Utils.Arrays.funList;
+import static com.example.hubert.gameoflife.Utils.Arrays.lodgingList;
+import static com.example.hubert.gameoflife.Utils.Arrays.lotteryList;
+import static com.example.hubert.gameoflife.Utils.Arrays.medicinesList;
+import static com.example.hubert.gameoflife.Utils.Arrays.transportList;
+import static com.example.hubert.gameoflife.Utils.Arrays.weaponList;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
 
 public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBuyAdapter.ItemClickListener {
@@ -62,30 +67,30 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         switch (id)
         {
             case R.id.cardview_food:
-                for(int i = 0; i < ShopFragment.foodList.length; i++)
-                    itemsNames.add(ShopFragment.foodList[i].getName());
-                for(int i = 0; i < ShopFragment.foodList.length; i++)
-                    itemsPrices.add("$" + ShopFragment.foodList[i].getPrice());
+                for(int i = 0; i < foodList.length; i++)
+                    itemsNames.add(foodList[i].getName());
+                for(int i = 0; i < foodList.length; i++)
+                    itemsPrices.add("$" + foodList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY FOOD");
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
                 break;
 
             case R.id.cardview_medicines:
-                for(int i = 0; i < ShopFragment.medicinesList.length; i++)
-                    itemsNames.add(ShopFragment.medicinesList[i].getName());
-                for(int i = 0; i < ShopFragment.medicinesList.length; i++)
-                    itemsPrices.add("$" + ShopFragment.medicinesList[i].getPrice());
+                for(int i = 0; i < medicinesList.length; i++)
+                    itemsNames.add(medicinesList[i].getName());
+                for(int i = 0; i < medicinesList.length; i++)
+                    itemsPrices.add("$" + medicinesList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY MEDICINES");
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
                 break;
 
             case R.id.cardview_fun:
-                for(int i = 0; i < ShopFragment.funList.length; i++)
-                    itemsNames.add(ShopFragment.funList[i].getName());
-                for(int i = 0; i < ShopFragment.funList.length; i++)
-                    itemsPrices.add("$" + ShopFragment.funList[i].getPrice());
+                for(int i = 0; i < funList.length; i++)
+                    itemsNames.add(funList[i].getName());
+                for(int i = 0; i < funList.length; i++)
+                    itemsPrices.add("$" + funList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY FUN ITEMS");
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
                 break;
 
             case R.id.buyLotteries:
@@ -119,20 +124,20 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 break;
 
             case R.id.cardview_house:
-                for(int i = 0; i < ShopFragment.lodgingList.length; i++)
-                    itemsNames.add(ShopFragment.lodgingList[i].getName());
-                for(int i = 0; i < ShopFragment.lodgingList.length; i++)
-                    itemsPrices.add("$" + ShopFragment.lodgingList[i].getPrice());
+                for(int i = 0; i < lodgingList.length; i++)
+                    itemsNames.add(lodgingList[i].getName());
+                for(int i = 0; i < lodgingList.length; i++)
+                    itemsPrices.add("$" + lodgingList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY HOUSES");
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
-                lodgingObjects = ShopFragment.lodgingList;
+                lodgingObjects = lodgingList;
                 break;
 
             case R.id.cardview_transport:
-                for(int i = 0; i < ShopFragment.transportList.length; i++)
-                    itemsNames.add(ShopFragment.transportList[i].getName());
-                for(int i = 0; i < ShopFragment.transportList.length; i++)
-                    itemsPrices.add("$" + ShopFragment.transportList[i].getPrice());
+                for(int i = 0; i < transportList.length; i++)
+                    itemsNames.add(transportList[i].getName());
+                for(int i = 0; i < transportList.length; i++)
+                    itemsPrices.add("$" + transportList[i].getPrice());
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText("BUY TRANSPORT");
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
@@ -162,29 +167,29 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         switch (id)
         {
             case R.id.cardview_food:
-                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.foodList[position].getPrice())
+                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= foodList[position].getPrice())
                 {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.foodList[position].getPrice()));
-                    editor.putInt(getString(R.string.saved_hungry_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) + ShopFragment.foodList[position].getGivenFood()));
-                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) + ShopFragment.foodList[position].getGivenHealth()));
-                    editor.putInt(getString(R.string.saved_energy_key), (sharedPref.getInt(getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) + ShopFragment.foodList[position].getGivenEnergy()));
-                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), 750) + ShopFragment.foodList[position].getGivenHappiness()));
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - foodList[position].getPrice()));
+                    editor.putInt(getString(R.string.saved_hungry_key), (sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) + foodList[position].getGivenFood()));
+                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) + foodList[position].getGivenHealth()));
+                    editor.putInt(getString(R.string.saved_energy_key), (sharedPref.getInt(getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) + foodList[position].getGivenEnergy()));
+                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), 750) + foodList[position].getGivenHappiness()));
                 }
                 else
                     Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
                 ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.cardview_medicines:
-                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.medicinesList[position].getPrice())
+                if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= medicinesList[position].getPrice())
                 {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.medicinesList[position].getPrice()));
-                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) + ShopFragment.medicinesList[position].getGivenHealth()));
+                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - medicinesList[position].getPrice()));
+                    editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) + medicinesList[position].getGivenHealth()));
                 }
                 else
                     Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
                 ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
@@ -219,38 +224,37 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     tvPrice = funTv.getPrice();
                 }
 
-                if("Exit".equals(ShopFragment.funList[position].getType()))
+                if("Exit".equals(funList[position].getType()))
                     buyFun(position);
 
-                else if("Computer".equals(ShopFragment.funList[position].getType()) && funComputer == null)
+                else if("Computer".equals(funList[position].getType()) && funComputer == null)
                     buyFun(position);
-                else if("Computer".equals(ShopFragment.funList[position].getType()))
-                    alertDialogSellItem(computerName, computerPrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "fun", position);
+                else if("Computer".equals(funList[position].getType()))
+                    alertDialogSellItem(computerName, computerPrice,  funList[position].getPrice(),  funList[position].getName(), "fun", position);
 
-                else if(ShopFragment.funList[position].getType().equals("Phone") && funPhone == null)
+                else if( funList[position].getType().equals("Phone") && funPhone == null)
                     buyFun(position);
-                else if ("Phone".equals(ShopFragment.funList[position].getType()))
-                    alertDialogSellItem(phoneName, phonePrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "fun", position);
+                else if ("Phone".equals( funList[position].getType()))
+                    alertDialogSellItem(phoneName, phonePrice,  funList[position].getPrice(),  funList[position].getName(), "fun", position);
 
-                else if(ShopFragment.funList[position].getType().equals("TV") && funTv == null)
+                else if( funList[position].getType().equals("TV") && funTv == null)
                     buyFun(position);
-                else if ("TV".equals(ShopFragment.funList[position].getType()))
-                    alertDialogSellItem(tvName, tvPrice, ShopFragment.funList[position].getPrice(), ShopFragment.funList[position].getName(), "fun", position);
+                else if ("TV".equals( funList[position].getType()))
+                    alertDialogSellItem(tvName, tvPrice,  funList[position].getPrice(),  funList[position].getName(), "fun", position);
 
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
                 break;
-//TODO: jak będą karne alert dialogi to żeby zapobiec wychodzeniu z apki, żeby się nie odjeła kasa, to napoczątku odejmować, a potem najwyżej dodawać
             case R.id.buyLotteries:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= lotteryList[position].getPrice())
                 {
                     editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - lotteryList[position].getPrice()));
 
                     Random random = new Random();
-                    if(random.nextInt(ShopFragment.lotteryList[position].getChanceToWin()) == 1)
+                    if(random.nextInt( lotteryList[position].getChanceToWin()) == 1)
                     {
-                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + ShopFragment.lotteryList[position].getPrize()));
-                        Toast.makeText(view.getContext(), "Wow! You won " + ShopFragment.lotteryList[position].getPrize() + "$ in lottery!", Toast.LENGTH_LONG).show();
-                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + ShopFragment.lotteryList[position].getPrize()));
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) +  lotteryList[position].getPrize()));
+                        Toast.makeText(view.getContext(), "Wow! You won " +  lotteryList[position].getPrize() + "$ in lottery!", Toast.LENGTH_LONG).show();
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) +  lotteryList[position].getPrize()));
                     }
                     else
                         Toast.makeText(view.getContext(), "Unfortunately, you didn't win this lottery", Toast.LENGTH_LONG).show();
@@ -288,7 +292,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
             case R.id.cardview_house:
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
-                //TODO: zobaczy czy dziala bez tego
+                // zobaczyc czy dziala bez tego
                 gson.fromJson(json, Lodging.class);
                 gson.newBuilder().setLenient().create();
 
@@ -297,10 +301,10 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
                 if(sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) == null || json.equals(SharedPreferencesDefaultValues.DefaultMyLodging) || json.equals(SharedPreferencesDefaultValues.DefaultMyLodgingAfter18))
                 {
-                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.lodgingList[position].getPrice())
+                    if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >=  lodgingList[position].getPrice())
                     {
-                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.lodgingList[position].getPrice()));
-                        json = gson.toJson(ShopFragment.lodgingList[position]);
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) -  lodgingList[position].getPrice()));
+                        json = gson.toJson( lodgingList[position]);
                         editor.putString(getResources().getString(R.string.saved_my_lodging_key), json);
                     }
                     else
@@ -313,7 +317,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     else if(json.equals(SharedPreferencesDefaultValues.DefaultMyLodging))
                         ;
                     else*/
-                        alertDialogSellItem(lodging.getName(), lodging.getPrice(), ShopFragment.lodgingList[position].getPrice(), ShopFragment.lodgingList[position].getName(), "lodging", position);
+                        alertDialogSellItem(lodging.getName(), lodging.getPrice(),  lodgingList[position].getPrice(),  lodgingList[position].getName(), "lodging", position);
 
                 break;
 
@@ -321,7 +325,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
                 Transport transport = gson.fromJson(json, Transport.class);
 
-                double transportPriceDouble = ShopFragment.transportList[position].getPrice();
+                double transportPriceDouble =  transportList[position].getPrice();
                 if("Rent for a month".equals(String.valueOf(((Spinner)view.findViewById(R.id.buy_method_spinner)).getSelectedItem())))
                     transportPriceDouble *= 4.75;
                 else if("Buy".equals(String.valueOf(((Spinner)view.findViewById(R.id.buy_method_spinner)).getSelectedItem())))
@@ -333,13 +337,13 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= transportPrice)
                     {
                         editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - transportPrice));
-                        json = gson.toJson(ShopFragment.transportList[position]);
+                        json = gson.toJson( transportList[position]);
                         editor.putString(getResources().getString(R.string.saved_my_transport_key), json);
                     }
                     else
                         Toast.makeText(view.getContext(), "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
                 } else
-                    alertDialogSellItem(transport.getName(), transport.getPrice(), transportPrice, ShopFragment.transportList[position].getName(), "transport", position);
+                    alertDialogSellItem(transport.getName(), transport.getPrice(), transportPrice,  transportList[position].getName(), "transport", position);
                 ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
@@ -389,11 +393,11 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                                     buyFun(position);
                                     break;
                                 case "lodging":
-                                    json = gson.toJson(ShopFragment.lodgingList[position]);
+                                    json = gson.toJson( lodgingList[position]);
                                     editor.putString(getResources().getString(R.string.saved_my_lodging_key), json);
                                     break;
                                 case "transport":
-                                    json = gson.toJson(ShopFragment.transportList[position]);
+                                    json = gson.toJson( transportList[position]);
                                     editor.putString(getResources().getString(R.string.saved_my_transport_key), json);
                                     break;
                             }
@@ -412,15 +416,15 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
     {
         SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        if (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= ShopFragment.funList[position].getPrice())
+        if (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >=  funList[position].getPrice())
         {
-            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - ShopFragment.funList[position].getPrice()));
+            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) -  funList[position].getPrice()));
             Gson gson = new Gson();
-            String json = gson.toJson(ShopFragment.funList[position]);
-            switch (ShopFragment.funList[position].getType()) {
-                // TODO: create enum with those types
+            String json = gson.toJson( funList[position]);
+            switch ( funList[position].getType()) {
+                //  create enum with those types
                 case "Exit":
-                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) + ShopFragment.funList[position].getGivenFun()));
+                    editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) +  funList[position].getGivenFun()));
                     break;
                 case "TV":
                     editor.putString(getResources().getString(R.string.saved_my_tv_key), json);

@@ -200,4 +200,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRewardedVideoCompleted() {}
+
+    public static void Die()
+    {
+        //TODO: uzupełnić to
+    }
 }

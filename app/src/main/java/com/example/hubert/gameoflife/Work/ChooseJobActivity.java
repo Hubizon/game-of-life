@@ -29,38 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Bicycle;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.BigHouse;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.BlackAndWhiteTv;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Boots;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Car;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.CheapFlat;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.CheapFlatInTheDangerousDistrict;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Computer;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Flat;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Hotel3;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.House;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.ModernComputer;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Motorcycle;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.OldPhone;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.PlasmaTv;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.SmallHouse;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Smartphone;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.SportsCar;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Tv;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.Villa;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.WoodenPc;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.ak47;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.bombs;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.funList;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.grenades;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.knife;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.lodgingList;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.pistol;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.rocketLauncher;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.sniperRifle;
-import static com.example.hubert.gameoflife.Shop.ShopFragment.transportList;
-import static com.example.hubert.gameoflife.Utils.Arrays.GeneralTraing;
 import static com.example.hubert.gameoflife.Utils.Arrays.GetAMastersDegree;
 import static com.example.hubert.gameoflife.Utils.Arrays.PassHighSchool;
 import static com.example.hubert.gameoflife.Utils.Arrays.PassPrimarySchool;
@@ -102,31 +70,6 @@ public class ChooseJobActivity extends AppCompatActivity{
         mTabLayout.getTabAt(0).setIcon(tabIcons[0]);
         mTabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
-
-    public static final Job[] officeJobsList = new Job[] {
-            new Job("Beggar", 5, 3, 35, 0,  0, null,null, null, null, null, null),
-            new Job("Salesperson", 15, 20, 25, 1,  0, OldPhone, null, null,null, Boots, new Skill[] { PassPrimarySchool}),
-            new Job("Dustman", 20, 25, 30, 1, 0, OldPhone, WoodenPc,null, CheapFlatInTheDangerousDistrict, Boots, new Skill[] { PassPrimarySchool}),
-            new Job("Painter", 35, 40, 45, 5,  R.string.saved_drawing_skills_key, Smartphone, WoodenPc, BlackAndWhiteTv, CheapFlat, Bicycle, new Skill[] { PassPrimarySchool, PassSecondarySchool }),
-            new Job("Teacher", 30, 40, 45, 25,  R.string.saved_communication_skills_key, Smartphone, Computer, BlackAndWhiteTv, CheapFlat, Bicycle, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool }),
-            new Job("YouTuber", 30, 50, 95, 3,  R.string.saved_recording_skills_key, Smartphone,ModernComputer, Tv, Flat, Motorcycle, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing }),
-            new Job("Programmer", 45, 55, 70, 10,  R.string.saved_programming_skills_key, Smartphone,ModernComputer, Tv, SmallHouse, Motorcycle, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage }),
-            new Job("Footballer", 40, 70, 110, 5,  0, Smartphone,ModernComputer, Tv, SmallHouse, Car, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage }),
-            new Job("Scientist", 50, 65, 90, 50,  0, Smartphone, ModernComputer, PlasmaTv, House, Car, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
-            new Job("Doctor", 65, 80, 100, 50,  0, Smartphone,ModernComputer, PlasmaTv, Hotel3, Car, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
-            new Job("Lawyer", 80, 120, 150, 15,  R.string.saved_communication_skills_key, Smartphone,ModernComputer, PlasmaTv, BigHouse, SportsCar, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
-            new Job("Businessman", 100, 140, 200, 50,  R.string.saved_communication_skills_key, Smartphone, ModernComputer, PlasmaTv, Villa, SportsCar, new Skill[] { PassPrimarySchool, PassSecondarySchool, PassHighSchool, GeneralTraing, StudyAtCollage, GetAMastersDegree }),
-    };
-
-    public static CriminalJob[] criminalJobsList = new CriminalJob[] {
-            new CriminalJob("Pickpocket", 40, 45, 50, null, null, null,null, null, new Skill[] { ThiefSkillsBeginner }, 125, null),
-            new CriminalJob("Thief", 55, 65, 80, OldPhone, null, null, CheapFlat, Bicycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate },75, new Weapon[] { knife }),
-            new CriminalJob("Drug dealer", 70, 75, 1000, Smartphone, null, null, SmallHouse, Motorcycle,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner }, 40, new Weapon[] { knife, pistol, grenades }),
-            new CriminalJob("Terrorist", 80, 85, 100, Smartphone, WoodenPc, null, House, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate },25, new Weapon[] { knife, pistol, grenades, ak47, bombs }),
-            new CriminalJob("Kidnap kids", 90, 100, 115, Smartphone, Computer, BlackAndWhiteTv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 20, new Weapon[] { knife, pistol, grenades, ak47, bombs }),
-            new CriminalJob("Mafia member", 95, 120, 160, Smartphone, ModernComputer, Tv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 15, new Weapon[] { knife, pistol, grenades, ak47, bombs, sniperRifle }),
-            new CriminalJob("Assassin", 125, 160, 250, Smartphone, ModernComputer, PlasmaTv, Villa, SportsCar,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced, WeaponSkillsAdvanced }, 10, new Weapon[] { knife, pistol, grenades, ak47, bombs, sniperRifle, rocketLauncher }),
-    };
 
 
 

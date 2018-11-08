@@ -216,11 +216,13 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
             case R.id.button_love_brokeUp:
                 if(sharedPref.getString(getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) != null)
+                {
                     if("girl".equals(sharedPref.getString(getResources().getString(R.string.saved_sexuality_key), SharedPreferencesDefaultValues.DefaultSexuality)))
                         showDialogWithChoose("Break up", "Are you want to break up with her?", 3);
                     else
                         showDialogWithChoose("Break up", "Are you want to break up with him?", 3);
-
+                    Love.BreakUp(getContext());
+                }
                 break;
 
             case R.id.button_love_SearchLove:
@@ -265,13 +267,13 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                     else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2)
                         loveStatus.setText("Status: marry");
 
-                    progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+                    progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
                 }
                 break;
         }
 
         editor.apply();
-        progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+        progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
     }
 
     private void showDialogWithChoose(final String title, final String message, final int whichOneEvent)
@@ -316,7 +318,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                     Toast.makeText(getContext(), "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
 
                                 editor.apply();
-                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
                                 dialoginterface.cancel();
                                 break;
 
@@ -331,7 +333,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                     Toast.makeText(getContext(), "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
 
                                 editor.apply();
-                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) / 10);
+                                progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
                                 dialoginterface.cancel();
                                 break;
 

@@ -1,21 +1,16 @@
 package com.example.hubert.gameoflife;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
 
 import com.example.hubert.gameoflife.Education.EduFragment;
-import com.example.hubert.gameoflife.Education.EducationFragment;
 import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
 import com.example.hubert.gameoflife.House.HomeFragment;
 import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
-import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.Work.WorkFragment;
 
 public class CustomPagerAdapter extends FragmentPagerAdapter {
 

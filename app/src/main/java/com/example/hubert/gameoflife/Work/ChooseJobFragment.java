@@ -32,8 +32,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.hubert.gameoflife.Work.ChooseJobActivity.criminalJobsList;
-import static com.example.hubert.gameoflife.Work.ChooseJobActivity.officeJobsList;
+import static com.example.hubert.gameoflife.Utils.Arrays.criminalJobsList;
+import static com.example.hubert.gameoflife.Utils.Arrays.officeJobsList;
 
 
 /**
@@ -96,11 +96,25 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
         Gson gson = new Gson();
         String json;
 
-        Job job;
-        if(((TextView)view.findViewById(R.id.chooseJobName)).getText().equals(officeJobsList[position].getName()))
-            job = officeJobsList[position];
-        else
-            job = criminalJobsList[position];
+        Job job = null;
+        try
+        {
+            JSONArray jsonArrayOfficeJobs = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_office_jobs_list_key), SharedPreferencesDefaultValues.DefaultOfficeJobsList));
+            JSONArray jsonArrayCriminalJobs = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_criminal_jobs_list_key), SharedPreferencesDefaultValues.DefaultCriminalJobsList));
+            JSONObject jsonObjectOfficeJob = jsonArrayOfficeJobs.getJSONObject(position);
+
+            if(((TextView)view.findViewById(R.id.chooseJobName)).getText().equals(jsonObjectOfficeJob.getString("name")))
+                job = gson.fromJson(jsonObjectOfficeJob.toString(), Job.class);
+            else
+            {
+                JSONObject jsonObjectCriminalJob = jsonArrayCriminalJobs.getJSONObject(position);
+                job = gson.fromJson(jsonObjectCriminalJob.toString(), Job.class);
+            }
+
+        } catch (JSONException e) { }
+
+
+
         String toToast = "";
         if(job != null) {
             if (job.getMinPhoneNeeded() != null) {

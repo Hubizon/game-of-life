@@ -16,15 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Education.expandable.ChildList;
 import com.example.hubert.gameoflife.Education.expandable.MyExpandableRecyclerAdapter;
 import com.example.hubert.gameoflife.Education.expandable.ParentList;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Utils.MyDialogFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.Work.FindJobActivity;
 import com.example.hubert.gameoflife.Work.Job;
 import com.google.gson.Gson;
 
@@ -76,7 +73,20 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         {
             view.findViewById(R.id.cardViewWorkInfo).setVisibility(View.VISIBLE);
             ((TextView)view.findViewById(R.id.work_name)).setText("Work: " + job.getName());
-            ((ProgressBar)view.findViewById(R.id.ProgressBar_work_position)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), SharedPreferencesDefaultValues.DefaultWorkPosition));
+            ((ProgressBar)view.findViewById(R.id.ProgressBar_work_position)).setProgress(job.getPositionPoints());
+            ((TextView)view.findViewById(R.id.position_work)).setText("Position: " + job.getPosition());
+            /*switch (sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), 1))
+            {
+                case 1:
+                    ((TextView)view.findViewById(R.id.position_work)).setText();
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+            }*/
         }
 
         ChildSchool.add(new ChildList("Go to school"));
@@ -109,21 +119,6 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         adapter = new MyExpandableRecyclerAdapter(Parent, getContext());
         recycler_view.setAdapter(adapter);
 
-//        Button goSchoolButton = view.findViewById(R.id.GoToSchoolEducation);
-//        goSchoolButton.setOnClickListener(this);
-//        Button learnInHomeButton = view.findViewById(R.id.LearnInHomeEducation);
-//        learnInHomeButton.setOnClickListener(this);
-//        Button giveUpSchoolButton = view.findViewById(R.id.GiveUpSchool);
-//        giveUpSchoolButton.setOnClickListener(this);
-//        Button getNewFriendsButton = view.findViewById(R.id.getNewFriendsCriminal);
-//        getNewFriendsButton.setOnClickListener(this);
-//        Button stealSomethingButton = view.findViewById(R.id.stealSomethingCriminal);
-//        stealSomethingButton.setOnClickListener(this);
-//        Button sellDrugsButton = view.findViewById(R.id.sellDrugsCriminal);
-//        sellDrugsButton.setOnClickListener(this);
-//        Button threatTeachersButton = view.findViewById(R.id.threatTeachersCriminal);
-//        threatTeachersButton.setOnClickListener(this);
-
         return view;
     }
 
@@ -133,115 +128,6 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         SharedPreferences.Editor editor = sharedPref.edit();
         Intent intent = null;
         DialogFragment newDialog = null;
-        Random r = new Random();
-
-        int view_id = view.getId();
-        switch(view_id) {
-            case R.id.GiveUpSchool:
-                editor.putBoolean(getString(R.string.saved_is_in_school_now_key), false);
-                intent = new Intent(getActivity().getApplicationContext(), FindJobActivity.class);
-                break;
-
-            case R.id.LearnInHomeEducation:
-                //intent = new Intent(getActivity().getApplicationContext(), LearnInHomeActivity.class);
-                //TODO: open SkillsFragment
-                intent = new Intent(getActivity().getApplicationContext(), SkillsActivity.class);
-               /* FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                SkillsFragment fragment = new SkillsFragment();
-                fragmentTransaction.add(R.id.pagerSkills, fragment);
-                fragmentTransaction.commit();*/
-                break;
-
-            case R.id.GoToSchoolEducation:
-                newDialog = MyDialogFragment.newInstance(view_id);
-                break;
-
-            case R.id.getNewFriendsCriminal:
-                newDialog = MyDialogFragment.newInstance(view_id);
-                break;
-
-            case R.id.stealSomethingCriminal:
-                if(r.nextInt(25) == 1) {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-                    Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
-                    if(r.nextInt(25) == 1)
-                        if(sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
-                        {
-                            editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-                            Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
-                        }
-                }
-                else
-                {
-                    editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + 50));
-                    Toast.makeText(getActivity().getApplicationContext(), ("You got 50 money!"), Toast.LENGTH_LONG).show();
-                }
-                break;
-
-            case R.id.sellDrugsCriminal:
-                newDialog = MyDialogFragment.newInstance(view_id);
-                break;
-
-            case R.id.threatTeachersCriminal:
-                if(r.nextInt(5) == 1)
-                {
-                    /*try {
-                        JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                        JSONObject jsonObject = (JSONObject)(jsonArray.get(jsonArray.length() - 1));
-                        if(jsonObject.getInt("subjectMark") <= 1)
-                        {
-                            Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you were expelled from school! You can not come back untill" + (sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) + 2) + "year"), Toast.LENGTH_LONG).show();
-                            editor.putBoolean(getResources().getString(R.string.saved_can_go_to_school_key), false);
-                            editor.putInt(getResources().getString(R.string.saved_year_when_can_go_to_school_key), (sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) + 2));
-                        }
-                        else
-                        {
-                            Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you got 1 from Behavior! Next time you will be expelled from school."), Toast.LENGTH_LONG).show();
-                            jsonObject.put("subjectMark", 1);
-                        }
-                        jsonArray.put(jsonArray.length() - 1, jsonObject);
-                        editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
-                    }
-                    catch (JSONException e)
-                    { }*/
-
-                    if(sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) >= 500)
-                    {
-                        Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you have now 2x weaker grades!"), Toast.LENGTH_LONG).show();
-                        editor.putInt(getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) / 2);
-                    }
-                    else
-                    {
-                        Toast.makeText(getActivity().getApplicationContext(), ("Teacher reported this and you've got 1 from all subjects!"), Toast.LENGTH_LONG).show();
-                        editor.putInt(getResources().getString(R.string.saved_education_points_key), 0);
-                    }
-                }
-                else
-                {
-                    Toast.makeText(getActivity().getApplicationContext(), ("You have now a little better marks"), Toast.LENGTH_LONG).show();
-                    editor.putInt(getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 50);
-                    /*try
-                    {
-                        JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                        int rnd = r.nextInt(jsonArray.length());
-                        JSONObject jsonObject = (JSONObject)jsonArray.get(rnd);
-                        jsonObject.put("subjectMark", (jsonObject.getInt("subjectMark") + 1 ));
-                        if(jsonObject.getInt("subjectMark") >= 6)
-                            Toast.makeText(getActivity().getApplicationContext(), ("You already have 6 from " + jsonObject.getString("subjectName")), Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(getActivity().getApplicationContext(), ("You have now " + jsonObject.get("subjectMark") + " from " + jsonObject.getString("subjectName")), Toast.LENGTH_LONG).show();
-                        jsonArray.put(rnd, jsonObject);
-                        editor.putString(getResources().getString(R.string.saved_subjects_list_key), jsonArray.toString());
-                    }
-                    catch (JSONException e)
-                    { }*/
-                }
-                break;
-
-            default:
-                break;
-        }
 
         if (intent != null) startActivity(intent);
         else if (newDialog != null) newDialog.show(getActivity().getSupportFragmentManager(), EDU_DIALOG_TAG);

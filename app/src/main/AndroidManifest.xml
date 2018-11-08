@@ -33,13 +33,7 @@
             android:name=".Shop.BuyActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Education.LearnInHomeActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
             android:name=".House.ComputerActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".Work.FindJobActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Work.ChooseJobActivity"

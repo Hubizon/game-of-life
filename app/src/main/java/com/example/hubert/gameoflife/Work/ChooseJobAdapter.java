@@ -15,6 +15,7 @@ import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
@@ -206,7 +207,7 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
     }
 
     static int page = 1;
-    static boolean isFirstTime0 = true;
+//    static boolean isFirstTime0 = true;
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ChooseJobAdapter.ViewHolder holder, int position) {
@@ -215,12 +216,12 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
         holder.myTextViewName.setText(ItemName);
         holder.myTextViewPrice.setText(ItemPrice);
 
-        if(position == 0)
-        {
-            isFirstTime0 = !isFirstTime0;
-        }
+//        if(position == 0)
+//        {
+//            isFirstTime0 = !isFirstTime0;
+//        }
 
-        if(!isFirstTime0)
+        if(!mDataNames.get(0).equals(Arrays.criminalJobsList[0].getName()))
         {
             if(position >= lastPositionPage1 && lastPositionPage1 != 100)
                 holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);
@@ -228,6 +229,15 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
         else
             if(position >= lastPositionPage2 && lastPositionPage2 != 100)
                 holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);
+
+//        if(!isFirstTime0)
+//        {
+//            if(position >= lastPositionPage1 && lastPositionPage1 != 100)
+//                holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);
+//        }
+//        else
+//            if(position >= lastPositionPage2 && lastPositionPage2 != 100)
+//                holder.myCardViewChooseJob.setBackgroundColor(lastItemColor);
     }
 
     // total number of rows

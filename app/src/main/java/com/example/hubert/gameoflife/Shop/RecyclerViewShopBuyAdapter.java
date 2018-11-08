@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.House.Lodging;
+import com.example.hubert.gameoflife.Utils.Arrays;
 
 import org.w3c.dom.Text;
 
@@ -70,7 +71,7 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
         holder.myTextViewPrice.setText(ItemPrice);
 
         if(mDataNames != null)
-            if(mDataNames.get(0).equals(ShopFragment.transportList[0].getName()) || mDataNames.get(0).equals(ShopFragment.lodgingList[0].getName()))
+            if(mDataNames.get(0).equals(Arrays.transportList[0].getName()) || mDataNames.get(0).equals(Arrays.lodgingList[0].getName()))
                 holder.mySpinnerBuyMethod.setVisibility(View.VISIBLE);
     }
 
