@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -28,8 +29,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@android:color/transparent"
-                android:gravity="center"
                 android:dropDownWidth="match_parent"
+                android:gravity="center"
                 android:popupBackground="#66000000"
                 app:layout_constraintBottom_toTopOf="@+id/characterName"
                 app:layout_constraintDimensionRatio="1:1"
@@ -166,9 +167,9 @@
         android:id="@+id/cardView4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_weight="1.5">
 
         <LinearLayout
@@ -218,8 +219,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     tools:progress="75" />
             </LinearLayout>
 
@@ -241,8 +242,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     tools:progress="75" />
             </LinearLayout>
 
@@ -264,8 +265,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     tools:progress="75" />
             </LinearLayout>
         </LinearLayout>
@@ -303,6 +304,7 @@
                     android:hint="@string/loudging"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -324,6 +326,7 @@
                     android:text="@string/education_main"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -368,6 +371,7 @@
                     android:text="@string/girlfriend"
                     android:textColor="@color/primaryTextColor" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

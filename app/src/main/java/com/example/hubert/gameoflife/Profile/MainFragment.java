@@ -9,12 +9,15 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -95,6 +98,13 @@ public class MainFragment extends Fragment {
         Spinner iconSpinner = view.findViewById(R.id.spinner);
         SpinnerIconAdapter spinnerIconAdapter = new SpinnerIconAdapter(getContext(), iconSpinner.getWidth());
         iconSpinner.setAdapter(spinnerIconAdapter);
+        iconSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            //    coordinatorLayout = (LinearLayout) findViewById(R.id  .coordinatorLayout);
+              //  Snackbar.make(view, "This feature is not supported yet!", Snackbar.LENGTH_SHORT).show();
+            }
+        });
 
         updateLabels();
         return view;

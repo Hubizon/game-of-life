@@ -56,3 +56,5 @@ public class SpinnerIconAdapter extends BaseAdapter {
         return view;
     }
 }
+
+// Feaure not supported yet!

@@ -94,6 +94,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
             view.findViewById(R.id.button_love_buyGift).setVisibility(View.VISIBLE);
             view.findViewById(R.id.button_love_takeSomewhere).setVisibility(View.VISIBLE);
             view.findViewById(R.id.button_love_brokeUp).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.button_love_SearchLove).setVisibility(View.GONE);
 
             if("girl".equals(sharedPref.getString(getResources().getString(R.string.saved_sexuality_key), SharedPreferencesDefaultValues.DefaultSexuality)))
                 loveName.setText("Girlfriend: " + sharedPref.getString(getResources().getString(R.string.saved_love_name_key), ""));
@@ -119,6 +120,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
             view.findViewById(R.id.button_love_buyGift).setVisibility(View.GONE);
             view.findViewById(R.id.button_love_takeSomewhere).setVisibility(View.GONE);
             view.findViewById(R.id.button_love_brokeUp).setVisibility(View.GONE);
+            view.findViewById(R.id.button_love_SearchLove).setVisibility(View.VISIBLE);
         }
 
         view.findViewById(R.id.button_love_IncreaseRelationship).setOnClickListener(this);
@@ -249,6 +251,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                     view.findViewById(R.id.button_love_buyGift).setVisibility(View.VISIBLE);
                     view.findViewById(R.id.button_love_takeSomewhere).setVisibility(View.VISIBLE);
                     view.findViewById(R.id.button_love_brokeUp).setVisibility(View.VISIBLE);
+                    view.findViewById(R.id.button_love_SearchLove).setVisibility(View.GONE);
 
                     if("girl".equals(sharedPref.getString(getResources().getString(R.string.saved_sexuality_key), SharedPreferencesDefaultValues.DefaultSexuality)))
                         loveName.setText("Girlfriend: " + sharedPref.getString(getResources().getString(R.string.saved_love_name_key), ""));
@@ -346,6 +349,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                 view.findViewById(R.id.button_love_buyGift).setVisibility(View.GONE);
                                 view.findViewById(R.id.button_love_takeSomewhere).setVisibility(View.GONE);
                                 view.findViewById(R.id.button_love_brokeUp).setVisibility(View.GONE);
+                                view.findViewById(R.id.button_love_SearchLove).setVisibility(View.VISIBLE);
                                 break;
 
                             default:
