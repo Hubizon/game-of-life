@@ -2,12 +2,9 @@ package com.example.hubert.gameoflife.Girlboyfriend;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-
-import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
 
 public class Love  {
     private String name;

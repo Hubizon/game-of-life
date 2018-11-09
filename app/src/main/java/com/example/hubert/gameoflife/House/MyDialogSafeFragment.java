@@ -1,37 +1,23 @@
-package com.example.hubert.gameoflife.Utils;
+package com.example.hubert.gameoflife.House;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.House.Fun;
-import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Work.ChooseJobActivity;
-import com.example.hubert.gameoflife.Work.Job;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Random;
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 public class MyDialogSafeFragment extends DialogFragment implements View.OnClickListener{
 

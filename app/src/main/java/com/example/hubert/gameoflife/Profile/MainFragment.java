@@ -45,11 +45,14 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHandler = new Handler();
+
     }
 
     private TextView characternametext, charactermoneytext, timetext, moneytext, agetext, lodgingtext, educationtext, transporttext, girltext, childtext;
     private ProgressBar hungerprogress, healthprogress, energyprogress, happinessprogress;
     private ImageView charactericon;
+    private LinearLayout mainLayout;
+    private Spinner iconSpinner;
 
     private SharedPreferences mSharedPref;
     private Handler mHandler;
@@ -77,6 +80,8 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main,
                 container, false);
+
+        mainLayout = view.findViewById(R.id.profile_main_layout);
         charactermoneytext = view.findViewById(R.id.characterMoney);
         characternametext = view.findViewById(R.id.characterName);
         timetext = view.findViewById(R.id.time);
@@ -95,16 +100,9 @@ public class MainFragment extends Fragment {
 
         //charactericon = view.findViewById(R.id.characterIcon);
 
-        Spinner iconSpinner = view.findViewById(R.id.spinner);
+        iconSpinner = view.findViewById(R.id.spinner);
         SpinnerIconAdapter spinnerIconAdapter = new SpinnerIconAdapter(getContext(), iconSpinner.getWidth());
         iconSpinner.setAdapter(spinnerIconAdapter);
-        iconSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            //    coordinatorLayout = (LinearLayout) findViewById(R.id  .coordinatorLayout);
-              //  Snackbar.make(view, "This feature is not supported yet!", Snackbar.LENGTH_SHORT).show();
-            }
-        });
 
         updateLabels();
         return view;
@@ -184,7 +182,9 @@ public class MainFragment extends Fragment {
         mHandler.post(mRunnable);
 
         SharedPreferences sharedPrefSettings = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String nameChange = sharedPrefSettings.getString(SettingsActivity.NAME_EDIT_KEY, SharedPreferencesDefaultValues.DefaultName);
+        //String nameChange = sharedPrefSettings.getString(/*SettingsActivity.NAME_EDIT_KEY*/, SharedPreferencesDefaultValues.DefaultName);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        String nameChange = sharedPref.getString(getResources().getString(R.string.saved_character_name_key), SharedPreferencesDefaultValues.DefaultName);
         characternametext.setText(nameChange);
     }
 

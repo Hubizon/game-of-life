@@ -17,7 +17,11 @@ import com.example.hubert.gameoflife.Utils.Arrays;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.hubert.gameoflife.Utils.Arrays.lodgingList;
+import static com.example.hubert.gameoflife.Utils.Arrays.transportList;
 
 /**
  * Created by Hubert on 31.08.2018.
@@ -43,13 +47,57 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
     // inflates the row layout from xml when needed
     @Override
     public RecyclerViewShopBuyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recyclerview_shopbuy_row, parent, false);
+        final View view = mInflater.inflate(R.layout.recyclerview_shopbuy_row, parent, false);
+
 
         Spinner spinner = view.findViewById(R.id.buy_method_spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                int i = 0;
+                TextView textViewName = view.findViewById(R.id.shopBuyItemName);
+                TextView textViewPrice = view.findViewById(R.id.shopBuyItemPrice);
+                if(mDataNames.get(0).equals(lodgingList[0].getName()))
+                {
+                    for(int i = 0; i < lodgingList.length; i++)
+                    {
+                        if(lodgingList[i].getName().equals(textViewName.getText()))
+                        {
+                            switch (position)
+                            {
+                                case 0:
+                                    textViewPrice.setText((lodgingList[i].getPrice() * 25) + "$");
+                                    break;
+                                case 1:
+                                    textViewPrice.setText(lodgingList[i].getPrice() + "$");
+                                    break;
+                                case 2:
+                                    textViewPrice.setText(Math.round(lodgingList[i].getPrice() * 3.5) + "$");
+                                    break;
+                            }
+                        }
+                    }
+                }
+                else if(mDataNames.get(0).equals(transportList[0].getName()))
+                {
+                    for(int i = 0; i < transportList.length; i++)
+                    {
+                        if(transportList[i].getName().equals(textViewName.getText()))
+                        {
+                            switch (position)
+                            {
+                                case 0:
+                                    textViewPrice.setText((transportList[i].getPrice() * 25) + "$");
+                                    break;
+                                case 1:
+                                    textViewPrice.setText(transportList[i].getPrice() + "$");
+                                    break;
+                                case 2:
+                                    textViewPrice.setText(Math.round(transportList[i].getPrice() * 3.5) + "$");
+                                    break;
+                            }
+                        }
+                    }
+                }
             }
 
             @Override
@@ -71,7 +119,7 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
         holder.myTextViewPrice.setText(ItemPrice);
 
         if(mDataNames != null)
-            if(mDataNames.get(0).equals(Arrays.transportList[0].getName()) || mDataNames.get(0).equals(Arrays.lodgingList[0].getName()))
+            if(mDataNames.get(0).equals(Arrays.transportList[0].getName()) || mDataNames.get(0).equals(lodgingList[0].getName()))
                 holder.mySpinnerBuyMethod.setVisibility(View.VISIBLE);
     }
 

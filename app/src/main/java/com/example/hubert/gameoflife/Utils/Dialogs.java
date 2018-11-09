@@ -130,9 +130,9 @@ public class Dialogs {
     public static void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
     {
         AlertDialog.Builder dialog;
-        stopTimer(sharedPreferences, context);
+        stopTimer();
 
-        boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
+        boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
         if (isDark) {
             dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
         } else {

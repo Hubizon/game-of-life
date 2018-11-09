@@ -4,33 +4,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Shop.BuyActivity;
-import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
-import com.example.hubert.gameoflife.Utils.MyDialogSafeFragment;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class HomeFragment extends Fragment
     implements View.OnClickListener {
@@ -75,6 +62,9 @@ public class HomeFragment extends Fragment
 
     @Override
     public void onClick(View view) {
+
+
+
 
         final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Intent intent = null;

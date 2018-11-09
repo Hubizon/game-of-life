@@ -7,6 +7,7 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Utils.Dialogs;
+import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
 import com.example.hubert.gameoflife.Utils.UpdateValues;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         context = this;
+        sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         MobileAds.initialize(this, getResources().getString(R.string.MY_ADMOB_APP_ID));
 
@@ -91,19 +94,39 @@ public class MainActivity extends AppCompatActivity
             mHandler = new Handler();
             mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
         }
+
+        if(sharedPreferences.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true))
+        {
+            //sharedPreferences.edit().putBoolean(getResources().getString(R.string.saved_is_first_time_key), false).apply();
+            DialogFragment newDialog = MyDialogOpenFragment.newInstance();
+            newDialog.show(getSupportFragmentManager(), "open_dialog_tag");
+        }
+        else
+            if(sharedPreferences.getBoolean(getResources().getString(R.string.saved_is_dead_key), false))
+                Die();
     }
 
     static SharedPreferences sharedPref;
     private static Handler mHandler;
-    private Runnable mRunnable = new Runnable() {
+    private static Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
-            sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-            UpdateValues.updateSharedPreferences(MainActivity.this, sharedPref);
+           // sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+            UpdateValues.updateSharedPreferences(context, sharedPref);
             mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
         }
     };
 
+    public static void stopTimer()
+    {
+        mHandler.removeCallbacks(mRunnable);
+    }
+
+    public static void startTimer()
+    {
+        mHandler.removeCallbacks(mRunnable);
+        mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+    }
 
     private void setupTabIcons() {
         mTabLayout.getTabAt(0).setIcon(tabIcons[0]);
@@ -162,7 +185,6 @@ public class MainActivity extends AppCompatActivity
 
 
     private void loadRewardedVideoAd() {
-        //TODO: zastopować timer w trakcie reklamy
         mRewardedVideoAd.loadAd(getString(R.string.TEST_SAMPLE_ADMOB_REWARDED),
                 new AdRequest.Builder().build());
     }
@@ -173,13 +195,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRewardedVideoAdOpened() {}
+    public void onRewardedVideoAdOpened() {
+        stopTimer();
+    }
 
     @Override
     public void onRewardedVideoStarted() {}
 
     @Override
     public void onRewardedVideoAdClosed() {
+        startTimer();
         loadRewardedVideoAd();
     }
 
@@ -203,6 +228,9 @@ public class MainActivity extends AppCompatActivity
 
     public static void Die()
     {
-        //TODO: uzupełnić to
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
+        Dialogs.showDialogWithChoose(sharedPref, context, "You just died!", "Do you want to rescue by watching ad?", 7);
+        editor.apply();
     }
 }
