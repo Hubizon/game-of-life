@@ -1,6 +1,7 @@
 package com.example.hubert.gameoflife.FirstOpen;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,23 +13,49 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 
 import com.example.hubert.gameoflife.R;
+import com.example.hubert.gameoflife.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyDialogChooseAvatar extends DialogFragment implements RecyclerViewChooseAvatarAdapter.ItemClickListener{
+public class MyDialogChooseAvatar extends DialogFragment implements RecyclerViewChooseAvatarAdapter.ItemClickListener {
 
     public MyDialogChooseAvatar() {}
+
+    public interface DialogCallback {
+        void getResults(int results);
+    }
+
+    DialogCallback dialogCallback;
+    public MyDialogChooseAvatar setCallBack(DialogCallback dialogCallback){
+        this.dialogCallback = dialogCallback;
+        return this;
+    }
+
 
     SharedPreferences sharedPref;
 
     View view;
+    final Integer[] avatars = {
+            R.drawable.boy,
+            R.drawable.girl,
+            R.drawable.boy_1,
+            R.drawable.avatar_icon1,
+            R.drawable.girl_1,
+            R.drawable.man,
+            R.drawable.man_1,
+            R.drawable.man_2,
+            R.drawable.man_4 };
 
-    public static MyDialogChooseAvatar newInstance() {
+    static DialogFragment parent;
+
+    public static MyDialogChooseAvatar newInstance(DialogFragment parentDialog) {
         MyDialogChooseAvatar frag = new MyDialogChooseAvatar();
+        parent = parentDialog;
         return frag;
     }
 
@@ -36,7 +63,13 @@ public class MyDialogChooseAvatar extends DialogFragment implements RecyclerView
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_NoActionBar_MinWidth);
+        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        boolean isDark = sharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
+        if (isDark) {
+            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_MaterialComponents_Dialog_MinWidth);
+        } else {
+            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_MaterialComponents_Dialog_MinWidth);
+        }
     }
 
     @Nullable
@@ -44,25 +77,6 @@ public class MyDialogChooseAvatar extends DialogFragment implements RecyclerView
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.dialog_choose_avatar, container, false);
-
-        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-
-        List<Integer> avatars = new ArrayList<Integer>();
-        avatars.add(R.drawable.boy);
-        avatars.add(R.drawable.girl);
-        avatars.add(R.drawable.boy_1);
-        avatars.add(R.drawable.avatar_icon1);
-        avatars.add(R.drawable.girl_1);
-        avatars.add(R.drawable.man);
-        avatars.add(R.drawable.man_1);
-        avatars.add(R.drawable.man_2);
-        avatars.add(R.drawable.man_3);
-        avatars.add(R.drawable.man_4);
-
-//        int[] avatars = new int[] {
-//                R.drawable.boy, R.drawable.girl, R.drawable.boy_1, R.drawable.avatar_icon1, R.drawable.girl_1, R.drawable.man,
-//                R.drawable.man_1, R.drawable.man_2, R.drawable.man_3, R.drawable.man_4
-//        };
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewChooseAvatar);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
@@ -77,8 +91,12 @@ public class MyDialogChooseAvatar extends DialogFragment implements RecyclerView
 
     @Override
     public void onItemClick(View view, int position) {
-        ImageView imageViewAvatar = view.findViewById(R.id.imageViewAvatar);
-        MyDialogOpenFragment.avatarRes = (Integer)imageViewAvatar.getTag();
-        onStop();
+       // ImageView imageViewAvatar = view.findViewById(R.id.imageViewAvatar);
+       // MyDialogOpenFragment.avatarRes = (Integer)imageViewAvatar.getTag();
+
+       // MyDialogOpenFragment.onDialogIconClick(avatars[position]);
+
+        dialogCallback.getResults(avatars[position]);
+        dismiss();
     }
 }
