@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
-import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 import static com.example.hubert.gameoflife.MainActivity.Die;
 import static com.example.hubert.gameoflife.MainActivity.startTimer;
@@ -30,7 +29,8 @@ public class Dialogs {
 
         AlertDialog.Builder dialog;
 
-        boolean isDark = sharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
+        SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
         } else {
@@ -135,7 +135,8 @@ public class Dialogs {
         stopTimer();
         AlertDialog.Builder dialog;
 
-        boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
+        SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
         } else {
@@ -147,7 +148,7 @@ public class Dialogs {
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         startTimer();
-                        dialoginterface.cancel();
+                        dialoginterface.dismiss();
                     }
                 })
                 .setCancelable(false)

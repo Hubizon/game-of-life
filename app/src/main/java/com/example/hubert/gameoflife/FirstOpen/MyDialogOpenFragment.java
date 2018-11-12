@@ -25,13 +25,18 @@ import android.widget.Toast;
 
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
+import com.example.hubert.gameoflife.Utils.NewUser;
 
 public class MyDialogOpenFragment extends DialogFragment implements View.OnClickListener {
 
     public MyDialogOpenFragment() {}
 
-    private static final String TAG = MyDialogOpenFragment.class.getSimpleName();
-    public static int avatarRes = R.drawable.avatar_icon1;
+    public interface OnNewUserAdd {
+        void onNewUserAdd ();
+    }
+    OnNewUserAdd mListener;
+
+    public int avatarRes = R.drawable.avatar_icon1;
 
     SharedPreferences sharedPref;
 
@@ -43,8 +48,7 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
     View view;
 
     public static MyDialogOpenFragment newInstance() {
-        MyDialogOpenFragment frag = new MyDialogOpenFragment();
-        return frag;
+        return new MyDialogOpenFragment();
     }
 
 
@@ -59,8 +63,6 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         } else {
             setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_AppCompat_Light_Dialog_Alert);
         }
-
-        //setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_NoActionBar_MinWidth);
     }
 
     @Nullable
@@ -102,38 +104,35 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        ImageView imageViewAvatar = view.findViewById(R.id.avatarImage);
+//        imageViewAvatar.setImageResource(avatarRes);
+//        Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
+//    }
 
-        ImageView imageViewAvatar = view.findViewById(R.id.avatarImage);
-        imageViewAvatar.setImageResource(avatarRes);
-        Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
-    }
-
-    public void changeIcon() {
-
-    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.saveButton:
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean(getResources().getString(R.string.saved_is_first_time_key), false);
-                editor.putString(getResources().getString(R.string.saved_character_name_key), nameEdit.getText().toString());
-                editor.putInt(getResources().getString(R.string.saved_character_icon_key), /*TODO avatarImage.getResources()*/1);
-                editor.putString(getResources().getString(R.string.saved_sex_key), String.valueOf(sexSpinner.getSelectedItem()));
-                editor.apply();
-                onStop();
+                NewUser newUser = new NewUser();
+                newUser.createUser (
+                        getContext(),
+                        nameEdit.getText().toString(),
+                        avatarRes,
+                        String.valueOf(sexSpinner.getSelectedItem()).equals("male"));
+
+                mListener.onNewUserAdd();
+                dismiss();
                 break;
 
             case R.id.avatarImage:
                 MyDialogChooseAvatar newDialog = MyDialogChooseAvatar.newInstance(this);
-
                 newDialog.setCallBack(dialogCallback).show(getActivity().getSupportFragmentManager(), "choose_avatar_tag");
-                //onPause();
                 break;
         }
     }
@@ -142,9 +141,20 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         @Override
         public void getResults(int avatarPath) {
             if(avatarPath > 0){
+                avatarRes = avatarPath;
                 avatarImage.setImageResource(avatarPath);
             }
         }
     };
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnNewUserAdd) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnNewUserAdd");
+        }
+    }
 }

@@ -66,7 +66,8 @@ public class HomeFragment extends Fragment
 
 
 
-        final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        final SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Intent intent = null;
         DialogFragment newDialog = null;
 

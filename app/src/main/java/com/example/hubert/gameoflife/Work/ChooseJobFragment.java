@@ -21,6 +21,7 @@ import com.example.hubert.gameoflife.Education.SkillsFragment;
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
@@ -67,7 +68,8 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_choose_job, container, false);
 
-        SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         ((TextView) (view.findViewById(R.id.money_choose_work))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
 
 
@@ -91,7 +93,8 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
 
     @Override
     public void onItemClick(View view, int position) {
-        SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
         String json;

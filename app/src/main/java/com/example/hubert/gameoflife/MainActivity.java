@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.Utils.Dialogs;
 import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
 import com.example.hubert.gameoflife.Utils.UpdateValues;
@@ -28,9 +29,10 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class MainActivity extends AppCompatActivity
-    implements RewardedVideoAdListener {
+    implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd {
 
     private static final int TIMER_LOOP_TIME = 1000;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String INTENT_PAGE = "intent_page";
     private static AnimatedVectorDrawable mPlayDrawable;
@@ -50,9 +52,23 @@ public class MainActivity extends AppCompatActivity
 
     static Context context;
 
+    public static int currentUserNumber;
+    public static SharedPreferences userSharedPref;
+    static SharedPreferences sharedPref;
+    private static Handler mHandler;
+    private static Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            UpdateValues.updateSharedPreferences(context, userSharedPref);
+         //   Log.d(TAG, "main handler is running!");
+            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
@@ -61,13 +77,16 @@ public class MainActivity extends AppCompatActivity
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
+        MobileAds.initialize(this, getString(R.string.MY_ADMOB_APP_ID));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         context = this;
         sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-        MobileAds.initialize(this, getResources().getString(R.string.MY_ADMOB_APP_ID));
+        String user_key = context.getString(R.string.shared_preferences_user_key)
+                + currentUserNumber;
+        userSharedPref = context.getSharedPreferences(user_key, MODE_PRIVATE);
 
         mPager = findViewById(R.id.pager);
         mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), this);
@@ -90,32 +109,22 @@ public class MainActivity extends AppCompatActivity
         loadRewardedVideoAd();
 
         if (mHandler == null) {
-            Log.d("test", "the Handler is null!");
+            Log.d(TAG, "the Handler is null!");
             mHandler = new Handler();
             mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
         }
 
-        if(sharedPreferences.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true))
+
+        if (sharedPref.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true))
         {
-            //sharedPreferences.edit().putBoolean(getResources().getString(R.string.saved_is_first_time_key), false).apply();
+            sharedPref.edit().putBoolean(getResources().getString(R.string.saved_is_first_time_key), false).apply();
             DialogFragment newDialog = MyDialogOpenFragment.newInstance();
             newDialog.show(getSupportFragmentManager(), "open_dialog_tag");
         }
-        else
-            if(sharedPreferences.getBoolean(getResources().getString(R.string.saved_is_dead_key), false))
-                Die();
-    }
-
-    static SharedPreferences sharedPref;
-    private static Handler mHandler;
-    private static Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-           // sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-            UpdateValues.updateSharedPreferences(context, sharedPref);
-            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+        else {
+            if(sharedPref.getBoolean(getResources().getString(R.string.saved_is_dead_key), false)) Die();
         }
-    };
+    }
 
     public static void stopTimer()
     {
@@ -124,7 +133,7 @@ public class MainActivity extends AppCompatActivity
 
     public static void startTimer()
     {
-        mHandler = new Handler();
+        Log.d(TAG, "Timer has started!");
         mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
     }
 
@@ -228,9 +237,30 @@ public class MainActivity extends AppCompatActivity
 
     public static void Die()
     {
-        SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences.Editor editor = userSharedPref.edit();
         editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
-        Dialogs.showDialogWithChoose(sharedPref, context, "You just died!", "Do you want to rescue by watching ad?", 7);
+        Dialogs.showDialogWithChoose(userSharedPref, context, "You just died!", "Do you want to rescue by watching ad?", 7);
         editor.apply();
+    }
+
+    @Override
+    public void onNewUserAdd() {
+        currentUserNumber = sharedPref.getInt(getString(R.string.saved_current_user), 0);
+        Log.d(TAG, "current user:" + currentUserNumber);
+        userSharedPref = getSharedPreferences(getString(R.string.shared_preferences_user_key) + currentUserNumber, MODE_PRIVATE);
+
+        MainFragment.mUserSharedPref = userSharedPref;
+
+        mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), this);
+        mPager.setAdapter(mPagerAdapter);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(INTENT_PAGE)) {
+            mPager.setCurrentItem(intent.getIntExtra(INTENT_PAGE, 0));
+        }
+
+        mTabLayout = findViewById(R.id.tablayout);
+        mTabLayout.setupWithViewPager(mPager);
+        setupTabIcons();
     }
 }

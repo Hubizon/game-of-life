@@ -2,6 +2,7 @@ package com.example.hubert.gameoflife.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.House.Lodging;
@@ -45,6 +46,28 @@ public class UpdateValues {
             editor.putInt(context.getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
 
 
+       // editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
+
+        if(sharedPref.getString(context.getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) != null)
+        {
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) <= 1) {
+                editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 1));
+                editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations)) - 1));
+            } else if(sharedPref.getInt((context.getResources().getString(R.string.saved_love_relationship_level_key)), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2) {
+                editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 3));
+                editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations)) - 1));
+            } else if(sharedPref.getInt((context.getResources().getString(R.string.saved_love_relationship_level_key)), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) >= 3) {
+                editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 5));
+                editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations)) - 1));
+            }
+            editor.apply();
+
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) <= 0)
+            {
+                showAlertDialog(context, sharedPref, "Break up", "Your partner broke up with you!");
+                Love.BreakUp(context);
+            }
+        }
 
         if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_sad_key), false))
         {
@@ -83,7 +106,6 @@ public class UpdateValues {
                     else
                         editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0) + 1));
             }
-            editor.apply();
 
             if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
             {
@@ -107,8 +129,6 @@ public class UpdateValues {
                 }
             }
 
-            editor.apply();
-
             if (sharedPref.getInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) >= 31) {
                 editor.putInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays);
                 if (sharedPref.getInt(context.getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) >= 12) {
@@ -126,7 +146,18 @@ public class UpdateValues {
         } else
             editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
 
-        editor.apply();
+        if (sharedPref.getInt(context.getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) <= 18) {
+            /*try {
+                jsonArray = new JSONArray(sharedPref.getString(context.getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    json = (JSONObject) jsonArray.get(i);
+                    json.put("toAnotherMark", (json.getInt("toAnotherMark") + 1));
+                    jsonArray.put(i, json);
+                }
+
+            } catch (JSONException e) { }*/
+        }
+
         randomEvents(context);
 
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) < 0)
@@ -150,7 +181,7 @@ public class UpdateValues {
             editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 1000);
 
         editor.apply();
-
+/*
         if(sharedPref.getString(context.getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) != null)
         {
             if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) <= 1) {
@@ -171,7 +202,7 @@ public class UpdateValues {
             }
         }
 
-        editor.apply();
+        editor.apply();*/
     }
 
     private static void getPayment(final Context context)//from e.g. "make a game", "write a book"
@@ -253,6 +284,8 @@ public class UpdateValues {
         }
         catch (JSONException e)
         { }
+
+        editor.apply();
     }
 
     private static void randomEvents(Context context)

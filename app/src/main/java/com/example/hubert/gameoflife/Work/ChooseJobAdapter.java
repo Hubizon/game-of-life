@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
@@ -42,7 +43,8 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
     ChooseJobAdapter(Context context, Job[] mDataJobs, int page) {
         this.mInflater = LayoutInflater.from(context);
         lastItemColor = ContextCompat.getColor(context, R.color.colorDark);
-        SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json;
         if(page == 1)

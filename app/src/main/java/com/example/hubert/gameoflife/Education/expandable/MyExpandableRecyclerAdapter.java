@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hubert.gameoflife.Education.EduFragment;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Education.SkillsActivity;
 import com.example.hubert.gameoflife.Utils.MyDialogFragment;
@@ -81,7 +82,8 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                 Toast toast = Toast.makeText(mContext, titleChild, Toast.LENGTH_SHORT);
                 toast.show();
 
-                SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+                SharedPreferences sharedPref = MainActivity.userSharedPref;
+//                SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 Intent intent = null;
                 DialogFragment newDialog = null;

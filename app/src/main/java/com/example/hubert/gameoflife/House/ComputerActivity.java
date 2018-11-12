@@ -41,7 +41,8 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_computer);
         setTitle(R.string.title_computer);
 
-        sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        sharedPref = MainActivity.userSharedPref;
+        //sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         ((TextView)(findViewById(R.id.time_computer))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
 
         Button playComputer = findViewById(R.id.playComputer);
