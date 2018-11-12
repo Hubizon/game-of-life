@@ -25,6 +25,7 @@ public class Dialogs {
 
     public static void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
     {
+        stopTimer();
         final SharedPreferences.Editor editor = sharedPref.edit();
 
         AlertDialog.Builder dialog;
@@ -40,6 +41,7 @@ public class Dialogs {
                 .setMessage(message)
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        startTimer();
                         switch (whichOneEvent)
                         {
                             case 1:
@@ -60,6 +62,7 @@ public class Dialogs {
                     }})
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        startTimer();
                         switch (whichOneEvent)
                         {
                             case 1:
@@ -129,8 +132,8 @@ public class Dialogs {
 
     public static void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
     {
-        AlertDialog.Builder dialog;
         stopTimer();
+        AlertDialog.Builder dialog;
 
         boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
         if (isDark) {

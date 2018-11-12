@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity
 
     public static void startTimer()
     {
-        mHandler.removeCallbacks(mRunnable);
+        mHandler = new Handler();
         mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
     }
 
