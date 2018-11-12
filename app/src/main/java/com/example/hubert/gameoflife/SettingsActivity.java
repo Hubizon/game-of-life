@@ -23,6 +23,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
+
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
@@ -90,6 +92,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
+
+                if (preference instanceof EditTextPreference && preference.getKey().equals("name_edit")) {
+                    EditTextPreference editTextPreference = (EditTextPreference) preference;
+                    SharedPreferences userSharedPref = MainActivity.userSharedPref;
+                    userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
+                }
             }
             return true;
         }
@@ -163,7 +171,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference(NAME_EDIT_KEY));
+            final Preference editNamePref = findPreference(NAME_EDIT_KEY);
+            bindPreferenceSummaryToValue(editNamePref);
+
 
             Preference switchPref = findPreference(DARK_SWITCH_KEY);
             switchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {

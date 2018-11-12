@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 public class SharedPreferencesDefaultValues {
 
+    public static final int DefaultNumberOfUsers = 0;
+
     public static final int DefaultWorkPosition = 1;
     private static final Gson gson = new Gson();
 

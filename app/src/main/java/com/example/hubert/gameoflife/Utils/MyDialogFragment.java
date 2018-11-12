@@ -20,6 +20,7 @@ import com.example.hubert.gameoflife.Education.EduFragment;
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 import com.example.hubert.gameoflife.Work.CriminalJob;
@@ -184,7 +185,8 @@ public class  MyDialogFragment extends DialogFragment  {
                 break;
         }
 
-        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        sharedPref = MainActivity.userSharedPref;
+        //sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         String moneyText = "$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
         ((TextView) view.findViewById(R.id.money_dialog)).setText(moneyText);
@@ -215,7 +217,8 @@ public class  MyDialogFragment extends DialogFragment  {
 
     private void onTimerDelay()
     {
-        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        sharedPref = MainActivity.userSharedPref;
+        //sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         Random r = new Random();
 

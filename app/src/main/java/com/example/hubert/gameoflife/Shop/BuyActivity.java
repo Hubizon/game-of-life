@@ -59,7 +59,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         ArrayList<String> itemsPrices = new ArrayList<>();
         Lodging[] lodgingObjects = null;
 
-        SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         ((TextView)(findViewById(R.id.money_buy))).setText(sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
 
         id = getIntent().getIntExtra(getResources().getString(R.string.send_shop_click_id), R.id.cardview_food);
@@ -376,7 +377,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
     private void alertDialogSellItem(/*String boughtItemName, final int boughtItemPrice,*/ final int itemPrice, String itemName, final String purchaseMethod, final String itemType, final int position)
     {
-        final SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        final SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //final SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -424,7 +426,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
     private void buyFun(int position)
     {
-        SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         if (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >=  funList[position].getPrice())
         {

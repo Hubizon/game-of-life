@@ -2,6 +2,7 @@ package com.example.hubert.gameoflife.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.House.Lodging;
@@ -45,7 +46,7 @@ public class UpdateValues {
             editor.putInt(context.getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
 
 
-        editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
+       // editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
 
         if(sharedPref.getString(context.getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) != null)
         {
@@ -179,7 +180,7 @@ public class UpdateValues {
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) > 1000)
             editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 1000);
 
-        editor.apply();
+        editor.commit();
     }
 
     private static void getPayment(final Context context)//from e.g. "make a game", "write a book"

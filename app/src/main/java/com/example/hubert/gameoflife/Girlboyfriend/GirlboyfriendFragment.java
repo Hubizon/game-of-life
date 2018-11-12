@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
@@ -67,6 +68,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
     ProgressBar progressBar;
     TextView loveName;
     TextView loveStatus;
+    Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +77,10 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
         view = inflater.inflate(R.layout.fragment_girlboyfriend,
                 container, false);
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        mContext = view.getContext();
+
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         progressBar = view.findViewById(R.id.progressBar_girlboyFriend_relations);
         loveName = view.findViewById(R.id.love_name);
@@ -134,7 +139,8 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         switch (v.getId())
@@ -274,12 +280,14 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
     private void showDialogWithChoose(final String title, final String message, final int whichOneEvent)
     {
-        final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        final SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
         AlertDialog.Builder dialog;
 
-        boolean isDark = sharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
+        SharedPreferences settingsSharedPref = mContext.getSharedPreferences(mContext.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Dialog_Alert);
         } else {

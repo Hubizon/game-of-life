@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.RecyclerViewShopBuyAdapter;
 import com.example.hubert.gameoflife.Utils.Arrays;
@@ -67,7 +68,8 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
         ArrayList<String> mSkillsNames = new ArrayList<>();
         ArrayList<String> mSkillsPrices = new ArrayList<>();
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         try {
             JSONArray jsonArray = new JSONArray();
             JSONObject jsonObject;

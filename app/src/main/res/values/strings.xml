@@ -160,6 +160,10 @@
     <string name="saved_books_key" translatable="false">books</string>
     <string name="saved_drawings_key" translatable="false">drawings</string>
     <string name="saved_movies_key" translatable="false">movies</string>
+
+    <string name="saved_number_of_users" translatable="false">users_count</string>
+    <string name="shared_preferences_user_key" translatable="false">shared_preferences_user</string>
+    <string name="saved_current_user" translatable="false">shared_current_user</string>
     <!-- end -->
 
     <string name="MY_ADMOB_APP_ID" translatable="false">ca-app-pub-3337866636093645~1700225876</string>

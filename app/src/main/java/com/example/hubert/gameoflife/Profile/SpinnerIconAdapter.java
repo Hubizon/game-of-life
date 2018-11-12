@@ -1,6 +1,7 @@
 package com.example.hubert.gameoflife.Profile;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,30 +10,31 @@ import android.widget.ImageView;
 
 import com.example.hubert.gameoflife.R;
 
+import java.util.ArrayList;
+
 
 public class SpinnerIconAdapter extends BaseAdapter {
 
     Context context;
     int width;
-    int icons[] = {
-            R.drawable.man,
-            R.drawable.man_1,
-            R.drawable.man_3,
-            R.drawable.man_4,
-            R.drawable.girl,
-            R.drawable.girl_1,
-    };
-    LayoutInflater inflter;
+    private ArrayList<Integer> icons;
+    private LayoutInflater inflter;
+    private SharedPreferences mainSharedPref;
+    private int numberOfUsers;
 
     public SpinnerIconAdapter(Context applicationContext, int width) {
         this.context = applicationContext;
         this.width = width;
         inflter = (LayoutInflater.from(applicationContext));
+
+        mainSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        numberOfUsers = mainSharedPref.getInt(context.getString(R.string.saved_number_of_users), 0);
+        icons = getAvatarts();
     }
 
     @Override
     public int getCount() {
-        return icons.length;
+        return numberOfUsers;
     }
 
     @Override
@@ -48,13 +50,21 @@ public class SpinnerIconAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflter.inflate(R.layout.spinner_layout_icons, null);
-//        view.getLayoutParams().width = width;
-//        view.getLayoutParams().height = width;
+
         ImageView icon =  view.findViewById(R.id.icon_spinner);
-//        icon.setLayoutParams(new ViewGroup.LayoutParams(width, width));
-        icon.setImageResource(icons[i]);
+        icon.setImageResource(icons.get(i));
         return view;
     }
-}
 
-// Feaure not supported yet!
+    public ArrayList<Integer> getAvatarts() {
+        ArrayList<Integer> avatarIcons = new ArrayList<>();
+        for (int i = 0; i < numberOfUsers; i++) {
+            SharedPreferences userSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_key) + i, 0);
+            int avatar = userSharedPref.getInt(context.getString(R.string.saved_character_icon_key), 0);
+            if (avatar != 0) avatarIcons.add(avatar);
+        }
+        //avatarIcons.add(R.drawable.ic_new_user);
+
+        return avatarIcons;
+    }
+}
