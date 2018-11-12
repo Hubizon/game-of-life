@@ -60,8 +60,10 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void run() {
             UpdateValues.updateSharedPreferences(context, userSharedPref);
-         //   Log.d(TAG, "main handler is running!");
-            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+            Log.d(TAG, "main handler is running!");
+            if (mHandler != null) {
+                mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+            }
         }
     };
 
@@ -128,12 +130,19 @@ public class MainActivity extends AppCompatActivity
 
     public static void stopTimer()
     {
-        mHandler.removeCallbacks(mRunnable);
+        Log.d(TAG, "stopTimer");
+        if (mHandler != null) {
+            mHandler.removeCallbacks(mRunnable);
+            mHandler = null;
+        }
     }
 
     public static void startTimer()
     {
         Log.d(TAG, "Timer has started!");
+        if (mHandler == null) {
+            mHandler = new Handler();
+        }
         mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
     }
 

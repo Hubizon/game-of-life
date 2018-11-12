@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.google.gson.Gson;
 
@@ -32,6 +33,8 @@ public class UpdateValues {
         SharedPreferences.Editor editor = sharedPref.edit();
         sharedPreferences = sharedPref;
         contextThis = context;
+
+        Log.d("MainActivity", "upatesharedpreferences");
 
         editor.putInt(context.getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 8));
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) <= 0)
