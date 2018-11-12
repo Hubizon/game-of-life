@@ -98,7 +98,8 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         //ChildSchool.add(new ChildList("Give up school"));
         Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
 
-        ChildWork.add(new ChildList("Start working"));
+        if(job != null)
+            ChildWork.add(new ChildList("Start working"));
         //ChildWork.add(new ChildList("work hard"));
 
         if(job == null)

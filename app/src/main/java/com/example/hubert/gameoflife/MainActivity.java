@@ -221,7 +221,10 @@ public class MainActivity extends AppCompatActivity
     public void onRewarded(RewardItem rewardItem) {
         Toast.makeText(this, "onRewarded! currency: " + rewardItem.getType() + "  amount: " +
                 rewardItem.getAmount(), Toast.LENGTH_LONG).show();
-        SharedPreferences sharedPref = this.getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        //SharedPreferences sharedPref = this.getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        //TODO: nie ma być przypadkiem
+         SharedPreferences sharedPref = userSharedPref;
+        // ? xd
         int currentMoney = sharedPref.getInt(getString(R.string.saved_character_money_key), 0) + rewardItem.getAmount();
         sharedPref.edit().putInt(getString(R.string.saved_character_money_key), currentMoney).apply();
     }
@@ -238,6 +241,7 @@ public class MainActivity extends AppCompatActivity
     public static void Die()
     {
         SharedPreferences.Editor editor = userSharedPref.edit();
+        editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
         editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
         Dialogs.showDialogWithChoose(userSharedPref, context, "You just died!", "Do you want to rescue by watching ad?", 7);
         editor.apply();

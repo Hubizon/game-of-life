@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
+import static com.example.hubert.gameoflife.MainActivity.Die;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
 import static com.example.hubert.gameoflife.Utils.Dialogs.showDialogWithChoose;
 
@@ -62,7 +63,7 @@ public class UpdateValues {
             }
             editor.apply();
 
-            if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) <= 0)
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) >= 0)
             {
                 showAlertDialog(context, sharedPref, "Break up", "Your partner broke up with you!");
                 Love.BreakUp(context);
@@ -179,6 +180,9 @@ public class UpdateValues {
             editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 0);
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) > 1000)
             editor.putInt(context.getResources().getString(R.string.saved_happiness_key), 1000);
+
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) <= 0)
+            Die();
 
         editor.apply();
 /*

@@ -188,7 +188,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     }
-                    SharedPreferences sharedPreferences = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = MainActivity.userSharedPref;
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean(DARK_SWITCH_KEY, darkThemeOn);
                     editor.apply();

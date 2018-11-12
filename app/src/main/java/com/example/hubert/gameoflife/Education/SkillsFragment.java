@@ -156,7 +156,7 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
 
-                        SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+                        SharedPreferences sharedPref = MainActivity.userSharedPref;
                         SharedPreferences.Editor editor = sharedPref.edit();
                         JSONArray jsonArray;
                         JSONObject jsonObject;

@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static com.example.hubert.gameoflife.MainActivity.userSharedPref;
 import static com.example.hubert.gameoflife.Utils.Arrays.foodList;
 import static com.example.hubert.gameoflife.Utils.Arrays.funList;
 import static com.example.hubert.gameoflife.Utils.Arrays.lodgingList;
@@ -59,7 +60,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         ArrayList<String> itemsPrices = new ArrayList<>();
         Lodging[] lodgingObjects = null;
 
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = userSharedPref;
         //SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         ((TextView)(findViewById(R.id.money_buy))).setText(sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
 
@@ -159,7 +160,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
     @Override
     public void onItemClick(View view, int position) {
 
-        SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = userSharedPref;
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
         String json;
@@ -174,6 +175,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     editor.putInt(getString(R.string.saved_health_key), (sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) + foodList[position].getGivenHealth()));
                     editor.putInt(getString(R.string.saved_energy_key), (sharedPref.getInt(getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) + foodList[position].getGivenEnergy()));
                     editor.putInt(getString(R.string.saved_happiness_key), (sharedPref.getInt(getString(R.string.saved_happiness_key), 750) + foodList[position].getGivenHappiness()));
+                    editor.apply();
                 }
                 else
                     Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
@@ -189,8 +191,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 else
                     Toast.makeText(this, "Unfortunately, you don't have enough money to buy this thing.", Toast.LENGTH_LONG).show();
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
-                ((TextView)(findViewById(R.id.money_buy))).setText(sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
+                ((TextView)(findViewById(R.id.money_buy))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
                 break;
 
             case R.id.cardview_fun:
@@ -242,7 +244,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 else if ("TV".equals( funList[position].getType()))
                     alertDialogSellItem(funList[position].getPrice(),  funList[position].getName(), "buy","fun", position);
 
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) / 10);
+                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
                 break;
             case R.id.buyLotteries:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= lotteryList[position].getPrice())
@@ -377,7 +379,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
     private void alertDialogSellItem(/*String boughtItemName, final int boughtItemPrice,*/ final int itemPrice, String itemName, final String purchaseMethod, final String itemType, final int position)
     {
-        final SharedPreferences sharedPref = MainActivity.userSharedPref;
+        final SharedPreferences sharedPref = userSharedPref;
         //final SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -426,7 +428,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
     private void buyFun(int position)
     {
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = userSharedPref;
         //SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         if (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >=  funList[position].getPrice())

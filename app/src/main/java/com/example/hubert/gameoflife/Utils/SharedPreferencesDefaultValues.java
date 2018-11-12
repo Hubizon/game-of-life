@@ -17,7 +17,7 @@ public class SharedPreferencesDefaultValues {
     private static final Gson gson = new Gson();
 
     //TODO sa 2 domyslne wartosci, tu i w strings.xml (do preference_headers potrzeba strings.xml)
-    public static final String DefaultName = "Mr. Hubi";
+    public static final String DefaultName = "";
     public static final String DefaultSexuality = "girl";
     public static final int DefaultIcon = R.drawable.avatar_icon1;
     public static final int DefaultMoney = 5000;

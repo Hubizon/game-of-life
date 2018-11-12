@@ -208,12 +208,17 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                             Job mJob = gson.fromJson(json, Job.class);
                             if(mJob != null)
                                 newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), start_working_index);
+                            else
+                            {
+                                Intent intentWork = new Intent(mContext.getApplicationContext(), ChooseJobActivity.class);
+                                mContext.startActivity(intentWork);
+                            }
                             break;
 //                        case work_hard_index:
 //                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), work_hard_index);
 //                            break;
                         case give_up_work_index:
-                            editor.putString(mContext.getString(R.string.saved_my_job_key), null);
+                           // editor.putString(mContext.getString(R.string.saved_my_job_key), null);
 
                             Intent intentWork = new Intent(mContext.getApplicationContext(), ChooseJobActivity.class);
                             mContext.startActivity(intentWork);
