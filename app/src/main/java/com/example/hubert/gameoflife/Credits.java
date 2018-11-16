@@ -7,8 +7,9 @@ import com.example.hubert.gameoflife.Utils.ScrollingTextView;
 
 public class Credits extends AppCompatActivity {
 
-    private static final String authorsText = "Icons designed by:\n(flaticon.com)\nFreepik\nVectors Market\n Smashicons" +
+    private static final String authorsText = "Icons designed by:\n(flaticon.com)\nFreepik\nVectors Market\n Smashicons\n Nikita Golubev" +
             "\nIcons designed by:\n(flaticon.com)\nFreepik\nVectors Market\n Smashicons" +
+            "\nIcons designed by:\n(flaticon.com)\nFreepik\nVectors Market" +
             "\nIcons designed by:\n(flaticon.com)\nFreepik\nVectors Market\n Smashicons" +
             "\nIcons designed by:\n(flaticon.com)\nFreepik\nVectors Market\n Smashicons" +
             "\nIcons designed by:\n(flaticon.com)\nFreepik\nVectors Market\n Smashicons" +

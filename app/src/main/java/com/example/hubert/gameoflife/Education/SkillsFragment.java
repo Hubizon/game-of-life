@@ -145,15 +145,15 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
     private void alertDialogLearnSkill(final int position, final Skill[] skills, final String defaultSkills, final String resSavedList, String skillName)
     {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
-        dialog.setTitle("Buying skill")
-                //.setIcon(R.drawable.ic_launcher)
-                .setMessage("Are you sure you want to buy and learn " + skillName + "?")
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+        dialog.setTitle(getResources().getString(R.string.buying_skills))
+                //.setIcon(R.drawable.ic_launcher)Are you sure you want to buy and learn
+                .setMessage(getResources().getString(R.string.sure_to_buy_learn) + "" + skillName + "?")
+                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         dialoginterface.cancel();
                         //TODO: start timer
                     }})
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
 
                         SharedPreferences sharedPref = MainActivity.userSharedPref;
@@ -175,19 +175,19 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
                                         jsonArray.put(position, jsonObject);
                                         editor.putString(resSavedList, jsonArray.toString());
                                         editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - jsonObject.getInt("price"));
-                                        Toast.makeText(getContext(), "You successful bought " + skills[position].getName() + "!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(),getResources().getString(R.string.successful_bought) + " " + skills[position].getName() + "!", Toast.LENGTH_SHORT).show();
                                     }
                                     else
-                                        Toast.makeText(getContext(), "You already have had buy it!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), getResources().getString(R.string.already_had_it), Toast.LENGTH_SHORT).show();
                                 }
                                 catch (JSONException e)
                                 { }
                             }
                             else
-                                Toast.makeText(getContext(), "You already have had buy it!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), getResources().getString(R.string.already_had_it), Toast.LENGTH_SHORT).show();
                         }
                         else
-                            Toast.makeText(getContext(), "Unfortunately you don't have enough money to but this", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
                         editor.apply();
                     }
                 }).show();

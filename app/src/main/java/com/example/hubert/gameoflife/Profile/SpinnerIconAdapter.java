@@ -42,7 +42,7 @@ public class SpinnerIconAdapter extends BaseAdapter {
         return null;
     }
 
-    @Override
+    @Override 
     public long getItemId(int i) {
         return 0;
     }
@@ -52,7 +52,8 @@ public class SpinnerIconAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.spinner_layout_icons, null);
 
         ImageView icon =  view.findViewById(R.id.icon_spinner);
-        icon.setImageResource(icons.get(i));
+        if(icons.size() > i)
+            icon.setImageResource(icons.get(i));
         return view;
     }
 

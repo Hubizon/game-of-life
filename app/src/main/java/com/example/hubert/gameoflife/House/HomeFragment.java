@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment
                 if(sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyTv) != null)
                     newDialog = MyDialogFragment.newInstance(view.getId());
                 else
-                    Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a televisor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.dont_have_televisor), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cardview_bed:
                 newDialog = MyDialogFragment.newInstance(view.getId());
@@ -85,20 +85,20 @@ public class HomeFragment extends Fragment
                 if(sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer) != null || sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null)
                     intent = new Intent(getActivity().getApplicationContext(), ComputerActivity.class);
                 else
-                    Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.dont_have_computer_phone), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cardview_safe:
                 if(!sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe)) {
                     final Context context = getContext();
                     AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
-                    dialog.setTitle("You don't have the safe!")
+                    dialog.setTitle(getResources().getString(R.string.dont_have_safe))
                             //.setIcon(R.drawable.ic_launcher)
-                            .setMessage("Do you want to buy it for 25000$?")
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            .setMessage(getResources().getString(R.string.sure_to_buy_for_25000))
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialoginterface, int i) {
                                     dialoginterface.cancel();
                                 }})
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialoginterface, int i) {
                                     if((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) >= 25000)
                                     {
@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment
                                         editor.apply();
                                     }
                                     else
-                                        Toast.makeText(context, "Unfortunately you don't have enough money to buy this", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
                                 }
                             }).show();
                 }
@@ -120,7 +120,7 @@ public class HomeFragment extends Fragment
                 if (MainActivity.mRewardedVideoAd.isLoaded()) {
                     MainActivity.mRewardedVideoAd.show();
                 } else {
-                    Toast.makeText(getContext(), "There are currently no ads!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getResources().getString(R.string.no_ads), Toast.LENGTH_SHORT).show();
                 }
         }
 

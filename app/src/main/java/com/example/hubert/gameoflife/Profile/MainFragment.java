@@ -126,7 +126,7 @@ public class MainFragment extends Fragment {
         charactermoneytext.setText(moneyStirng);
 
         String ageString = mUserSharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears)
-                + " years " + mUserSharedPref.getInt(getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays) + " days";
+                + " " + getResources().getString(R.string.years) + " " + mUserSharedPref.getInt(getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays) + " " + getResources().getString(R.string.days);
         agetext.setText(ageString);
 
         String timeString = mUserSharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears) + "."
@@ -169,11 +169,11 @@ public class MainFragment extends Fragment {
 
         json = mUserSharedPref.getString(getResources().getString(R.string.saved_love_key), "");
         Love love = gson.fromJson(json, Love.class);
-        String girlString = "Girlfriend: ";
+        String girlString = getResources().getString(R.string.girlfriend) + " ";
         if(love != null)
             girlString = girlString + love.getName();
         else {
-            girlString = "Single";
+            girlString = getResources().getString(R.string.single);
         }
         girltext.setText(girlString);
 

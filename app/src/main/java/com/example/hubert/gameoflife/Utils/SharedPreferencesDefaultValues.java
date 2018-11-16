@@ -18,7 +18,7 @@ public class SharedPreferencesDefaultValues {
 
     //TODO sa 2 domyslne wartosci, tu i w strings.xml (do preference_headers potrzeba strings.xml)
     public static final String DefaultName = "";
-    public static final String DefaultSexuality = "girl";
+    public static final boolean DefaultIsMale = true;
     public static final int DefaultIcon = R.drawable.avatar_icon1;
     public static final int DefaultMoney = 5000;
     public static final int DefaultMoneyInSafe = 0;
@@ -33,8 +33,8 @@ public class SharedPreferencesDefaultValues {
 
     public static final int DefaultDayWeek = 1;
 
-    public static final String DefaultMyLodging = gson.toJson(new Lodging("Parents' House", 0,  5, 125, 5));
-    public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
+    public static final String DefaultMyLodging = gson.toJson(new Lodging("Street", 0,  5, 100, 5));
+    //public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
     public static final boolean DefaultIsInSchoolNow = true;
     public static final String DefaultMyJob = null;
     public static final String DefaultMyTransport = gson.toJson(new Transport("Foots", 0, 10));

@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRewardedVideoAdLoaded() {
-        Toast.makeText(this, "Ad is available!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.ad_avaible), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -228,14 +228,24 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        Toast.makeText(this, "onRewarded! currency: " + rewardItem.getType() + "  amount: " +
-                rewardItem.getAmount(), Toast.LENGTH_LONG).show();
-        //SharedPreferences sharedPref = this.getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        //TODO: nie ma być przypadkiem
-         SharedPreferences sharedPref = userSharedPref;
-        // ? xd
-        int currentMoney = sharedPref.getInt(getString(R.string.saved_character_money_key), 0) + rewardItem.getAmount();
-        sharedPref.edit().putInt(getString(R.string.saved_character_money_key), currentMoney).apply();
+        if("money".equals(rewardItem.getType()))
+        {
+            Toast.makeText(this, getResources().getString(R.string.on_rewarded_money) + " " + rewardItem.getType() + "  " + getResources().getString(R.string.amount) + " " +
+                    rewardItem.getAmount(), Toast.LENGTH_LONG).show();
+            int currentMoney = userSharedPref.getInt(getString(R.string.saved_character_money_key), 0) + rewardItem.getAmount();
+            userSharedPref.edit().putInt(getString(R.string.saved_character_money_key), currentMoney).apply();
+        }
+        else if("life".equals(rewardItem.getType()))
+        {
+            Toast.makeText(this, getResources().getString(R.string.on_rewarded_life), Toast.LENGTH_LONG).show();
+            SharedPreferences.Editor editor = userSharedPref.edit();
+            editor.putBoolean(getResources().getString(R.string.saved_is_dead_key), false);
+            editor.putInt(getResources().getString(R.string.saved_health_key), 100);
+            editor.putInt(getResources().getString(R.string.saved_hungry_key), 250);
+            editor.putInt(getResources().getString(R.string.saved_energy_key), 250);
+            editor.putInt(getResources().getString(R.string.saved_happiness_key), 250);
+            editor.apply();
+        }
     }
 
     @Override
@@ -252,7 +262,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = userSharedPref.edit();
         editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
         editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
-        Dialogs.showDialogWithChoose(userSharedPref, context, "You just died!", "Do you want to rescue by watching ad?", 7);
+        Dialogs.showDialogWithChoose(userSharedPref, context, context.getResources().getString(R.string.died), "Do you want to rescue by watching ad?", 7);
         editor.apply();
     }
 

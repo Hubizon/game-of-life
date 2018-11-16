@@ -74,9 +74,9 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         if(job != null)
         {
             view.findViewById(R.id.cardViewWorkInfo).setVisibility(View.VISIBLE);
-            ((TextView)view.findViewById(R.id.work_name)).setText("Work: " + job.getName());
+            ((TextView)view.findViewById(R.id.work_name)).setText(getResources().getString(R.string.work) + " " + job.getName());
             ((ProgressBar)view.findViewById(R.id.ProgressBar_work_position)).setProgress(job.getPositionPoints());
-            ((TextView)view.findViewById(R.id.position_work)).setText("Position: " + job.getPosition());
+            ((TextView)view.findViewById(R.id.position_work)).setText(getResources().getString(R.string.position) + " " + job.getPosition());
             /*switch (sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), 1))
             {
                 case 1:
@@ -91,27 +91,27 @@ public class EduFragment extends Fragment implements View.OnClickListener{
             }*/
         }
 
-        ChildSchool.add(new ChildList("Go to school"));
+        ChildSchool.add(new ChildList(getResources().getString(R.string.go_to_school)));
         //ChildSchool.add(new ChildList("learn hard"));
         //ChildSchool.add(new ChildList("hand around"));
-        ChildSchool.add(new ChildList("Get some skills"));
+        ChildSchool.add(new ChildList(getResources().getString(R.string.get_some_skills)));
         //ChildSchool.add(new ChildList("Give up school"));
         Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
 
         if(job != null)
-            ChildWork.add(new ChildList("Start working"));
+            ChildWork.add(new ChildList(getResources().getString(R.string.start_working)));
         //ChildWork.add(new ChildList("work hard"));
 
         if(job == null)
-            ChildWork.add(new ChildList("Find a Job"));
+            ChildWork.add(new ChildList(getResources().getString(R.string.find_a_job)));
         else
-            ChildWork.add(new ChildList("Give up work"));
+            ChildWork.add(new ChildList(getResources().getString(R.string.give_up_work)));
         Parent.add(new ParentList(TITLE_WORK, ChildWork));
 
-        ChildCriminal.add(new ChildList("Get new friends"));
-        ChildCriminal.add(new ChildList("Steal stuff"));
-        ChildCriminal.add(new ChildList("Sell drugs"));
-        ChildCriminal.add(new ChildList("Threat teachers"));
+        ChildCriminal.add(new ChildList(getResources().getString(R.string.get_new_friends)));
+        ChildCriminal.add(new ChildList(getResources().getString(R.string.steal_something)));
+        ChildCriminal.add(new ChildList(getResources().getString(R.string.sell_drugs)));
+        ChildCriminal.add(new ChildList(getResources().getString(R.string.threat_teachers)));
         Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
 
         RecyclerView.ItemAnimator animator = recycler_view.getItemAnimator();

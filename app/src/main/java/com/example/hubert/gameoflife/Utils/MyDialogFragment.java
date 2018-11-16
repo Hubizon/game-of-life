@@ -102,7 +102,7 @@ public class  MyDialogFragment extends DialogFragment  {
         }
 
         Bundle args = getArguments();
-        Log.d("onCraate", "args: " + args);
+        Log.d("onCreate", "args: " + args);
         if (args != null) {
             mId = args.getInt(BUNDLE_ID);
         }
@@ -128,10 +128,10 @@ public class  MyDialogFragment extends DialogFragment  {
             } else if (title.equals(EduFragment.TITLE_CRIMINAL)) {
                 switch (position) {
                     case get_new_friends_index:
-
+                        getDialog().setTitle(getResources().getString(R.string.getting_new_friends));
                         break;
                     case sell_drugs_index:
-
+                        getDialog().setTitle(getResources().getString(R.string.selling_drugs));
                         break;
                 }
             } else if (title.equals(EduFragment.TITLE_WORK)) {
@@ -236,10 +236,23 @@ public class  MyDialogFragment extends DialogFragment  {
             } else if (title.equals(EduFragment.TITLE_CRIMINAL)) {
                 switch (position) {
                     case get_new_friends_index:
-
+                        if(sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) < 1000)
+                        {
+                            editor.putInt(getResources().getString(R.string.saved_criminal_points_key), sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), 1000));
+                            Toast.makeText(getContext(), "You already have a lot of friends.", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            editor.putInt(getResources().getString(R.string.saved_criminal_points_key), sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 10);
+                        editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 20));
+                        editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
+                        editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 15));
                         break;
-                    case sell_drugs_index:
 
+                    case sell_drugs_index:
+                        editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + 75));
+                        editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 25));
+                        editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 25));
+                        editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 20));
                         break;
                 }
             } else if (title.equals(EduFragment.TITLE_WORK)) {

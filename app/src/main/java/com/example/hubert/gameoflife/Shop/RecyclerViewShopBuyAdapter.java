@@ -65,13 +65,13 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
                             switch (position)
                             {
                                 case 0:
-                                    textViewPrice.setText((lodgingList[i].getPrice() * 25) + "$");
+                                    textViewPrice.setText((lodgingList[i].getPrice() * 25) + context.getResources().getString(R.string.currency));
                                     break;
                                 case 1:
-                                    textViewPrice.setText(lodgingList[i].getPrice() + "$");
+                                    textViewPrice.setText(lodgingList[i].getPrice() + context.getResources().getString(R.string.currency));
                                     break;
                                 case 2:
-                                    textViewPrice.setText(Math.round(lodgingList[i].getPrice() * 3.5) + "$");
+                                    textViewPrice.setText(Math.round(lodgingList[i].getPrice() * 3.5) + context.getResources().getString(R.string.currency));
                                     break;
                             }
                         }
@@ -86,13 +86,13 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
                             switch (position)
                             {
                                 case 0:
-                                    textViewPrice.setText((transportList[i].getPrice() * 25) + "$");
+                                    textViewPrice.setText((transportList[i].getPrice() * 25) + context.getResources().getString(R.string.currency));
                                     break;
                                 case 1:
-                                    textViewPrice.setText(transportList[i].getPrice() + "$");
+                                    textViewPrice.setText(transportList[i].getPrice() + context.getResources().getString(R.string.currency));
                                     break;
                                 case 2:
-                                    textViewPrice.setText(Math.round(transportList[i].getPrice() * 3.5) + "$");
+                                    textViewPrice.setText(Math.round(transportList[i].getPrice() * 3.5) + context.getResources().getString(R.string.currency));
                                     break;
                             }
                         }

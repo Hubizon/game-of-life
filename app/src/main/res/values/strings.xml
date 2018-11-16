@@ -12,14 +12,12 @@
     <string name="draw_something">Draw something</string>
     <string name="write_a_poem">Write a poem</string>
     <string name="record_movies">Record movies</string>
-    <!--<string name="bills">Bills</string>&ndash;&gt;-->
-    <!--<string name="electricity">Electricity: $</string>-->
     <string name="other">Other: $</string>
-    <!--<string name="pay_bills">pay bills</string>-->
     <string name="school">School:</string>
     <string name="school_text">School</string>
     <string name="mon_fri">Mon - Fri</string>
     <string name="go_to_the_school">go to the school</string>
+    <string name="go_to_school">go to school</string>
     <string name="learn_hard">Learn hard</string>
     <string name="learn_at_home">learn at home</string>
     <string name="give_up_school">give up school</string>
@@ -33,16 +31,9 @@
     <string name="search_for_a_girlfriend">Search for a girlfriend</string>
     <string name="status">Status:</string>
     <string name="ask_her_to_marry_you">Ask her to marry you</string>
-    <!--<string name="last_meet">Last meat:</string>-->
     <string name="buy_her_a_gift">buy her a gift</string>
     <string name="take_her_somewhere">take her somewhere</string>
     <string name="broke_up_with_her">broke up with her</string>
-    <!--<string name="children">Children:</string>-->
-    <!--<string name="play_with_him">Play with him</string>-->
-    <!--<string name="take_him_somewhere">take him somewhere</string>-->
-    <!--<string name="buy_him_a_gift">buy him a gift</string>-->
-    <!--<string name="ask_for_increased_pocket_money">Ask for increased pocket money</string>-->
-    <!--<string name="disinheritance">disinheritance</string>-->
     <string name="education">EDUCATION</string>
     <string name="loudging">Lodging: </string>
     <string name="education_main">Education: </string>
@@ -54,18 +45,8 @@
     <string name="position">Position:</string>
     <string name="ask_for_promotion">Ask for promotion</string>
     <string name="relations">Relations</string>
-    <!--<string name="min_hours_to_work">Min hours to work:</string>-->
-    <!--<string name="days_to_deathline">Days to deathline:</string>-->
-    <!--<string name="go_to_the_work">go to the work</string>-->
-    <!--<string name="work_hard">Work hard</string>-->
     <string name="hang_around">Hang Around</string><!---->
     <string name="give_up_work">give up work</string>
-    <!--<string name="employee_satisfaction">Employee satisfaction</string>-->
-    <!--<string name="company_s_revenues_month">Company\'s revenues/month: $</string>-->
-    <!--<string name="employee_sallary_month">Employee sallary/month: $</string>-->
-    <!--<string name="bills_month">Bills/month: $</string>-->
-    <!--<string name="increase_their_salary">Increase their salary</string>-->
-    <!--<string name="lower_their_salary">lower their salary</string>-->
     <string name="years">years</string>
     <string name="days">days</string>
     <string name="work">Work:</string>
@@ -98,6 +79,59 @@
     <string name="title_home">Home</string>
     <string name="title_find_job">Find job</string>
     <string name="no_children">No children</string>
+    <string name="skills">Skills</string>
+    <string name="got_busted">You got busted! You lost all your money.</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="recording_movies">Recording Movies</string>
+    <string name="writing_poem">Writing Poem</string>
+    <string name="drawing_something">Drawing Somethings</string>
+    <string name="making_computer_game">Making Computer</string>
+    <string name="found_safe">Policeman found your safe! You lost all your money in safe.</string>
+    <string name="got50Money">You got 50 money!</string>
+    <string name="reported2xWeakerGrades">Teacher reported this and you have now 2x weaker grades!</string>
+    <string name="reported1FromAllSubjects">Teacher reported this and you\'ve got 1 from all subjects!</string>
+    <string name="aLittleBetterMarks">You have a little better marks now.</string>
+    <string name="get_some_skills">get some skills</string>
+    <string name="start_working">start working</string>
+    <string name="find_a_job">find a job</string>
+    <string name="buying_skills">Buying skills</string>
+    <string name="sure_to_buy_learn">Are you sure you want to buy and learn</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="successful_bought">You successful bought</string>
+    <string name="already_had_it">You already have had buy it!</string>
+    <string name="not_enough_money">Unfortunately you don\'t have enough money to but this</string>
+    <string name="lovers">lovers</string>
+    <string name="betrothed">betrothed</string>
+    <string name="marry">marry</string>
+    <string name="single">single</string>
+    <string name="engagement">Engagement</string>
+    <string name="successful_engagement">You successful were engagement!</string>
+    <string name="getting_married">Getting married</string>
+    <string name="successful_marrying">You successful got married!</string>
+    <string name="unsuccessful_engagement">Unfortunately your love didn\'t accept your engagement request</string>
+    <string name="unsuccessful_marrying">Unfortunately your love didn\'t accept your married request</string>
+    <string name="increasing_relationship_level">Increasing relationship level</string>
+    <string name="max_relationship_level">Unfortunately you have max relationship level</string>
+    <string name="buy_a_gift">Buy a gift</string>
+    <string name="sure_to_buy_her_a_gift">Are you sure you want to buy her a gift for a 100$?</string>
+    <string name="sure_to_buy_him_a_gift">Are you sure you want to buy him a gift for a 100$?</string>
+    <string name="take_him_somewhere">take him somewhere</string>
+    <string name="sure_to_take_her_somewhere">Are you sure you want to take her somewhere for a 75$?</string>
+    <string name="break_up">break up</string>
+    <string name="sure_to_break_up_with_her">Are you want to break up with her?</string>
+    <string name="sure_to_break_up_with_him">Are you want to break up with him?</string>
+    <string name="found_love">Found love</string>
+    <string name="successful_found_girlfriend">You successful found love! Her name is</string>
+    <string name="successful_found_boyfriend">You successful found love! His name is</string>
+    <string name="sure_to_support_a_charity_event">Are you sure you want to support a charity event for 100$?</string>
+    <string name="dont_have_televisor">Unfortunately you don\'t have a televisor</string>
+    <string name="dont_have_computer_phone">Unfortunately you don\'t have a computer or a phone</string>
+    <string name="dont_have_safe">You don\'t have the safe!</string>
+    <string name="sure_to_buy_for_25000">Do you want to buy it for 25000$?</string>
+    <string name="no_ads">There are currently no ads!</string>
+    <string name="cash">Cash:</string>
+
 
     <!-- Strings related to Shared Preferences -->
     <string name="shared_preferences_key" translatable="false">shared_preferences</string>
@@ -120,15 +154,11 @@
     <string name="saved_my_computer_key" translatable="false">my_computer</string>
     <string name="saved_my_phone_key" translatable="false">my_phone</string>
     <string name="saved_my_tv_key" translatable="false">my_tv</string>
-    <!--<string name="saved_owned_lotteries_key" translatable="false">owned_lotteries</string>-->
-    <!--<string name="saved_subjects_list_key" translatable="false">subjects_list</string>-->
     <string name="saved_age_years_key" translatable="false">age_years</string>
     <string name="saved_age_days_key" translatable="false">age_days</string>
     <string name="saved_communication_skills_key" translatable="false">communication_skills</string>
     <string name="saved_work_relations_key" translatable="false">work_relations</string>
     <string name="saved_criminal_points_key" translatable="false">criminal_points</string>
-    <!--<string name="saved_can_go_to_school_key" translatable="false">can_go_to_school</string>-->
-    <!--<string name="saved_year_when_can_go_to_school_key" translatable="false">year_when_can_go_to_school</string>-->
     <string name="saved_have_safe_key" translatable="false">have_safe</string>
     <string name="saved_money_in_safe_key" translatable="false">money_in_safe</string>
     <string name="saved_karma_points_key" translatable="false">karma</string>
@@ -149,7 +179,6 @@
     <string name="saved_love_key" translatable="false">love</string>
     <string name="saved_love_relations_key" translatable="false">love_relations</string>
     <string name="saved_love_relationship_level_key" translatable="false">love_relationship_level</string>
-    <string name="saved_sexuality_key" translatable="false">sexuality</string>
     <string name="saved_love_name_key" translatable="false">love_name</string>
     <string name="saved_skills_criminal_list_key" translatable="false">skills_criminal_list</string>
     <string name="saved_skills_education_list_key" translatable="false">skills_education_list</string>
@@ -160,11 +189,16 @@
     <string name="saved_books_key" translatable="false">books</string>
     <string name="saved_drawings_key" translatable="false">drawings</string>
     <string name="saved_movies_key" translatable="false">movies</string>
+    <string name="saved_is_first_time_key" translatable="false">is_first_time</string>
+    <string name="saved_sex_key" translatable="false">sex</string>
+    <string name="saved_do_borrow_money_key" translatable="false">do_borrow_money</string>
+    <string name="saved_office_jobs_list_key" translatable="false">office_jobs_list</string>
+    <string name="saved_criminal_jobs_list_key" translatable="false">criminal_jobs_list</string>
 
     <string name="saved_number_of_users" translatable="false">users_count</string>
     <string name="shared_preferences_user_key" translatable="false">shared_preferences_user</string>
     <string name="saved_current_user" translatable="false">shared_current_user</string>
-    <!-- end -->
+    <!-- end of "Strings related to Shared Preferences" -->
 
     <string name="MY_ADMOB_APP_ID" translatable="false">ca-app-pub-3337866636093645~1700225876</string>
     <string name="TEST_SAMPLE_ADMOB_REWARDED" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
@@ -237,29 +271,30 @@
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
+    <string name="buy_food">BUY FOOD</string>
+    <string name="buy_medicines">BUY MEDICINES</string>
+    <string name="buy_fun_items">BUY FUN ITEMS</string>
+    <string name="buy_lotteries">BUY LOTTERIES</string>
+    <string name="buy_houses">BUY HOUSES</string>
+    <string name="buy_transport">BUY TRANSPORT</string>
+    <string name="currency">$</string>
+    <string name="won">Wow! You won</string>
+    <string name="in_lottery">$ in lottery!</string>
+    <string name="didnt_win_lottery">Unfortunately, you didn\'t win this lottery</string>
+    <string name="rent_for_a_month">Rent for a month</string>
+    <string name="buy">Buy</string>
+    <string name="buying_lodging">Buying lodging</string>
+    <string name="sure_to">Are you sure you want to</string>
+    <string name="for_string">for</string>
+    <string name="ad_avaible">Ad is available!</string>
+    <string name="on_rewarded_money">onRewarded! currency:</string>
+    <string name="amount">amount</string>
+    <string name="on_rewarded_life">onRewarded! You successfully had been rescued.</string>
+    <string name="died">You just died!</string>
+    <string name="dont_have_a">Unfortunately, you don\'t have a:</string>
+    <string name="buying">buying</string>
+    <string name="saved_renting_time_lodging_key">renting_time_lodging</string>
+    <string name="saved_renting_time_transport_key">renting_time_transport</string>
 
-    <string name="pref_title_vibrate">Vibrate</string>
-    <string name="recording_movies">Recording Movies</string>
-    <string name="writing_poem">Writing Poem</string>
-    <string name="drawing_something">Drawing Somethings</string>
-    <string name="making_computer_game">Making Computer</string>
-    <string name="saved_office_jobs_list_key">office_jobs_list</string>
-    <string name="saved_criminal_jobs_list_key">criminal_jobs_list</string>
-
-
-    <string name="skills">Skills</string>
-    <string name="saved_is_first_time_key">is_first_time</string>
-    <string name="saved_sex_key">sex</string>
-    <string name="saved_do_borrow_money_key">do_borrow_money</string>
-    <string-array name="buy_method_array">
-        <item>Buy</item>
-        <item>Rent for a week</item>
-        <item>Rent for a month</item>
-    </string-array>
-
-    <string-array name="sexuality_array">
-        <item>Men</item>
-        <item>Women</item>
-    </string-array>
 
 </resources>

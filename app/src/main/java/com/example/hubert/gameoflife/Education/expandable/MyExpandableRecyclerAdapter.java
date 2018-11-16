@@ -126,18 +126,18 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                         case steal_stuff_index:
                             if(r.nextInt(25) == 1) {
                                 editor.putInt(mContext.getString(R.string.saved_character_money_key), 0);
-                                Toast.makeText(mContext.getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext.getApplicationContext(), (mContext.getResources().getString(R.string.got_busted)), Toast.LENGTH_LONG).show();
                                 if(r.nextInt(25) == 1)
                                     if(sharedPref.getBoolean(mContext.getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe))
                                     {
                                         editor.putInt(mContext.getString(R.string.saved_money_in_safe_key), 0);
-                                        Toast.makeText(mContext.getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(mContext.getApplicationContext(), (mContext.getResources().getString(R.string.found_safe)), Toast.LENGTH_LONG).show();
                                     }
                             }
                             else
                             {
                                 editor.putInt(mContext.getString(R.string.saved_character_money_key), ((sharedPref.getInt(mContext.getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + 50));
-                                Toast.makeText(mContext.getApplicationContext(), ("You got 50 money!"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext.getApplicationContext(), (mContext.getResources().getString(R.string.got50Money)), Toast.LENGTH_LONG).show();
                             }
                             break;
                         case sell_drugs_index:
@@ -166,20 +166,20 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                                 catch (JSONException e)
                                 { }*/
 
-                                if(sharedPref.getInt(mContext.getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) >= 500)
+                                if(sharedPref.getInt(mContext.getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) >= 250)
                                 {
-                                    Toast.makeText(mContext.getApplicationContext(), ("Teacher reported this and you have now 2x weaker grades!"), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mContext.getApplicationContext(), (mContext.getResources().getString(R.string.reported2xWeakerGrades)), Toast.LENGTH_LONG).show();
                                     editor.putInt(mContext.getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(mContext.getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) / 2);
                                 }
                                 else
                                 {
-                                    Toast.makeText(mContext.getApplicationContext(), ("Teacher reported this and you've got 1 from all subjects!"), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(mContext.getApplicationContext(), (mContext.getResources().getString(R.string.reported1FromAllSubjects)), Toast.LENGTH_LONG).show();
                                     editor.putInt(mContext.getResources().getString(R.string.saved_education_points_key), 0);
                                 }
                             }
                             else
                             {
-                                Toast.makeText(mContext.getApplicationContext(), ("You have now a little better marks"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(mContext.getApplicationContext(), (mContext.getResources().getString(R.string.aLittleBetterMarks)), Toast.LENGTH_LONG).show();
                                 editor.putInt(mContext.getResources().getString(R.string.saved_education_points_key), sharedPref.getInt(mContext.getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 50);
 
                                 /*try

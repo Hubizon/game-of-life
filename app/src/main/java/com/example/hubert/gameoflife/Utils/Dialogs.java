@@ -5,13 +5,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
@@ -39,7 +43,7 @@ public class Dialogs {
         dialog.setTitle(title)
                 //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         startTimer();
                         switch (whichOneEvent)
@@ -53,6 +57,9 @@ public class Dialogs {
                                 break;
 
                             case 7:
+                                sharedPref.edit().clear().apply();
+                                DialogFragment newDialog = MyDialogOpenFragment.newInstance();
+                                newDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "open_dialog_tag");
                                 //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
                                 //TODO: wyczyścic sharedpref
                                 break;
@@ -60,7 +67,7 @@ public class Dialogs {
                         dialoginterface.cancel();
                         //TODO: start timer
                     }})
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         startTimer();
                         switch (whichOneEvent)
@@ -86,7 +93,7 @@ public class Dialogs {
                                         editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) + 50));
                                 }
                                 else
-                                    Toast.makeText(context, "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, context.getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
                                 editor.apply();
                                 dialoginterface.cancel();
                                 break;
@@ -99,7 +106,7 @@ public class Dialogs {
                                         editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) + 40));
                                 }
                                 else
-                                    Toast.makeText(context, "Unfortunately, you don't have enough money to do this.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, context.getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
                                 editor.apply();
                                 dialoginterface.cancel();
                                 break;
@@ -118,7 +125,10 @@ public class Dialogs {
                                 break;
 
                             case 7:
-                                // TODO: Wyświetlić reklamę
+                                if (MainActivity.mRewardedVideoAd.isLoaded())
+                                    MainActivity.mRewardedVideoAd.show();
+                                else
+                                    Toast.makeText(context, context.getResources().getString(R.string.no_ads), Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:

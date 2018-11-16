@@ -168,7 +168,7 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
 
                 if (canDoThisWork) {
                     mDataNames.add(mDataJobs[i].getName());
-                    mDataPrices.add(mDataJobs[i].getSalary() + "$");
+                    mDataPrices.add(mDataJobs[i].getSalary() + context.getResources().getString(R.string.currency));
                     //mDataJobs[i]
                 }
                 else
@@ -187,7 +187,7 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
             {
                 for(int i = lastPositionPage1; i < mDataJobs.length; i++) {
                     mDataNames.add(mDataJobs[i].getName());
-                    mDataPrices.add(mDataJobs[i].getSalary() + "$");
+                    mDataPrices.add(mDataJobs[i].getSalary() + context.getResources().getString(R.string.currency));
                 }
             }
         }
@@ -196,7 +196,7 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
             {
                 for(int i = lastPositionPage2; i < mDataJobs.length; i++) {
                     mDataNames.add(mDataJobs[i].getName());
-                    mDataPrices.add(mDataJobs[i].getSalary() + "$");
+                    mDataPrices.add(mDataJobs[i].getSalary() + context.getResources().getString(R.string.currency));
                 }
             }
     }

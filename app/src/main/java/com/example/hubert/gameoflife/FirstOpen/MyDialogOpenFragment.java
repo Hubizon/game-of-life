@@ -124,7 +124,7 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
                         getContext(),
                         nameEdit.getText().toString(),
                         avatarRes,
-                        String.valueOf(sexSpinner.getSelectedItem()).equals("male"));
+                        String.valueOf(sexSpinner.getSelectedItem()).equals("Men"));
 
                 mListener.onNewUserAdd();
                 dismiss();

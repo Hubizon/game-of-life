@@ -51,10 +51,10 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
         SharedPreferences sharedPref = MainActivity.userSharedPref;
         //sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-        String cashText = "Cash: " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$";
+        String cashText = R.string.cash + " " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$";
         ((TextView)view.findViewById(R.id.money_dialogsafe)).setText(cashText);
 
-        String safeText = "Safe: " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$";
+        String safeText = R.string.safe + " " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$";
         ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText(safeText);
 
         sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
@@ -132,7 +132,7 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
         }
 
         editor.apply();
-        ((TextView)view.findViewById(R.id.money_dialogsafe)).setText("Cash:   " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
-        ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText("Safe:   " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$");
+        ((TextView)view.findViewById(R.id.money_dialogsafe)).setText(R.string.cash + "   " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$");
+        ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText(R.string.safe + "   " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$");
     }
 }

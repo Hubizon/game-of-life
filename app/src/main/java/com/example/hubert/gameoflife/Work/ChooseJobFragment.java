@@ -2,6 +2,7 @@ package com.example.hubert.gameoflife.Work;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -70,7 +71,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
 
         SharedPreferences sharedPref = MainActivity.userSharedPref;
         //SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        ((TextView) (view.findViewById(R.id.money_choose_work))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
+        ((TextView) (view.findViewById(R.id.money_choose_work))).setText(getResources().getString(R.string.currency) + " " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
 
 
         // set up the RecyclerView
@@ -231,10 +232,13 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
             if (toToast.equals("")) {
                 //editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
                 editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(job));
-
+               // Intent intent = new Intent(getContext(), MainActivity.class);
+                //startActivity(intent);
             } else
-                Toast.makeText(getContext(), "Unfortunately, you don't have a:" + toToast, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.dont_have_a) + "" + toToast, Toast.LENGTH_SHORT).show();
         }
+
+
 
         /*switch (id) {
             case R.id.cardview_officeWork:

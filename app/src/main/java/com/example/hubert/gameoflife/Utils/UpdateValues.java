@@ -39,15 +39,24 @@ public class UpdateValues {
 
         editor.putInt(context.getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 8));
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) <= 0)
+        {
             editor.putInt(context.getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
+            editor.apply();
+        }
 
         editor.putInt(context.getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 8));
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy) <= 0)
+        {
             editor.putInt(context.getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
+            editor.apply();
+        }
 
         editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 8));
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness) <= 0)
+        {
             editor.putInt(context.getResources().getString(R.string.saved_health_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)) - 25));
+            editor.apply();
+        }
 
 
        // editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)) + 1));
@@ -66,17 +75,17 @@ public class UpdateValues {
             }
             editor.apply();
 
-            if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) >= 0)
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) <= 0)
             {
-                showAlertDialog(context, sharedPref, "Break up", "Your partner broke up with you!");
+                showAlertDialog(context, sharedPref, "Break up", "Your partner broke up with you! You're sad now for few days.");
                 Love.BreakUp(context);
             }
         }
 
         if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_sad_key), false))
         {
-            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 3));
-            editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0));
+            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
+            editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) - 1);
             if(sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) <= 0)
                 editor.putBoolean(context.getResources().getString(R.string.saved_is_sad_key), false);
         }
@@ -96,19 +105,37 @@ public class UpdateValues {
 
             if(lodging != null)
             {
-                if("rent".equals(lodging.getType()))
-                    if(lodging.getRentTime() <= sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0))
-                    {
-                        if(sharedPref.getInt(context.getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) <= 18)
-                            editor.putString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
-                        else
-                            editor.putString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodgingAfter18);
+                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0))
+                {
+                    editor.putInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0) - 1));
+                    editor.apply();
 
-                        editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), 0);
+                    if(sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0) == 0)
+                    {
+                        //  if(sharedPref.getInt(context.getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears) <= 18)
+                        editor.putString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+                        // else
+                        //    editor.putString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodgingAfter18);
+
+                        editor.putInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0);
                         showAlertDialog(context,sharedPref, "Your time of rental has ended", "You came to the street!");
                     }
-                    else
-                        editor.putInt(context.getResources().getString(R.string.saved_renting_time_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_key), 0) + 1));
+                }
+            }
+
+            jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
+            Transport transport = gson.fromJson(jsonString, Transport.class);
+            if(transport != null)
+            {
+                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0))
+                {
+                    editor.putString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
+
+                    editor.putInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0);
+                    showAlertDialog(context,sharedPref, "Your time of rental has ended", "You came to the street!");
+                }
+                else
+                    editor.putInt(context.getResources().getString(R.string.saved_renting_time_transport_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0) - 1));
             }
 
             if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
@@ -301,7 +328,7 @@ public class UpdateValues {
         Random rnd = new Random();
         //TODO: zrobic, zeby nie zadzialalo jak ktos wylaczy aplikacje podczas dialogu
 
-        switch (rnd.nextInt(5000))
+        switch (rnd.nextInt(1500))
         {
             case 1:
                 //TODO: Michal!!! zastopuj timer tu xd
@@ -323,7 +350,7 @@ public class UpdateValues {
         if(rnd.nextInt(100) < karmaPoints)
         {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            switch (rnd.nextInt(50))
+            switch (rnd.nextInt(10))
             {
                 case 1:
                     showDialogWithChoose(sharedPreferences, context,"Some rich man won the lottery and want to give you 2500$!", "Do you want to accept it?", 2);
@@ -356,7 +383,7 @@ public class UpdateValues {
         if(rnd.nextInt(100) > 100 - karmaPoints)
         {
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            switch (rnd.nextInt(7))
+            switch (rnd.nextInt(10))
             {
                 case 1: case 2:
                 json = sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);

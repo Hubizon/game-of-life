@@ -3,6 +3,7 @@ package com.example.hubert.gameoflife.Girlboyfriend;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
@@ -20,7 +21,7 @@ public class Love  {
 
     public static void BreakUp(Context context)
     {
-        SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(context.getResources().getString(R.string.saved_love_key), null);
         editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);

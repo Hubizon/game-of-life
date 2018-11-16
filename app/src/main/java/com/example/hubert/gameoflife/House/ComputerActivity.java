@@ -86,7 +86,7 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case  R.id.supportComputer:
-                showDialog("Support a Charity Event", "Are you sure you want to support a charity event for 100$?");
+                showDialog(getResources().getString(R.string.support_a_charity_event), getResources().getString(R.string.sure_to_support_a_charity_event));
                 break;
 
             case R.id.buyLotteries:
@@ -124,11 +124,11 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
         dialog.setTitle(title)
                 //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         dialoginterface.cancel();
                     }})
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 100)
                         {
@@ -136,7 +136,7 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
                             editor.putInt(getResources().getString(R.string.saved_karma_points_key), (sharedPref.getInt(getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints)) + 5);
                         }
                         else
-                            Toast.makeText(getApplicationContext(), "You don't have enough money to do this", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
                         editor.apply();
                     }
                 }).show();

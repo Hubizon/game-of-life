@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="buy_method_array">
+        <item>Buy</item>
+        <item>Rent for a week</item>
+        <item>Rent for a month</item>
+    </string-array>
+
+    <string-array name="sexuality_array">
+        <item>Men</item>
+        <item>Women</item>
+    </string-array>
+
 </resources>
