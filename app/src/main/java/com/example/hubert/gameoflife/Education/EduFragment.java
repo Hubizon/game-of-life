@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +32,8 @@ import java.util.List;
 import java.util.Random;
 
 
-public class EduFragment extends Fragment implements View.OnClickListener{
+public class EduFragment extends Fragment
+        implements View.OnClickListener, MyExpandableRecyclerAdapter.EduFragmentCallback{
 
     private static final String EDU_DIALOG_TAG = "edu_dialog_tag2";
 
@@ -41,6 +43,15 @@ public class EduFragment extends Fragment implements View.OnClickListener{
 
     private RecyclerView recycler_view;
     private MyExpandableRecyclerAdapter adapter;
+
+    public List<ParentList> Parent = new ArrayList<>();
+    public List<ChildList> ChildSchool = new ArrayList<>();
+    public List<ChildList> ChildCriminal = new ArrayList<>();
+    public  List<ChildList> ChildWork = new ArrayList<>();
+
+    CardView workCardView;
+    TextView workTitle, workPosition;
+    ProgressBar workProgressPosition;
 
     public EduFragment() {}
 
@@ -61,64 +72,58 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         recycler_view = view.findViewById(R.id.recycler_Expand);
         recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        final List<ParentList> Parent = new ArrayList<>();
-        final List<ChildList> ChildSchool = new ArrayList<>();
-        final List<ChildList> ChildCriminal = new ArrayList<>();
-        final List<ChildList> ChildWork = new ArrayList<>();
-
         SharedPreferences sharedPref = MainActivity.userSharedPref;
         //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
         Job job = gson.fromJson(json, Job.class);
+
+        workCardView = view.findViewById(R.id.cardViewWorkInfo);
+        workTitle = view.findViewById(R.id.work_name);
+        workPosition = view.findViewById(R.id.position_work);
+        workProgressPosition = view.findViewById(R.id.ProgressBar_work_position);
+
         if(job != null)
         {
-            view.findViewById(R.id.cardViewWorkInfo).setVisibility(View.VISIBLE);
-            ((TextView)view.findViewById(R.id.work_name)).setText("Work: " + job.getName());
-            ((ProgressBar)view.findViewById(R.id.ProgressBar_work_position)).setProgress(job.getPositionPoints());
-            ((TextView)view.findViewById(R.id.position_work)).setText("Position: " + job.getPosition());
-            /*switch (sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), 1))
-            {
-                case 1:
-                    ((TextView)view.findViewById(R.id.position_work)).setText();
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-            }*/
+            workCardView.setVisibility(View.VISIBLE);
+            workTitle.setText("Work: " + job.getName());
+            workProgressPosition.setProgress(job.getPositionPoints());
+            workPosition.setText("Position: " + job.getPosition());
         }
 
-        ChildSchool.add(new ChildList("Go to school"));
-        //ChildSchool.add(new ChildList("learn hard"));
-        //ChildSchool.add(new ChildList("hand around"));
-        ChildSchool.add(new ChildList("Get some skills"));
-        //ChildSchool.add(new ChildList("Give up school"));
-        Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
 
-        ChildWork.add(new ChildList("Start working"));
-        //ChildWork.add(new ChildList("work hard"));
+        if (!(Parent.size() > 0)) {
+            ChildSchool.add(new ChildList("Go to school"));
+            //ChildSchool.add(new ChildList("learn hard"));
+            //ChildSchool.add(new ChildList("hand around"));
+            ChildSchool.add(new ChildList("Get some skills"));
+            //ChildSchool.add(new ChildList("Give up school"));
+            Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
 
-        if(job == null)
-            ChildWork.add(new ChildList("Find a Job"));
-        else
-            ChildWork.add(new ChildList("Give up work"));
-        Parent.add(new ParentList(TITLE_WORK, ChildWork));
+            //ChildWork.add(new ChildList("work hard"));
 
-        ChildCriminal.add(new ChildList("Get new friends"));
-        ChildCriminal.add(new ChildList("Steal stuff"));
-        ChildCriminal.add(new ChildList("Sell drugs"));
-        ChildCriminal.add(new ChildList("Threat teachers"));
-        Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
+            //TODO make it in chnageWOrkStatus method
+            if(job == null)
+                ChildWork.add(new ChildList("Find a Job"));
+            else {
+                ChildWork.add(new ChildList("Start working"));
+                ChildWork.add(new ChildList("Give up work"));
+            }
+            Parent.add(new ParentList(TITLE_WORK, ChildWork));
+
+            ChildCriminal.add(new ChildList("Get new friends"));
+            ChildCriminal.add(new ChildList("Steal stuff"));
+            ChildCriminal.add(new ChildList("Sell drugs"));
+            ChildCriminal.add(new ChildList("Threat teachers"));
+            Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
+        }
 
         RecyclerView.ItemAnimator animator = recycler_view.getItemAnimator();
         if (animator instanceof DefaultItemAnimator) {
             ((DefaultItemAnimator) animator).setSupportsChangeAnimations(false);
         }
 
-        adapter = new MyExpandableRecyclerAdapter(Parent, getContext());
+        adapter = new MyExpandableRecyclerAdapter(Parent, getContext(), this);
         recycler_view.setAdapter(adapter);
 
         return view;
@@ -150,4 +155,38 @@ public class EduFragment extends Fragment implements View.OnClickListener{
         super.onViewStateRestored(savedInstanceState);
         adapter.onRestoreInstanceState(savedInstanceState);
     }
+
+    @Override
+    public void UpdateJobStatus(boolean hasJob) {
+        ChildWork.clear();
+        if( hasJob ) {
+            ChildWork.add(new ChildList("Start Working"));
+            ChildWork.add(new ChildList("Quit the job"));
+
+            SharedPreferences sharedPref = MainActivity.userSharedPref;
+            Gson gson = new Gson();
+            String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
+            Job job = gson.fromJson(json, Job.class);
+            workTitle.setText("Work: " + job.getName());
+            workProgressPosition.setProgress(job.getPositionPoints());
+            workPosition.setText("Position: " + job.getPosition());
+            workCardView.setVisibility(View.VISIBLE);
+        }
+        else {
+            ChildWork.add(new ChildList("Find a job"));
+            workCardView.setVisibility(View.GONE);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        Gson gson = new Gson();
+        String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
+        Job job = gson.fromJson(json, Job.class);
+        if (job != null) UpdateJobStatus(true);
+    }
+
 }

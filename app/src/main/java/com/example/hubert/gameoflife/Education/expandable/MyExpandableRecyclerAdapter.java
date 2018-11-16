@@ -1,5 +1,8 @@
 package com.example.hubert.gameoflife.Education.expandable;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,14 +49,21 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
     private static final int threat_teacher_index = 3;
 
     private static final int start_working_index = 0;
-    private static final int work_hard_index = 2;
     private static final int give_up_work_index = 1;
+    private static final int work_hard_index = 2;
 
     Context mContext;
 
-    public MyExpandableRecyclerAdapter(List<ParentList> groups, Context context) {
+    EduFragmentCallback mCallback;
+    public interface EduFragmentCallback {
+        void UpdateJobStatus(boolean hasJob);
+    }
+
+
+    public MyExpandableRecyclerAdapter(List<ParentList> groups, Context context, EduFragmentCallback eduListener) {
         super(groups);
         mContext = context;
+        mCallback = eduListener;
     }
 
     @Override
@@ -88,6 +98,11 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                 Intent intent = null;
                 DialogFragment newDialog = null;
                 Random r = new Random();
+
+                Gson gson = new Gson();
+                String json = sharedPref.getString(mContext.getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
+                Job mJob = gson.fromJson(json, Job.class);
+
                 int view_id = view.getId();
                 if (group.getTitle().equals(EduFragment.TITLE_SCHOOL)) {
                     switch (childIndex) {
@@ -203,21 +218,24 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
                 } else if (group.getTitle().equals(EduFragment.TITLE_WORK)) {
                     switch (childIndex) {
                         case start_working_index:
-                            Gson gson = new Gson();
-                            String json = sharedPref.getString(mContext.getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
-                            Job mJob = gson.fromJson(json, Job.class);
-                            if(mJob != null)
+                            if(mJob == null) {
+                                Intent intentWork = new Intent(mContext.getApplicationContext(), ChooseJobActivity.class);
+                                mContext.startActivity(intentWork);
+                            }
+                            else {
                                 newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), start_working_index);
+                            }
                             break;
-//                        case work_hard_index:
+                        case give_up_work_index:
+                            Toast.makeText(mContext, "You are unemployed now!", Toast.LENGTH_SHORT).show();
+                            mJob = null;
+                            editor.putString(mContext.getResources().getString(R.string.saved_my_job_key), gson.toJson(mJob));
+                            //EduFragment.changeWorkStatus(false);
+                            mCallback.UpdateJobStatus(false);
+                            break;
+//                      case work_hard_index:
 //                            newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), work_hard_index);
 //                            break;
-                        case give_up_work_index:
-                            editor.putString(mContext.getString(R.string.saved_my_job_key), null);
-
-                            Intent intentWork = new Intent(mContext.getApplicationContext(), ChooseJobActivity.class);
-                            mContext.startActivity(intentWork);
-                            break;
                     }
                 }
 

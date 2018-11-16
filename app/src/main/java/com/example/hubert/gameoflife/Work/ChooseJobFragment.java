@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.Education.EduFragment;
 import com.example.hubert.gameoflife.Education.RecyclerViewSkillsAdapter;
 import com.example.hubert.gameoflife.Education.Skill;
 import com.example.hubert.gameoflife.Education.SkillsFragment;
@@ -231,6 +232,8 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
             if (toToast.equals("")) {
                 //editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
                 editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(job));
+                //EduFragment.changeWorkStatus(true);
+                //mCallback.UpdateJobStatus(true);
             } else
                 Toast.makeText(getContext(), "Unfortunately, you don't have a:" + toToast, Toast.LENGTH_SHORT).show();
         }
