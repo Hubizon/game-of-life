@@ -231,6 +231,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
 
             if (toToast.equals("")) {
                 //editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
+                Toast.makeText(getContext(), "You've got the job!", Toast.LENGTH_SHORT).show();
                 editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(job));
                 //EduFragment.changeWorkStatus(true);
                 //mCallback.UpdateJobStatus(true);

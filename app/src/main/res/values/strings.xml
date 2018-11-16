@@ -246,6 +246,8 @@
     <string name="saved_office_jobs_list_key">office_jobs_list</string>
     <string name="saved_criminal_jobs_list_key">criminal_jobs_list</string>
 
+    <string name="option_no">NO</string>
+    <string name="reset">Reset</string>
 
     <string name="skills">Skills</string>
     <string name="saved_is_first_time_key">is_first_time</string>

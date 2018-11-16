@@ -15,7 +15,7 @@ public class SkillsActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private int[] tabIcons = {
             R.drawable.profile_icon,
-            R.drawable.education_icon,
+            R.drawable.ic_education,
     };
 
     @Override
