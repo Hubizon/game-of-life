@@ -1,6 +1,7 @@
 package com.example.hubert.gameoflife;
 
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,8 @@ import android.view.MenuItem;
 
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
@@ -53,7 +56,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
-
             if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
@@ -98,6 +100,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     SharedPreferences userSharedPref = MainActivity.userSharedPref;
                     userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
                 }
+
             }
             return true;
         }
@@ -206,6 +209,33 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 public boolean onPreferenceClick(Preference preference) {
                     Intent intent = new Intent(getContext(), Credits.class);
                     startActivity(intent);
+                    return true;
+                }
+            });
+
+            Preference hardReset = findPreference("reset_key");
+            hardReset.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    if (o.toString().equals("YES")) {
+                        Log.d("MainActivity", "data has been removed!");
+                        if (Build.VERSION_CODES.KITKAT <= Build.VERSION.SDK_INT) {
+                            ((ActivityManager)getContext().getSystemService(ACTIVITY_SERVICE))
+                                    .clearApplicationUserData();
+                        }
+                        else {
+                            try {
+                                String packageName = getContext().getPackageName();
+                                Runtime runtime = Runtime.getRuntime();
+                                runtime.exec("pm clear "+packageName);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    else {
+                        Log.d("MainActivity", "data has NOT been removed!");
+                    }
                     return true;
                 }
             });
