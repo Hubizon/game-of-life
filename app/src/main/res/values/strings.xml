@@ -298,6 +298,8 @@
 
     <string name="option_no">NO</string>
     <string name="reset">Reset</string>
+    <string name="fitnessNotYet">You are too lazy!</string>
+
 
 
 </resources>

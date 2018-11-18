@@ -126,7 +126,7 @@ public class HomeFragment extends Fragment
                 break;
 
             case R.id.cardview_fitness:
-                Toast.makeText(getContext(), "That's not available yet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.fitnessNotYet, Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.cardview_ad:
