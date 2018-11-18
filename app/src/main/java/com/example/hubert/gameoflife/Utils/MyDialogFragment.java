@@ -236,7 +236,7 @@ public class  MyDialogFragment extends DialogFragment  {
             } else if (title.equals(EduFragment.TITLE_CRIMINAL)) {
                 switch (position) {
                     case get_new_friends_index:
-                        if(sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) < 1000)
+                        if(sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) > 1000)
                         {
                             editor.putInt(getResources().getString(R.string.saved_criminal_points_key), sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), 1000));
                             Toast.makeText(getContext(), "You already have a lot of friends.", Toast.LENGTH_SHORT).show();
@@ -409,19 +409,19 @@ public class  MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.makeGameComputer:
-                editor.putString(getResources().getString(R.string.saved_games_key), doSomething(getResources().getString(R.string.saved_progress_making_game_key), getResources().getString(R.string.saved_programming_skills_key), getResources().getString(R.string.saved_games_key), "Information Technology"));
+                editor.putString(getResources().getString(R.string.saved_games_key), doSomething(getResources().getString(R.string.saved_progress_making_game_key), getResources().getString(R.string.saved_programming_skills_key), getResources().getString(R.string.saved_games_key), "You successfully made a game"));
                 break;
 
             case R.id.drawSomethingComputer:
-                editor.putString(getResources().getString(R.string.saved_drawings_key), doSomething(getResources().getString(R.string.saved_progress_making_drawings_key), getResources().getString(R.string.saved_drawing_skills_key), getResources().getString(R.string.saved_games_key), "Art"));
+                editor.putString(getResources().getString(R.string.saved_drawings_key), doSomething(getResources().getString(R.string.saved_progress_making_drawings_key), getResources().getString(R.string.saved_drawing_skills_key), getResources().getString(R.string.saved_games_key), "You successfully made a drawing"));
                 break;
 
             case R.id.writePoemComputer:
-                editor.putString(getResources().getString(R.string.saved_books_key), doSomething(getResources().getString(R.string.saved_progress_making_book_key), getResources().getString(R.string.saved_writing_skills_key), getResources().getString(R.string.saved_games_key), "English"));
+                editor.putString(getResources().getString(R.string.saved_books_key), doSomething(getResources().getString(R.string.saved_progress_making_book_key), getResources().getString(R.string.saved_writing_skills_key), getResources().getString(R.string.saved_games_key), "You successfully wrote a book"));
                 break;
 
             case R.id.recordMoviesComputer:
-                editor.putString(getResources().getString(R.string.saved_movies_key), doSomething(getResources().getString(R.string.saved_progress_making_movies_key), getResources().getString(R.string.saved_recording_skills_key), getResources().getString(R.string.saved_games_key), "Music"));
+                editor.putString(getResources().getString(R.string.saved_movies_key), doSomething(getResources().getString(R.string.saved_progress_making_movies_key), getResources().getString(R.string.saved_recording_skills_key), getResources().getString(R.string.saved_games_key), "You successfully made a movie"));
                 break;
 
             default:
@@ -463,7 +463,7 @@ public class  MyDialogFragment extends DialogFragment  {
         ((ProgressBar)view.findViewById(R.id.progressBar_happiness_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
     }
 
-    private String doSomething(String resSavedProgress, String resSavedSkills, String resSavedList, String subjectToThing) {
+    private String doSomething(String resSavedProgress, String resSavedSkills, String resSavedList, String textWhenEnd) {
         editor.putInt(resSavedProgress, (sharedPref.getInt(resSavedProgress, 0) + 1));
         editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 1));
         editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
@@ -472,25 +472,13 @@ public class  MyDialogFragment extends DialogFragment  {
         ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).setProgress(((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress() + 1);
         editor.putInt(resSavedProgress, ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress());
 
-        if (sharedPref.getInt(resSavedProgress, 0) >= 100) {
+        if (sharedPref.getInt(resSavedProgress, 0) >= 10) {
             editor.putInt(resSavedSkills, (sharedPref.getInt(resSavedSkills, 0) + 2));
             editor.putInt(resSavedSkills, 0);
+            editor.putInt(resSavedProgress, 0);
+            editor.apply();
 
-            /*JSONObject jsonObject;
-            int gameScore = 0;
-            try {
-                JSONArray jsonArray = new JSONArray(sharedPref.getString(getResources().getString(R.string.saved_subjects_list_key), SharedPreferencesDefaultValues.DefaultSubjectsList));
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    jsonObject = jsonArray.getJSONObject(i);
-                    if (subjectToThing.equals(jsonObject.get("subjectName"))) {
-                        gameScore = (jsonObject.getInt("subjectMark") * 10) + (sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key),0));
-                        break;
-                    }
-                }
-            } catch (JSONException e)
-            { }*/
-
-            int gameScore = sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints)/ 10 + sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key),0);
+            int gameScore = sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) / 10 + sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key),0);
 
             JSONArray toJsonArray = new JSONArray();
             toJsonArray.put(gameScore);
@@ -503,12 +491,17 @@ public class  MyDialogFragment extends DialogFragment  {
             toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths));
 
             try {
-                JSONArray jsonArray = new JSONArray(sharedPref.getString(resSavedList, SharedPreferencesDefaultValues.DefaultGamesList));
+                JSONArray jsonArray = new JSONArray();
+                if(!sharedPref.getString(resSavedList, SharedPreferencesDefaultValues.DefaultGamesList).isEmpty())
+                    jsonArray = new JSONArray(sharedPref.getString(resSavedList, SharedPreferencesDefaultValues.DefaultGamesList));
+
                 jsonArray.put(toJsonArray);
                 return jsonArray.toString();
                 //editor.putString(getResources().getString(R.string.saved_games_key), jsonArray.toString());
             } catch (JSONException e) {
             }
+
+            Toast.makeText(getContext(), textWhenEnd, Toast.LENGTH_SHORT).show();
         }
         return "";
     }

@@ -88,32 +88,35 @@ public class EduFragment extends Fragment
             workCardView.setVisibility(View.VISIBLE);
             workTitle.setText(getResources().getString(R.string.work) + " " + job.getName());
             workProgressPosition.setProgress(job.getPositionPoints());
-            workPosition.setText(getResources().getString(R.string.position) + " " + job.getPosition());
+            workPosition.setText(getResources().getString(R.string.position) + "" + job.getPosition());
         }
+
 
         if (!(Parent.size() > 0)) {
-            ChildSchool.add(new ChildList(getResources().getString(R.string.go_to_school)));
+            ChildSchool.add(new ChildList("Go to school"));
             //ChildSchool.add(new ChildList("learn hard"));
             //ChildSchool.add(new ChildList("hand around"));
-            ChildSchool.add(new ChildList(getResources().getString(R.string.get_some_skills)));
+            ChildSchool.add(new ChildList("Get some skills"));
             //ChildSchool.add(new ChildList("Give up school"));
             Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
+
+            //ChildWork.add(new ChildList("work hard"));
+
+            //TODO make it in chnageWOrkStatus method
+            if(job == null)
+                ChildWork.add(new ChildList("Find a Job"));
+            else {
+                ChildWork.add(new ChildList("Start working"));
+                ChildWork.add(new ChildList("Give up work"));
+            }
+            Parent.add(new ParentList(TITLE_WORK, ChildWork));
+
+            ChildCriminal.add(new ChildList("Get new friends"));
+            ChildCriminal.add(new ChildList("Steal stuff"));
+            ChildCriminal.add(new ChildList("Sell drugs"));
+            ChildCriminal.add(new ChildList("Threat teachers"));
+            Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
         }
-        if(job != null)
-            ChildWork.add(new ChildList(getResources().getString(R.string.start_working)));
-        //ChildWork.add(new ChildList("work hard"));
-
-        if(job == null)
-            ChildWork.add(new ChildList(getResources().getString(R.string.find_a_job)));
-        else
-            ChildWork.add(new ChildList(getResources().getString(R.string.give_up_work)));
-        Parent.add(new ParentList(TITLE_WORK, ChildWork));
-
-        ChildCriminal.add(new ChildList(getResources().getString(R.string.get_new_friends)));
-        ChildCriminal.add(new ChildList(getResources().getString(R.string.steal_something)));
-        ChildCriminal.add(new ChildList(getResources().getString(R.string.sell_drugs)));
-        ChildCriminal.add(new ChildList(getResources().getString(R.string.threat_teachers)));
-        Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
 
         RecyclerView.ItemAnimator animator = recycler_view.getItemAnimator();
         if (animator instanceof DefaultItemAnimator) {
@@ -164,9 +167,9 @@ public class EduFragment extends Fragment
             Gson gson = new Gson();
             String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
             Job job = gson.fromJson(json, Job.class);
-            workTitle.setText("Work: " + job.getName());
+            workTitle.setText(getResources().getString(R.string.work) + "" + job.getName());
             workProgressPosition.setProgress(job.getPositionPoints());
-            workPosition.setText("Position: " + job.getPosition());
+            workPosition.setText(getResources().getString(R.string.position) + "" + job.getPosition());
             workCardView.setVisibility(View.VISIBLE);
         }
         else {

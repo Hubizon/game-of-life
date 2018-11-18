@@ -45,12 +45,10 @@ public class CustomPagerSkillsAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
+            case 0:
+                return "Skills";
             case 1:
-                return "Edu Skills";
-            case 2:
                 return "Crim Skills";
-            case 3:
-                return "Sth Skills";
             default:
                 return "Skills";
         }

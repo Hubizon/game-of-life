@@ -22,11 +22,6 @@ public class CustomPagerJobAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-//                SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-//                if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_in_school_now_key), SharedPreferencesDefaultValues.DefaultIsInSchoolNow))
-//                    return EducationFragment.newInstance();
-//                else
-//                    return WorkFragment.newInstance();
                 return ChooseJobFragment.newInstance();
             case 2:
                 return ChooseJobFragment.newInstance();
@@ -39,14 +34,12 @@ public class CustomPagerJobAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
+            case 0:
+                return "Job";
             case 1:
-                return "Edu Skills";
-            case 2:
-                return "Crim Skills";
-            case 3:
-                return "Sth Skills";
+                return "Crim Job";
             default:
-                return "Skills";
+                return "Job";
         }
     }
 

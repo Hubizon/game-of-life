@@ -31,18 +31,23 @@
         </activity>
         <activity
             android:name=".Shop.BuyActivity"
+            android:label="Shop"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".House.ComputerActivity"
+            android:label="House"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Work.ChooseJobActivity"
+            android:label="Choose Job"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".Credits" />
+        <activity android:name=".Credits"
+            android:label="Credits"/>
         <activity android:name=".Education.SkillsActivity"
+            android:label="Skills"
             android:parentActivityName=".MainActivity"/>
     </application>
 

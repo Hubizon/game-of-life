@@ -387,7 +387,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                                     break;
                                 case "lodging":
                                     if(purchaseMethod.equals(buyMethods[1]))
-                                        editor.putInt(getResources().getString(R.string.saved_renting_time_lodging_key), 2);
+                                        editor.putInt(getResources().getString(R.string.saved_renting_time_lodging_key), 7);
                                     else if(purchaseMethod.equals(buyMethods[2]))
                                         editor.putInt(getResources().getString(R.string.saved_renting_time_lodging_key), 31);
 

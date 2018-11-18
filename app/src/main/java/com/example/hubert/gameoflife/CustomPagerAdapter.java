@@ -27,11 +27,6 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-//                SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-//                if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_in_school_now_key), SharedPreferencesDefaultValues.DefaultIsInSchoolNow))
-//                    return EducationFragment.newInstance();
-//                else
-//                    return WorkFragment.newInstance();
                 return EduFragment.newInstance();
             case 2:
                 return ShopFragment.newInstance();

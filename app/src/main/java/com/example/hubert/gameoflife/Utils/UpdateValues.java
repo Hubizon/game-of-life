@@ -94,9 +94,14 @@ public class UpdateValues {
             editor.putInt(context.getResources().getString(R.string.saved_age_days_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays)) + 1));
             editor.putInt(context.getResources().getString(R.string.saved_date_days_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
             editor.putInt(context.getResources().getString(R.string.saved_day_week_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
-
-            if(sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDayWeek) == 1)
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays) >= 7)
+            {
+                editor.putInt(context.getResources().getString(R.string.saved_day_week_key), 0);
                 getPayment(context);
+            }
+            else
+                editor.putInt(context.getResources().getString(R.string.saved_day_week_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
+
 
             String jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
             Lodging lodging = gson.fromJson(jsonString, Lodging.class);
@@ -248,7 +253,7 @@ public class UpdateValues {
             JSONArray jsonArrayBooks = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_drawings_key), SharedPreferencesDefaultValues.DefaultDrawingsList));
             JSONArray jsonArrayMovies = new JSONArray(sharedPreferences.getString(contextThis.getResources().getString(R.string.saved_movies_key), SharedPreferencesDefaultValues.DefaultMoviesList));
 
-            for(int x = 0; x < 5; x++)
+            for(int x = 1; x < 5; x++)
             {
                 JSONArray jsonArrayThing = null;
                 switch (x)
@@ -279,7 +284,7 @@ public class UpdateValues {
                         {
                             JSONArray jsonArray = jsonArrayThing.getJSONArray(i);
                             Random random = new Random();
-                            int moneyFromGame = (jsonArray.getInt(0) * random.nextInt(5) + 10);
+                            int moneyFromGame = (jsonArray.getInt(0) * random.nextInt(5) + 100);
                             if(jsonArray.getBoolean(1))
                                 moneyFromGame *= 2.5;
 

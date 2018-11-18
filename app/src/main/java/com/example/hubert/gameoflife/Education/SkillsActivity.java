@@ -14,8 +14,8 @@ public class SkillsActivity extends AppCompatActivity {
     private CustomPagerSkillsAdapter mPagerAdapter;
     private TabLayout mTabLayout;
     private int[] tabIcons = {
-            R.drawable.profile_icon,
-            R.drawable.ic_education,
+            R.drawable.skills,
+            R.drawable.crim_skills,
     };
 
     @Override

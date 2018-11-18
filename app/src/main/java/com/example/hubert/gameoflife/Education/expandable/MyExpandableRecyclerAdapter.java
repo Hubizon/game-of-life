@@ -85,12 +85,9 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
 
         final ChildList childItem = ((ParentList) group).getItems().get(childIndex);
         holder.onBind(childItem.getTitle());
-        final String titleChild = group.getTitle();
         holder.listChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast toast = Toast.makeText(mContext, titleChild, Toast.LENGTH_SHORT);
-                toast.show();
 
                 SharedPreferences sharedPref = MainActivity.userSharedPref;
 //                SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);

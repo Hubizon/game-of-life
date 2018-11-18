@@ -17,7 +17,8 @@
         app:cardBackgroundColor="?attr/colorPrimary"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        app:cardPreventCornerOverlap="false">
+        app:cardPreventCornerOverlap="false"
+        app:cardCornerRadius="7dp">
 
         <TextView
             android:id="@+id/chooseJobName"

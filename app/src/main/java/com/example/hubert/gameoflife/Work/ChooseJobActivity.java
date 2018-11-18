@@ -49,8 +49,8 @@ public class ChooseJobActivity extends AppCompatActivity{
     private CustomPagerJobAdapter mPagerAdapter;
     private TabLayout mTabLayout;
     private int[] tabIcons = {
-            R.drawable.profile_icon,
-            R.drawable.ic_education,
+            R.drawable.job,
+            R.drawable.crim_job,
     };
 
     @Override
