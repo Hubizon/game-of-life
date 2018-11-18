@@ -98,7 +98,7 @@
 
     <!-- Column 2 -->
     <android.support.v7.widget.CardView
-        android:id="@+id/cardview_todo2"
+        android:id="@+id/cardview_fitness"
         style="@style/MyCardViewStyle">
 
         <FrameLayout

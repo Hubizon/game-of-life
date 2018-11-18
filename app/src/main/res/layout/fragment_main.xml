@@ -14,7 +14,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:cardBackgroundColor="@color/cardViewBackgroundColor">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -170,7 +171,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_weight="1.5">
+        android:layout_weight="1.5"
+        app:cardBackgroundColor="@color/cardViewBackgroundColor">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -276,7 +278,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        app:cardBackgroundColor="@color/cardViewBackgroundColor">
 
         <LinearLayout
             android:layout_width="match_parent"

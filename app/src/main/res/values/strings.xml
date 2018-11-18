@@ -248,6 +248,8 @@
 
     <string name="option_no">NO</string>
     <string name="reset">Reset</string>
+    <string name="fitnessNotYet">You are too lazy!</string>
+
 
     <string name="skills">Skills</string>
     <string name="saved_is_first_time_key">is_first_time</string>

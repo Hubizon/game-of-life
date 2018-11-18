@@ -8,14 +8,16 @@
     <!--<color name="secondaryDarkColor">#c53d13</color>-->
     <!--<color name="primaryTextColor">#000000</color>-->
     <!--<color name="secondaryTextColor">#000000</color>-->
-    <color name="primaryColor">#CDCDC0</color>
-    <color name="primaryLightColor">#ffffff</color>
-    <color name="primaryDarkColor">#626D71</color>
-    <color name="secondaryColor">#ff6e40</color>
-    <color name="secondaryLightColor">#DDBC95</color>
-    <color name="secondaryDarkColor">#B38867</color>
+    <color name="primaryColor">#607D8B</color>
+    <color name="primaryLightColor">#eeeeee</color>
+    <color name="primaryDarkColor">#455A64</color>
+    <color name="secondaryColor">#009688</color>
+    <color name="secondaryLightColor">#52c7b8</color>
+    <color name="secondaryDarkColor">#00675b</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
+
+    <color name="cardViewBackgroundColor">#e0e0e0</color>
 
     <color name="colorDisabled">#808080</color>
     <color name="colorDark">#808080</color>

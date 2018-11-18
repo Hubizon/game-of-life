@@ -125,6 +125,10 @@ public class HomeFragment extends Fragment
                     newDialog = MyDialogSafeFragment.newInstance();
                 break;
 
+            case R.id.cardview_fitness:
+                Toast.makeText(getContext(), R.string.fitnessNotYet, Toast.LENGTH_SHORT).show();
+                break;
+
             case R.id.cardview_ad:
                 if (MainActivity.mRewardedVideoAd.isLoaded()) {
                     MainActivity.mRewardedVideoAd.show();
