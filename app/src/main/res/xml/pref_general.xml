@@ -16,6 +16,14 @@
         android:singleLine="true"
         android:title="@string/pref_title_display_name" />
 
+    <EditTextPreference
+        android:defaultValue="@string/option_no"
+        android:summary="Wipe all of your data"
+        android:key="reset_key"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:title="@string/reset"/>
+
     <Preference android:title="Go to credits"
     android:key="creditsButton"
     android:summary="Awesome people"/>

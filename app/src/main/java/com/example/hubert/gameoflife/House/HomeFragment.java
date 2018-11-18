@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -90,7 +91,15 @@ public class HomeFragment extends Fragment
             case R.id.cardview_safe:
                 if(!sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe)) {
                     final Context context = getContext();
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                    AlertDialog.Builder dialog;
+                    SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    boolean isDark = mSettings.getBoolean("dark_mode_switch", false);
+                    if (isDark) {
+                        dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
+                    }
+                    else {
+                        dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                    }
                     dialog.setTitle(getResources().getString(R.string.dont_have_safe))
                             //.setIcon(R.drawable.ic_launcher)
                             .setMessage(getResources().getString(R.string.sure_to_buy_for_25000))

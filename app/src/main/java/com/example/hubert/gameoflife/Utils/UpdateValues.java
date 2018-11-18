@@ -35,8 +35,6 @@ public class UpdateValues {
         sharedPreferences = sharedPref;
         contextThis = context;
 
-        Log.d("MainActivity", "upatesharedpreferences");
-
         editor.putInt(context.getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 8));
         if(sharedPref.getInt(context.getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry) <= 0)
         {

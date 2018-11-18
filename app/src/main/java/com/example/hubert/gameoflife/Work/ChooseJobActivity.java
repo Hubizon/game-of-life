@@ -1,6 +1,7 @@
 package com.example.hubert.gameoflife.Work;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -49,7 +50,7 @@ public class ChooseJobActivity extends AppCompatActivity{
     private TabLayout mTabLayout;
     private int[] tabIcons = {
             R.drawable.profile_icon,
-            R.drawable.education_icon,
+            R.drawable.ic_education,
     };
 
     @Override

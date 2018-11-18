@@ -296,5 +296,8 @@
     <string name="saved_renting_time_lodging_key">renting_time_lodging</string>
     <string name="saved_renting_time_transport_key">renting_time_transport</string>
 
+    <string name="option_no">NO</string>
+    <string name="reset">Reset</string>
+
 
 </resources>

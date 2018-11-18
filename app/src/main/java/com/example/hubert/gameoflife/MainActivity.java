@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void run() {
             UpdateValues.updateSharedPreferences(context, userSharedPref);
-            Log.d(TAG, "main handler is running!");
             if (mHandler != null) {
                 mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
             }
