@@ -2,10 +2,8 @@ package com.example.hubert.gameoflife;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -24,13 +22,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
-import static android.support.constraint.Constraints.TAG;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

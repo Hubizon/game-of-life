@@ -4,7 +4,6 @@ import com.example.hubert.gameoflife.Education.Skill;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Shop.ShopFragment;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -48,10 +47,10 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultMyGirlboyfriend = "None";
     public static final String DefaultMyChildren = "None";*/
 
-    public static final int DefaultHealth = 750;
-    public static final int DefaultHungry = 750;
-    public static final int DefaultEnergy = 750;
-    public static final int DefaultHappiness = 750;
+    public static final int DefaultHealth = 150;
+    public static final int DefaultHungry = 150;
+    public static final int DefaultEnergy = 150;
+    public static final int DefaultHappiness = 150;
 
     public static final String DefaultMyComputer = null;
     public static final String DefaultMyTv = null;

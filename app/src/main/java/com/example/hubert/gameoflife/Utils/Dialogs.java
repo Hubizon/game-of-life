@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
 import com.example.hubert.gameoflife.MainActivity;
+import com.example.hubert.gameoflife.MyDialogDead;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 
@@ -33,7 +34,8 @@ public class Dialogs {
 
         AlertDialog.Builder dialog;
 
-        SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        //SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
@@ -57,11 +59,16 @@ public class Dialogs {
                                 break;
 
                             case 7:
-                                sharedPref.edit().clear().apply();
-                                DialogFragment newDialog = MyDialogOpenFragment.newInstance();
-                                newDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "open_dialog_tag");
+                               // sharedPref.edit().clear().apply();
+                               // DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_RESET);
+                               // newDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "open_dialog_tag");
+
                                 //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
                                 //TODO: wyczyścic sharedpref
+
+                                stopTimer();
+                                DialogFragment deadDialog = MyDialogDead.newInstance();
+                                deadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_dead_dialog_tag");
                                 break;
                         }
                         dialoginterface.cancel();

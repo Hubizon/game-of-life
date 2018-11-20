@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.hubert.gameoflife.Education.SkillsFragment;
-
 public class CustomPagerJobAdapter extends FragmentPagerAdapter {
     private static final int NUM_PAGES = 2;
     Context context;

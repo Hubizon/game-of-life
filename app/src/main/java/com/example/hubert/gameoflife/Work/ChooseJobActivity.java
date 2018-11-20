@@ -1,46 +1,11 @@
 package com.example.hubert.gameoflife.Work;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.hubert.gameoflife.Education.Skill;
-import com.example.hubert.gameoflife.House.Fun;
-import com.example.hubert.gameoflife.House.Lodging;
-import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Shop.ShopFragment;
-import com.example.hubert.gameoflife.Shop.Weapon;
-import com.example.hubert.gameoflife.Utils.Arrays;
-import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-import static com.example.hubert.gameoflife.Utils.Arrays.GetAMastersDegree;
-import static com.example.hubert.gameoflife.Utils.Arrays.PassHighSchool;
-import static com.example.hubert.gameoflife.Utils.Arrays.PassPrimarySchool;
-import static com.example.hubert.gameoflife.Utils.Arrays.PassSecondarySchool;
-import static com.example.hubert.gameoflife.Utils.Arrays.StudyAtCollage;
-import static com.example.hubert.gameoflife.Utils.Arrays.ThiefSkillsAdvanced;
-import static com.example.hubert.gameoflife.Utils.Arrays.ThiefSkillsBeginner;
-import static com.example.hubert.gameoflife.Utils.Arrays.ThiefSkillsIntermediate;
-import static com.example.hubert.gameoflife.Utils.Arrays.WeaponSkillsAdvanced;
-import static com.example.hubert.gameoflife.Utils.Arrays.WeaponSkillsBeginner;
-import static com.example.hubert.gameoflife.Utils.Arrays.WeaponSkillsIntermediate;
 
 public class ChooseJobActivity extends AppCompatActivity{
 

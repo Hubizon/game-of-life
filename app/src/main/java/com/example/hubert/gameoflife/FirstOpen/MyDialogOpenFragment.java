@@ -1,31 +1,29 @@
 package com.example.hubert.gameoflife.FirstOpen;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 import com.example.hubert.gameoflife.Utils.NewUser;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.hubert.gameoflife.MainActivity.currentUserNumber;
 
 public class MyDialogOpenFragment extends DialogFragment implements View.OnClickListener {
 
@@ -35,6 +33,12 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         void onNewUserAdd ();
     }
     OnNewUserAdd mListener;
+
+    public static final String ARG_MODE = "modeArgKey";
+    public static final int MODE_NEW = 0;
+    public static final int MODE_RESET = 1;
+
+    public int mode;
 
     public int avatarRes = R.drawable.avatar_icon1;
 
@@ -47,8 +51,13 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
 
     View view;
 
-    public static MyDialogOpenFragment newInstance() {
-        return new MyDialogOpenFragment();
+    public static MyDialogOpenFragment newInstance(int mode) {
+        MyDialogOpenFragment myDialogOpenFragment = new MyDialogOpenFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_MODE, mode);
+        myDialogOpenFragment.setArguments(args);
+
+        return myDialogOpenFragment;
     }
 
 
@@ -56,8 +65,12 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        boolean isDark = sharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
+        mode = getArguments().getInt(ARG_MODE, 0);
+
+        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), MODE_PRIVATE);
+
+        SharedPreferences defSP = PreferenceManager.getDefaultSharedPreferences(getContext());
+        boolean isDark = defSP.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_AppCompat_Dialog_Alert);
         } else {
@@ -120,13 +133,23 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         {
             case R.id.saveButton:
                 NewUser newUser = new NewUser();
-                newUser.createUser (
+
+                if (mode == MODE_NEW) {
+                    newUser.createUser (
                         getContext(),
                         nameEdit.getText().toString(),
                         avatarRes,
                         String.valueOf(sexSpinner.getSelectedItem()).equals("Men"));
+                } else {
+                    newUser.resetUser(
+                            getContext(),
+                            nameEdit.getText().toString(),
+                            avatarRes,
+                            String.valueOf(sexSpinner.getSelectedItem()).equals("Men"));
+                }
 
                 mListener.onNewUserAdd();
+                MainActivity.startTimer();
                 dismiss();
                 break;
 

@@ -1,5 +1,6 @@
 package com.example.hubert.gameoflife;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.Utils.Dialogs;
 import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
+import com.example.hubert.gameoflife.Utils.NewUser;
 import com.example.hubert.gameoflife.Utils.UpdateValues;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -29,7 +31,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class MainActivity extends AppCompatActivity
-    implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd {
+    implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd, MyDialogDead.OnDialogDeadInteractionListener {
 
     private static final int TIMER_LOOP_TIME = 1000;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity
             }
         }
     };
+
+    private static boolean hasAdd = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +122,9 @@ public class MainActivity extends AppCompatActivity
 
         if (sharedPref.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true))
         {
+            stopTimer();
             sharedPref.edit().putBoolean(getResources().getString(R.string.saved_is_first_time_key), false).apply();
-            DialogFragment newDialog = MyDialogOpenFragment.newInstance();
+            DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_NEW);
             newDialog.show(getSupportFragmentManager(), "open_dialog_tag");
         }
         else {
@@ -208,11 +213,13 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRewardedVideoAdLoaded() {
+        hasAdd = true;
         Toast.makeText(this, getResources().getString(R.string.ad_avaible), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRewardedVideoAdOpened() {
+        hasAdd = false;
         stopTimer();
     }
 
@@ -260,9 +267,16 @@ public class MainActivity extends AppCompatActivity
     {
         SharedPreferences.Editor editor = userSharedPref.edit();
         editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
-        editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
-        Dialogs.showDialogWithChoose(userSharedPref, context, context.getResources().getString(R.string.died), "Do you want to rescue by watching ad?", 7);
         editor.apply();
+        //for testing purposes
+        hasAdd = false;
+        if (hasAdd)
+            Dialogs.showDialogWithChoose(userSharedPref, context, context.getResources().getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
+        else {
+            stopTimer();
+            DialogFragment deadDialog = MyDialogDead.newInstance();
+            deadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_dead_dialog_tag");
+        }
     }
 
     @Override
@@ -284,5 +298,11 @@ public class MainActivity extends AppCompatActivity
         mTabLayout = findViewById(R.id.tablayout);
         mTabLayout.setupWithViewPager(mPager);
         setupTabIcons();
+    }
+
+    @Override
+    public void onDialogDeadInteraction() {
+        DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_RESET);
+        newDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_user_dialog_tag");
     }
 }

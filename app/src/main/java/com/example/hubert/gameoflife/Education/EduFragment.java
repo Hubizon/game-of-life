@@ -1,6 +1,5 @@
 package com.example.hubert.gameoflife.Education;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,7 +28,6 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 public class EduFragment extends Fragment

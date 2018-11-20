@@ -6,12 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.hubert.gameoflife.Education.EduFragment;
 import com.example.hubert.gameoflife.Education.SkillsFragment;
-import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
-import com.example.hubert.gameoflife.House.HomeFragment;
-import com.example.hubert.gameoflife.Profile.MainFragment;
-import com.example.hubert.gameoflife.Shop.ShopFragment;
 
 public class CustomPagerSkillsAdapter extends FragmentPagerAdapter {
 

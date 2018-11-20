@@ -8,10 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hubert.gameoflife.House.Fun;
-import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.House.Transport;
 
 
 public class ShopFragment extends Fragment

@@ -2,18 +2,15 @@ package com.example.hubert.gameoflife.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
-import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -319,8 +316,9 @@ public class UpdateValues {
                 }
             }
         }
-        catch (JSONException e)
-        { }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         editor.apply();
     }

@@ -1,6 +1,5 @@
 package com.example.hubert.gameoflife.Utils;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -261,7 +260,9 @@ public class  MyDialogFragment extends DialogFragment  {
                         json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
                         try {
                             jsonObject = new JSONObject(json);
-                        } catch (JSONException e ) { }
+                        } catch (JSONException e ) {
+                            e.printStackTrace();
+                        }
                         Job mJob = gson.fromJson(json, Job.class);
                         int educationPoints = sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints);
                         //int workPosition = sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), SharedPreferencesDefaultValues.DefaultWorkPosition);
@@ -299,7 +300,9 @@ public class  MyDialogFragment extends DialogFragment  {
                                 editor.putString(getResources().getString(R.string.saved_my_job_key), jsonObject.toString());
 
                             }
-                            catch (JSONException e) { }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
                             /*mJob.setPosition(mJob.getPosition() + 1);
                             mJob.setPositionPoints(75);
@@ -333,7 +336,9 @@ public class  MyDialogFragment extends DialogFragment  {
                                 }
                             }
                         }
-                        catch (JSONException e) { }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
                         editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 30));
@@ -499,6 +504,7 @@ public class  MyDialogFragment extends DialogFragment  {
                 return jsonArray.toString();
                 //editor.putString(getResources().getString(R.string.saved_games_key), jsonArray.toString());
             } catch (JSONException e) {
+                e.printStackTrace();
             }
 
             Toast.makeText(getContext(), textWhenEnd, Toast.LENGTH_SHORT).show();

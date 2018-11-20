@@ -1,13 +1,8 @@
 package com.example.hubert.gameoflife.Work;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,24 +11,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.Education.EduFragment;
-import com.example.hubert.gameoflife.Education.RecyclerViewSkillsAdapter;
-import com.example.hubert.gameoflife.Education.Skill;
-import com.example.hubert.gameoflife.Education.SkillsFragment;
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import static com.example.hubert.gameoflife.Utils.Arrays.criminalJobsList;
 import static com.example.hubert.gameoflife.Utils.Arrays.officeJobsList;
@@ -116,7 +104,9 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                 job = gson.fromJson(jsonObjectCriminalJob.toString(), Job.class);
             }
 
-        } catch (JSONException e) { }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -199,7 +189,9 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                         if (!haveThisSkill)
                             toToast += "\n" + jsonObject.getString("name");
                     }
-                } catch (JSONException e) { }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             if(job instanceof CriminalJob)
@@ -226,7 +218,9 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                             if (!haveThisWeapon)
                                 toToast += "\n" + jsonObject.getString("name");
                         }
-                    } catch (JSONException e) { }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

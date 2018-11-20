@@ -1,12 +1,8 @@
 package com.example.hubert.gameoflife.Education;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,17 +15,13 @@ import android.widget.Toast;
 
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Shop.RecyclerViewShopBuyAdapter;
 import com.example.hubert.gameoflife.Utils.Arrays;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -104,6 +96,7 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
             }
 
         } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerViewSkills);
@@ -180,8 +173,9 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
                                     else
                                         Toast.makeText(getContext(), getResources().getString(R.string.already_had_it), Toast.LENGTH_SHORT).show();
                                 }
-                                catch (JSONException e)
-                                { }
+                                catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                             else
                                 Toast.makeText(getContext(), getResources().getString(R.string.already_had_it), Toast.LENGTH_SHORT).show();

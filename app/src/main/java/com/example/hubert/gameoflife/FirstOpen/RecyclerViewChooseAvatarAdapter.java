@@ -6,20 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.Shop.RecyclerViewShopBuyAdapter;
-import com.example.hubert.gameoflife.Utils.Arrays;
-
-import java.util.List;
-
-import static com.example.hubert.gameoflife.Utils.Arrays.lodgingList;
-import static com.example.hubert.gameoflife.Utils.Arrays.transportList;
 
 public class RecyclerViewChooseAvatarAdapter extends RecyclerView.Adapter<RecyclerViewChooseAvatarAdapter.ViewHolder> {
 

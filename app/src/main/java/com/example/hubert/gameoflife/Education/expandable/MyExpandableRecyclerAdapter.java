@@ -1,8 +1,5 @@
 package com.example.hubert.gameoflife.Education.expandable;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

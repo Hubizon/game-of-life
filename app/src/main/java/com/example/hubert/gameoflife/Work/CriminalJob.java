@@ -7,8 +7,6 @@ import com.example.hubert.gameoflife.House.Transport;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Shop.Weapon;
 
-import static java.security.AccessController.getContext;
-
 public class CriminalJob extends Job{
 
     private int chanceToGetBusted;

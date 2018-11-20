@@ -1,6 +1,5 @@
 package com.example.hubert.gameoflife.Shop;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -68,8 +67,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         switch (id)
         {
             case R.id.cardview_food:
-                for(int i = 0; i < foodList.length; i++)
-                    itemsNames.add(foodList[i].getName());
+                for (Food aFoodList : foodList) itemsNames.add(aFoodList.getName());
                 for(int i = 0; i < foodList.length; i++)
                     itemsPrices.add(foodList[i].getPrice() + getResources().getString(R.string.currency));
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_food));
@@ -118,7 +116,9 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                         }
                     }
 
-                } catch (JSONException e) { }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_lotteries));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
@@ -287,7 +287,9 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                         } else
                             Toast.makeText(this, getResources().getString(R.string.already_had_it), Toast.LENGTH_SHORT).show();
                     }
-                } catch (JSONException e) { }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
 

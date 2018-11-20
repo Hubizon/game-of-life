@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.hubert.gameoflife.House.Fun;
 import com.example.hubert.gameoflife.House.Lodging;
@@ -25,7 +24,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.ViewHolder> {
     private ArrayList<String> mDataNames = new ArrayList<>();
@@ -136,7 +134,9 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
                             if (!haveThisSkill)
                                 canDoThisWork = false;
                         }
-                    } catch (JSONException e) { }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                     if(job instanceof CriminalJob)
                     {
@@ -161,7 +161,9 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
                                     if (!haveThisWeapon)
                                         canDoThisWork = false;
                                 }
-                            } catch (JSONException e) { }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }

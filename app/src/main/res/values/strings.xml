@@ -50,7 +50,7 @@
     <string name="years">years</string>
     <string name="days">days</string>
     <string name="work">Work:</string>
-    <string name="write_a_book" >write a book</string>
+    <string name="write_a_book">write a book</string>
     <string name="sleeping">Sleeping</string>
     <string name="playing">Playing</string>
     <string name="talking_on_messengers">Talking on messengers</string>
@@ -125,7 +125,7 @@
     <string name="successful_found_girlfriend">You successful found love! Her name is</string>
     <string name="successful_found_boyfriend">You successful found love! His name is</string>
     <string name="sure_to_support_a_charity_event">Are you sure you want to support a charity event for 100$?</string>
-    <string name="dont_have_televisor">Unfortunately you don\'t have a televisor</string>
+    <string name="dont_have_televisor">Unfortunately you don\'t have a TV</string>
     <string name="dont_have_computer_phone">Unfortunately you don\'t have a computer or a phone</string>
     <string name="dont_have_safe">You don\'t have the safe!</string>
     <string name="sure_to_buy_for_25000">Do you want to buy it for 25000$?</string>
@@ -299,7 +299,7 @@
     <string name="option_no">NO</string>
     <string name="reset">Reset</string>
     <string name="fitnessNotYet">You are too lazy!</string>
-
+    <string name="tombstone">tombstone</string>
 
 
 </resources>

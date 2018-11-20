@@ -47,12 +47,12 @@ public class Arrays {
 
     public static Food[] foodList = new Food[] {
             new Food("Eat Thrashes", 0, 50, -20, 0, -15),
-            new Food("Drink Water from Wasterwater", 0, 35, -10, 0, -10),
+            new Food("Drink Water from waste water", 0, 35, -10, 0, -10),
             new Food("Drink Water", 3, 40, 10, 0, 0),
             new Food("Drink Milk", 4, 30, 20, 0, 0),
             new Food("Eat Chips", 4, 50, -5, 0, 20),
             new Food("Eat Sandwich", 5, 75, 0, 0, 0),
-            new Food("Drink Cofee", 7, 20, 0, 50, 0),
+            new Food("Drink Coffee", 7, 20, 0, 50, 0),
             new Food("Drink Beer", 9, 50, -10, 10, 10),
             new Food("Eat Cereal with Milk", 10, 200, 5, 0, 0),
             new Food("Drink Energy Drink", 12, 40, -5, 100, 0),
@@ -105,7 +105,7 @@ public class Arrays {
             new Lottery("SuperLotto Plus", 10, 20000, 5000000),
             new Lottery("Powerball", 12, 150, 10000000),
             new Lottery("Euro Jackpot", 14, 350, 7500000),
-            new Lottery("Mega Milions", 15, 15000, 1500000),
+            new Lottery("Mega Millions", 15, 15000, 1500000),
             new Lottery("Euro Millions", 20, 10000, 10000000),
             new Lottery("Win The Life", 100, 100000, 999999999),
     };
