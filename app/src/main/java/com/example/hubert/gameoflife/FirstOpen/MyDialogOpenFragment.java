@@ -17,13 +17,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 import com.example.hubert.gameoflife.Utils.NewUser;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.hubert.gameoflife.MainActivity.currentUserNumber;
 
 public class MyDialogOpenFragment extends DialogFragment implements View.OnClickListener {
 
@@ -117,21 +115,13 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         return view;
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        ImageView imageViewAvatar = view.findViewById(R.id.avatarImage);
-//        imageViewAvatar.setImageResource(avatarRes);
-//        Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
-//    }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.saveButton:
+                sharedPref.edit().putBoolean(getResources().getString(R.string.saved_is_first_time_key), false).apply();
                 NewUser newUser = new NewUser();
 
                 if (mode == MODE_NEW) {
@@ -178,5 +168,11 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnNewUserAdd");
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mListener = null;
     }
 }

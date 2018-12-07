@@ -134,10 +134,8 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        if (sharedPref.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true))
-        {
+        if (sharedPref.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true)) {
             stopTimer();
-            sharedPref.edit().putBoolean(getResources().getString(R.string.saved_is_first_time_key), false).apply();
             DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_NEW);
             newDialog.show(getSupportFragmentManager(), "open_dialog_tag");
         }
@@ -189,8 +187,8 @@ public class MainActivity extends AppCompatActivity
                 dialogs.showResumeDialog(this, item, mRunnable);
                 return true;
             case R.id.menu_item_setings:
+                mHandler = null;
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                //settings();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -216,6 +214,10 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         isMainActvityActive = true;
+        if (mHandler == null) {
+            mHandler = new Handler();
+            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
+        }
     }
 
     @Override

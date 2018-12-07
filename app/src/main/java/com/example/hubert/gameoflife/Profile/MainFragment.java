@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.Girlboyfriend.Children;
 import com.example.hubert.gameoflife.Girlboyfriend.Love;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
@@ -42,9 +41,9 @@ public class MainFragment extends Fragment {
     }
 
     private static final String TAG = MainFragment.class.getSimpleName();
-    private TextView characternametext, charactermoneytext, timetext, moneytext, agetext, lodgingtext, educationtext, transporttext, girltext, childtext;
+    private TextView characternametext, charactermoneytext, timetext, agetext, lodgingtext, transporttext, girltext;
     private ProgressBar hungerprogress, healthprogress, energyprogress, happinessprogress;
-    private ImageView charactericon;
+    private ImageView genderImage;
     private LinearLayout mainLayout;
     private Spinner iconSpinner;
 
@@ -55,13 +54,11 @@ public class MainFragment extends Fragment {
         @Override
         public void run() {
 
-        //    Log.d(TAG, "fragment handler is running!!!");
             String timetxt = mUserSharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears) + "."
                     + mUserSharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) + "."
                     + mUserSharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
                     + mUserSharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00";
             timetext.setText(timetxt);
-        //    Log.d(TAG, "time: "+ timetxt);
             hungerprogress.setProgress((mUserSharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)));
             healthprogress.setProgress((mUserSharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)));
             energyprogress.setProgress((mUserSharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)));
@@ -88,34 +85,29 @@ public class MainFragment extends Fragment {
         characternametext = view.findViewById(R.id.characterName);
         timetext = view.findViewById(R.id.time);
         agetext = view.findViewById(R.id.characterAge);
+        genderImage = view.findViewById(R.id.iv_gender);
+        if (mUserSharedPref.getBoolean(getString(R.string.saved_sex_key), true)) genderImage.setImageResource(R.drawable.ic_mars);
+        else genderImage.setImageResource(R.drawable.ic_venus);
 
         lodgingtext = view.findViewById(R.id.characterLodging);
-        //educationtext = view.findViewById(R.id.characterEducationWork);
         transporttext = view.findViewById(R.id.characterTransport);
         girltext = view.findViewById(R.id.characterGirlboyfriend);
-        //childtext = view.findViewById(R.id.characterChildren);
 
         hungerprogress = view.findViewById(R.id.progressBar_character_hungry);
         healthprogress = view.findViewById(R.id.progressBar_character_health);
         energyprogress = view.findViewById(R.id.progressBar_character_energy);
         happinessprogress = view.findViewById(R.id.progressBar_character_happiness);
 
-        //charactericon = view.findViewById(R.id.characterIcon);
 
         iconSpinner = view.findViewById(R.id.spinner);
         SpinnerIconAdapter spinnerIconAdapter = new SpinnerIconAdapter(getContext(), iconSpinner.getWidth());
         iconSpinner.setAdapter(spinnerIconAdapter);
-        //iconSpinner.setSelection(MainActivity.currentUserNumber);
 
         updateLabels();
         return view;
     }
 
     private void updateLabels() {
-
-       // charactericon.setBackground(getResources().getDrawable(sharedPref.getInt(getResources().getString(R.string.saved_character_icon_key), R.drawable.avatar_icon1)));
-
-
         String nameChange = mUserSharedPref.getString(getResources().getString(R.string.saved_character_name_key), SharedPreferencesDefaultValues.DefaultName);
         characternametext.setText(nameChange);
 
@@ -144,21 +136,6 @@ public class MainFragment extends Fragment {
         if(lodging != null)
             lodgingtext.setText(lodging.getName());
 
-      /*  if(sharedPref.getBoolean(getResources().getString(R.string.saved_is_in_school_now_key), true))
-            educationtext.setText(getString(R.string.school_text));
-        else
-        {
-            json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
-            gson.fromJson(json, Job.class);
-            gson.newBuilder().setLenient().create();
-            Job job = gson.fromJson(json, Job.class);
-
-            if(job != null)
-                educationtext.setText(job.getName());
-            else
-                educationtext.setText("-");
-        }*/
-
         json = mUserSharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
         Transport transport = gson.fromJson(json, Transport.class);
         if(transport != null)
@@ -173,13 +150,6 @@ public class MainFragment extends Fragment {
             girlString = getResources().getString(R.string.single);
         }
         girltext.setText(girlString);
-
-        json = mUserSharedPref.getString(getResources().getString(R.string.saved_my_children_key), "");
-        Children children = gson.fromJson(json, Children.class);
-        /*if(children != null)
-            childtext.setText(children.getName());
-        else
-            childtext.setText(getString(R.string.no_children));*/
     }
 
     @Override
