@@ -48,9 +48,9 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultMyChildren = "None";*/
 
     public static final int DefaultHealth = 750;
-    public static final int DefaultHungry = 150;
-    public static final int DefaultEnergy = 150;
-    public static final int DefaultHappiness = 150;
+    public static final int DefaultHungry = 650;
+    public static final int DefaultEnergy = 650;
+    public static final int DefaultHappiness = 650;
 
     public static final String DefaultMyComputer = null;
     public static final String DefaultMyTv = null;
