@@ -149,7 +149,6 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
                 }
 
                 mListener.onNewUserAdd();
-                MainActivity.startTimer();
                 dismiss();
                 break;
 

@@ -71,7 +71,6 @@ public class EduFragment extends Fragment
         recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
         SharedPreferences sharedPref = MainActivity.userSharedPref;
-        //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
         Job job = gson.fromJson(json, Job.class);
@@ -130,7 +129,6 @@ public class EduFragment extends Fragment
     @Override
     public void onClick(View view) {
         SharedPreferences sharedPref = MainActivity.userSharedPref;
-        //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         Intent intent = null;
         DialogFragment newDialog = null;

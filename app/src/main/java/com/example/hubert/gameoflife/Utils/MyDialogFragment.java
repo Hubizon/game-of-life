@@ -32,8 +32,6 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
-import static com.example.hubert.gameoflife.Utils.Dialogs.showAlertDialog;
-
 public class  MyDialogFragment extends DialogFragment  {
 
     private static final String BUNDLE_ID = "bundle_id";
@@ -307,7 +305,8 @@ public class  MyDialogFragment extends DialogFragment  {
                             /*mJob.setPosition(mJob.getPosition() + 1);
                             mJob.setPositionPoints(75);
                             mJob.setSalary(Math.round(mJob.getSalary() * 0.10 * mJob.getSalaryIncrease()));*/
-                            showAlertDialog(getContext(), sharedPref, "Promotion", "Congratulation! You got promotion in the work!");
+
+                            (new Dialogs(getContext())).showAlertDialog(getContext(), sharedPref, "Promotion", "Congratulation! You got promotion in the work!");
                         }
 
                         try {

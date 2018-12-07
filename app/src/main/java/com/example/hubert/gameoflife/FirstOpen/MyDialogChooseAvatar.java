@@ -92,4 +92,10 @@ public class MyDialogChooseAvatar extends DialogFragment implements RecyclerView
         dialogCallback.getResults(avatars[position]);
         dismiss();
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        dialogCallback = null;
+    }
 }

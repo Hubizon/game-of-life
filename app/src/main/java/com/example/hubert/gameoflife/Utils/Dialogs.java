@@ -15,21 +15,33 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
 import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.MyDialogDead;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 
-import static com.example.hubert.gameoflife.MainActivity.Die;
-import static com.example.hubert.gameoflife.MainActivity.startTimer;
-import static com.example.hubert.gameoflife.MainActivity.stopTimer;
-
 public class Dialogs {
 
-    public static void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
+    private OnDialogInteractionListener mListener;
+    public interface OnDialogInteractionListener {
+        void onDialogInteractionTimerStop();
+        void onDialogInteractionTimerStart();
+        void onDialogInteractionDie();
+        void onDialogResume(MenuItem item, Runnable runnable);
+    }
+
+    public Dialogs(Context context) {
+        if (context instanceof OnDialogInteractionListener) {
+            mListener = (OnDialogInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    public void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
     {
-        stopTimer();
+        mListener.onDialogInteractionTimerStop();
         final SharedPreferences.Editor editor = sharedPref.edit();
 
         AlertDialog.Builder dialog;
@@ -47,11 +59,11 @@ public class Dialogs {
                 .setMessage(message)
                 .setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        startTimer();
+                        mListener.onDialogInteractionTimerStop();
                         switch (whichOneEvent)
                         {
                             case 1:
-                                Die();
+                                mListener.onDialogInteractionDie();
                                 break;
 
                             case 6:
@@ -66,7 +78,7 @@ public class Dialogs {
                                 //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
                                 //TODO: wyczyścic sharedpref
 
-                                stopTimer();
+                                mListener.onDialogInteractionTimerStop();
                                 DialogFragment deadDialog = MyDialogDead.newInstance();
                                 deadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_dead_dialog_tag");
                                 break;
@@ -76,12 +88,12 @@ public class Dialogs {
                     }})
                 .setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        startTimer();
+                        mListener.onDialogInteractionTimerStart();
                         switch (whichOneEvent)
                         {
                             case 1:
                                 if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) < 0)
-                                    Die();
+                                    mListener.onDialogInteractionDie();
                                 editor.apply();
                                 dialoginterface.cancel();
                                 break;
@@ -147,9 +159,9 @@ public class Dialogs {
                 }).show();
     }
 
-    public static void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
+    public void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
     {
-        stopTimer();
+        mListener.onDialogInteractionTimerStop();
         AlertDialog.Builder dialog;
 
         SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
@@ -164,7 +176,7 @@ public class Dialogs {
                 .setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        startTimer();
+                        mListener.onDialogInteractionTimerStart();
                         dialoginterface.dismiss();
                     }
                 })
@@ -172,12 +184,12 @@ public class Dialogs {
                 .show();
     }
 
-    public static void showResumeDialog(Context context, final MenuItem item, final Runnable runnable) {
+    public void showResumeDialog(Context context, final MenuItem item, final Runnable runnable) {
         Dialog resumeDialog = new Dialog(context) {
             @Override
             public boolean onTouchEvent(@NonNull MotionEvent event) {
                 this.dismiss();
-                MainActivity.onResumeDialogClicked(item, runnable);
+                mListener.onDialogResume(item, runnable);
                 return true;
             }
         };
