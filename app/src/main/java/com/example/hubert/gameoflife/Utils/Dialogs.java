@@ -63,7 +63,7 @@ public class Dialogs {
                         switch (whichOneEvent)
                         {
                             case 1:
-                                mListener.onDialogInteractionDie();
+                                //mListener.onDialogInteractionDie(); nie lepiek editor.putInt( dead, true) ?
                                 break;
 
                             case 6:
@@ -93,7 +93,7 @@ public class Dialogs {
                         {
                             case 1:
                                 if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) < 0)
-                                    mListener.onDialogInteractionDie();
+                                    //mListener.onDialogInteractionDie(); nie lepiej editor.putBoolean(dead, true) ???
                                 editor.apply();
                                 dialoginterface.cancel();
                                 break;

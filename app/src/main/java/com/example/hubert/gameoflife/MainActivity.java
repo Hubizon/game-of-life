@@ -32,6 +32,8 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 public class MainActivity extends AppCompatActivity
     implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd, MyDialogDead.OnDialogDeadInteractionListener, Dialogs.OnDialogInteractionListener {
 
+    private boolean isMainActvityActive;
+
     private static final int TIMER_LOOP_TIME = 1000;
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -67,7 +69,11 @@ public class MainActivity extends AppCompatActivity
             if (mHandler != null) {
                 mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
                 if(userSharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) <= 0)
-                    Die();
+                    if (isMainActvityActive) Die();
+                    else {
+                        mHandler = null;
+                        startActivity(new Intent(mContext, MainActivity.class));
+                    }
             }
         }
     };
@@ -77,6 +83,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+
+        isMainActvityActive = true;
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
@@ -204,6 +212,17 @@ public class MainActivity extends AppCompatActivity
         mHandler.removeCallbacks(mRunnable);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isMainActvityActive = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isMainActvityActive = false;
+    }
 
     public void onResumeDialogClicked(MenuItem item, Runnable runnable) {
         item.setIcon(mPlayDrawable);
@@ -270,6 +289,7 @@ public class MainActivity extends AppCompatActivity
     public void onRewardedVideoCompleted() {}
 
     public void Die() {
+
         SharedPreferences.Editor editor = userSharedPref.edit();
         editor.putBoolean(getString(R.string.saved_is_dead_key), true);
         editor.apply();
@@ -280,7 +300,7 @@ public class MainActivity extends AppCompatActivity
         else {
             stopTimer();
             DialogFragment deadDialog = MyDialogDead.newInstance();
-            deadDialog.show( getSupportFragmentManager(), "open_dead_dialog_tag");
+            deadDialog.show(getSupportFragmentManager(), "open_dead_dialog_tag");
         }
     }
 
