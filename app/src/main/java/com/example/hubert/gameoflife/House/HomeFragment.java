@@ -55,6 +55,9 @@ public class HomeFragment extends Fragment
         CardView safecardview = view.findViewById(R.id.cardview_safe);
         safecardview.setOnClickListener(this);
 
+        CardView fitnesscardview = view.findViewById(R.id.cardview_fitness);
+        fitnesscardview.setOnClickListener(this);
+
         CardView adcardview = view.findViewById(R.id.cardview_ad);
         adcardview.setOnClickListener(this);
 
