@@ -2,10 +2,10 @@ package com.example.hubert.gameoflife.Shop;
 
 public class Lottery {
 
-    private String name;
-    private int price;
-    private int chanceToWin;
-    private int prize;
+    private final String name;
+    private final int price;
+    private final int chanceToWin;
+    private final int prize;
 
     public Lottery(String name, int price, int chanceToWin, int prize)
     {

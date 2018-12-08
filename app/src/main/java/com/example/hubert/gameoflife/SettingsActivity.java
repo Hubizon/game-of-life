@@ -42,9 +42,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * to reflect its new value.
      */
     public static final String DARK_SWITCH_KEY = "dark_mode_switch";
-    public static final String NAME_EDIT_KEY = "name_edit";
+    private static final String NAME_EDIT_KEY = "name_edit";
 
-    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+    private static final Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
@@ -201,6 +201,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 public boolean onPreferenceClick(Preference preference) {
                     Intent intent = new Intent(getContext(), Credits.class);
                     startActivity(intent);
+                    return true;
+                }
+            });
+
+            Preference feedback = findPreference("feedbackButton");
+            feedback.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    final Intent _Intent = new Intent(android.content.Intent.ACTION_SEND);
+                    _Intent.setType("text/html");
+                    _Intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{getString(R.string.mail_feedback_email)});
+                    _Intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.mail_feedback_subject));
+                    _Intent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.mail_feedback_message));
+                    startActivity(Intent.createChooser(_Intent, getString(R.string.title_send_feedback)));
                     return true;
                 }
             });

@@ -1,9 +1,9 @@
 package com.example.hubert.gameoflife.Shop;
 
 public class Weapon {
-    String name;
-    int price;
-    boolean isBought = false;
+    private final String name;
+    private final int price;
+    private final boolean isBought = false;
 
     public Weapon(String name, int price)
     {
@@ -13,5 +13,5 @@ public class Weapon {
 
     public String getName() { return name; }
     public int getPrice() { return price; }
-    public boolean getIsBought() { return isBought; }
+    // --Commented out by Inspection (12/8/2018 12:30 AM):public boolean getIsBought() { return isBought; }
 }

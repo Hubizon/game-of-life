@@ -20,14 +20,16 @@ import com.example.hubert.gameoflife.MyDialogDead;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 
+import java.util.Objects;
+
 public class Dialogs {
 
     private OnDialogInteractionListener mListener;
     public interface OnDialogInteractionListener {
         void onDialogInteractionTimerStop();
         void onDialogInteractionTimerStart();
-        void onDialogInteractionDie();
-        void onDialogResume(MenuItem item, Runnable runnable);
+        // --Commented out by Inspection (12/8/2018 12:30 AM):void onDialogInteractionDie();
+        void onDialogResume(MenuItem item);
     }
 
     public Dialogs(Context context) {
@@ -59,7 +61,7 @@ public class Dialogs {
                 .setMessage(message)
                 .setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        mListener.onDialogInteractionTimerStop();
+                        mListener.onDialogInteractionTimerStart();
                         switch (whichOneEvent)
                         {
                             case 1:
@@ -159,12 +161,12 @@ public class Dialogs {
                 }).show();
     }
 
-    public void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
+    public void showAlertDialog(Context context, String title, final String message)
     {
         mListener.onDialogInteractionTimerStop();
         AlertDialog.Builder dialog;
 
-        SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
@@ -184,19 +186,19 @@ public class Dialogs {
                 .show();
     }
 
-    public void showResumeDialog(Context context, final MenuItem item, final Runnable runnable) {
+    public void showResumeDialog(Context context, final MenuItem item) {
         Dialog resumeDialog = new Dialog(context) {
             @Override
             public boolean onTouchEvent(@NonNull MotionEvent event) {
                 this.dismiss();
-                mListener.onDialogResume(item, runnable);
+                mListener.onDialogResume(item);
                 return true;
             }
         };
         resumeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         resumeDialog.setContentView(R.layout.dialog_stop);
         final Window window = resumeDialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        Objects.requireNonNull(window).setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         window.setBackgroundDrawableResource(R.color.translucent_black);
         resumeDialog.show();

@@ -40,18 +40,13 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
 
 
     public static ChooseJobFragment newInstance() {
-        ChooseJobFragment fragment = new ChooseJobFragment();
-        return fragment;
+        return new ChooseJobFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
-    ChooseJobAdapter adapter;
+    private ChooseJobAdapter adapter;
 
-    static int page = 1;
+    private static int page = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,16 +105,16 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
 
 
 
-        String toToast = "";
+        StringBuilder toToast = new StringBuilder();
         if(job != null) {
             if (job.getMinPhoneNeeded() != null) {
                 if (sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone) != null) {
                     json = sharedPref.getString(getResources().getString(R.string.saved_my_phone_key), SharedPreferencesDefaultValues.DefaultMyPhone);
                     Fun mFun = gson.fromJson(json, Fun.class);
                     if (mFun.getGivenFun() < job.getMinPhoneNeeded().getGivenFun())
-                        toToast += "\n" + job.getMinPhoneNeeded().getName();
+                        toToast.append("\n").append(job.getMinPhoneNeeded().getName());
                 } else
-                    toToast += "\n" + job.getMinPhoneNeeded().getName();
+                    toToast.append("\n").append(job.getMinPhoneNeeded().getName());
             }
             if(job.getMinTvNeeded() != null)
             {
@@ -127,9 +122,9 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                     json = sharedPref.getString(getResources().getString(R.string.saved_my_tv_key), SharedPreferencesDefaultValues.DefaultMyPhone);
                     Fun mFun = gson.fromJson(json, Fun.class);
                     if (mFun.getGivenFun() < job.getMinTvNeeded().getGivenFun())
-                        toToast += "\n" + job.getMinTvNeeded().getName();
+                        toToast.append("\n").append(job.getMinTvNeeded().getName());
                 } else
-                    toToast += "\n" + job.getMinTvNeeded().getName();
+                    toToast.append("\n").append(job.getMinTvNeeded().getName());
             }
             if(job.getMinComputerNeeded() != null)
             {
@@ -137,9 +132,9 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                     json = sharedPref.getString(getResources().getString(R.string.saved_my_computer_key), SharedPreferencesDefaultValues.DefaultMyComputer);
                     Fun mFun = gson.fromJson(json, Fun.class);
                     if (mFun.getGivenFun() < job.getMinComputerNeeded().getGivenFun())
-                        toToast += "\n" + job.getMinComputerNeeded().getName();
+                        toToast.append("\n").append(job.getMinComputerNeeded().getName());
                 } else
-                    toToast += "\n" + job.getMinComputerNeeded().getName();
+                    toToast.append("\n").append(job.getMinComputerNeeded().getName());
             }
 
             if (job.getMinLodgingNeeded() != null) {
@@ -147,7 +142,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
                 Lodging mLodging = gson.fromJson(json, Lodging.class);
                 if (mLodging.getPrice() < job.getMinLodgingNeeded().getPrice())
-                    toToast += "\n" + job.getMinLodgingNeeded().getName();
+                    toToast.append("\n").append(job.getMinLodgingNeeded().getName());
                 //   } else
                 //     toToast += "\n" + job.getMinLodgingNeeded().getName();
             }
@@ -157,7 +152,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                 json = sharedPref.getString(getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
                 Transport mTransport = gson.fromJson(json, Transport.class);
                 if (mTransport.getPrice() < job.getMinTransportNeeded().getPrice())
-                    toToast += "\n" + job.getMinTransportNeeded().getName();
+                    toToast.append("\n").append(job.getMinTransportNeeded().getName());
                 //   } else
                 //       toToast += "\n" + job.getMinTransportNeeded().getName();
             }
@@ -187,7 +182,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                                     break; }
                         }
                         if (!haveThisSkill)
-                            toToast += "\n" + jsonObject.getString("name");
+                            toToast.append("\n").append(jsonObject.getString("name"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -216,7 +211,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                                     }
                             }
                             if (!haveThisWeapon)
-                                toToast += "\n" + jsonObject.getString("name");
+                                toToast.append("\n").append(jsonObject.getString("name"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -224,7 +219,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                 }
             }
 
-            if (toToast.equals("")) {
+            if (toToast.toString().equals("")) {
                 //editor.putBoolean(getResources().getString(R.string.saved_is_in_school_now_key), false);
                 Toast.makeText(getContext(), "You've got the job!", Toast.LENGTH_SHORT).show();
                 editor.putString(getResources().getString(R.string.saved_my_job_key), gson.toJson(job));

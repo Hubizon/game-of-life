@@ -7,13 +7,14 @@ import android.os.Bundle;
 
 import com.example.hubert.gameoflife.R;
 
+import java.util.Objects;
+
 public class ChooseJobActivity extends AppCompatActivity{
 
 
-    private ViewPager mPager;
     private CustomPagerJobAdapter mPagerAdapter;
     private TabLayout mTabLayout;
-    private int[] tabIcons = {
+    private final int[] tabIcons = {
             R.drawable.job,
             R.drawable.crim_job,
     };
@@ -23,7 +24,7 @@ public class ChooseJobActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skills);
 
-        mPager = findViewById(R.id.pagerSkills);
+        ViewPager mPager = findViewById(R.id.pagerSkills);
         mPagerAdapter = new CustomPagerJobAdapter(getSupportFragmentManager(), this);
         mPager.setAdapter(mPagerAdapter);
 
@@ -33,7 +34,7 @@ public class ChooseJobActivity extends AppCompatActivity{
     }
 
     private void setupTabIcons() {
-        mTabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        Objects.requireNonNull(mTabLayout.getTabAt(0)).setIcon(tabIcons[0]);
         mTabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
 

@@ -30,24 +30,24 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
     public interface OnNewUserAdd {
         void onNewUserAdd ();
     }
-    OnNewUserAdd mListener;
+    private OnNewUserAdd mListener;
 
-    public static final String ARG_MODE = "modeArgKey";
+    private static final String ARG_MODE = "modeArgKey";
     public static final int MODE_NEW = 0;
     public static final int MODE_RESET = 1;
 
-    public int mode;
+    private int mode;
 
-    public int avatarRes = R.drawable.avatar_icon1;
+    private int avatarRes = R.drawable.avatar_icon1;
 
-    SharedPreferences sharedPref;
+    private SharedPreferences sharedPref;
 
-    EditText nameEdit;
-    ImageView avatarImage;
-    Spinner sexSpinner;
-    Button saveButton;
+    private EditText nameEdit;
+    private ImageView avatarImage;
+    private Spinner sexSpinner;
+    private Button saveButton;
 
-    View view;
+    private View view;
 
     public static MyDialogOpenFragment newInstance(int mode) {
         MyDialogOpenFragment myDialogOpenFragment = new MyDialogOpenFragment();
@@ -149,7 +149,7 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         }
     }
 
-    MyDialogChooseAvatar.DialogCallback dialogCallback = new MyDialogChooseAvatar.DialogCallback() {
+    private final MyDialogChooseAvatar.DialogCallback dialogCallback = new MyDialogChooseAvatar.DialogCallback() {
         @Override
         public void getResults(int avatarPath) {
             if(avatarPath > 0){

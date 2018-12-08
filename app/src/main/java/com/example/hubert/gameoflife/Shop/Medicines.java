@@ -2,9 +2,9 @@ package com.example.hubert.gameoflife.Shop;
 
 public class Medicines {
 
-    private String name;
-    private int price;
-    private int givenHealth;
+    private final String name;
+    private final int price;
+    private final int givenHealth;
 
     public Medicines(String name, int price, int givenHealth)
     {

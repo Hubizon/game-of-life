@@ -33,19 +33,19 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultDayWeek = 1;
 
     public static final String DefaultMyLodging = gson.toJson(new Lodging("Street", 0,  5, 100, 5));
-    //public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
+    public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
     public static final boolean DefaultIsInSchoolNow = true;
     public static final String DefaultMyJob = null;
     public static final String DefaultMyTransport = gson.toJson(new Transport("Foots", 0, 10));
     public static final String DefaultLove = null;
     public static final int DefaultLoveRelations = 50;
     public static final int DefaultLoveRelationshipLevel = 1;
-    //public static final String DefaultMyChildren = null;
+    public static final String DefaultMyChildren = null;
 
-    /*public static final int DefaultWorkPosition = 0;
-    public static final String DefaultMyTransport = gson.toJson(new Transport("On foot", 0, 10));
-    public static final String DefaultMyGirlboyfriend = "None";
-    public static final String DefaultMyChildren = "None";*/
+//    public static final int DefaultWorkPosition = 0;
+//    public static final String DefaultMyTransport = gson.toJson(new Transport("On foot", 0, 10));
+//    public static final String DefaultMyGirlboyfriend = "None";
+//    public static final String DefaultMyChildren = "None";
 
     public static final int DefaultHealth = 750;
     public static final int DefaultHungry = 650;
@@ -82,20 +82,20 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultEducationPoints = 100;
     public static final String DefaultSkillsEducationList = gson.toJson(Arrays.skillsEducationList);
     public static final String DefaultSkillsCriminalList = gson.toJson(Arrays.skillsCriminalList);
-    //public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
+    public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
     public static final String DefaultWeapons = gson.toJson(Arrays.weaponList);
     public static final String DefaultOfficeJobsList = gson.toJson(Arrays.officeJobsList);
     public static final String DefaultCriminalJobsList = gson.toJson(Arrays.criminalJobsList);
 
-    public static final int DefaultCommunicationsSkills = 100;
+    static final int DefaultCommunicationsSkills = 100;
     public static final int DefaultCriminalPoints = 100;
     public final static int DefaultKarmaPoints = 70;
     public final static int DefaultWorkPositionPoints = 75;
-    //public static final int DefaultWorkRelations = 100;
+    public static final int DefaultWorkRelations = 100;
 
     //NIGDY NIE DAWAJ NULL! godzine nad tym bledem siedzialem..
-    public static final String DefaultGamesList = gson.toJson(new ArrayList<>());
-    public static final String DefaultDrawingsList = gson.toJson(new ArrayList<>());
-    public static final String DefaultBooksList = gson.toJson(new ArrayList<>());
-    public static final String DefaultMoviesList = gson.toJson(new ArrayList<>());
+    static final String DefaultGamesList = gson.toJson(new ArrayList<>());
+    static final String DefaultDrawingsList = gson.toJson(new ArrayList<>());
+    static final String DefaultBooksList = gson.toJson(new ArrayList<>());
+    static final String DefaultMoviesList = gson.toJson(new ArrayList<>());
 }

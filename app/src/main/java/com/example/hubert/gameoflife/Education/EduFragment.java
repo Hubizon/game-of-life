@@ -33,23 +33,23 @@ import java.util.List;
 public class EduFragment extends Fragment
         implements View.OnClickListener, MyExpandableRecyclerAdapter.EduFragmentCallback{
 
-    private static final String EDU_DIALOG_TAG = "edu_dialog_tag2";
+    // --Commented out by Inspection (12/8/2018 12:30 AM):private static final String EDU_DIALOG_TAG = "edu_dialog_tag2";
 
     public static final String TITLE_SCHOOL = "School";
     public static final String TITLE_CRIMINAL = "Criminal";
     public static final String TITLE_WORK = "Work";
 
-    private RecyclerView recycler_view;
     private MyExpandableRecyclerAdapter adapter;
 
-    public List<ParentList> Parent = new ArrayList<>();
-    public List<ChildList> ChildSchool = new ArrayList<>();
-    public List<ChildList> ChildCriminal = new ArrayList<>();
-    public  List<ChildList> ChildWork = new ArrayList<>();
+    private final List<ParentList> Parent = new ArrayList<>();
+    private final List<ChildList> ChildSchool = new ArrayList<>();
+    private final List<ChildList> ChildCriminal = new ArrayList<>();
+    private final List<ChildList> ChildWork = new ArrayList<>();
 
-    CardView workCardView;
-    TextView workTitle, workPosition;
-    ProgressBar workProgressPosition;
+    private CardView workCardView;
+    private TextView workTitle;
+    private TextView workPosition;
+    private ProgressBar workProgressPosition;
 
     public EduFragment() {}
 
@@ -58,16 +58,11 @@ public class EduFragment extends Fragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edu, container, false);
 
-        recycler_view = view.findViewById(R.id.recycler_Expand);
+        RecyclerView recycler_view = view.findViewById(R.id.recycler_Expand);
         recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
         SharedPreferences sharedPref = MainActivity.userSharedPref;
@@ -133,8 +128,8 @@ public class EduFragment extends Fragment
         Intent intent = null;
         DialogFragment newDialog = null;
 
-        if (intent != null) startActivity(intent);
-        else if (newDialog != null) newDialog.show(getActivity().getSupportFragmentManager(), EDU_DIALOG_TAG);
+        startActivity(intent);
+        //else if (newDialog != null) newDialog.show(getActivity().getSupportFragmentManager(), EDU_DIALOG_TAG);
 
         editor.apply();
     }

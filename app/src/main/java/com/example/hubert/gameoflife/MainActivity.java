@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
@@ -21,8 +22,7 @@ import android.widget.Toast;
 import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.Utils.Dialogs;
 import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
-import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.Utils.UpdateValues;
+import com.example.hubert.gameoflife.Utils.MainTimer;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
@@ -30,11 +30,12 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
 public class MainActivity extends AppCompatActivity
-    implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd, MyDialogDead.OnDialogDeadInteractionListener, Dialogs.OnDialogInteractionListener {
+    implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd,
+        MyDialogDead.OnDialogDeadInteractionListener, Dialogs.OnDialogInteractionListener,
+        MainTimer.OnTimerInterActionListener{
 
-    private boolean isMainActvityActive;
+    public MainTimer mainTimer;
 
-    private static final int TIMER_LOOP_TIME = 1000;
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String INTENT_PAGE = "intent_page";
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     private ViewPager mPager;
     private CustomPagerAdapter mPagerAdapter;
     private TabLayout mTabLayout;
-    private int[] tabIcons = {
+    private final int[] tabIcons = {
             R.drawable.profile_icon,
             R.drawable.ic_education,
             R.drawable.shop_icon,
@@ -53,38 +54,18 @@ public class MainActivity extends AppCompatActivity
             R.drawable.house_icon
     };
 
-   Context mContext;
+   private Context mContext;
 
-   private UpdateValues updateValues;
-
-    public static int currentUserNumber;
+    private static int currentUserNumber;
     public static SharedPreferences userSharedPref;
-    static SharedPreferences sharedPref;
-    private Handler mHandler;
-    private Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            UpdateValues.updateSharedPreferences(mContext, userSharedPref);
-            updateValues.interactWithUI(mContext, userSharedPref);
-            if (mHandler != null) {
-                mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
-                if(userSharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) <= 0)
-                    if (isMainActvityActive) Die();
-                    else {
-                        mHandler = null;
-                        startActivity(new Intent(mContext, MainActivity.class));
-                    }
-            }
-        }
-    };
+    private static SharedPreferences sharedPref;
 
-    private static boolean hasAdd = false;
+
+    public static boolean hasAdd = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
-
-        isMainActvityActive = true;
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
@@ -101,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         mContext = this;
         sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
+        currentUserNumber = sharedPref.getInt(getString(R.string.saved_current_user), 0);
         String user_key = getString(R.string.shared_preferences_user_key)
                 + currentUserNumber;
         userSharedPref = getSharedPreferences(user_key, MODE_PRIVATE);
@@ -121,44 +103,32 @@ public class MainActivity extends AppCompatActivity
         mPlayDrawable = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_play_pause);
         mPauseDrawable = (AnimatedVectorDrawable) getDrawable(R.drawable.avd_pause_play);
 
-        updateValues = new UpdateValues();
-
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
         loadRewardedVideoAd();
 
-        if (mHandler == null) {
-            Log.d(TAG, "the Handler is null!");
-            mHandler = new Handler();
-            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
-        }
+        final MyApplication globalApplication = (MyApplication) getApplicationContext();
+        mainTimer = globalApplication.mainTimer;
+        mainTimer.setUserSharedPref(userSharedPref);
+        mainTimer.setContext(this);
+        MainTimer.isMainActvityActive = true;
+        if (!mainTimer.isRunning) mainTimer.startTimer();
 
 
         if (sharedPref.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true)) {
-            stopTimer();
+            (new Handler()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mainTimer.stopTimer();
+                }
+            }, 800);
             DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_NEW);
             newDialog.show(getSupportFragmentManager(), "open_dialog_tag");
         }
         else {
-            if(sharedPref.getBoolean(getResources().getString(R.string.saved_is_dead_key), false)) Die();
+            if(userSharedPref.getBoolean(getString(R.string.saved_is_dead_key), false)) Die();
         }
 
-    }
-
-    public void stopTimer() {
-        Log.d(TAG, "stopTimer");
-        if (mHandler != null) {
-            mHandler.removeCallbacks(mRunnable);
-            mHandler = null;
-        }
-    }
-
-    public void startTimer() {
-        Log.d(TAG, "Timer has started!");
-        if (mHandler == null) {
-            mHandler = new Handler();
-        }
-        mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
     }
 
     private void setupTabIcons() {
@@ -176,22 +146,36 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    static final int START_SETTINGS_REQUEST = 1;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_pause:
                 item.setIcon(mPauseDrawable);
                 mPauseDrawable.start();
-                mHandler.removeCallbacks(mRunnable);
+                //stopTimer();
+                mainTimer.stopTimer();
                 Dialogs dialogs = new Dialogs(mContext);
-                dialogs.showResumeDialog(this, item, mRunnable);
+                dialogs.showResumeDialog(this, item);
                 return true;
             case R.id.menu_item_setings:
-                mHandler = null;
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                //stopTimer();
+                mainTimer.stopTimer();
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                //startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                startActivityForResult(intent, START_SETTINGS_REQUEST);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == START_SETTINGS_REQUEST) {
+            mainTimer.startTimer();
         }
     }
 
@@ -207,29 +191,20 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacks(mRunnable);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        isMainActvityActive = true;
-        if (mHandler == null) {
-            mHandler = new Handler();
-            mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
-        }
+        mainTimer.stopTimer();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        isMainActvityActive = false;
+        MainTimer.isMainActvityActive = false;
     }
 
-    public void onResumeDialogClicked(MenuItem item, Runnable runnable) {
+
+    private void onResumeDialogClicked(MenuItem item) {
         item.setIcon(mPlayDrawable);
         mPlayDrawable.start();
-        mHandler.postDelayed(runnable, TIMER_LOOP_TIME);
+        mainTimer.startTimer();
     }
 
 
@@ -247,7 +222,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRewardedVideoAdOpened() {
         hasAdd = false;
-        stopTimer();
+        mainTimer.stopTimer();
     }
 
     @Override
@@ -255,7 +230,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRewardedVideoAdClosed() {
-        startTimer();
+        mainTimer.startTimer();
         loadRewardedVideoAd();
     }
 
@@ -290,7 +265,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRewardedVideoCompleted() {}
 
-    public void Die() {
+    private void Die() {
 
         SharedPreferences.Editor editor = userSharedPref.edit();
         editor.putBoolean(getString(R.string.saved_is_dead_key), true);
@@ -300,7 +275,7 @@ public class MainActivity extends AppCompatActivity
         if (hasAdd)
             (new Dialogs(mContext)).showDialogWithChoose(userSharedPref, mContext, getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
         else {
-            stopTimer();
+            mainTimer.stopTimer();
             DialogFragment deadDialog = MyDialogDead.newInstance();
             deadDialog.show(getSupportFragmentManager(), "open_dead_dialog_tag");
         }
@@ -308,7 +283,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNewUserAdd() {
-        startTimer();
 
         currentUserNumber = sharedPref.getInt(getString(R.string.saved_current_user), 0);
         Log.d(TAG, "current user:" + currentUserNumber);
@@ -327,6 +301,9 @@ public class MainActivity extends AppCompatActivity
         mTabLayout = findViewById(R.id.tablayout);
         mTabLayout.setupWithViewPager(mPager);
         setupTabIcons();
+
+        mainTimer.setUserSharedPref(userSharedPref);
+        mainTimer.startTimer();
     }
 
     @Override
@@ -337,21 +314,21 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDialogInteractionTimerStop() {
-        stopTimer();
+        mainTimer.stopTimer();
     }
 
     @Override
     public void onDialogInteractionTimerStart() {
-        startTimer();
+        mainTimer.startTimer();
     }
 
     @Override
-    public void onDialogInteractionDie() {
+    public void onDialogResume(MenuItem item) {
+        onResumeDialogClicked(item);
+    }
+
+    @Override
+    public void onDeathInteraction() {
         Die();
-    }
-
-    @Override
-    public void onDialogResume(MenuItem item, Runnable runnable) {
-        onResumeDialogClicked(item, runnable);
     }
 }

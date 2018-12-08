@@ -12,14 +12,14 @@ import com.example.hubert.gameoflife.House.HomeFragment;
 import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.Shop.ShopFragment;
 
-public class CustomPagerAdapter extends FragmentPagerAdapter {
+class CustomPagerAdapter extends FragmentPagerAdapter {
 
     private static final int NUM_PAGES = 5;
-    Context context;
+    // --Commented out by Inspection (12/8/2018 12:30 AM):private final Context context;
 
     public CustomPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.context = context;
+        //this.context = context;
     }
 
 

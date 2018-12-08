@@ -14,7 +14,6 @@
         android:layout_marginLeft="8dp">
 
         <TextView
-            android:id="@+id/device_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primaryTextColor"
@@ -30,7 +29,8 @@
             android:background="@drawable/clock_icon"
             android:layout_gravity="end"
             android:layout_marginEnd="100dp"
-            android:layout_marginTop="3dp"/>
+            android:layout_marginTop="3dp"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/time_computer"

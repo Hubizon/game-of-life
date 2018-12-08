@@ -6,17 +6,17 @@ import com.example.hubert.gameoflife.House.Lodging;
 import com.example.hubert.gameoflife.House.Transport;
 
 public class Job {
-    private String name;
+    private final String name;
     private long salary;
-    private int salaryIncrease;
-    private int markRatio;
-    private int additionalSkillsRes;
-    private Fun minPhoneNeeded;
-    private Fun minComputerNeeded;
-    private Fun minTvNeeded;
-    private Lodging minLodgingNeeded;
-    private Transport minTransportNeeded;
-    private Skill[] skillsNeeded;
+    private final int salaryIncrease;
+    private final int markRatio;
+    private final int additionalSkillsRes;
+    private final Fun minPhoneNeeded;
+    private final Fun minComputerNeeded;
+    private final Fun minTvNeeded;
+    private final Lodging minLodgingNeeded;
+    private final Transport minTransportNeeded;
+    private final Skill[] skillsNeeded;
     private int position = 1;
     private int positionPoints = 75;
 

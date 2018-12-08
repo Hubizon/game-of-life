@@ -43,14 +43,14 @@ public class MainFragment extends Fragment {
     private static final String TAG = MainFragment.class.getSimpleName();
     private TextView characternametext, charactermoneytext, timetext, agetext, lodgingtext, transporttext, girltext;
     private ProgressBar hungerprogress, healthprogress, energyprogress, happinessprogress;
-    private ImageView genderImage;
+
     private LinearLayout mainLayout;
     private Spinner iconSpinner;
 
     private SharedPreferences mMainSharedPref;
     public static SharedPreferences mUserSharedPref;
     private Handler mHandler;
-    public Runnable mRunnable = new Runnable() {
+    private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
 
@@ -85,7 +85,7 @@ public class MainFragment extends Fragment {
         characternametext = view.findViewById(R.id.characterName);
         timetext = view.findViewById(R.id.time);
         agetext = view.findViewById(R.id.characterAge);
-        genderImage = view.findViewById(R.id.iv_gender);
+        ImageView genderImage = view.findViewById(R.id.iv_gender);
         if (mUserSharedPref.getBoolean(getString(R.string.saved_sex_key), true)) genderImage.setImageResource(R.drawable.ic_mars);
         else genderImage.setImageResource(R.drawable.ic_venus);
 
@@ -100,7 +100,7 @@ public class MainFragment extends Fragment {
 
 
         iconSpinner = view.findViewById(R.id.spinner);
-        SpinnerIconAdapter spinnerIconAdapter = new SpinnerIconAdapter(getContext(), iconSpinner.getWidth());
+        SpinnerIconAdapter spinnerIconAdapter = new SpinnerIconAdapter(getContext());
         iconSpinner.setAdapter(spinnerIconAdapter);
 
         updateLabels();

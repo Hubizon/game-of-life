@@ -2,10 +2,10 @@ package com.example.hubert.gameoflife.House;
 
 public class Fun {
 
-    private String name;
-    private String type;
-    private int price;
-    private int givenFun;
+    private final String name;
+    private final String type;
+    private final int price;
+    private final int givenFun;
 
     public Fun(String name, String type, int price, int givenFun)
     {

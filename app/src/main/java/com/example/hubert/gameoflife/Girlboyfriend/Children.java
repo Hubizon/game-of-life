@@ -1,10 +1,8 @@
 package com.example.hubert.gameoflife.Girlboyfriend;
 
-public class Children {
+class Children {
     private int livingCost;
     private String name;
-
-    public Children() {}
 
     public int getLivingCost() {
         return livingCost;

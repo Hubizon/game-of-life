@@ -25,15 +25,15 @@ import static com.example.hubert.gameoflife.Utils.Arrays.transportList;
 
 public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerViewShopBuyAdapter.ViewHolder> {
 
-    private List<String> mDataNames;
-    private List<String> mDataPrices;
-    private LayoutInflater mInflater;
+    private final List<String> mDataNames;
+    private final List<String> mDataPrices;
+    private final LayoutInflater mInflater;
     private RecyclerViewShopBuyAdapter.ItemClickListener mClickListener;
 
-    Context context;
+    private final Context context;
 
     // data is passed into the constructor
-    RecyclerViewShopBuyAdapter(Context context, List<String> dataNames, List<String> dataPrices, Lodging[] dataLodgings) {
+    RecyclerViewShopBuyAdapter(Context context, List<String> dataNames, List<String> dataPrices) {
         this.mInflater = LayoutInflater.from(context);
         this.mDataNames = dataNames;
         this.mDataPrices = dataPrices;
@@ -55,7 +55,7 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
                 if(mDataNames.get(0).equals(lodgingList[0].getName()))
                 {
                     for (Lodging aLodgingList : lodgingList) {
-                        if (aLodgingList.getName().equals(textViewName.getText())) {
+                        if (aLodgingList.getName().contentEquals(textViewName.getText())) {
                             switch (position) {
                                 case 0:
                                     textViewPrice.setText((aLodgingList.getPrice() * 25) + context.getResources().getString(R.string.currency));
@@ -122,9 +122,9 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextViewName;
-        TextView myTextViewPrice;
-        Spinner mySpinnerBuyMethod;
+        final TextView myTextViewName;
+        final TextView myTextViewPrice;
+        final Spinner mySpinnerBuyMethod;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -140,10 +140,12 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-    // convenience method for getting data at click position
-    String getItem(int id) {
-        return mDataNames.get(id);
-    }
+// --Commented out by Inspection START (12/8/2018 12:30 AM):
+//    // convenience method for getting data at click position
+//    String getItem(int id) {
+//        return mDataNames.get(id);
+//    }
+// --Commented out by Inspection STOP (12/8/2018 12:30 AM)
 
     // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {

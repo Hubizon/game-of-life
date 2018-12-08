@@ -17,13 +17,7 @@ public class ShopFragment extends Fragment
     public ShopFragment() {}
 
     public static ShopFragment newInstance() {
-        ShopFragment fragment = new ShopFragment();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        return new ShopFragment();
     }
 
     @Override

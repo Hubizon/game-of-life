@@ -12,7 +12,8 @@
         android:layout_height="52dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/horizontal_margin"
-        tools:src="@drawable/ic_banjo" />
+        tools:src="@drawable/ic_banjo"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/list_item_type_name"
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="@dimen/horizontal_margin"
-        android:src="@drawable/keyboard_arrow_down_black_24x24" />
+        android:src="@drawable/keyboard_arrow_down_black_24x24"
+        android:contentDescription="TODO" />
 
 </FrameLayout>

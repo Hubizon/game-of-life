@@ -27,4 +27,7 @@
     <Preference android:title="Go to credits"
     android:key="creditsButton"
     android:summary="Awesome people"/>
+
+    <Preference android:title="Send Feedback"
+        android:key="feedbackButton"/>
 </PreferenceScreen>

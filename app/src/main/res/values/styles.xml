@@ -2,11 +2,9 @@
 
 
     <!-- Use this to switch to Dark theme -->
-    <style name="MyDarkTheme" parent="Theme.AppCompat.DayNight"/>
 
 
     <!-- Use this theme in Manifest by default -->
-    <style name="MyLightTheme" parent="Theme.AppCompat.DayNight"/>
 
     <!-- Base light theme containing all styles -->
     <style name="Theme.AppCompat.Light" parent="Theme.AppCompat.Light.DarkActionBar"/>
@@ -16,7 +14,6 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
-        <item name="cardViewStyle" parent="Base.CardView"/>
 
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
@@ -26,7 +23,7 @@
 
         <item name="actionBarTheme">@style/ToolbarStyle</item>
 
-        <item name="android:windowBackground">@color/primaryColor</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
     </style>
 
     <style name="ToolbarStyle" parent="Widget.AppCompat.ActionBar">
@@ -38,14 +35,6 @@
         <item name="android:progressDrawable">@drawable/progress_bar_color</item>
         <item name="android:progress">75</item>
         <item name="android:max">1000</item>
-    </style>
-
-    <style name="ProgressBarTextView">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/secondaryTextColor</item>
-        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="MyCardViewStyle">
@@ -72,14 +61,6 @@
         <item name="android:layout_margin">20dp</item>
         <item name="android:background">@color/primaryColor</item>
         <item name="android:paddingBottom">20dp</item>
-    </style>
-
-    <style name="MyLinearLayoutStyleInCardView">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_horizontal|center_vertical</item>
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:orientation">vertical</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

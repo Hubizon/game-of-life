@@ -26,17 +26,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.ViewHolder> {
-    private ArrayList<String> mDataNames = new ArrayList<>();
-    private ArrayList<String> mDataPrices = new ArrayList<>();
-    private LayoutInflater mInflater;
+    private final ArrayList<String> mDataNames = new ArrayList<>();
+    private final ArrayList<String> mDataPrices = new ArrayList<>();
+    private final LayoutInflater mInflater;
     private ChooseJobAdapter.ItemClickListener mClickListener;
 
-    private int lastItemColor;
+    private final int lastItemColor;
 
     // data is passed into the constructor
     //static int lastPosition;
-    static int lastPositionPage1;
-    static int lastPositionPage2;
+    private static int lastPositionPage1;
+    private static int lastPositionPage2;
 
     ChooseJobAdapter(Context context, Job[] mDataJobs, int page) {
         this.mInflater = LayoutInflater.from(context);
@@ -210,7 +210,7 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
         return new ChooseJobAdapter.ViewHolder(view);
     }
 
-    static int page = 1;
+    // --Commented out by Inspection (12/8/2018 12:30 AM):static int page = 1;
 //    static boolean isFirstTime0 = true;
     // binds the data to the TextView in each row
     @Override
@@ -253,9 +253,9 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        CardView myCardViewChooseJob;
-        TextView myTextViewName;
-        TextView myTextViewPrice;
+        final CardView myCardViewChooseJob;
+        final TextView myTextViewName;
+        final TextView myTextViewPrice;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -271,10 +271,12 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
         }
     }
 
-    // convenience method for getting data at click position
-    String getItem(int id) {
-        return mDataNames.get(id);
-    }
+// --Commented out by Inspection START (12/8/2018 12:30 AM):
+//    // convenience method for getting data at click position
+//    String getItem(int id) {
+//        return mDataNames.get(id);
+//    }
+// --Commented out by Inspection STOP (12/8/2018 12:30 AM)
 
     // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {

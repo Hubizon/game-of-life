@@ -12,17 +12,17 @@ import com.example.hubert.gameoflife.R;
 
 public class RecyclerViewChooseAvatarAdapter extends RecyclerView.Adapter<RecyclerViewChooseAvatarAdapter.ViewHolder> {
 
-    private Integer[] mDataAvatars;
-    private LayoutInflater mInflater;
+    private final Integer[] mDataAvatars;
+    private final LayoutInflater mInflater;
     private RecyclerViewChooseAvatarAdapter.ItemClickListener mClickListener;
 
-    Context context;
+    // --Commented out by Inspection (12/8/2018 12:30 AM):private final Context context;
 
     // data is passed into the constructor
     RecyclerViewChooseAvatarAdapter(Context context, Integer[] dataNamesAvatars) {
         this.mInflater = LayoutInflater.from(context);
         this.mDataAvatars = dataNamesAvatars;
-        this.context = context;
+        //this.context = context;
     }
 
     // inflates the row layout from xml when needed
@@ -50,7 +50,7 @@ public class RecyclerViewChooseAvatarAdapter extends RecyclerView.Adapter<Recycl
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView myImageViewAvatar;
+        final ImageView myImageViewAvatar;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -60,7 +60,7 @@ public class RecyclerViewChooseAvatarAdapter extends RecyclerView.Adapter<Recycl
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null) mClickListener.onItemClick(getAdapterPosition());
         }
     }
 
@@ -76,6 +76,6 @@ public class RecyclerViewChooseAvatarAdapter extends RecyclerView.Adapter<Recycl
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(int position);
     }
 }

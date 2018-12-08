@@ -23,17 +23,17 @@ public class MyDialogChooseAvatar extends DialogFragment implements RecyclerView
         void getResults(int results);
     }
 
-    DialogCallback dialogCallback;
+    private DialogCallback dialogCallback;
     public MyDialogChooseAvatar setCallBack(DialogCallback dialogCallback){
         this.dialogCallback = dialogCallback;
         return this;
     }
 
 
-    SharedPreferences sharedPref;
+    private SharedPreferences sharedPref;
 
-    View view;
-    final Integer[] avatars = {
+    private View view;
+    private final Integer[] avatars = {
             R.drawable.boy,
             R.drawable.girl,
             R.drawable.boy_1,
@@ -44,11 +44,11 @@ public class MyDialogChooseAvatar extends DialogFragment implements RecyclerView
             R.drawable.man_2,
             R.drawable.man_4 };
 
-    static DialogFragment parent;
+    // --Commented out by Inspection (12/8/2018 12:30 AM):private static DialogFragment parent;
 
     public static MyDialogChooseAvatar newInstance(DialogFragment parentDialog) {
         MyDialogChooseAvatar frag = new MyDialogChooseAvatar();
-        parent = parentDialog;
+        //parent = parentDialog;
         return frag;
     }
 
@@ -83,7 +83,7 @@ public class MyDialogChooseAvatar extends DialogFragment implements RecyclerView
 
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(int position) {
        // ImageView imageViewAvatar = view.findViewById(R.id.imageViewAvatar);
        // MyDialogOpenFragment.avatarRes = (Integer)imageViewAvatar.getTag();
 

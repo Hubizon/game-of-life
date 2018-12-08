@@ -2,12 +2,12 @@ package com.example.hubert.gameoflife.Shop;
 
 public class Food {
 
-    private String name;
-    private int price;
-    private int givenFood;
-    private int givenHealth;
-    private int givenEnergy;
-    private int givenHappiness;
+    private final String name;
+    private final int price;
+    private final int givenFood;
+    private final int givenHealth;
+    private final int givenEnergy;
+    private final int givenHappiness;
 
     public Food(String name, int price, int givenFood, int givenHealth, int givenEnergy, int givenHappiness)
     {

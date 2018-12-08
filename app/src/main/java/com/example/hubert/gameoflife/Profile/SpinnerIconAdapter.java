@@ -13,21 +13,18 @@ import com.example.hubert.gameoflife.R;
 import java.util.ArrayList;
 
 
-public class SpinnerIconAdapter extends BaseAdapter {
+class SpinnerIconAdapter extends BaseAdapter {
 
-    Context context;
-    int width;
-    private ArrayList<Integer> icons;
-    private LayoutInflater inflter;
-    private SharedPreferences mainSharedPref;
-    private int numberOfUsers;
+    private final Context context;
+    private final ArrayList<Integer> icons;
+    private final LayoutInflater inflter;
+    private final int numberOfUsers;
 
-    public SpinnerIconAdapter(Context applicationContext, int width) {
+    public SpinnerIconAdapter(Context applicationContext) {
         this.context = applicationContext;
-        this.width = width;
         inflter = (LayoutInflater.from(applicationContext));
 
-        mainSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences mainSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         numberOfUsers = mainSharedPref.getInt(context.getString(R.string.saved_number_of_users), 0);
         icons = getAvatarts();
     }
@@ -57,7 +54,7 @@ public class SpinnerIconAdapter extends BaseAdapter {
         return view;
     }
 
-    public ArrayList<Integer> getAvatarts() {
+    private ArrayList<Integer> getAvatarts() {
         ArrayList<Integer> avatarIcons = new ArrayList<>();
         for (int i = 0; i < numberOfUsers; i++) {
             SharedPreferences userSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_key) + i, 0);

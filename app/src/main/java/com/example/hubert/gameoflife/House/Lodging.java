@@ -2,13 +2,13 @@ package com.example.hubert.gameoflife.House;
 
 public class Lodging {
 
-    private String name;
-    private int price;
-    private int givenHealth;
-    private int givenEnergy;
-    private int givenHappiness;
+    private final String name;
+    private final int price;
+    private final int givenHealth;
+    private final int givenEnergy;
+    private final int givenHappiness;
     private String type;
-    private int rentTime;
+    // --Commented out by Inspection (12/8/2018 12:30 AM):private int rentTime;
 
     public Lodging(String name, int price, int givenHealth, int givenEnergy, int givenHappiness)
     {
@@ -25,5 +25,5 @@ public class Lodging {
     public int getGivenEnergy() { return givenEnergy; }
     public int getGivenHappiness() { return givenHappiness; }
     public String getType() { return type; }
-    public int getRentTime() { return rentTime; }
+    // --Commented out by Inspection (12/8/2018 12:30 AM):public int getRentTime() { return rentTime; }
 }
