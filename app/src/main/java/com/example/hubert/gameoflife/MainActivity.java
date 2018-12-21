@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.hubert.gameoflife.Girlboyfriend.GirlboyfriendFragment;
 import com.example.hubert.gameoflife.Profile.MainFragment;
 import com.example.hubert.gameoflife.Utils.Dialogs;
 import com.example.hubert.gameoflife.FirstOpen.MyDialogOpenFragment;
@@ -32,7 +33,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 public class MainActivity extends AppCompatActivity
     implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd,
         MyDialogDead.OnDialogDeadInteractionListener, Dialogs.OnDialogInteractionListener,
-        MainTimer.OnTimerInterActionListener{
+        MainTimer.OnTimerInterActionListener, GirlboyfriendFragment.OnGirlBoyfriendFragmentListener {
 
     public MainTimer mainTimer;
 
@@ -155,6 +156,7 @@ public class MainActivity extends AppCompatActivity
                 item.setIcon(mPauseDrawable);
                 mPauseDrawable.start();
                 //stopTimer();
+                MainTimer.shouldWork = false;
                 mainTimer.stopTimer();
                 Dialogs dialogs = new Dialogs(mContext);
                 dialogs.showResumeDialog(this, item);
@@ -330,5 +332,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onDeathInteraction() {
         Die();
+    }
+
+    @Override
+    public void onGirldboyStopTimer() {
+        MainTimer.shouldWork = false;
+        mainTimer.stopTimer();
+    }
+
+    @Override
+    public void onGirldboyStartTimer() {
+        MainTimer.shouldWork = true;
+        mainTimer.startTimer();
     }
 }

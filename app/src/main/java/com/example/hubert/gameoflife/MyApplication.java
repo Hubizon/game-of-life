@@ -30,6 +30,7 @@ public class MyApplication extends Application implements SampleLifecycleListene
 
     @Override
     public void startGlobalTimer() {
-        mainTimer.startTimer();
+        if (MainTimer.shouldWork)
+            mainTimer.startTimer();
     }
 }

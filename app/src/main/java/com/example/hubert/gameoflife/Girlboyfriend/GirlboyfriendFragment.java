@@ -64,6 +64,23 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
     private TextView loveStatus;
     private Context mContext;
 
+
+    public interface OnGirlBoyfriendFragmentListener {
+        void onGirldboyStopTimer();
+        void onGirldboyStartTimer();
+    }
+    OnGirlBoyfriendFragmentListener mListener;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnGirlBoyfriendFragmentListener) {
+            mListener = (OnGirlBoyfriendFragmentListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnGirlBoyfriendFragmentListener");
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -281,6 +298,8 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
         AlertDialog.Builder dialog;
 
+        mListener.onGirldboyStopTimer();
+
         SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
@@ -299,8 +318,8 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                 //Die();
                                 break;
                         }
+                        mListener.onGirldboyStartTimer();
                         dialoginterface.cancel();
-                        //TODO: start timer
                     }})
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
@@ -357,8 +376,15 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                 dialoginterface.cancel();
                                 break;
                         }
-                        //TODO: Michal!!! start timer
+                        mListener.onGirldboyStartTimer();
                     }
                 }).show();
+    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.mListener = null;
     }
 }

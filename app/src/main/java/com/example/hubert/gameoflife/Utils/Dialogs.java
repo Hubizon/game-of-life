@@ -43,6 +43,7 @@ public class Dialogs {
 
     public void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
     {
+        MainTimer.shouldWork = false;
         mListener.onDialogInteractionTimerStop();
         final SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -61,6 +62,7 @@ public class Dialogs {
                 .setMessage(message)
                 .setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        MainTimer.shouldWork = true;
                         mListener.onDialogInteractionTimerStart();
                         switch (whichOneEvent)
                         {
@@ -80,16 +82,16 @@ public class Dialogs {
                                 //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
                                 //TODO: wyczyścic sharedpref
 
-                                mListener.onDialogInteractionTimerStop();
+                                //mListener.onDialogInteractionTimerStop();
                                 DialogFragment deadDialog = MyDialogDead.newInstance();
                                 deadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_dead_dialog_tag");
                                 break;
                         }
                         dialoginterface.cancel();
-                        //TODO: start timer
                     }})
                 .setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        MainTimer.shouldWork = true;
                         mListener.onDialogInteractionTimerStart();
                         switch (whichOneEvent)
                         {
@@ -156,13 +158,13 @@ public class Dialogs {
                                 dialoginterface.cancel();
                                 break;
                         }
-                        //TODO: Michal!!! start timer
                     }
                 }).show();
     }
 
     public void showAlertDialog(Context context, String title, final String message)
     {
+        MainTimer.shouldWork = false;
         mListener.onDialogInteractionTimerStop();
         AlertDialog.Builder dialog;
 
@@ -178,6 +180,7 @@ public class Dialogs {
                 .setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        MainTimer.shouldWork = true;
                         mListener.onDialogInteractionTimerStart();
                         dialoginterface.dismiss();
                     }
@@ -191,6 +194,7 @@ public class Dialogs {
             @Override
             public boolean onTouchEvent(@NonNull MotionEvent event) {
                 this.dismiss();
+                MainTimer.shouldWork = true;
                 mListener.onDialogResume(item);
                 return true;
             }

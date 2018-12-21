@@ -3,7 +3,7 @@
 
     <string name="computer">Computer</string>
     <string name="play_video_games">Play video games</string>
-    <string name="talk_on_messengers">Talk on messengers</string>
+    <string name="talk_on_messengers">Talk on messenger</string>
     <string name="support_a_charity_event">Support a charity event</string>
     <string name="adopt_a_child">Adopt a child</string>
     <string name="make_a_game">Make a game</string>
@@ -20,7 +20,7 @@
     <string name="transport">Transport: </string>
     <string name="girlfriend">Girlfriend: </string>
     <string name="boyfriend">Boyfriend: </string>
-    <string name="position">Position:</string>
+    <string name="position">Position: </string>
     <string name="relations">Relations</string>
     <!---->
     <string name="years">years</string>
@@ -29,10 +29,10 @@
     <string name="write_a_book">write a book</string>
     <string name="sleeping">Sleeping</string>
     <string name="playing">Playing</string>
-    <string name="talking_on_messengers">Talking on messengers</string>
+    <string name="talking_on_messengers">Talking on messenger</string>
     <string name="learning">Learning</string>
     <string name="working">Working</string>
-    <string name="getting_new_friends">Getting New Friends</string>
+    <string name="getting_new_friends">Making New Friends</string>
     <string name="selling_drugs">Selling Drugs</string>
     <string name="send_shop_click_id" translatable="false">shop_click</string>
     <string name="food">Food</string>
@@ -55,9 +55,9 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="recording_movies">Recording Movies</string>
     <string name="writing_poem">Writing Poem</string>
-    <string name="drawing_something">Drawing Somethings</string>
-    <string name="making_computer_game">Making Computer</string>
-    <string name="found_safe">Policeman found your safe! You lost all your money in safe.</string>
+    <string name="drawing_something">Drawing Something</string>
+    <string name="making_computer_game">Crafting a Computer</string>
+    <string name="found_safe">Policeman found your safe but it was empty!</string>
     <string name="got50Money">You got 50 money!</string>
     <string name="reported2xWeakerGrades">Teacher reported this and you have now 2x weaker grades!</string>
     <string name="reported1FromAllSubjects">Teacher reported this and you\'ve got 1 from all subjects!</string>
@@ -78,9 +78,9 @@
     <string name="getting_married">Getting married</string>
     <string name="successful_marrying">You successful got married!</string>
     <string name="unsuccessful_engagement">Unfortunately your love didn\'t accept your engagement request</string>
-    <string name="unsuccessful_marrying">Unfortunately your love didn\'t accept your married request</string>
+    <string name="unsuccessful_marrying">Unfortunately your love didn\'t accept your request</string>
     <string name="increasing_relationship_level">Increasing relationship level</string>
-    <string name="max_relationship_level">Unfortunately you have max relationship level</string>
+    <string name="max_relationship_level">You already have a maximum relationship level</string>
     <string name="buy_a_gift">Buy a gift</string>
     <string name="sure_to_buy_her_a_gift">Are you sure you want to buy her a gift for a 100$?</string>
     <string name="sure_to_buy_him_a_gift">Are you sure you want to buy him a gift for a 100$?</string>
@@ -180,7 +180,7 @@
 
     <!-- Example settings for Notifications -->
 
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_new_message_notifications">New notification message</string>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>

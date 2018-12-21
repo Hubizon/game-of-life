@@ -61,7 +61,6 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
         ArrayList<String> mSkillsPrices = new ArrayList<>();
 
         SharedPreferences sharedPref = MainActivity.userSharedPref;
-        //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         try {
             JSONArray jsonArray = new JSONArray();
             JSONObject jsonObject;
@@ -145,6 +144,7 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
                     public void onClick(DialogInterface dialoginterface, int i) {
                         dialoginterface.cancel();
                         //TODO: start timer
+                        // raczej niepotrzebny tu jest dialog
                     }})
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {

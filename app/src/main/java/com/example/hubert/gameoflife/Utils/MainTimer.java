@@ -38,6 +38,7 @@ public class MainTimer {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+    public static boolean shouldWork = true;
     public boolean isRunning;
     public static boolean isMainActvityActive;
     private static final int TIMER_LOOP_TIME = 1000;
@@ -49,7 +50,7 @@ public class MainTimer {
             updateValues.interactWithUI(mContext, userSharedPref);
 
             if (userSharedPref.getInt(mContext.getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) <= 0) {
-               // userSharedPref.edit().putBoolean(mContext.getString(R.string.saved_is_dead_key), true).apply();
+                userSharedPref.edit().putBoolean(mContext.getString(R.string.saved_is_dead_key), true).apply();
                 if (isMainActvityActive) mListener.onDeathInteraction();
                 else {
                     Intent intent = new Intent(mContext, MainActivity.class);

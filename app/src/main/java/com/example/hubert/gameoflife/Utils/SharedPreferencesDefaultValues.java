@@ -15,7 +15,7 @@ public class SharedPreferencesDefaultValues {
     public static final int DefaultWorkPosition = 1;
     private static final Gson gson = new Gson();
 
-    //TODO sa 2 domyslne wartosci, tu i w strings.xml (do preference_headers potrzeba strings.xml)
+    // sa 2 domyslne wartosci, tu i w strings.xml (do preference_headers potrzeba strings.xml)
     public static final String DefaultName = "";
     public static final boolean DefaultIsMale = true;
     public static final int DefaultIcon = R.drawable.avatar_icon1;
