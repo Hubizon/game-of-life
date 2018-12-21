@@ -163,6 +163,7 @@
     <!-- end of "Strings related to Shared Preferences" -->
 
     <string name="MY_ADMOB_APP_ID" translatable="false">ca-app-pub-3337866636093645~1700225876</string>
+    <string name="MONEYBOOSTER_ADMOB_ID" translatable="false">ca-app-pub-3337866636093645/8976080664</string>
     <string name="TEST_SAMPLE_ADMOB_REWARDED" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
 
     <!-- Strings related to Settings -->

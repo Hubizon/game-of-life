@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd(getString(R.string.TEST_SAMPLE_ADMOB_REWARDED),
+        mRewardedVideoAd.loadAd(getString(R.string.MONEYBOOSTER_ADMOB_ID),
                 new AdRequest.Builder().build());
     }
 
@@ -238,15 +238,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        if("money".equals(rewardItem.getType()))
-        {
-            Toast.makeText(this, getResources().getString(R.string.on_rewarded_money) + " " + rewardItem.getType() + "  " + getResources().getString(R.string.amount) + " " +
-                    rewardItem.getAmount(), Toast.LENGTH_LONG).show();
-            int currentMoney = userSharedPref.getInt(getString(R.string.saved_character_money_key), 0) + rewardItem.getAmount();
-            userSharedPref.edit().putInt(getString(R.string.saved_character_money_key), currentMoney).apply();
-        }
-        else if("life".equals(rewardItem.getType()))
-        {
+        if (userSharedPref.getBoolean(getString(R.string.saved_is_dead_key), false)) {
             Toast.makeText(this, getResources().getString(R.string.on_rewarded_life), Toast.LENGTH_LONG).show();
             SharedPreferences.Editor editor = userSharedPref.edit();
             editor.putBoolean(getResources().getString(R.string.saved_is_dead_key), false);
@@ -255,6 +247,11 @@ public class MainActivity extends AppCompatActivity
             editor.putInt(getResources().getString(R.string.saved_energy_key), 250);
             editor.putInt(getResources().getString(R.string.saved_happiness_key), 250);
             editor.apply();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.on_rewarded_money) + " " + rewardItem.getType() + "  " + getResources().getString(R.string.amount) + " " +
+                    rewardItem.getAmount(), Toast.LENGTH_LONG).show();
+            int currentMoney = userSharedPref.getInt(getString(R.string.saved_character_money_key), 0) + rewardItem.getAmount();
+            userSharedPref.edit().putInt(getString(R.string.saved_character_money_key), currentMoney).apply();
         }
     }
 
@@ -272,8 +269,6 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = userSharedPref.edit();
         editor.putBoolean(getString(R.string.saved_is_dead_key), true);
         editor.apply();
-        //for testing purposes
-        hasAdd = false;
         if (hasAdd)
             (new Dialogs(mContext)).showDialogWithChoose(userSharedPref, mContext, getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
         else {
