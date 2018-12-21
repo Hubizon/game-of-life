@@ -53,6 +53,8 @@ public class MainTimer {
                 userSharedPref.edit().putBoolean(mContext.getString(R.string.saved_is_dead_key), true).apply();
                 if (isMainActvityActive) mListener.onDeathInteraction();
                 else {
+                    MainTimer.shouldWork = false;
+
                     Intent intent = new Intent(mContext, MainActivity.class);
                     mContext.startActivity(intent);
                 }

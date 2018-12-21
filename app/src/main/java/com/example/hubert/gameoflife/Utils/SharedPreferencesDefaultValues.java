@@ -36,7 +36,7 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
     public static final boolean DefaultIsInSchoolNow = true;
     public static final String DefaultMyJob = null;
-    public static final String DefaultMyTransport = gson.toJson(new Transport("Foots", 0, 10));
+    public static final String DefaultMyTransport = gson.toJson(new Transport("Foot", 0, 10));
     public static final String DefaultLove = null;
     public static final int DefaultLoveRelations = 50;
     public static final int DefaultLoveRelationshipLevel = 1;

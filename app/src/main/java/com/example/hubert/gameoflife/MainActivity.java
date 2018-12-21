@@ -113,16 +113,12 @@ public class MainActivity extends AppCompatActivity
         mainTimer.setUserSharedPref(userSharedPref);
         mainTimer.setContext(this);
         MainTimer.isMainActvityActive = true;
-        if (!mainTimer.isRunning) mainTimer.startTimer();
+        if (!mainTimer.isRunning && MainTimer.shouldWork) mainTimer.startTimer();
 
 
         if (sharedPref.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true)) {
-            (new Handler()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mainTimer.stopTimer();
-                }
-            }, 800);
+            MainTimer.shouldWork = false;
+            mainTimer.stopTimer();
             DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_NEW);
             newDialog.show(getSupportFragmentManager(), "open_dialog_tag");
         }
@@ -272,6 +268,7 @@ public class MainActivity extends AppCompatActivity
         if (hasAdd)
             (new Dialogs(mContext)).showDialogWithChoose(userSharedPref, mContext, getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
         else {
+            MainTimer.shouldWork = false;
             mainTimer.stopTimer();
             DialogFragment deadDialog = MyDialogDead.newInstance();
             deadDialog.show(getSupportFragmentManager(), "open_dead_dialog_tag");
@@ -300,6 +297,8 @@ public class MainActivity extends AppCompatActivity
         setupTabIcons();
 
         mainTimer.setUserSharedPref(userSharedPref);
+
+        MainTimer.shouldWork = true;
         mainTimer.startTimer();
     }
 

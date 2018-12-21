@@ -25,4 +25,6 @@
 
     <color name="translucent_black">#80000000</color>
 
+    <color name="bannerColor">#e0e0e0</color>
+
 </resources>
