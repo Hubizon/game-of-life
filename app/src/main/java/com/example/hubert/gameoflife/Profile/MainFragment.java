@@ -59,11 +59,18 @@ public class MainFragment extends Fragment {
                     + mUserSharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
                     + mUserSharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00";
             timetext.setText(timetxt);
+
+            String moneyStirng = "$" + mUserSharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
+            charactermoneytext.setText(moneyStirng);
+
+            String ageString = mUserSharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears)
+                    + " " + getResources().getString(R.string.years) + " " + mUserSharedPref.getInt(getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays) + " " + getResources().getString(R.string.days);
+            agetext.setText(ageString);
+
             hungerprogress.setProgress((mUserSharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)));
             healthprogress.setProgress((mUserSharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth)));
             energyprogress.setProgress((mUserSharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)));
             happinessprogress.setProgress((mUserSharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)));
-
             mHandler.postDelayed(mRunnable, 1000);
         }
     };
