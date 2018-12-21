@@ -13,7 +13,8 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/clock_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/time_dialog"
@@ -35,7 +36,8 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/money_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/money_dialog"
@@ -71,8 +73,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/health_icon" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/health_icon"
+                android:contentDescription="TODO" />
 
             <ProgressBar
                 android:id="@+id/progressBar_health_dialog"
@@ -95,8 +99,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/food_icon" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/food_icon"
+                android:contentDescription="TODO" />
 
             <ProgressBar
                 android:id="@+id/progressBar_hungry_dialog"
@@ -120,8 +126,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/energy_icon" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/energy_icon"
+                android:contentDescription="TODO" />
 
             <ProgressBar
                 android:id="@+id/progressBar_energy_dialog"
@@ -144,8 +152,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/happiness_icon" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/happiness_icon"
+                android:contentDescription="TODO" />
 
             <ProgressBar
                 android:id="@+id/progressBar_happiness_dialog"

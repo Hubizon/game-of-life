@@ -2,10 +2,10 @@ package com.example.hubert.gameoflife.House;
 
 public class Transport {
 
-    private String name;
-    private int price;
+    private final String name;
+    private final int price;
     // Time to go to the work/school etc. in seconds
-    private int speed;
+    private final int speed;
 
     public Transport(String name, int price, int speed)
     {

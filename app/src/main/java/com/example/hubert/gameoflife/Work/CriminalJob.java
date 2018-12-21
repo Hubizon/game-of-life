@@ -9,8 +9,8 @@ import com.example.hubert.gameoflife.Shop.Weapon;
 
 public class CriminalJob extends Job{
 
-    private int chanceToGetBusted;
-    private Weapon[] weaponsNeeded;
+    private final int chanceToGetBusted;
+    private final Weapon[] weaponsNeeded;
 
     public CriminalJob(String name, int salary, int salaryIncrease, Fun minPhoneNeeded, Fun minComputerNeeded, Fun minTvNeeded, Lodging minLodgingNeeded,
                        Transport minTransportNeeded,  Skill[] skillsNeeded, int chanceToGetBusted, Weapon[] weaponsNeeded) {
@@ -20,7 +20,7 @@ public class CriminalJob extends Job{
         this.weaponsNeeded = weaponsNeeded;
     }
 
-    //TODO: używać tego! xD
+    //TODO: uzywać tego! xD
     public int getChanceToGetBusted() { return chanceToGetBusted; }
     public Weapon[] getWeaponsNeeded() { return weaponsNeeded; }
 }

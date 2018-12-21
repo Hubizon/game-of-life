@@ -14,9 +14,9 @@ import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
 public class MyParentViewHolder extends GroupViewHolder {
 
-    public TextView listGroup;
-    private ImageView arrow;
-    private ImageView icon;
+    private final TextView listGroup;
+    private final ImageView arrow;
+    private final ImageView icon;
 
     public MyParentViewHolder(View itemView) {
         super(itemView);

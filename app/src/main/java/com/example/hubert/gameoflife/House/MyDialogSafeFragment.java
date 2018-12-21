@@ -24,16 +24,15 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
 
     public MyDialogSafeFragment() {}
 
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
-    EditText moneyEdit;
+    private EditText moneyEdit;
 
-    View view;
+    private View view;
 
     public static MyDialogSafeFragment newInstance() {
-        MyDialogSafeFragment frag = new MyDialogSafeFragment();
-        return frag;
+        return new MyDialogSafeFragment();
     }
 
 
@@ -56,8 +55,6 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
 
         String safeText = R.string.safe + " " + sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe) + "$";
         ((TextView)view.findViewById(R.id.safeMoney_dialogsafe)).setText(safeText);
-
-        sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         final Button depositButton = view.findViewById(R.id.despositSafe);
         depositButton.setAlpha(.5f);

@@ -8,7 +8,7 @@ import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 public class MyChildViewHolder extends ChildViewHolder {
 
-    public TextView listChild;
+    public final TextView listChild;
 
     public MyChildViewHolder(View itemView) {
         super(itemView);

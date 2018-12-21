@@ -26,7 +26,8 @@
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/money_icon" />
+            android:background="@drawable/money_icon"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/money_buy"

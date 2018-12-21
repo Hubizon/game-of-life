@@ -20,14 +20,16 @@ import com.example.hubert.gameoflife.MyDialogDead;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 
+import java.util.Objects;
+
 public class Dialogs {
 
     private OnDialogInteractionListener mListener;
     public interface OnDialogInteractionListener {
         void onDialogInteractionTimerStop();
         void onDialogInteractionTimerStart();
-        void onDialogInteractionDie();
-        void onDialogResume(MenuItem item, Runnable runnable);
+        // --Commented out by Inspection (12/8/2018 12:30 AM):void onDialogInteractionDie();
+        void onDialogResume(MenuItem item);
     }
 
     public Dialogs(Context context) {
@@ -41,6 +43,7 @@ public class Dialogs {
 
     public void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
     {
+        MainTimer.shouldWork = false;
         mListener.onDialogInteractionTimerStop();
         final SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -59,11 +62,12 @@ public class Dialogs {
                 .setMessage(message)
                 .setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        mListener.onDialogInteractionTimerStop();
+                        MainTimer.shouldWork = true;
+                        mListener.onDialogInteractionTimerStart();
                         switch (whichOneEvent)
                         {
                             case 1:
-                                mListener.onDialogInteractionDie();
+                                //mListener.onDialogInteractionDie(); nie lepiek editor.putInt( dead, true) ?
                                 break;
 
                             case 6:
@@ -78,22 +82,22 @@ public class Dialogs {
                                 //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
                                 //TODO: wyczyścic sharedpref
 
-                                mListener.onDialogInteractionTimerStop();
+                                //mListener.onDialogInteractionTimerStop();
                                 DialogFragment deadDialog = MyDialogDead.newInstance();
                                 deadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_dead_dialog_tag");
                                 break;
                         }
                         dialoginterface.cancel();
-                        //TODO: start timer
                     }})
                 .setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        MainTimer.shouldWork = true;
                         mListener.onDialogInteractionTimerStart();
                         switch (whichOneEvent)
                         {
                             case 1:
                                 if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) < 0)
-                                    mListener.onDialogInteractionDie();
+                                    //mListener.onDialogInteractionDie(); nie lepiej editor.putBoolean(dead, true) ???
                                 editor.apply();
                                 dialoginterface.cancel();
                                 break;
@@ -157,17 +161,17 @@ public class Dialogs {
                                 dialoginterface.cancel();
                                 break;
                         }
-                        //TODO: Michal!!! start timer
                     }
                 }).show();
     }
 
-    public void showAlertDialog(Context context, SharedPreferences sharedPreferences, String title, final String message)
+    public void showAlertDialog(Context context, String title, final String message)
     {
+        MainTimer.shouldWork = false;
         mListener.onDialogInteractionTimerStop();
         AlertDialog.Builder dialog;
 
-        SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
@@ -179,6 +183,7 @@ public class Dialogs {
                 .setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        MainTimer.shouldWork = true;
                         mListener.onDialogInteractionTimerStart();
                         dialoginterface.dismiss();
                     }
@@ -187,19 +192,20 @@ public class Dialogs {
                 .show();
     }
 
-    public void showResumeDialog(Context context, final MenuItem item, final Runnable runnable) {
+    public void showResumeDialog(Context context, final MenuItem item) {
         Dialog resumeDialog = new Dialog(context) {
             @Override
             public boolean onTouchEvent(@NonNull MotionEvent event) {
                 this.dismiss();
-                mListener.onDialogResume(item, runnable);
+                MainTimer.shouldWork = true;
+                mListener.onDialogResume(item);
                 return true;
             }
         };
         resumeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         resumeDialog.setContentView(R.layout.dialog_stop);
         final Window window = resumeDialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        Objects.requireNonNull(window).setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         window.setBackgroundDrawableResource(R.color.translucent_black);
         resumeDialog.show();

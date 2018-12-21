@@ -6,13 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class CustomPagerJobAdapter extends FragmentPagerAdapter {
+class CustomPagerJobAdapter extends FragmentPagerAdapter {
     private static final int NUM_PAGES = 2;
-    Context context;
+    // --Commented out by Inspection (12/8/2018 12:30 AM):private final Context context;
 
     public CustomPagerJobAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.context = context;
+        //this.context = context;
     }
 
 

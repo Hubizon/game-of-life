@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:background="?attr/colorPrimary">
 
     <TextView
         android:id="@+id/textView"
@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Avatar"
+        android:text="@string/avatar"
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/space"
@@ -26,17 +26,19 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="4dp"
-        android:src="@drawable/avatar_icon1"
+        android:src="@drawable/man"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:contentDescription="@string/avatarImageDesc" />
 
     <TextView
         android:id="@+id/textView2"
+        android:labelFor="@id/nameEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Screen Name"
+        android:text="@string/screen_name"
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +46,14 @@
 
     <EditText
         android:id="@+id/nameEdit"
+        android:autofillHints="username"
+        android:inputType="text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -60,7 +65,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Sex"
+        android:text="@string/sex"
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +103,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:text="Save"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"

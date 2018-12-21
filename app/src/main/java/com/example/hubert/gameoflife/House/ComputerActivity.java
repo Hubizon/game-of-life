@@ -22,7 +22,7 @@ import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 public class ComputerActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final int PAGE_NUMBER = 4;
-    SharedPreferences sharedPref;
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

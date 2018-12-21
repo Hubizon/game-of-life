@@ -8,7 +8,7 @@ import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.Utils.SharedPreferencesDefaultValues;
 
 public class Love  {
-    private String name;
+    private final String name;
    // private int age;
 
     public Love(String name)

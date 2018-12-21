@@ -44,7 +44,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
     private static final int PAGE_NUMBER = 2;
 
     private int id;
-    View view;
+    private View view;
 
 //    Spinner spinner;
 
@@ -67,36 +67,37 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         switch (id)
         {
             case R.id.cardview_food:
-                for (Food aFoodList : foodList) itemsNames.add(aFoodList.getName());
-                for(int i = 0; i < foodList.length; i++)
-                    itemsPrices.add(foodList[i].getPrice() + getResources().getString(R.string.currency));
+                for (Food food : foodList) {
+                    itemsNames.add(food.getName());
+                    itemsPrices.add(food.getPrice() + getResources().getString(R.string.currency));
+                }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_food));
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
                 break;
 
             case R.id.cardview_medicines:
-                for(int i = 0; i < medicinesList.length; i++)
-                    itemsNames.add(medicinesList[i].getName());
-                for(int i = 0; i < medicinesList.length; i++)
-                    itemsPrices.add(medicinesList[i].getPrice() + getResources().getString(R.string.currency));
+                for (Medicines medicines : medicinesList) {
+                    itemsNames.add(medicines.getName());
+                    itemsPrices.add(medicines.getPrice() + getResources().getString(R.string.currency));
+                }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_medicines));
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
                 break;
 
             case R.id.cardview_fun:
-                for(int i = 0; i < funList.length; i++)
-                    itemsNames.add(funList[i].getName());
-                for(int i = 0; i < funList.length; i++)
-                    itemsPrices.add(funList[i].getPrice() + getResources().getString(R.string.currency));
+                for (Fun fun : funList) {
+                    itemsNames.add(fun.getName());
+                    itemsPrices.add(fun.getPrice() + getResources().getString(R.string.currency));
+                }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_fun_items));
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
                 break;
 
             case R.id.buyLotteries:
-                for(int i = 0; i < lotteryList.length; i++)
-                    itemsNames.add(lotteryList[i].getName());
-                for(int i = 0; i < lotteryList.length; i++)
-                    itemsPrices.add(lotteryList[i].getPrice() + getResources().getString(R.string.currency));
+                for (Lottery lottery : lotteryList) {
+                    itemsNames.add(lottery.getName());
+                    itemsPrices.add(lottery.getPrice() + getResources().getString(R.string.currency));
+                }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_lotteries));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
@@ -125,20 +126,20 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 break;
 
             case R.id.cardview_house:
-                for(int i = 0; i < lodgingList.length; i++)
-                    itemsNames.add(lodgingList[i].getName());
-                for(int i = 0; i < lodgingList.length; i++)
-                    itemsPrices.add((lodgingList[i].getPrice() * 25) + getResources().getString(R.string.currency));
+                for (Lodging lodging : lodgingList) {
+                    itemsNames.add(lodging.getName());
+                    itemsPrices.add((lodging.getPrice() * 25) + getResources().getString(R.string.currency));
+                }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_houses));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 lodgingObjects = lodgingList;
                 break;
 
             case R.id.cardview_transport:
-                for(int i = 0; i < transportList.length; i++)
-                    itemsNames.add(transportList[i].getName());
-                for(int i = 0; i < transportList.length; i++)
-                    itemsPrices.add((transportList[i].getPrice() * 25) + getResources().getString(R.string.currency));
+                for (Transport transport : transportList) {
+                    itemsNames.add(transport.getName());
+                    itemsPrices.add((transport.getPrice() * 25) + getResources().getString(R.string.currency));
+                }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_transport));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
@@ -150,12 +151,12 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerViewShopBuy);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewShopBuyAdapter(this, itemsNames, itemsPrices, lodgingObjects);
+        adapter = new RecyclerViewShopBuyAdapter(this, itemsNames, itemsPrices);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
 
-    RecyclerViewShopBuyAdapter adapter;
+    private RecyclerViewShopBuyAdapter adapter;
     
     @Override
     public void onItemClick(View view, int position) {
@@ -298,8 +299,6 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 // zobaczyc czy dziala bez tego
                 gson.fromJson(json, Lodging.class);
                 gson.newBuilder().setLenient().create();
-
-                Lodging lodging = gson.fromJson(json, Lodging.class);
 
                 double lodgingPriceDouble =  lodgingList[position].getPrice();
                 if(getResources().getString(R.string.rent_for_a_month).equals(String.valueOf(((Spinner)view.findViewById(R.id.buy_method_spinner)).getSelectedItem())))

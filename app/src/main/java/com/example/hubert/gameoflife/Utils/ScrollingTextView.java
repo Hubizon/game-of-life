@@ -69,14 +69,15 @@ public class ScrollingTextView extends AppCompatTextView implements Runnable {
         }
     }
 
+
     public void setSpeed(float speed) {
         this.speed = speed;
     }
 
+
     public float getSpeed() {
         return speed;
     }
-
     public void setContinuousScrolling(boolean continuousScrolling) {
         this.continuousScrolling = continuousScrolling;
     }

@@ -8,7 +8,6 @@
     tools:context="com.example.hubert.gameoflife.Profile.MainFragment">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="8dp"
@@ -47,11 +46,13 @@
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/age_icon"
+                android:contentDescription="TODO"
                 app:layout_constraintBottom_toTopOf="@+id/guideline4"
                 app:layout_constraintEnd_toEndOf="@+id/imageView4"
                 app:layout_constraintStart_toStartOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="@+id/guideline3"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed"
+                app:srcCompat="@drawable/ic_brain" />
 
             <TextView
                 android:id="@+id/characterName"
@@ -82,15 +83,13 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/money_icon"
-                app:layout_constraintBottom_toTopOf="@+id/guideline3"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="@+id/guideline2" />
+                android:contentDescription="TODO"
+                app:layout_constraintStart_toEndOf="@+id/spinner"
+                app:layout_constraintTop_toTopOf="@+id/guideline2"
+                app:srcCompat="@drawable/ic_notes" />
 
             <TextView
                 android:id="@+id/characterMoney"
@@ -111,7 +110,8 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/clock_icon"
+                android:background="@drawable/ic_clock"
+                android:contentDescription="TODO"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/time"
@@ -160,12 +160,26 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.95" />
 
+            <ImageView
+                android:id="@+id/iv_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/guideline2"
+                tools:src="@drawable/ic_mars"
+                android:contentDescription="TODO" />
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -189,7 +203,8 @@
                     android:layout_height="34dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/health_icon" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_cardiogram" />
 
                 <ProgressBar
                     android:id="@+id/progressBar_character_health"
@@ -212,8 +227,10 @@
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/energy_icon" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_flash" />
 
                 <ProgressBar
                     android:id="@+id/progressBar_character_energy"
@@ -235,8 +252,10 @@
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/food_icon" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_apple" />
 
                 <ProgressBar
                     android:id="@+id/progressBar_character_hungry"
@@ -258,8 +277,10 @@
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/happiness_icon" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_happy" />
 
                 <ProgressBar
                     android:id="@+id/progressBar_character_happiness"
@@ -296,7 +317,8 @@
                     android:layout_height="34dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/lodging_icon" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_house" />
 
                 <TextView
                     android:id="@+id/characterLodging"
@@ -318,10 +340,10 @@
                     android:layout_height="34dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
-                    app:srcCompat="@drawable/ic_education" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_mortarboard" />
 
                 <TextView
-                    android:id="@+id/characterEducationWork"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
@@ -340,7 +362,8 @@
                     android:layout_height="34dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/transport_icon" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_car" />
 
                 <TextView
                     android:id="@+id/characterTransport"
@@ -359,11 +382,12 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/girlboyfriend_icon" />
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/ic_heartlove" />
 
                 <TextView
                     android:id="@+id/characterGirlboyfriend"
@@ -373,29 +397,6 @@
                     android:gravity="center"
                     android:text="@string/girlfriend"
                     android:textColor="@color/primaryTextColor" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:visibility="gone">
-
-                <!--<ImageView-->
-                <!--android:layout_width="34dp"-->
-                <!--android:layout_height="34dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:background="@drawable/children_icon" />-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/characterChildren"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:gravity="center"-->
-                <!--android:text="@string/childrens"-->
-                <!--android:textColor="@color/primaryTextColor" />-->
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

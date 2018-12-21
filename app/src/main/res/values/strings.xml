@@ -1,63 +1,38 @@
 <resources>
     <string name="app_name" translatable="false">Game of Life</string>
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     <string name="computer">Computer</string>
     <string name="play_video_games">Play video games</string>
-    <string name="talk_on_messengers">Talk on messengers</string>
+    <string name="talk_on_messengers">Talk on messenger</string>
     <string name="support_a_charity_event">Support a charity event</string>
-    <string name="sell_something">Sell something</string>
     <string name="adopt_a_child">Adopt a child</string>
     <string name="make_a_game">Make a game</string>
     <string name="draw_something">Draw something</string>
-    <string name="write_a_poem">Write a poem</string>
     <string name="record_movies">Record movies</string>
-    <string name="other">Other: $</string>
-    <string name="school">School:</string>
-    <string name="school_text">School</string>
-    <string name="mon_fri">Mon - Fri</string>
-    <string name="go_to_the_school">go to the school</string>
-    <string name="go_to_school">go to school</string>
-    <string name="learn_hard">Learn hard</string>
-    <string name="learn_at_home">learn at home</string>
-    <string name="give_up_school">give up school</string>
-    <string name="criminal">Criminal:</string>
-    <string name="get_new_friends">Get new friends</string>
-    <string name="help_other_criminals">Help other criminals</string>
-    <string name="steal_something">Steal something</string>
-    <string name="sell_drugs">Sell drugs</string>
-    <string name="give_a_bribe_for_better_grades">give a bribe for better grades</string>
-    <string name="threat_teachers">Threat teachers</string>
     <string name="search_for_a_girlfriend">Search for a girlfriend</string>
     <string name="status">Status:</string>
     <string name="ask_her_to_marry_you">Ask her to marry you</string>
     <string name="buy_her_a_gift">buy her a gift</string>
     <string name="take_her_somewhere">take her somewhere</string>
     <string name="broke_up_with_her">broke up with her</string>
-    <string name="education">EDUCATION</string>
     <string name="loudging">Lodging: </string>
     <string name="education_main">Education: </string>
     <string name="transport">Transport: </string>
     <string name="girlfriend">Girlfriend: </string>
     <string name="boyfriend">Boyfriend: </string>
-    <string name="children">Children: </string>
-    <string name="job">Job:</string>
-    <string name="position">Position:</string>
-    <string name="ask_for_promotion">Ask for promotion</string>
+    <string name="position">Position: </string>
     <string name="relations">Relations</string>
-    <string name="hang_around">Hang Around</string><!---->
-    <string name="give_up_work">give up work</string>
+    <!---->
     <string name="years">years</string>
     <string name="days">days</string>
     <string name="work">Work:</string>
     <string name="write_a_book">write a book</string>
     <string name="sleeping">Sleeping</string>
     <string name="playing">Playing</string>
-    <string name="talking_on_messengers">Talking on messengers</string>
+    <string name="talking_on_messengers">Talking on messenger</string>
     <string name="learning">Learning</string>
     <string name="working">Working</string>
-    <string name="getting_new_friends">Getting New Friends</string>
-    <string name="stealing_something">Stealing Something</string>
+    <string name="getting_new_friends">Making New Friends</string>
     <string name="selling_drugs">Selling Drugs</string>
     <string name="send_shop_click_id" translatable="false">shop_click</string>
     <string name="food">Food</string>
@@ -76,24 +51,17 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_shop">Shop</string>
     <string name="title_computer">Computer</string>
-    <string name="title_home">Home</string>
-    <string name="title_find_job">Find job</string>
-    <string name="no_children">No children</string>
-    <string name="skills">Skills</string>
     <string name="got_busted">You got busted! You lost all your money.</string>
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="recording_movies">Recording Movies</string>
     <string name="writing_poem">Writing Poem</string>
-    <string name="drawing_something">Drawing Somethings</string>
-    <string name="making_computer_game">Making Computer</string>
-    <string name="found_safe">Policeman found your safe! You lost all your money in safe.</string>
+    <string name="drawing_something">Drawing Something</string>
+    <string name="making_computer_game">Crafting a Computer</string>
+    <string name="found_safe">Policeman found your safe but it was empty!</string>
     <string name="got50Money">You got 50 money!</string>
     <string name="reported2xWeakerGrades">Teacher reported this and you have now 2x weaker grades!</string>
     <string name="reported1FromAllSubjects">Teacher reported this and you\'ve got 1 from all subjects!</string>
     <string name="aLittleBetterMarks">You have a little better marks now.</string>
-    <string name="get_some_skills">get some skills</string>
-    <string name="start_working">start working</string>
-    <string name="find_a_job">find a job</string>
     <string name="buying_skills">Buying skills</string>
     <string name="sure_to_buy_learn">Are you sure you want to buy and learn</string>
     <string name="yes">Yes</string>
@@ -110,9 +78,9 @@
     <string name="getting_married">Getting married</string>
     <string name="successful_marrying">You successful got married!</string>
     <string name="unsuccessful_engagement">Unfortunately your love didn\'t accept your engagement request</string>
-    <string name="unsuccessful_marrying">Unfortunately your love didn\'t accept your married request</string>
+    <string name="unsuccessful_marrying">Unfortunately your love didn\'t accept your request</string>
     <string name="increasing_relationship_level">Increasing relationship level</string>
-    <string name="max_relationship_level">Unfortunately you have max relationship level</string>
+    <string name="max_relationship_level">You already have a maximum relationship level</string>
     <string name="buy_a_gift">Buy a gift</string>
     <string name="sure_to_buy_her_a_gift">Are you sure you want to buy her a gift for a 100$?</string>
     <string name="sure_to_buy_him_a_gift">Are you sure you want to buy him a gift for a 100$?</string>
@@ -145,8 +113,6 @@
     <string name="saved_my_lodging_key" translatable="false">my_lodging</string>
     <string name="saved_my_job_key" translatable="false">my_job</string>
     <string name="saved_my_transport_key" translatable="false">my_transport</string>
-    <string name="saved_my_children_key" translatable="false">my_children</string>
-    <string name="saved_is_in_school_now_key" translatable="false">is_in_school_now</string>
     <string name="saved_hungry_key" translatable="false">hungry</string>
     <string name="saved_health_key" translatable="false">health</string>
     <string name="saved_energy_key" translatable="false">energy</string>
@@ -157,7 +123,6 @@
     <string name="saved_age_years_key" translatable="false">age_years</string>
     <string name="saved_age_days_key" translatable="false">age_days</string>
     <string name="saved_communication_skills_key" translatable="false">communication_skills</string>
-    <string name="saved_work_relations_key" translatable="false">work_relations</string>
     <string name="saved_criminal_points_key" translatable="false">criminal_points</string>
     <string name="saved_have_safe_key" translatable="false">have_safe</string>
     <string name="saved_money_in_safe_key" translatable="false">money_in_safe</string>
@@ -166,15 +131,12 @@
     <string name="saved_programming_skills_key" translatable="false">programming_skills</string>
     <string name="saved_games_key" translatable="false">games</string>
     <string name="saved_day_week_key" translatable="false">day_week</string>
-    <string name="saved_renting_time_key" translatable="false">renting_time</string>
     <string name="saved_progress_making_movies_key" translatable="false">progress_making_movies</string>
     <string name="saved_progress_making_book_key" translatable="false">progress_making_book</string>
     <string name="saved_progress_making_drawings_key" translatable="false">progress_making_drawings</string>
     <string name="saved_recording_skills_key" translatable="false">recording_skills</string>
     <string name="saved_writing_skills_key" translatable="false">writing_skills</string>
     <string name="saved_drawing_skills_key" translatable="false">drawing_skills</string>
-    <string name="saved_work_position_key" translatable="false">work_position</string>
-    <string name="saved_work_position_points_key" translatable="false">work_position_points</string>
     <string name="saved_education_points_key" translatable="false">education_points</string>
     <string name="saved_love_key" translatable="false">love</string>
     <string name="saved_love_relations_key" translatable="false">love_relations</string>
@@ -201,12 +163,12 @@
     <!-- end of "Strings related to Shared Preferences" -->
 
     <string name="MY_ADMOB_APP_ID" translatable="false">ca-app-pub-3337866636093645~1700225876</string>
+    <string name="MONEYBOOSTER_ADMOB_ID" translatable="false">ca-app-pub-3337866636093645/8976080664</string>
     <string name="TEST_SAMPLE_ADMOB_REWARDED" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
 
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
 
     <string name="pref_title_dark_mode">Enable dark mode</string>
     <string name="pref_description_dark_mode">Godzilla style!
@@ -215,59 +177,11 @@
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">Mr. Hubi</string>
 
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values" translatable="false">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
     <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values" translatable="false">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
 
     <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_new_message_notifications">New notification message</string>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
@@ -283,7 +197,6 @@
     <string name="didnt_win_lottery">Unfortunately, you didn\'t win this lottery</string>
     <string name="rent_for_a_month">Rent for a month</string>
     <string name="buy">Buy</string>
-    <string name="buying_lodging">Buying lodging</string>
     <string name="sure_to">Are you sure you want to</string>
     <string name="for_string">for</string>
     <string name="ad_avaible">Ad is available!</string>
@@ -300,6 +213,14 @@
     <string name="reset">Reset</string>
     <string name="fitnessNotYet">You are too lazy!</string>
     <string name="tombstone">tombstone</string>
+    <string name="sex">Sex</string>
+    <string name="screen_name">Screen Name</string>
+    <string name="avatarImageDesc">Avatar Image</string>
+    <string name="avatar">Avatar</string>
+    <string name="save">Save</string>
 
-
+    <string name="title_send_feedback">Send feedback</string>
+    <string name="mail_feedback_email">example@gameoflife.com</string>
+    <string name="mail_feedback_subject">Game Of Life - feedback</string>
+    <string name="mail_feedback_message">Hi,\n\n</string>
 </resources>

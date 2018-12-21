@@ -17,13 +17,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.example.hubert.gameoflife.MainActivity;
 import com.example.hubert.gameoflife.R;
 import com.example.hubert.gameoflife.SettingsActivity;
 import com.example.hubert.gameoflife.Utils.NewUser;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.hubert.gameoflife.MainActivity.currentUserNumber;
 
 public class MyDialogOpenFragment extends DialogFragment implements View.OnClickListener {
 
@@ -32,24 +30,24 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
     public interface OnNewUserAdd {
         void onNewUserAdd ();
     }
-    OnNewUserAdd mListener;
+    private OnNewUserAdd mListener;
 
-    public static final String ARG_MODE = "modeArgKey";
+    private static final String ARG_MODE = "modeArgKey";
     public static final int MODE_NEW = 0;
     public static final int MODE_RESET = 1;
 
-    public int mode;
+    private int mode;
 
-    public int avatarRes = R.drawable.avatar_icon1;
+    private int avatarRes = R.drawable.man;
 
-    SharedPreferences sharedPref;
+    private SharedPreferences sharedPref;
 
-    EditText nameEdit;
-    ImageView avatarImage;
-    Spinner sexSpinner;
-    Button saveButton;
+    private EditText nameEdit;
+    private ImageView avatarImage;
+    private Spinner sexSpinner;
+    private Button saveButton;
 
-    View view;
+    private View view;
 
     public static MyDialogOpenFragment newInstance(int mode) {
         MyDialogOpenFragment myDialogOpenFragment = new MyDialogOpenFragment();
@@ -117,21 +115,13 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         return view;
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//
-//        ImageView imageViewAvatar = view.findViewById(R.id.avatarImage);
-//        imageViewAvatar.setImageResource(avatarRes);
-//        Toast.makeText(getContext(), "asd", Toast.LENGTH_SHORT).show();
-//    }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.saveButton:
+                sharedPref.edit().putBoolean(getResources().getString(R.string.saved_is_first_time_key), false).apply();
                 NewUser newUser = new NewUser();
 
                 if (mode == MODE_NEW) {
@@ -159,7 +149,7 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         }
     }
 
-    MyDialogChooseAvatar.DialogCallback dialogCallback = new MyDialogChooseAvatar.DialogCallback() {
+    private final MyDialogChooseAvatar.DialogCallback dialogCallback = new MyDialogChooseAvatar.DialogCallback() {
         @Override
         public void getResults(int avatarPath) {
             if(avatarPath > 0){
@@ -178,5 +168,11 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnNewUserAdd");
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mListener = null;
     }
 }

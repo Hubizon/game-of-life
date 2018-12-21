@@ -12,7 +12,7 @@ public class ChildList implements Parcelable {
         this.title = title;
     }
 
-    protected ChildList(Parcel in) {
+    private ChildList(Parcel in) {
         title = in.readString();
     }
 
@@ -32,9 +32,11 @@ public class ChildList implements Parcelable {
         return title;
     }
 
-    public void setTitle(String Title) {
-        this.title = Title;
-    }
+// --Commented out by Inspection START (12/8/2018 12:30 AM):
+//    public void setTitle(String Title) {
+//        this.title = Title;
+//    }
+// --Commented out by Inspection STOP (12/8/2018 12:30 AM)
 
     @Override
     public int describeContents() {

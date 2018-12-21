@@ -37,8 +37,9 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
     private static final int get_some_skills = 1;
     private static final int learn_hard_index = 3;
     private static final int hang_around_index = 2;
+
     private static final int learn_at_home_index = 1;
-    private static final int give_up_school_index = 4;
+private static final int give_up_school_index = 4;
 
     private static final int get_new_friends_index = 0;
     private static final int steal_stuff_index = 1;
@@ -49,9 +50,9 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
     private static final int give_up_work_index = 1;
     private static final int work_hard_index = 2;
 
-    Context mContext;
+    private final Context mContext;
 
-    EduFragmentCallback mCallback;
+    private final EduFragmentCallback mCallback;
     public interface EduFragmentCallback {
         void UpdateJobStatus(boolean hasJob);
     }
