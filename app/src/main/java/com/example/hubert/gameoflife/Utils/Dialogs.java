@@ -135,12 +135,15 @@ public class Dialogs {
                                 if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) < 1000)
                                     editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
                                 editor.apply();
+                                dialoginterface.cancel();
                                 break;
 
                             case 6:
                                 editor.putInt(context.getResources().getString(R.string.saved_karma_points_key), sharedPref.getInt(context.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints) + 10);
                                 editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), true);
                                 editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 1000));
+                                editor.apply();
+                                dialoginterface.cancel();
                                 break;
 
                             case 7:
