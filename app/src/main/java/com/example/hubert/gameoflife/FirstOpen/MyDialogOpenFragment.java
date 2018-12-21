@@ -38,7 +38,7 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
 
     private int mode;
 
-    private int avatarRes = R.drawable.avatar_icon1;
+    private int avatarRes = R.drawable.man;
 
     private SharedPreferences sharedPref;
 
