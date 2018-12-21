@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -32,8 +31,6 @@ import java.util.List;
 
 public class EduFragment extends Fragment
         implements View.OnClickListener, MyExpandableRecyclerAdapter.EduFragmentCallback{
-
-    // --Commented out by Inspection (12/8/2018 12:30 AM):private static final String EDU_DIALOG_TAG = "edu_dialog_tag2";
 
     public static final String TITLE_SCHOOL = "School";
     public static final String TITLE_CRIMINAL = "Criminal";
@@ -126,10 +123,8 @@ public class EduFragment extends Fragment
         SharedPreferences sharedPref = MainActivity.userSharedPref;
         SharedPreferences.Editor editor = sharedPref.edit();
         Intent intent = null;
-        DialogFragment newDialog = null;
 
         startActivity(intent);
-        //else if (newDialog != null) newDialog.show(getActivity().getSupportFragmentManager(), EDU_DIALOG_TAG);
 
         editor.apply();
     }

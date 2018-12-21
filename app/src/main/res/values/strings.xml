@@ -223,4 +223,7 @@
     <string name="mail_feedback_email">example@gameoflife.com</string>
     <string name="mail_feedback_subject">Game Of Life - feedback</string>
     <string name="mail_feedback_message">Hi,\n\n</string>
+    <string name="description_char_dialog">Chart Dialog</string>
+    <string name="description_chart_dialog_doingThing">To end this:</string>
+    <string name="dollar">$</string>
 </resources>

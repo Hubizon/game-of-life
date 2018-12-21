@@ -12,4 +12,6 @@
 
     <color name="backgroundColor">#6d6d6d</color>
     <color name="cardViewBackgroundColor">#424242</color>
+
+    <color name="my_dialog_bcgnd">#424242</color>
 </resources>

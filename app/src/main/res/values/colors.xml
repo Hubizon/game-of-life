@@ -27,4 +27,8 @@
 
     <color name="bannerColor">#e0e0e0</color>
 
+    <color name="my_dialog_bcgnd">#ffffffff</color>
+
+    <color name="banner_test">#2e2e2e</color>
+
 </resources>

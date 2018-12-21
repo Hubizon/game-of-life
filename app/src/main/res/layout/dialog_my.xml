@@ -3,18 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/my_dialog_bcgnd">
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/description_char_dialog"
         android:src="@drawable/clock_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/time_dialog"
@@ -32,19 +33,19 @@
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/description_char_dialog"
         android:src="@drawable/money_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <TextView
         android:id="@+id/money_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="$"
+        android:text="@string/dollar"
         android:textAlignment="center"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
@@ -55,10 +56,12 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7">
@@ -75,8 +78,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/health_icon"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/description_char_dialog"
+                android:src="@drawable/health_icon" />
 
             <ProgressBar
                 android:id="@+id/progressBar_health_dialog"
@@ -84,8 +87,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 tools:progress="75" />
         </LinearLayout>
 
@@ -101,8 +104,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/food_icon"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/description_char_dialog"
+                android:src="@drawable/food_icon" />
 
             <ProgressBar
                 android:id="@+id/progressBar_hungry_dialog"
@@ -110,8 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 tools:progress="75" />
 
         </LinearLayout>
@@ -128,8 +131,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/energy_icon"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/description_char_dialog"
+                android:src="@drawable/energy_icon" />
 
             <ProgressBar
                 android:id="@+id/progressBar_energy_dialog"
@@ -137,8 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 tools:progress="75" />
         </LinearLayout>
 
@@ -154,8 +157,8 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/happiness_icon"
-                android:contentDescription="TODO" />
+                android:contentDescription="@string/description_char_dialog"
+                android:src="@drawable/happiness_icon" />
 
             <ProgressBar
                 android:id="@+id/progressBar_happiness_dialog"
@@ -163,42 +166,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 tools:progress="75" />
         </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/textToDoingThing"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="To end this:"
+        android:layout_marginEnd="8dp"
+        android:text="@string/description_chart_dialog_doingThing"
         android:textStyle="italic"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar_doing_thing"
-        android:visibility="gone"
         style="@style/ProgressBarMain"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:progress="0"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textToDoingThing"
-        app:layout_constraintVertical_bias="0.0"
-        android:progress="0" />
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
