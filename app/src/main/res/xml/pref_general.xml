@@ -1,10 +1,15 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="dark_mode_switch"
-        android:summary="@string/pref_description_dark_mode"
-        android:title="@string/pref_title_dark_mode" />
+    <PreferenceCategory
+        app:key="main_category"
+        app:title="Main">
+
+    <SwitchPreferenceCompat
+        app:key="dark_mode_switch"
+        app:title="@string/pref_title_dark_mode"
+        app:defaultValue="false"
+        app:summary="@string/pref_description_dark_mode"/>
 
     <EditTextPreference
         android:capitalize="words"
@@ -14,7 +19,7 @@
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="@string/pref_title_display_name" />
+        android:title="@string/pref_title_display_name"/>
 
     <EditTextPreference
         android:defaultValue="@string/option_no"
@@ -23,11 +28,21 @@
         android:maxLines="1"
         android:singleLine="true"
         android:title="@string/reset"/>
+    </PreferenceCategory>
 
-    <Preference android:title="Go to credits"
-    android:key="creditsButton"
-    android:summary="Awesome people"/>
+    <PreferenceCategory
+        app:key="about_category"
+        app:title="About">
 
-    <Preference android:title="Send Feedback"
-        android:key="feedbackButton"/>
-</PreferenceScreen>
+    <Preference app:title="Go to credits"
+    app:key="creditsButton"
+    app:summary="Awesome people"/>
+
+    <Preference app:title="Send Feedback"
+        app:key="feedbackButton"/>
+
+    <Preference
+            android:key="@string/pref_key_version"
+            android:title="Version" />
+    </PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>

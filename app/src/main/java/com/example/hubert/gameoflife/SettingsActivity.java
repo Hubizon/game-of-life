@@ -1,26 +1,20 @@
 package com.example.hubert.gameoflife;
 
-import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.EditTextPreference;
+import android.support.v7.preference.Preference;
 import android.support.v7.app.ActionBar;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.text.TextUtils;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.util.Log;
-import android.view.MenuItem;
 
 import java.io.IOException;
 
@@ -35,7 +29,7 @@ import java.io.IOException;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -60,35 +54,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 ? listPreference.getEntries()[index]
                                 : null);
 
-            } else if (preference instanceof RingtonePreference) {
-                // For ringtone preferences, look up the correct display value
-                // using RingtoneManager.
-                if (TextUtils.isEmpty(stringValue)) {
-                    // Empty values correspond to 'silent' (no ringtone).
-                    preference.setSummary(R.string.pref_ringtone_silent);
-
-                } else {
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
-
-                    if (ringtone == null) {
-                        // Clear the summary if there was a lookup error.
-                        preference.setSummary(null);
-                    } else {
-                        // Set the summary to reflect the new ringtone display
-                        // name.
-                        String name = ringtone.getTitle(preference.getContext());
-                        preference.setSummary(name);
-                    }
-                }
-
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
 
                 if (preference instanceof EditTextPreference && preference.getKey().equals("name_edit")) {
-                    EditTextPreference editTextPreference = (EditTextPreference) preference;
                     SharedPreferences userSharedPref = MainActivity.userSharedPref;
                     userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
                 }
@@ -123,9 +94,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(android.R.id.content, new GeneralPreferenceFragment())
+                .commit();
+
         setupActionBar();
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new GeneralPreferenceFragment()).commit();
     }
 
     /**
@@ -141,35 +115,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 
 
     /**
-     * This method stops fragment injection in malicious applications.
-     * Make sure to deny any unknown fragments here.
-     */
-    protected boolean isValidFragment(String fragmentName) {
-        return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || NotificationPreferenceFragment.class.getName().equals(fragmentName);
-    }
-
-    /**
      * This fragment shows general preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class GeneralPreferenceFragment extends PreferenceFragment {
+    public static class GeneralPreferenceFragment extends PreferenceFragmentCompat {
+
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_general);
-            setHasOptionsMenu(true);
+        public void onCreatePreferences(Bundle bundle, String s) {
+            setPreferencesFromResource(R.xml.pref_general, s);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            final Preference editNamePref = findPreference(NAME_EDIT_KEY);
-            bindPreferenceSummaryToValue(editNamePref);
-
-
+            // Dark mode preference
             Preference switchPref = findPreference(DARK_SWITCH_KEY);
             switchPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -183,10 +138,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     }
-                    SharedPreferences sharedPreferences = MainActivity.userSharedPref;
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean(DARK_SWITCH_KEY, darkThemeOn);
-                    editor.apply();
 
                     getActivity().recreate();
                     Intent intent = new Intent(getContext(), MainActivity.class);
@@ -195,30 +146,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 }
             });
 
-            Preference credits = findPreference("creditsButton");
-            credits.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent(getContext(), Credits.class);
-                    startActivity(intent);
-                    return true;
-                }
-            });
+            final Preference editNamePref = findPreference(NAME_EDIT_KEY);
+            bindPreferenceSummaryToValue(editNamePref);
 
-            Preference feedback = findPreference("feedbackButton");
-            feedback.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    final Intent _Intent = new Intent(android.content.Intent.ACTION_SEND);
-                    _Intent.setType("text/html");
-                    _Intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{getString(R.string.mail_feedback_email)});
-                    _Intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.mail_feedback_subject));
-                    _Intent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.mail_feedback_message));
-                    startActivity(Intent.createChooser(_Intent, getString(R.string.title_send_feedback)));
-                    return true;
-                }
-            });
 
+            //Hard Reset preference
             Preference hardReset = findPreference("reset_key");
             hardReset.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -245,47 +177,39 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     return true;
                 }
             });
-        }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
-    }
+            // Credits preference
+            Preference credits = findPreference("creditsButton");
+            credits.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getContext(), Credits.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
 
+            // Feedback preference
+            Preference feedback = findPreference("feedbackButton");
+            feedback.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    final Intent _Intent = new Intent(android.content.Intent.ACTION_SEND);
+                    _Intent.setType("text/html");
+                    _Intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{getString(R.string.mail_feedback_email)});
+                    _Intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.mail_feedback_subject));
+                    _Intent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.mail_feedback_message));
+                    startActivity(Intent.createChooser(_Intent, getString(R.string.title_send_feedback)));
+                    return true;
+                }
+            });
 
-    /**
-     * This fragment shows notification preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class NotificationPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_notification);
-            setHasOptionsMenu(true);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
+            // Version Preference
+            Preference version = findPreference((getString(R.string.pref_key_version)));
+            version.setSummary(BuildConfig.VERSION_NAME);
         }
     }
+
+
+
 }

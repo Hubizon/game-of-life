@@ -3,12 +3,12 @@ package com.example.hubert.gameoflife;
 import android.app.Application;
 import android.arch.lifecycle.ProcessLifecycleOwner;
 
-import com.example.hubert.gameoflife.Utils.MainTimer;
+import com.example.hubert.gameoflife.utils.MainTimer;
 
 
 public class MyApplication extends Application implements SampleLifecycleListener.OnLifeCycleEventChange{
 
-    private SampleLifecycleListener lifecycleListener = new SampleLifecycleListener(this);
+    private final SampleLifecycleListener lifecycleListener = new SampleLifecycleListener(this);
 
     public MainTimer mainTimer;
 

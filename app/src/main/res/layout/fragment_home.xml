@@ -10,7 +10,7 @@
     android:columnOrderPreserved="false"
     android:padding="14dp"
     android:rowCount="3"
-    tools:context=".House.HomeFragment">
+    tools:context=".house.HomeFragment">
 
     <!-- Row 1 -->
 

@@ -3,7 +3,7 @@ package com.example.hubert.gameoflife;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.hubert.gameoflife.Utils.ScrollingTextView;
+import com.example.hubert.gameoflife.utils.ScrollingTextView;
 
 public class Credits extends AppCompatActivity {
 

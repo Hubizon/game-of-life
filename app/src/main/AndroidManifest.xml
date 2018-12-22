@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher3"
         android:label="@string/app_name"
@@ -27,29 +27,33 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Shop.BuyActivity"
+            android:name=".shop.BuyActivity"
             android:label="Shop"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".House.ComputerActivity"
+            android:name=".house.ComputerActivity"
             android:label="House"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Work.ChooseJobActivity"
+            android:name=".work.ChooseJobActivity"
             android:label="Choose Job"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".Credits"
-            android:label="Credits"/>
-        <activity android:name=".Education.SkillsActivity"
-            android:label="Skills"
+            android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Credits"
+            android:label="Credits" />
+        <activity
+            android:name=".education.SkillsActivity"
+            android:label="Skills"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
