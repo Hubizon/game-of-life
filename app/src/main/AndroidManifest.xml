@@ -49,7 +49,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Credits"
-            android:label="Credits" />
+            android:label="Credits"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".education.SkillsActivity"
             android:label="Skills"
