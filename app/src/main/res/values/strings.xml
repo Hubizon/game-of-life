@@ -293,4 +293,5 @@
 
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
+    <string name="saved_high_score_key">high_score</string>
 </resources>

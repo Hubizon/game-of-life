@@ -166,16 +166,16 @@ public class Arrays {
     };
 
 
-    private static Transport Boots = new Transport("Boots", 100, 9);
-    private static Transport Skateboard = new Transport("Skateboard", 250, 8);
-    private static Transport Bicycle = new Transport("Bicycle", 650, 7);
-    private static Transport Bus = new Transport("Bus", 1500, 6);
-    private static Transport Motorcycle = new Transport("Motorcycle", 3500, 5);
-    private static Transport Car = new Transport("Car", 20000, 4);
-    private static Transport SportsCar = new Transport("Sports Car", 100000, 3);
-    private static Transport Aeroplane = new Transport("Aeroplane", 5000000, 2);
-    private static Transport Rocket = new Transport("Rocket", 25000000, 1);
-    private static Transport Teleporter = new Transport("Teleporter", 100000000, 0);
+    private static Transport Boots = new Transport("Boots", 4, 9);
+    private static Transport Skateboard = new Transport("Skateboard", 10, 8);
+    private static Transport Bicycle = new Transport("Bicycle", 22, 7);
+    private static Transport Bus = new Transport("Bus", 60, 6);
+    private static Transport Motorcycle = new Transport("Motorcycle", 150, 5);
+    private static Transport Car = new Transport("Car", 175, 4);
+    private static Transport SportsCar = new Transport("Sports Car", 400, 3);
+    private static Transport Aeroplane = new Transport("Aeroplane", 5000, 2);
+    private static Transport Rocket = new Transport("Rocket", 250000, 1);
+    private static Transport Teleporter = new Transport("Teleporter", 1000000, 0);
 
     public static Transport[] transportList = new Transport[]{
             Boots,

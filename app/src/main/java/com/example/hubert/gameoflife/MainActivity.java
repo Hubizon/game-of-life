@@ -263,7 +263,13 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences.Editor editor = userSharedPref.edit();
         editor.putBoolean(getString(R.string.saved_is_dead_key), true);
+
+        int daysNow = userSharedPref.getInt(getResources().getString(R.string.saved_age_years_key), 0) * 365 + userSharedPref.getInt(getResources().getString(R.string.saved_age_days_key), 0);
+        int daysHigh = userSharedPref.getInt(getResources().getString(R.string.saved_high_score_key), 0);
+        if(daysNow > daysHigh)
+            editor.putInt(getResources().getString(R.string.saved_high_score_key), daysNow);
         editor.apply();
+
         if (hasAdd)
             (new Dialogs(mContext)).showDialogWithChoose(userSharedPref, mContext, getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
         else {
