@@ -269,6 +269,7 @@ public class MainActivity extends AppCompatActivity
         if(daysNow > daysHigh)
             editor.putInt(getResources().getString(R.string.saved_high_score_key), daysNow);
         editor.apply();
+        if (hasAdd && mRewardedVideoAd.isLoaded())
 
         if (hasAdd)
             (new Dialogs(mContext)).showDialogWithChoose(userSharedPref, mContext, getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);

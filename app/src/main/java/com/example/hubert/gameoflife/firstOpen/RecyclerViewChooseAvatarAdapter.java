@@ -26,8 +26,9 @@ public class RecyclerViewChooseAvatarAdapter extends RecyclerView.Adapter<Recycl
     }
 
     // inflates the row layout from xml when needed
+    @NonNull
     @Override
-    public RecyclerViewChooseAvatarAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewChooseAvatarAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = mInflater.inflate(R.layout.recyclerview_choose_avatar_row, parent, false);
 
         return new RecyclerViewChooseAvatarAdapter.ViewHolder(view);

@@ -44,22 +44,30 @@ class UpdateValues {
 
         if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
         {
-            sharedPref.edit().putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false).apply();
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+
+            int moneyNow = sharedPref.getInt(context.getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
             Random random = new Random();
             switch ( random.nextInt(2))
             {
                 case 0:
                     dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money.");
+                    moneyNow += 1000;
+                    editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
                     break;
 
                 case 1:
                     dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money and additionally gave you 500$!");
+                    moneyNow += 1500;
+                    editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
                     break;
 
                 case 2:
                     dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour stole your money and run out from city.");
                     break;
             }
+            editor.apply();
         }
 
         jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);

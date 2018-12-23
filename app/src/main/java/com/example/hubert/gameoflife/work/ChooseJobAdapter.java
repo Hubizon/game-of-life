@@ -2,6 +2,7 @@ package com.example.hubert.gameoflife.work;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -42,7 +43,6 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
         this.mInflater = LayoutInflater.from(context);
         lastItemColor = ContextCompat.getColor(context, R.color.colorDark);
         SharedPreferences sharedPref = MainActivity.userSharedPref;
-        //SharedPreferences sharedPref = context.getSharedPreferences(context.getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json;
         if(page == 1)
@@ -204,8 +204,9 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
     }
 
     // inflates the row layout from xml when needed
+    @NonNull
     @Override
-    public ChooseJobAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChooseJobAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_choosejob_row, parent, false);
         return new ChooseJobAdapter.ViewHolder(view);
     }
@@ -214,7 +215,7 @@ public class ChooseJobAdapter extends RecyclerView.Adapter<ChooseJobAdapter.View
 //    static boolean isFirstTime0 = true;
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(ChooseJobAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChooseJobAdapter.ViewHolder holder, int position) {
         String ItemName = mDataNames.get(position);
         String ItemPrice = mDataPrices.get(position);
         holder.myTextViewName.setText(ItemName);

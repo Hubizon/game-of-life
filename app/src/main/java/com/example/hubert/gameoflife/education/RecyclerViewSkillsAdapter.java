@@ -1,6 +1,7 @@
 package com.example.hubert.gameoflife.education;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +27,9 @@ public class RecyclerViewSkillsAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     // inflates the row layout from xml when needed
+    @NonNull
     @Override
-    public RecyclerViewSkillsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewSkillsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_skills_row, parent, false);
 
         if(mDataNames.isEmpty())
@@ -38,7 +40,7 @@ public class RecyclerViewSkillsAdapter extends RecyclerView.Adapter<RecyclerView
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(RecyclerViewSkillsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewSkillsAdapter.ViewHolder holder, int position) {
         String ItemName = mDataNames.get(position);
         String ItemPrice = mDataPrices.get(position);
 

@@ -3,6 +3,7 @@ package com.example.hubert.gameoflife;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ public class MyDialogDead extends DialogFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_dialog_dead, container, false);
         ((TextView)view.findViewById(R.id.score)).setText("You Last " + MainActivity.sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), 0)

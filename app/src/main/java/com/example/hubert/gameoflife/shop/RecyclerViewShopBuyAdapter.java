@@ -1,6 +1,7 @@
 package com.example.hubert.gameoflife.shop;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +42,9 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     // inflates the row layout from xml when needed
+    @NonNull
     @Override
-    public RecyclerViewShopBuyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewShopBuyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view = mInflater.inflate(R.layout.recyclerview_shopbuy_row, parent, false);
 
 
@@ -101,7 +103,7 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(RecyclerViewShopBuyAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewShopBuyAdapter.ViewHolder holder, int position) {
         String ItemName = mDataNames.get(position);
         String ItemPrice = mDataPrices.get(position);
 
