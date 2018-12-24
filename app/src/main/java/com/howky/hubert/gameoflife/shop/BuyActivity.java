@@ -46,8 +46,6 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
     private int id;
     private View view;
 
-//    Spinner spinner;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +55,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
 
         ArrayList<String> itemsNames = new ArrayList<>();
         ArrayList<String> itemsPrices = new ArrayList<>();
-        //Lodging[] lodgingObjects = null;
 
         SharedPreferences sharedPref = userSharedPref;
-        //SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         ((TextView)(findViewById(R.id.money_buy))).setText(getString(R.string.money_formatted, getString(R.string.currency),
                 sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
 

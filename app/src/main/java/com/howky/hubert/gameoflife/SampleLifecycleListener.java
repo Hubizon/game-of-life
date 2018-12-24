@@ -25,13 +25,11 @@ class SampleLifecycleListener implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     void onMoveToForeground() {
-        Log.d("SampleLifecycle", "Returning to foreground…");
         mListener.startGlobalTimer();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     void onMoveToBackground() {
-        Log.d("SampleLifecycle", "Moving to background…");
         mListener.stopGlobalTimer();
     }
 }

@@ -39,14 +39,9 @@ public class MainFragment extends Fragment {
 
     }
 
-    private static final String TAG = MainFragment.class.getSimpleName();
     private TextView characternametext, charactermoneytext, timetext, agetext, lodgingtext, transporttext, girltext;
     private ProgressBar hungerprogress, healthprogress, energyprogress, happinessprogress;
 
-    //private LinearLayout mainLayout;
-    //private Spinner iconSpinner;
-
-    //private SharedPreferences mMainSharedPref;
     public static SharedPreferences mUserSharedPref;
     private Handler mHandler;
     private final Runnable mRunnable = new Runnable() {
@@ -80,13 +75,10 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main,
                 container, false);
 
-        Log.d(TAG, "onCreateView called");
 
-        //mMainSharedPref = getActivity().getSharedPreferences(getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         mUserSharedPref = MainActivity.userSharedPref;
 
-        //mainLayout = view.findViewById(R.id.profile_main_layout);
         charactermoneytext = view.findViewById(R.id.characterMoney);
         characternametext = view.findViewById(R.id.characterName);
         timetext = view.findViewById(R.id.time);

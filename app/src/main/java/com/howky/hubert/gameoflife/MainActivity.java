@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity
 
     public MainTimer mainTimer;
 
-    private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String INTENT_PAGE = "intent_page";
     private static AnimatedVectorDrawable mPlayDrawable;
@@ -278,7 +277,6 @@ public class MainActivity extends AppCompatActivity
     public void onNewUserAdd() {
 
         currentUserNumber = sharedPref.getInt(getString(R.string.saved_current_user), 0);
-        Log.d(TAG, "current user:" + currentUserNumber);
         userSharedPref = getSharedPreferences(getString(R.string.shared_preferences_user_key) + currentUserNumber, MODE_PRIVATE);
 
         MainFragment.mUserSharedPref = userSharedPref;

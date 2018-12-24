@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,6 @@ public class  MyDialogFragment extends DialogFragment  {
     private int mId;
     private final Gson gson = new Gson();
     private String json;
-    // --Commented out by Inspection (12/8/2018 12:30 AM):JSONArray jsonArray;
     private JSONObject jsonObject;
 
     private static String title;
@@ -186,7 +184,6 @@ public class  MyDialogFragment extends DialogFragment  {
         }
 
         sharedPref = MainActivity.userSharedPref;
-        //sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         String moneyText = "$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
         ((TextView) view.findViewById(R.id.money_dialog)).setText(moneyText);
@@ -218,7 +215,6 @@ public class  MyDialogFragment extends DialogFragment  {
     private void onTimerDelay()
     {
         sharedPref = MainActivity.userSharedPref;
-        //sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         Random r = new Random();
 
@@ -267,7 +263,6 @@ public class  MyDialogFragment extends DialogFragment  {
                             }
                             Job mJob = gson.fromJson(json, Job.class);
                             int educationPoints = sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints);
-                            //int workPosition = sharedPref.getInt(getResources().getString(R.string.saved_work_position_key), SharedPreferencesDefaultValues.DefaultWorkPosition);
 
                             if (mJob != null) {
                                 double salary;
@@ -283,10 +278,6 @@ public class  MyDialogFragment extends DialogFragment  {
 
                                 salary = salary + moneyFromAdditionalSkills + moneyFromEducation;
 
-//                            salary = (mJob.getSalary() * (((100.0 - mJob.getMarkRatio() * 3.0) + subjectMark * mJob.getMarkRatio()) / 100.0 ) * ((100.0 + ((additionalSkills - 50.0) / 5.0)) / 100.0));
-//                            if(salary <= 0)
-//                                salary = mJob.getSalary() * 0.10;
-
                                 editor.putInt(getResources().getString(R.string.saved_character_money_key), sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + (int) Math.round(salary));
                             }
 
@@ -301,10 +292,6 @@ public class  MyDialogFragment extends DialogFragment  {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-
-                            /*mJob.setPosition(mJob.getPosition() + 1);
-                            mJob.setPositionPoints(75);
-                            mJob.setSalary(Math.round(mJob.getSalary() * 0.10 * mJob.getSalaryIncrease()));*/
 
                                 (new Dialogs(getContext())).showAlertDialog(getContext(), "Promotion", "Congratulation! You got promotion in the work!");
                             }
@@ -358,7 +345,6 @@ public class  MyDialogFragment extends DialogFragment  {
             }
         }
 
-        Log.d(MyDialogFragment.class.getSimpleName(), "mId: " + mId);
         switch (mId)
         {
             case R.id.cardview_bed:
@@ -453,11 +439,14 @@ public class  MyDialogFragment extends DialogFragment  {
 
         editor.apply();
 
-        ((TextView)view.findViewById(R.id.money_dialog)).setText("$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
-        ((TextView)view.findViewById(R.id.time_dialog)).setText(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears) + "."
-                + sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths) + "."
-                + sharedPref.getInt(getResources().getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays) + " "
-                + sharedPref.getInt(getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) + ":" + "00");
+        ((TextView)view.findViewById(R.id.money_dialog)).setText(getString(R.string.money_formatted, getString(R.string.currency),
+                sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
+
+        ((TextView) view.findViewById(R.id.time_dialog)).setText(getString(R.string.date_format,
+                sharedPref.getInt(getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears),
+                sharedPref.getInt(getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths),
+                sharedPref.getInt(getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays),
+                sharedPref.getInt(getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)));
 
         ((ProgressBar)view.findViewById(R.id.progressBar_health_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
         ((ProgressBar)view.findViewById(R.id.progressBar_hungry_dialog)).setProgress(sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
@@ -499,7 +488,6 @@ public class  MyDialogFragment extends DialogFragment  {
 
                 jsonArray.put(toJsonArray);
                 return jsonArray.toString();
-                //editor.putString(getResources().getString(R.string.saved_games_key), jsonArray.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

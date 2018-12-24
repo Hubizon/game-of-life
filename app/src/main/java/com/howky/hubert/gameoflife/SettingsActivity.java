@@ -133,7 +133,6 @@ public class SettingsActivity extends AppCompatActivity {
 
                     if (darkThemeOn) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        Log.d("test", "darkthemeOn is true");
 
                     } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -156,7 +155,6 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
                     if (o.toString().equals("YES")) {
-                        Log.d("MainActivity", "data has been removed!");
                         if (Build.VERSION_CODES.KITKAT <= Build.VERSION.SDK_INT) {
                             ((ActivityManager)getContext().getSystemService(ACTIVITY_SERVICE))
                                     .clearApplicationUserData();
@@ -170,9 +168,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }
-                    else {
-                        Log.d("MainActivity", "data has NOT been removed!");
                     }
                     return true;
                 }
