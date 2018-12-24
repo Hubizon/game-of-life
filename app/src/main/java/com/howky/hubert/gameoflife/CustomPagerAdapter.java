@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.howky.hubert.gameoflife;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -6,11 +6,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.hubert.gameoflife.education.EduFragment;
-import com.example.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
-import com.example.hubert.gameoflife.house.HomeFragment;
-import com.example.hubert.gameoflife.profile.MainFragment;
-import com.example.hubert.gameoflife.shop.ShopFragment;
+import com.howky.hubert.gameoflife.education.EduFragment;
+import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
+import com.howky.hubert.gameoflife.house.HomeFragment;
+import com.howky.hubert.gameoflife.profile.MainFragment;
+import com.howky.hubert.gameoflife.shop.ShopFragment;
 
 class CustomPagerAdapter extends FragmentPagerAdapter {
 

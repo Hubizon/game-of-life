@@ -1,12 +1,12 @@
-package com.example.hubert.gameoflife.utils;
+package com.howky.hubert.gameoflife.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.hubert.gameoflife.girlboyfriend.Love;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.house.Transport;
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.girlboyfriend.Love;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.R;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

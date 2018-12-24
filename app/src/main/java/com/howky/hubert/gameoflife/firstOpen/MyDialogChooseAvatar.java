@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.firstOpen;
+package com.howky.hubert.gameoflife.firstOpen;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.SettingsActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.SettingsActivity;
 
 public class MyDialogChooseAvatar extends DialogFragment implements RecyclerViewChooseAvatarAdapter.ItemClickListener {
 

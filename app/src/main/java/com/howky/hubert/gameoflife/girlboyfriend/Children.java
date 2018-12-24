@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.girlboyfriend;
+package com.howky.hubert.gameoflife.girlboyfriend;
 
 class Children {
     private int livingCost;

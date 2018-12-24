@@ -1,9 +1,9 @@
-package com.example.hubert.gameoflife.utils;
+package com.howky.hubert.gameoflife.utils;
 
-import com.example.hubert.gameoflife.education.Skill;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.house.Transport;
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.education.Skill;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

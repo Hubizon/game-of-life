@@ -1,11 +1,11 @@
-package com.example.hubert.gameoflife.work;
+package com.howky.hubert.gameoflife.work;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.R;
 
 import java.util.Objects;
 

@@ -1,9 +1,9 @@
-package com.example.hubert.gameoflife;
+package com.howky.hubert.gameoflife;
 
 import android.app.Application;
 import android.arch.lifecycle.ProcessLifecycleOwner;
 
-import com.example.hubert.gameoflife.utils.MainTimer;
+import com.howky.hubert.gameoflife.utils.MainTimer;
 
 
 public class MyApplication extends Application implements SampleLifecycleListener.OnLifeCycleEventChange{

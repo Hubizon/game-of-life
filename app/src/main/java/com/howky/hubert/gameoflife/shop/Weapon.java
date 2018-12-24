@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.shop;
+package com.howky.hubert.gameoflife.shop;
 
 public class Weapon {
     private final String name;
@@ -13,5 +13,5 @@ public class Weapon {
 
     public String getName() { return name; }
     public int getPrice() { return price; }
-    // --Commented out by Inspection (12/8/2018 12:30 AM):public boolean getIsBought() { return isBought; }
+    public boolean getIsBought() { return isBought; }
 }

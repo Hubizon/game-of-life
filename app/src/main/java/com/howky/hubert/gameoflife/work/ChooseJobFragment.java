@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.work;
+package com.howky.hubert.gameoflife.work;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,20 +12,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.house.Fun;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.house.Transport;
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.house.Fun;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.example.hubert.gameoflife.utils.Arrays.criminalJobsList;
-import static com.example.hubert.gameoflife.utils.Arrays.officeJobsList;
+import static com.howky.hubert.gameoflife.utils.Arrays.criminalJobsList;
+import static com.howky.hubert.gameoflife.utils.Arrays.officeJobsList;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.education;
+package com.howky.hubert.gameoflife.education;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.R;
 
 import java.util.List;
 

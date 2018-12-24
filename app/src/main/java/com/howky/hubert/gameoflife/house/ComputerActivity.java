@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.house;
+package com.howky.hubert.gameoflife.house;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,11 +13,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.shop.BuyActivity;
-import com.example.hubert.gameoflife.utils.MyDialogFragment;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.shop.BuyActivity;
+import com.howky.hubert.gameoflife.utils.MyDialogFragment;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
 public class ComputerActivity extends AppCompatActivity implements View.OnClickListener{
 

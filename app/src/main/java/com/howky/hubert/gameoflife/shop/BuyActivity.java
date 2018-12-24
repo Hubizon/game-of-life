@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.shop;
+package com.howky.hubert.gameoflife.shop;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,12 +15,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.house.Fun;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.house.Fun;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.house.Transport;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -30,14 +30,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.example.hubert.gameoflife.MainActivity.userSharedPref;
-import static com.example.hubert.gameoflife.utils.Arrays.foodList;
-import static com.example.hubert.gameoflife.utils.Arrays.funList;
-import static com.example.hubert.gameoflife.utils.Arrays.lodgingList;
-import static com.example.hubert.gameoflife.utils.Arrays.lotteryList;
-import static com.example.hubert.gameoflife.utils.Arrays.medicinesList;
-import static com.example.hubert.gameoflife.utils.Arrays.transportList;
-import static com.example.hubert.gameoflife.utils.Arrays.weaponList;
+import static com.howky.hubert.gameoflife.MainActivity.userSharedPref;
+import static com.howky.hubert.gameoflife.utils.Arrays.foodList;
+import static com.howky.hubert.gameoflife.utils.Arrays.funList;
+import static com.howky.hubert.gameoflife.utils.Arrays.lodgingList;
+import static com.howky.hubert.gameoflife.utils.Arrays.lotteryList;
+import static com.howky.hubert.gameoflife.utils.Arrays.medicinesList;
+import static com.howky.hubert.gameoflife.utils.Arrays.transportList;
+import static com.howky.hubert.gameoflife.utils.Arrays.weaponList;
 
 public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBuyAdapter.ItemClickListener {
 

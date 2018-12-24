@@ -1,11 +1,11 @@
-package com.example.hubert.gameoflife.girlboyfriend;
+package com.howky.hubert.gameoflife.girlboyfriend;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
 public class Love  {
     private final String name;

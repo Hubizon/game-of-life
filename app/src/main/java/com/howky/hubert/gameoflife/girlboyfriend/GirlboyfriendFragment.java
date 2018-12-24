@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.girlboyfriend;
+package com.howky.hubert.gameoflife.girlboyfriend;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,11 +15,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.SettingsActivity;
-import com.example.hubert.gameoflife.utils.Dialogs;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.SettingsActivity;
+import com.howky.hubert.gameoflife.utils.Dialogs;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
 import java.util.Objects;

@@ -1,16 +1,16 @@
-package com.example.hubert.gameoflife.utils;
+package com.howky.hubert.gameoflife.utils;
 
-import com.example.hubert.gameoflife.education.Skill;
-import com.example.hubert.gameoflife.house.Fun;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.house.Transport;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.shop.Food;
-import com.example.hubert.gameoflife.shop.Lottery;
-import com.example.hubert.gameoflife.shop.Medicines;
-import com.example.hubert.gameoflife.shop.Weapon;
-import com.example.hubert.gameoflife.work.CriminalJob;
-import com.example.hubert.gameoflife.work.Job;
+import com.howky.hubert.gameoflife.education.Skill;
+import com.howky.hubert.gameoflife.house.Fun;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.shop.Food;
+import com.howky.hubert.gameoflife.shop.Lottery;
+import com.howky.hubert.gameoflife.shop.Medicines;
+import com.howky.hubert.gameoflife.shop.Weapon;
+import com.howky.hubert.gameoflife.work.CriminalJob;
+import com.howky.hubert.gameoflife.work.Job;
 
 public class Arrays {
 

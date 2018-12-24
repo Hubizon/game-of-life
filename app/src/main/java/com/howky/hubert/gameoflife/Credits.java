@@ -1,9 +1,9 @@
-package com.example.hubert.gameoflife;
+package com.howky.hubert.gameoflife;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.hubert.gameoflife.utils.ScrollingTextView;
+import com.howky.hubert.gameoflife.utils.ScrollingTextView;
 
 public class Credits extends AppCompatActivity {
 

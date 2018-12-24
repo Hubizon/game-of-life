@@ -1,9 +1,9 @@
-package com.example.hubert.gameoflife.education.expandable;
+package com.howky.hubert.gameoflife.education.expandable;
 
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.R;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
 
 public class MyChildViewHolder extends ChildViewHolder {

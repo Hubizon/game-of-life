@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.utils;
+package com.howky.hubert.gameoflife.utils;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,10 +15,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.MyDialogDead;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.SettingsActivity;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyDialogDead;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.SettingsActivity;
 
 import java.util.Objects;
 
@@ -28,7 +28,6 @@ public class Dialogs {
     public interface OnDialogInteractionListener {
         void onDialogInteractionTimerStop();
         void onDialogInteractionTimerStart();
-        // --Commented out by Inspection (12/8/2018 12:30 AM):void onDialogInteractionDie();
         void onDialogResume(MenuItem item);
     }
 
@@ -82,7 +81,7 @@ public class Dialogs {
                                 //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
                                 //TODO: wyczyścic sharedpref
 
-                                //mListener.onDialogInteractionTimerStop();
+                                mListener.onDialogInteractionTimerStop();
                                 DialogFragment deadDialog = MyDialogDead.newInstance();
                                 deadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_dead_dialog_tag");
                                 break;

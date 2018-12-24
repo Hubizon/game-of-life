@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.howky.hubert.gameoflife;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,17 +12,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
-import com.example.hubert.gameoflife.profile.MainFragment;
-import com.example.hubert.gameoflife.utils.Dialogs;
-import com.example.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
-import com.example.hubert.gameoflife.utils.MainTimer;
+import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
+import com.howky.hubert.gameoflife.profile.MainFragment;
+import com.howky.hubert.gameoflife.utils.Dialogs;
+import com.howky.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
+import com.howky.hubert.gameoflife.utils.MainTimer;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;

@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.house;
+package com.howky.hubert.gameoflife.house;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,9 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
 public class MyDialogSafeFragment extends DialogFragment implements View.OnClickListener{
 

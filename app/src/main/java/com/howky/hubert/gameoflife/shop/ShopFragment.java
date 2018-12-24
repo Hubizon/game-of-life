@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.shop;
+package com.howky.hubert.gameoflife.shop;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.R;
 
 
 public class ShopFragment extends Fragment

@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.house;
+package com.howky.hubert.gameoflife.house;
 
 public class Transport {
 

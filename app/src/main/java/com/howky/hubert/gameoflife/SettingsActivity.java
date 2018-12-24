@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.howky.hubert.gameoflife;
 
 import android.app.ActivityManager;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.util.Log;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.shop;
+package com.howky.hubert.gameoflife.shop;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,15 +10,15 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.house.Transport;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.utils.Arrays;
+import com.howky.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.utils.Arrays;
 
 import java.util.List;
 
-import static com.example.hubert.gameoflife.utils.Arrays.lodgingList;
-import static com.example.hubert.gameoflife.utils.Arrays.transportList;
+import static com.howky.hubert.gameoflife.utils.Arrays.lodgingList;
+import static com.howky.hubert.gameoflife.utils.Arrays.transportList;
 
 /**
  * Created by Hubert on 31.08.2018.
@@ -142,12 +142,10 @@ public class RecyclerViewShopBuyAdapter extends RecyclerView.Adapter<RecyclerVie
         }
     }
 
-// --Commented out by Inspection START (12/8/2018 12:30 AM):
-//    // convenience method for getting data at click position
-//    String getItem(int id) {
-//        return mDataNames.get(id);
-//    }
-// --Commented out by Inspection STOP (12/8/2018 12:30 AM)
+    // convenience method for getting data at click position
+    String getItem(int id) {
+        return mDataNames.get(id);
+    }
 
     // allows clicks events to be caught
     void setClickListener(ItemClickListener itemClickListener) {

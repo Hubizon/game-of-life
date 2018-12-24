@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.shop;
+package com.howky.hubert.gameoflife.shop;
 
 public class Food {
 

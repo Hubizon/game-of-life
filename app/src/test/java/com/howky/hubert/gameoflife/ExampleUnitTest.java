@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife;
+package com.howky.hubert.gameoflife;
 
 import org.junit.Test;
 

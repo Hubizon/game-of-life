@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.profile;
+package com.howky.hubert.gameoflife.profile;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.R;
 
 import java.util.ArrayList;
 

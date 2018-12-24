@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.education;
+package com.howky.hubert.gameoflife.education;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,10 +15,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.utils.Arrays;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.utils.Arrays;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
 import org.json.JSONArray;
 import org.json.JSONException;

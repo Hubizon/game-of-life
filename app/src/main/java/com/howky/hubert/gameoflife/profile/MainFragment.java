@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.profile;
+package com.howky.hubert.gameoflife.profile;
 
 
 import android.content.SharedPreferences;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.girlboyfriend.Love;
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.girlboyfriend.Love;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.house.Transport;
 import com.google.gson.Gson;
 
 public class MainFragment extends Fragment {

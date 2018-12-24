@@ -1,12 +1,12 @@
-package com.example.hubert.gameoflife.education.expandable;
+package com.howky.hubert.gameoflife.education.expandable;
 
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.education.EduFragment;
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.education.EduFragment;
+import com.howky.hubert.gameoflife.R;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 

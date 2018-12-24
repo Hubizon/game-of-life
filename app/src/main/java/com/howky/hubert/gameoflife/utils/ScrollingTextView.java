@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.utils;
+package com.howky.hubert.gameoflife.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;

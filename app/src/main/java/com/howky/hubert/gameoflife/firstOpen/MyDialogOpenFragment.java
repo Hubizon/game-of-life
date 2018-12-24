@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.firstOpen;
+package com.howky.hubert.gameoflife.firstOpen;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,9 +17,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.SettingsActivity;
-import com.example.hubert.gameoflife.utils.NewUser;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.SettingsActivity;
+import com.howky.hubert.gameoflife.utils.NewUser;
 
 import static android.content.Context.MODE_PRIVATE;
 

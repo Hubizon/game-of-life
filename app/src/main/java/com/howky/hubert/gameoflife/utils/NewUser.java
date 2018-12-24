@@ -1,9 +1,9 @@
-package com.example.hubert.gameoflife.utils;
+package com.howky.hubert.gameoflife.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.R;
 
 public class NewUser {
 

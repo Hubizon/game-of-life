@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.utils;
+package com.howky.hubert.gameoflife.utils;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,15 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.education.EduFragment;
-import com.example.hubert.gameoflife.house.Fun;
-import com.example.hubert.gameoflife.house.Lodging;
-import com.example.hubert.gameoflife.house.Transport;
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.SettingsActivity;
-import com.example.hubert.gameoflife.work.CriminalJob;
-import com.example.hubert.gameoflife.work.Job;
+import com.howky.hubert.gameoflife.education.EduFragment;
+import com.howky.hubert.gameoflife.house.Fun;
+import com.howky.hubert.gameoflife.house.Lodging;
+import com.howky.hubert.gameoflife.house.Transport;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.SettingsActivity;
+import com.howky.hubert.gameoflife.work.CriminalJob;
+import com.howky.hubert.gameoflife.work.Job;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -89,7 +89,7 @@ public class  MyDialogFragment extends DialogFragment  {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, true);
+        boolean isDark = sharedPreferences.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
             setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Material_Dialog_MinWidth);
         } else {

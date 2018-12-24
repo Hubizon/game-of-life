@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.firstOpen;
+package com.howky.hubert.gameoflife.firstOpen;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.R;
 
 public class RecyclerViewChooseAvatarAdapter extends RecyclerView.Adapter<RecyclerViewChooseAvatarAdapter.ViewHolder> {
 

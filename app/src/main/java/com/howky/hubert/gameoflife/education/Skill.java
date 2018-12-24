@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.education;
+package com.howky.hubert.gameoflife.education;
 
 public class Skill {
 

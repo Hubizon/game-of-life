@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.education.expandable;
+package com.howky.hubert.gameoflife.education.expandable;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.hubert.gameoflife.education.EduFragment;
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.education.SkillsActivity;
-import com.example.hubert.gameoflife.utils.MyDialogFragment;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.work.ChooseJobActivity;
-import com.example.hubert.gameoflife.work.Job;
+import com.howky.hubert.gameoflife.education.EduFragment;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.education.SkillsActivity;
+import com.howky.hubert.gameoflife.utils.MyDialogFragment;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.work.ChooseJobActivity;
+import com.howky.hubert.gameoflife.work.Job;
 import com.google.gson.Gson;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;

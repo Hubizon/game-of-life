@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.education;
+package com.howky.hubert.gameoflife.education;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,13 +16,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.hubert.gameoflife.education.expandable.ChildList;
-import com.example.hubert.gameoflife.education.expandable.MyExpandableRecyclerAdapter;
-import com.example.hubert.gameoflife.education.expandable.ParentList;
-import com.example.hubert.gameoflife.MainActivity;
-import com.example.hubert.gameoflife.R;
-import com.example.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
-import com.example.hubert.gameoflife.work.Job;
+import com.howky.hubert.gameoflife.education.expandable.ChildList;
+import com.howky.hubert.gameoflife.education.expandable.MyExpandableRecyclerAdapter;
+import com.howky.hubert.gameoflife.education.expandable.ParentList;
+import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+import com.howky.hubert.gameoflife.work.Job;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

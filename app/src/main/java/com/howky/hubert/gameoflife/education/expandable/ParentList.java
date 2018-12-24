@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.education.expandable;
+package com.howky.hubert.gameoflife.education.expandable;
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 

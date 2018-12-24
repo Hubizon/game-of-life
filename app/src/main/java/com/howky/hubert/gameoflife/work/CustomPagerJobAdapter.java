@@ -1,4 +1,4 @@
-package com.example.hubert.gameoflife.work;
+package com.howky.hubert.gameoflife.work;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
