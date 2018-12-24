@@ -66,9 +66,9 @@
     <string name="sure_to_buy_learn">Are you sure you want to buy and learn</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="successful_bought">You successful bought</string>
-    <string name="already_had_it">You already have had buy it!</string>
-    <string name="not_enough_money">Unfortunately you don\'t have enough money to but this</string>
+    <string name="successful_bought">You have successfully bought this item!</string>
+    <string name="already_had_it">You have already bought it!</string>
+    <string name="not_enough_money">Unfortunately you don\'t have enough money to buy this</string>
     <string name="lovers">lovers</string>
     <string name="betrothed">betrothed</string>
     <string name="marry">marry</string>
@@ -102,6 +102,7 @@
 
 
     <string name="money_formatted">%1$s%2$d</string>
+    <string name="date_format">%d.%d.%d %d:00</string>
 
     <!-- Strings related to Shared Preferences -->
     <string name="shared_preferences_key" translatable="false">shared_preferences</string>
@@ -202,9 +203,9 @@
     <string name="sure_to">Are you sure you want to</string>
     <string name="for_string">for</string>
     <string name="ad_avaible">Ad is available!</string>
-    <string name="on_rewarded_money">onRewarded! currency:</string>
+    <string name="on_rewarded_money">currency:</string>
     <string name="amount">amount</string>
-    <string name="on_rewarded_life">onRewarded! You successfully had been rescued.</string>
+    <string name="on_rewarded_life">You successfully had been rescued.</string>
     <string name="died">You just died!</string>
     <string name="dont_have_a">Unfortunately, you don\'t have a:</string>
     <string name="buying">buying</string>

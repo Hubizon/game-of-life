@@ -45,10 +45,49 @@
 -optimizationpasses 5
 -allowaccessmodification
 
+-addconfigurationdebugging
 
--keepclassmembers class com.example.hubert.gameoflife.work.CriminalJob {
+
+-keepclassmembers class com.howky.hubert.gameoflife.education.Skill {
         <fields>;
-    }
+}
+-keepclassmembers class com.howky.hubert.gameoflife.work.Job {
+        <fields>;
+}
+-keepclassmembers class com.howky.hubert.gameoflife.work.Job {
+        public <init>();
+}
+-keepclassmembers class com.howky.hubert.gameoflife.work.CriminalJob {
+        <fields>;
+}
+-keepclassmembers class com.howky.hubert.gameoflife.work.CriminalJob {
+        public <init>();
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Weapon {
+        <fields>;
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Weapon {
+        public <init>();
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Food {
+        <fields>;
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Food {
+        public <init>();
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Lottery {
+        <fields>;
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Lottery {
+        public <init>();
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Medicines {
+        <fields>;
+}
+-keepclassmembers class com.howky.hubert.gameoflife.shop.Medicines {
+        public <init>();
+}
+
 
 # For Google Play Services
 -keep public class com.google.android.gms.ads.**{

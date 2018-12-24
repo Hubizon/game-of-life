@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".Credits">
 
-    <com.example.hubert.gameoflife.utils.ScrollingTextView
+    <com.howky.hubert.gameoflife.utils.ScrollingTextView
         android:id="@+id/credit_tv"
         android:layout_gravity="center"
         android:textSize="18sp"
