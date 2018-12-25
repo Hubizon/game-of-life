@@ -26,16 +26,23 @@ public class MyDialogDead extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_dialog_dead, container, false);
-        ((TextView)view.findViewById(R.id.score)).setText("You Last " + MainActivity.sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), 0)
-                + " years and " + MainActivity.sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), 0) + " days.");
-
-        int highscoreYears = 0;
-        if(MainActivity.sharedPref.getInt(getResources().getString(R.string.saved_high_score_key), 0) >= 365)
-            highscoreYears = MainActivity.sharedPref.getInt(getResources().getString(R.string.saved_high_score_key), 0);
-        int highscoreDays =  MainActivity.sharedPref.getInt(getResources().getString(R.string.saved_high_score_key), 0) - (highscoreYears * 365);
-        ((TextView)view.findViewById(R.id.high_score)).setText("Your high score " + highscoreYears + " years and " + highscoreDays);
-
         setCancelable(false);
+
+        int pointsNow = MainActivity.userSharedPref.getInt(getString(R.string.saved_age_years_key), 0) * 365 + MainActivity.userSharedPref.getInt(getString(R.string.saved_age_days_key), 0);
+        int pointsHigh = MainActivity.sharedPref.getInt(getString(R.string.saved_high_score_key), 0);
+
+        if(pointsNow > pointsHigh) {
+            pointsHigh = pointsNow;
+            SharedPreferences.Editor editor = MainActivity.sharedPref.edit();
+            editor.putInt(getString(R.string.saved_high_score_key), pointsHigh);
+            editor.apply();
+        }
+
+        ((TextView)view.findViewById(R.id.score)).setText(getString(R.string.socre_format,
+                pointsNow));
+        ((TextView)view.findViewById(R.id.high_score)).setText(getString(R.string.highscore_format,
+                pointsHigh));
+
         Button okbtn = view.findViewById(R.id.btn_newGame);
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override

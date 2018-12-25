@@ -33,23 +33,24 @@
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        tools:text="New Game"
+        android:text="New Game"
         android:textSize="20sp" />
+
 
     <TextView
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You last: "
         android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:text="You last: " />
 
     <TextView
         android:id="@+id/high_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Highscore: "
         android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:text="Highscore: " />
 
 </LinearLayout>
