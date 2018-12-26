@@ -45,9 +45,6 @@
 -optimizationpasses 5
 -allowaccessmodification
 
--addconfigurationdebugging
-
-
 -keepclassmembers class com.howky.hubert.gameoflife.education.Skill {
         <fields>;
 }
