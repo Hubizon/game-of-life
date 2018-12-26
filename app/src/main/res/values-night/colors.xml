@@ -8,10 +8,12 @@
     <color name="primaryTextColor">#eeeeee</color>
     <color name="secondaryTextColor">#212121</color>
 
-    <color name="backgroundColor">#212121</color>
+    <color name="backgroundColor">#303841</color>
     <color name="cardViewBackgroundColor">#3a4750</color>
 
     <color name="my_dialog_bcgnd">#4f5b62</color>
 
     <color name="contrastTextColor">#eeeeee</color>
+
+    <color name="primaryLightColor">#6d6d6d</color>
 </resources>
