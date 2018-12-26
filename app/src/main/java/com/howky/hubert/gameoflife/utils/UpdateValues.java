@@ -31,13 +31,24 @@ class UpdateValues {
             }
         }
 
-        String jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
-        Lodging lodging = gson.fromJson(jsonString, Lodging.class);
+        if(sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) == 1)
+        {
+            String jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+            Lodging lodging = gson.fromJson(jsonString, Lodging.class);
+            if(lodging != null) {
+                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0)) {
+                    if(sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0) == 0) {
+                        dialogs.showAlertDialog(context, "Your rental time has ended", "You are kicked out of your home!");
+                    }
+                }
+            }
 
-        if(lodging != null) {
-            if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0)) {
-                if(sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0) == 0) {
-                    dialogs.showAlertDialog(context, "Your rental time has ended", "You're homeless!");
+            jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
+            Transport transport = gson.fromJson(jsonString, Transport.class);
+            if(transport != null) {
+                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0))
+                {
+                    dialogs.showAlertDialog(context, "Your rental time has ended", "You have no longer access to your transport.");
                 }
             }
         }
@@ -45,42 +56,35 @@ class UpdateValues {
         if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
         {
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
 
             int moneyNow = sharedPref.getInt(context.getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
             Random random = new Random();
-            switch ( random.nextInt(2))
+            switch ( random.nextInt(100))
             {
-                case 0:
+                case 0: case 1:
                     dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money.");
                     moneyNow += 1000;
                     editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
                     break;
 
-                case 1:
+                case 2: case 3: case 4: case 5: case 6:
                     dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money and additionally gave you 500$!");
                     moneyNow += 1500;
                     editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
                     break;
 
-                case 2:
+                case 7:
                     dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour stole your money and run out from city.");
+                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
                     break;
             }
             editor.apply();
         }
 
-        jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
-        Transport transport = gson.fromJson(jsonString, Transport.class);
-        if(transport != null) {
-            if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0))
-            {
-                dialogs.showAlertDialog(context, "Your rental time has ended", "You are kicked out of your home!");
-            }
-        }
-
-        if (sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) >= 23) {
-            if(sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays) >= 7) {
+        if (sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) == 1) {
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays) == 6) {
                 getPayment(context);
             }
         }
@@ -127,14 +131,6 @@ class UpdateValues {
             editor.apply();
         }
 
-        if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_sad_key), false))
-        {
-            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
-            editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) - 1);
-            if(sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) <= 0)
-                editor.putBoolean(context.getResources().getString(R.string.saved_is_sad_key), false);
-        }
-
         if (sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) >= 23) {
 
             editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), 0);
@@ -147,6 +143,13 @@ class UpdateValues {
             else
                 editor.putInt(context.getResources().getString(R.string.saved_day_week_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
 
+            if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_sad_key), false))
+            {
+                editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
+                editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) - 1);
+                if(sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) <= 0)
+                    editor.putBoolean(context.getResources().getString(R.string.saved_is_sad_key), false);
+            }
 
             String jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
             Lodging lodging = gson.fromJson(jsonString, Lodging.class);

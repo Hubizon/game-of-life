@@ -295,4 +295,8 @@
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
     <string name="saved_high_score_key">high_score</string>
+    <string name="hungry">hungry</string>
+    <string name="health">health</string>
+    <string name="happiness">happiness</string>
+    <string name="black_market">black market</string>
 </resources>

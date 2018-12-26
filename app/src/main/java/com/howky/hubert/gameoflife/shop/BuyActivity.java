@@ -68,7 +68,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsNames.add(food.getName());
                     itemsPrices.add(food.getPrice() + getResources().getString(R.string.currency));
                 }
-                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_food));
+                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.hungry));
+                setTitle(getResources().getString(R.string.buy_food));
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
                 break;
 
@@ -77,7 +78,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsNames.add(medicines.getName());
                     itemsPrices.add(medicines.getPrice() + getResources().getString(R.string.currency));
                 }
-                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_medicines));
+                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.health));
+                setTitle(getResources().getString(R.string.buy_medicines));
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
                 break;
 
@@ -86,7 +88,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsNames.add(fun.getName());
                     itemsPrices.add(fun.getPrice() + getResources().getString(R.string.currency));
                 }
-                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_fun_items));
+                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.happiness));
+                setTitle(getResources().getString(R.string.buy_fun_items));
                 ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
                 break;
 
@@ -95,7 +98,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsNames.add(lottery.getName());
                     itemsPrices.add(lottery.getPrice() + getResources().getString(R.string.currency));
                 }
-                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_lotteries));
+                setTitle(getResources().getString(R.string.buy_lotteries));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
 
@@ -118,7 +121,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     e.printStackTrace();
                 }
 
-                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_lotteries));
+                setTitle(getResources().getString(R.string.black_market));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
 
@@ -127,7 +130,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsNames.add(lodging.getName());
                     itemsPrices.add((lodging.getPrice() * 25) + getResources().getString(R.string.currency));
                 }
-                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_houses));
+                setTitle(getResources().getString(R.string.buy_houses));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 //lodgingObjects = lodgingList;
                 break;
@@ -137,7 +140,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsNames.add(transport.getName());
                     itemsPrices.add((transport.getPrice() * 25) + getResources().getString(R.string.currency));
                 }
-                ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.buy_transport));
+                setTitle(getResources().getString(R.string.buy_transport));
                 findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
                 break;
 
@@ -413,6 +416,9 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                           //  editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - (boughtItemPrice / 2)));
                         }
                         editor.apply();
+
+                        ((TextView)(findViewById(R.id.money_buy))).setText(getString(R.string.money_formatted, getString(R.string.currency),
+                                sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
                     }
                 }).show();
     }
