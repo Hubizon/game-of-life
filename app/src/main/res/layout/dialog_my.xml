@@ -3,19 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/my_dialog_bcgnd">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="@string/description_char_dialog"
-        android:src="@drawable/clock_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_clock" />
 
     <TextView
         android:id="@+id/time_dialog"
@@ -36,9 +35,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="@string/description_char_dialog"
-        android:src="@drawable/money_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:srcCompat="@drawable/ic_notes" />
 
     <TextView
         android:id="@+id/money_dialog"
@@ -55,7 +54,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="148dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -68,9 +67,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -79,7 +77,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:contentDescription="@string/description_char_dialog"
-                android:src="@drawable/health_icon" />
+                app:srcCompat="@drawable/ic_cardiogram" />
 
             <ProgressBar
                 android:id="@+id/progressBar_health_dialog"
@@ -94,9 +92,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -105,7 +102,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:contentDescription="@string/description_char_dialog"
-                android:src="@drawable/food_icon" />
+                app:srcCompat="@drawable/ic_apple" />
 
             <ProgressBar
                 android:id="@+id/progressBar_hungry_dialog"
@@ -121,9 +118,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -132,7 +128,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:contentDescription="@string/description_char_dialog"
-                android:src="@drawable/energy_icon" />
+                app:srcCompat="@drawable/ic_flash"  />
 
             <ProgressBar
                 android:id="@+id/progressBar_energy_dialog"
@@ -147,18 +143,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="4dp"
                 android:contentDescription="@string/description_char_dialog"
-                android:src="@drawable/happiness_icon" />
+                app:srcCompat="@drawable/ic_happy" />
 
             <ProgressBar
                 android:id="@+id/progressBar_happiness_dialog"
