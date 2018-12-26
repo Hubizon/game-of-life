@@ -71,9 +71,9 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
         SharedPreferences defSP = PreferenceManager.getDefaultSharedPreferences(getContext());
         boolean isDark = defSP.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
-            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_AppCompat_Dialog_Alert);
+            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.ThemeOverlay_MaterialComponents_Dialog);
         } else {
-            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_AppCompat_Light_Dialog_Alert);
+            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_MaterialComponents_Light_Dialog);
         }
     }
 

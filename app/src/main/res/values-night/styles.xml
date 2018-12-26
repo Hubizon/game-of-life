@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
 
         <item name="colorPrimary">@color/primaryColor</item>
@@ -16,7 +16,7 @@
     </style>
 
     <style name="ToolbarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:textColorPrimary">@color/contrastTextColor</item>
+        <item name="android:textColorPrimary">@color/primaryTextColor</item>
     </style>
 
 
@@ -62,6 +62,16 @@
 
     <style name="MyTextViewInCardViewContrastStyle" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textColor">@color/contrastTextColor</item>
+    </style>
+
+    <style name="MyTabLayoutDark" parent="Base.Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
 
 </resources>

@@ -31,12 +31,12 @@
                 app:srcCompat="@drawable/ic_television" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/tv"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/tv" />
 
         </FrameLayout>
 
@@ -59,12 +59,12 @@
                 app:srcCompat="@drawable/ic_zzz" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/sleep"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/sleep" />
         </FrameLayout>
     </android.support.v7.widget.CardView>
 
@@ -85,12 +85,12 @@
                 app:srcCompat="@drawable/computer_icon" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/computer"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/computer"/>
 
         </FrameLayout>
     </android.support.v7.widget.CardView>
@@ -112,12 +112,12 @@
                 app:srcCompat="@drawable/ic_stationary_bike" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="Fitness"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="Fitness"/>
 
         </FrameLayout>
     </android.support.v7.widget.CardView>
@@ -141,12 +141,12 @@
                 app:srcCompat="@drawable/ic_strongbox" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/safe"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/safe"/>
 
         </FrameLayout>
     </android.support.v7.widget.CardView>
@@ -166,12 +166,12 @@
                 app:srcCompat="@drawable/ad_icon" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/advertisement"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/advertisement" />
 
         </FrameLayout>
     </android.support.v7.widget.CardView>

@@ -55,12 +55,12 @@
                 app:srcCompat="@drawable/ic_brain" />
 
             <TextView
+                style="@style/MyTextViewInContrastStyle"
                 android:id="@+id/characterName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:textAlignment="center"
-                android:textColor="@color/primaryTextColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/spinner"
                 app:layout_constraintHorizontal_bias="0.51"
@@ -68,6 +68,7 @@
                 tools:text="Mr. Hubi" />
 
             <TextView
+                style="@style/MyTextViewInContrastStyle"
                 android:id="@+id/characterAge"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -75,7 +76,6 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="13 years 92 days"
-                android:textColor="@color/primaryTextColor"
                 app:layout_constraintBottom_toTopOf="@+id/guideline4"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="@+id/guideline3"
@@ -92,6 +92,7 @@
                 app:srcCompat="@drawable/ic_notes" />
 
             <TextView
+                style="@style/MyTextViewInContrastStyle"
                 android:id="@+id/characterMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -99,7 +100,6 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="$"
-                android:textColor="@color/primaryTextColor"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="@+id/guideline2" />
@@ -118,6 +118,7 @@
                 app:layout_constraintTop_toTopOf="@+id/time" />
 
             <TextView
+                style="@style/MyTextViewInContrastStyle"
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -125,7 +126,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="center"
-                android:textColor="@color/primaryTextColor"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -230,10 +230,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="4dp"
                     android:contentDescription="TODO"
-                    app:srcCompat="@drawable/ic_flash" />
+                    app:srcCompat="@drawable/ic_apple" />
 
                 <ProgressBar
-                    android:id="@+id/progressBar_character_energy"
+                    android:id="@+id/progressBar_character_hungry"
                     style="@style/ProgressBarMain"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
@@ -255,10 +255,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="4dp"
                     android:contentDescription="TODO"
-                    app:srcCompat="@drawable/ic_apple" />
+                    app:srcCompat="@drawable/ic_flash" />
 
                 <ProgressBar
-                    android:id="@+id/progressBar_character_hungry"
+                    android:id="@+id/progressBar_character_energy"
                     style="@style/ProgressBarMain"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
@@ -267,6 +267,7 @@
                     android:layout_marginEnd="8dp"
                     tools:progress="75" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -321,13 +322,13 @@
                     app:srcCompat="@drawable/ic_house" />
 
                 <TextView
+                    style="@style/MyTextViewInContrastStyle"
                     android:id="@+id/characterLodging"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:hint="@string/loudging"
-                    android:textColor="@color/primaryTextColor" />
+                    android:hint="@string/loudging" />
             </LinearLayout>
 
             <LinearLayout
@@ -344,12 +345,12 @@
                     app:srcCompat="@drawable/ic_mortarboard" />
 
                 <TextView
+                    style="@style/MyTextViewInContrastStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:text="@string/education_main"
-                    android:textColor="@color/primaryTextColor" />
+                    android:text="@string/education_main" />
             </LinearLayout>
 
             <LinearLayout
@@ -366,13 +367,13 @@
                     app:srcCompat="@drawable/ic_car" />
 
                 <TextView
+                    style="@style/MyTextViewInContrastStyle"
                     android:id="@+id/characterTransport"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:text="@string/transport"
-                    android:textColor="@color/primaryTextColor" />
+                    android:text="@string/transport"/>
 
             </LinearLayout>
 
@@ -390,13 +391,13 @@
                     app:srcCompat="@drawable/ic_heartlove" />
 
                 <TextView
+                    style="@style/MyTextViewInContrastStyle"
                     android:id="@+id/characterGirlboyfriend"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:text="@string/girlfriend"
-                    android:textColor="@color/primaryTextColor" />
+                    android:text="@string/girlfriend"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

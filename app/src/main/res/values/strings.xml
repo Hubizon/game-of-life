@@ -63,7 +63,7 @@
     <string name="reported1FromAllSubjects">Teacher reported this and you\'ve got 1 from all subjects!</string>
     <string name="aLittleBetterMarks">You have a little better marks now.</string>
     <string name="buying_skills">Buying skills</string>
-    <string name="sure_to_buy_learn">Are you sure you want to buy and learn</string>
+    <string name="sure_to_buy_learn">Are you sure you want to buy and learn </string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="successful_bought">You have successfully bought this item!</string>
@@ -87,8 +87,8 @@
     <string name="take_him_somewhere">take him somewhere</string>
     <string name="sure_to_take_her_somewhere">Are you sure you want to take her somewhere for a 75$?</string>
     <string name="break_up">break up</string>
-    <string name="sure_to_break_up_with_her">Are you want to break up with her?</string>
-    <string name="sure_to_break_up_with_him">Are you want to break up with him?</string>
+    <string name="sure_to_break_up_with_her">Do you want to break up with her?</string>
+    <string name="sure_to_break_up_with_him">Do you want to break up with him?</string>
     <string name="found_love">Found love</string>
     <string name="successful_found_girlfriend">You successful found love! Her name is</string>
     <string name="successful_found_boyfriend">You successful found love! His name is</string>
@@ -100,7 +100,6 @@
     <string name="no_ads">There are currently no ads!</string>
     <string name="cash">Cash:</string>
 
-fggff
     <string name="money_formatted">%1$s%2$d</string>
     <string name="date_format">%d.%d.%d %d:00</string>
 
@@ -203,7 +202,7 @@ fggff
     <string name="didnt_win_lottery">Unfortunately, you didn\'t win this lottery</string>
     <string name="rent_for_a_month">Rent for a month</string>
     <string name="buy">Buy</string>
-    <string name="sure_to">Are you sure you want to</string>
+    <string name="sure_to">Are you sure you want to </string>
     <string name="for_string">for</string>
     <string name="ad_avaible">Ad is available!</string>
     <string name="on_rewarded_money">currency:</string>
@@ -298,6 +297,7 @@ fggff
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
     <string name="saved_high_score_key">high_score</string>
+    <string name="resume">RESUME</string>
     <string name="hungry">hungry</string>
     <string name="health">health</string>
     <string name="happiness">happiness</string>
