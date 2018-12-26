@@ -29,6 +29,7 @@
             android:paddingBottom="8dp">
 
             <TextView
+                android:textColor="@color/contrastTextColor"
                 android:id="@+id/work_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,25 +45,26 @@
                 android:layout_height="20dp"
                 android:layout_gravity="end"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/clock_icon"
                 android:contentDescription="@string/clock"
                 app:layout_constraintBottom_toBottomOf="@+id/time_school"
                 app:layout_constraintEnd_toStartOf="@+id/time_school"
-                app:layout_constraintTop_toTopOf="@+id/time_school" />
+                app:layout_constraintTop_toTopOf="@+id/time_school"
+                app:srcCompat="@drawable/ic_clock" />
 
             <TextView
+                android:textColor="@color/contrastTextColor"
                 android:id="@+id/time_school"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@color/primaryTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="01.09 15:30" />
 
             <TextView
+                android:textColor="@color/contrastTextColor"
                 android:id="@+id/position_work"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

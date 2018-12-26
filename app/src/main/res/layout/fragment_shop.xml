@@ -26,12 +26,12 @@
                 app:srcCompat="@drawable/ic_apple" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/food"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/food"/>
 
 
         </FrameLayout>
@@ -55,12 +55,12 @@
                 app:srcCompat="@drawable/ic_medicine" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/medicine"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/medicine"/>
 
 
         </FrameLayout>
@@ -82,12 +82,12 @@
                 app:srcCompat="@drawable/ic_rooftop" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/fun"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/fun"/>
 
 
         </FrameLayout>
@@ -110,12 +110,12 @@
                 app:srcCompat="@drawable/ic_shotgun" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="Black Market"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="Black Market"/>
 
         </FrameLayout>
 
@@ -137,12 +137,12 @@
                 app:srcCompat="@drawable/ic_house" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/house"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/house" />
 
         </FrameLayout>
     </android.support.v7.widget.CardView>
@@ -163,12 +163,12 @@
                 app:srcCompat="@drawable/ic_car" />
 
             <TextView
+                style="@style/MyTextViewInCardViewContrastStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/transportDesc"
-                android:textAppearance="@android:style/TextAppearance.Material.Button" />
+                android:text="@string/transportDesc" />
 
         </FrameLayout>
     </android.support.v7.widget.CardView>

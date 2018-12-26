@@ -304,9 +304,9 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
         SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
-            dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Dialog_Alert);
+            dialog = new AlertDialog.Builder(getContext(), R.style.Theme_MaterialComponents_Dialog_Alert);
         } else {
-            dialog = new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert);
+            dialog = new AlertDialog.Builder(getContext(), R.style.Theme_MaterialComponents_Light_Dialog_Alert);
         }
         dialog.setTitle(title)
                 //.setIcon(R.drawable.ic_launcher)

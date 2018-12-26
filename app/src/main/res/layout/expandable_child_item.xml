@@ -10,6 +10,7 @@ android:layout_height="@dimen/list_item_height">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/list_item_left_margin"
+        android:backgroundTint="@color/primaryLightColor"
         android:gravity="center_vertical"
         tools:text="Child" />
 

@@ -12,11 +12,11 @@
         app:cardBackgroundColor="@color/cardViewBackgroundColor">
 
         <TextView
+            android:textColor="@color/contrastTextColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textAlignment="center"
-            android:textColor="@color/primaryTextColor"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="17dp"
             tools:layout_editor_absoluteY="9dp"
@@ -27,10 +27,11 @@
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/money_icon"
+            android:src="@drawable/money_icon"
             android:contentDescription="TODO" />
 
         <TextView
+            android:textColor="@color/contrastTextColor"
             android:id="@+id/money_choose_work"
             android:layout_width="wrap_content"
             android:layout_height="16dp"
@@ -38,7 +39,6 @@
             android:layout_marginTop="36dp"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
-            android:textColor="@color/primaryTextColor"
             tools:text="963$" />
 
     </android.support.v7.widget.CardView>
