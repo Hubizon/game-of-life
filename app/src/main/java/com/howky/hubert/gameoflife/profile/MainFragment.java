@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.girlboyfriend.Love;
 import com.howky.hubert.gameoflife.MainActivity;
 import com.howky.hubert.gameoflife.R;
@@ -76,7 +77,7 @@ public class MainFragment extends Fragment {
 
 
 
-        mUserSharedPref = MainActivity.userSharedPref;
+        mUserSharedPref = MyApplication.userSharedPref;
 
         charactermoneytext = view.findViewById(R.id.characterMoney);
         characternametext = view.findViewById(R.id.characterName);

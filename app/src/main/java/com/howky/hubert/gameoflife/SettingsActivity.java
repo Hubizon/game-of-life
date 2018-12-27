@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
                 preference.setSummary(stringValue);
 
                 if (preference instanceof EditTextPreference && preference.getKey().equals("name_edit")) {
-                    SharedPreferences userSharedPref = MainActivity.userSharedPref;
+                    SharedPreferences userSharedPref = MyApplication.userSharedPref;
                     userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
                 }
 

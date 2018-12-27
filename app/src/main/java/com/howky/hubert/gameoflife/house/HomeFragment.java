@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.SettingsActivity;
 import com.howky.hubert.gameoflife.utils.MyDialogFragment;
@@ -67,7 +68,7 @@ public class HomeFragment extends Fragment
 
 
 
-        final SharedPreferences sharedPref = MainActivity.userSharedPref;
+        final SharedPreferences sharedPref = MyApplication.userSharedPref;
         //final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         Intent intent = null;
         DialogFragment newDialog = null;

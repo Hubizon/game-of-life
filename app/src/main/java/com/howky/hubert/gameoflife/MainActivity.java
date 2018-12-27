@@ -17,8 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
-import com.howky.hubert.gameoflife.profile.MainFragment;
+
 import com.howky.hubert.gameoflife.utils.Dialogs;
 import com.howky.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
 import com.howky.hubert.gameoflife.utils.MainTimer;
@@ -28,10 +27,13 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import static com.howky.hubert.gameoflife.MyApplication.currentUserNumber;
+import static com.howky.hubert.gameoflife.MyApplication.userSharedPref;
+import static com.howky.hubert.gameoflife.MyApplication.mainSharedPref;
+
 public class MainActivity extends AppCompatActivity
     implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd,
-        MyDialogDead.OnDialogDeadInteractionListener, Dialogs.OnDialogInteractionListener,
-        MainTimer.OnTimerInterActionListener, GirlboyfriendFragment.OnGirlBoyfriendFragmentListener {
+        MyDialogDead.OnDialogDeadInteractionListener, Dialogs.OnResumeDialogInteractionListener {
 
     public MainTimer mainTimer;
 
@@ -54,10 +56,6 @@ public class MainActivity extends AppCompatActivity
 
    private Context mContext;
 
-    private static int currentUserNumber;
-    public static SharedPreferences userSharedPref;
-    public static SharedPreferences sharedPref;
-
 
     public static boolean hasAdd = false;
 
@@ -78,9 +76,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mContext = this;
-        sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        mainSharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
-        currentUserNumber = sharedPref.getInt(getString(R.string.saved_current_user), 0);
+        currentUserNumber = mainSharedPref.getInt(getString(R.string.saved_current_user), 0);
         String user_key = getString(R.string.shared_preferences_user_key)
                 + currentUserNumber;
         userSharedPref = getSharedPreferences(user_key, MODE_PRIVATE);
@@ -105,22 +103,23 @@ public class MainActivity extends AppCompatActivity
         mRewardedVideoAd.setRewardedVideoAdListener(this);
         loadRewardedVideoAd();
 
+        MyApplication.CurrentContext = this;
         final MyApplication globalApplication = (MyApplication) getApplicationContext();
         mainTimer = globalApplication.mainTimer;
         mainTimer.setUserSharedPref(userSharedPref);
-        mainTimer.setContext(this);
+
         MainTimer.isMainActvityActive = true;
         if (!mainTimer.isRunning && MainTimer.shouldWork) mainTimer.startTimer();
 
 
-        if (sharedPref.getBoolean(getResources().getString(R.string.saved_is_first_time_key), true)) {
+        if (mainSharedPref.getBoolean(getString(R.string.saved_is_first_time_key), true)) {
             MainTimer.shouldWork = false;
             mainTimer.stopTimer();
             DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_NEW);
-            newDialog.show(getSupportFragmentManager(), "open_dialog_tag");
+            newDialog.show(getSupportFragmentManager(), "first_time_dialog_tag");
         }
         else {
-            if(userSharedPref.getBoolean(getString(R.string.saved_is_dead_key), false)) Die();
+            if(userSharedPref.getBoolean(getString(R.string.saved_is_dead_key), false)) mainTimer.Die();
         }
 
     }
@@ -148,17 +147,14 @@ public class MainActivity extends AppCompatActivity
             case R.id.menu_item_pause:
                 item.setIcon(mPauseDrawable);
                 mPauseDrawable.start();
-                //stopTimer();
                 MainTimer.shouldWork = false;
                 mainTimer.stopTimer();
                 Dialogs dialogs = new Dialogs(mContext);
                 dialogs.showResumeDialog(this, item);
                 return true;
             case R.id.menu_item_setings:
-                //stopTimer();
                 mainTimer.stopTimer();
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                //startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 startActivityForResult(intent, START_SETTINGS_REQUEST);
                 return true;
             default:
@@ -187,6 +183,8 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         mainTimer.stopTimer();
+
+        MyApplication.CurrentContext = null;
     }
 
     @Override
@@ -195,6 +193,11 @@ public class MainActivity extends AppCompatActivity
         MainTimer.isMainActvityActive = false;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.CurrentContext = this;
+    }
 
     private void onResumeDialogClicked(MenuItem item) {
         item.setIcon(mPlayDrawable);
@@ -257,29 +260,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRewardedVideoCompleted() {}
 
-    private void Die() {
 
-        SharedPreferences.Editor editor = userSharedPref.edit();
-        editor.putBoolean(getString(R.string.saved_is_dead_key), true);
-
-        editor.apply();
-        if (hasAdd && mRewardedVideoAd.isLoaded())
-            (new Dialogs(mContext)).showDialogWithChoose(userSharedPref, mContext, getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
-        else {
-            MainTimer.shouldWork = false;
-            mainTimer.stopTimer();
-            DialogFragment deadDialog = MyDialogDead.newInstance();
-            deadDialog.show(getSupportFragmentManager(), "open_dead_dialog_tag");
-        }
-    }
 
     @Override
     public void onNewUserAdd() {
 
-        currentUserNumber = sharedPref.getInt(getString(R.string.saved_current_user), 0);
+        currentUserNumber = MyApplication.mainSharedPref.getInt(getString(R.string.saved_current_user), 0);
         userSharedPref = getSharedPreferences(getString(R.string.shared_preferences_user_key) + currentUserNumber, MODE_PRIVATE);
-
-        MainFragment.mUserSharedPref = userSharedPref;
 
         mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), this);
         mPager.setAdapter(mPagerAdapter);
@@ -306,34 +293,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onDialogInteractionTimerStop() {
-        mainTimer.stopTimer();
-    }
-
-    @Override
-    public void onDialogInteractionTimerStart() {
-        mainTimer.startTimer();
-    }
-
-    @Override
     public void onDialogResume(MenuItem item) {
         onResumeDialogClicked(item);
     }
 
-    @Override
-    public void onDeathInteraction() {
-        Die();
-    }
-
-    @Override
-    public void onGirldboyStopTimer() {
-        MainTimer.shouldWork = false;
-        mainTimer.stopTimer();
-    }
-
-    @Override
-    public void onGirldboyStartTimer() {
-        MainTimer.shouldWork = true;
-        mainTimer.startTimer();
-    }
 }

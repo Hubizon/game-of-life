@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
@@ -21,7 +22,7 @@ public class Love  {
 
     public static void BreakUp(Context context)
     {
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(context.getResources().getString(R.string.saved_love_key), null);
         editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);

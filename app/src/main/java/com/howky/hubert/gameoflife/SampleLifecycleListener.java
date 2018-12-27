@@ -18,7 +18,7 @@ class SampleLifecycleListener implements LifecycleObserver {
             mListener = (OnLifeCycleEventChange) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnLifeCycleEventChange");
         }
     }
 

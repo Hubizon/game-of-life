@@ -216,4 +216,24 @@ public class Arrays {
             new CriminalJob("Mafia member", 95, 120, Smartphone, ModernComputer, Tv, BigHouse, Car,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced }, 15, new Weapon[] { knife, pistol, grenades, ak47, bombs, sniperRifle }),
             new CriminalJob("Assassin", 125, 160, Smartphone, ModernComputer, PlasmaTv, Villa, SportsCar,  new Skill[] { ThiefSkillsBeginner, ThiefSkillsIntermediate, WeaponSkillsBeginner, WeaponSkillsIntermediate, ThiefSkillsAdvanced, WeaponSkillsAdvanced }, 10, new Weapon[] { knife, pistol, grenades, ak47, bombs, sniperRifle, rocketLauncher }),
     };
+
+    public static final String[] boyfriendsNames = new String[] {
+            "Liam", "Noah", "William", "James", "Logan", "Benjamin", "Mason", "Elijah", "Oliver", "Jacob", "Lucas", "Michael", "Alexander", "Ethan", "Daniel", "Matthew",
+            "Aiden", "Henry", "Joseph", "Jackson", "Samuel", "Sebastian", "David", "Carter", "Wyatt", "Jayden", "John", "Owen", "Dylan", "Luke", "Gabriel", "Anthony",
+            "Isaac", "Grayson", "Jack", "Julian", "Levi", "Christopher", "Joshua", "Andrew", "Lincoln", "Mateo", "Ryan", "Jaxon", "Nathan", "Aaron", "Isaiah", "Thomas",
+            "Charles", "Caleb", "Josiah", "Christian", "Hunter", "Eli", "Jonathan", "Connor", "Landon", "Adrian", "Asher", "Cameron", "Leo", "Theodore", "Jeremiah",
+            "Hudson", "Robert", "Easton", "Nolan", "Nicholas", "Ezra", "Colton", "Angel", "Brayden", "Jordan", "Dominic", "Austin", "Ian", "Adam", "Elias", "Jaxson",
+            "Greyson", "Jose", "Ezekiel", "Carson", "Evan", "Maverick", "Bryson", "Jace", "Cooper", "Xavier", "Parker", "Roman", "Jason", "Santiago", "Chase", "Sawyer",
+            "Gavin", "Leonardo", "Kayden", "Ayden", "Jameson",
+    };
+
+    public static final String[] girlfriendsNames = new String[] {
+            "Emma", "Olivia", "Sophia", "Isabella", "Ava", "Mia", "Emily", "Abigail", "Charlotte", "Jacob", "Harper", "Sofia", "Avery", "Elizabeth", "Amelia", "Evelyn",
+            "Ella", "Chloe", "Victoria", "Aubrey", "Grace", "Zoey", "Natalie", "Addison", "Lillian", "Brooklyn", "Lily", "Owen", "Hannah", "Layla", "Scarlett", "Aria",
+            "Zoe", "Samantha", "Anna", "Leah", "Audrey", "Ariana", "Savannah", "Arianna", "Camila", "Penelope", "Gabriella", "Claire", "Aaliyah", "Sadie", "Riley", "Skylar",
+            "Nora", "Sarah", "Hailey", "Kaylee", "Paisley", "Kennedy", "Ellie", "Connor", "Landon", "Lilly", "Asher", "Lyla", "Salma", "Mya", "Amy",
+            "Luna", "Caroline", "Alexa", "Gabriella", "Clara", "Mary", "Quinn", "Peyton", "Annabelle", "Caroline", "Madelyn", "Serenity", "Aubree", "Lyla", "Lucy", "Alexa",
+            "Alexis", "Nevaeh", "Stella", "Violet", "Bella", "Maya", "Taylor", "Naomi", "Eva", "Katherine", "Julia", "Ashley", "Ruby", "Sophie", "Alexandra", "Isabelle",
+            "Alice", "Jasmine", "Clara", "Natalia", "Valentina",
+    };
 }
