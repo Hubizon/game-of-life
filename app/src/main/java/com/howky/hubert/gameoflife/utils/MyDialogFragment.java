@@ -159,26 +159,38 @@ public class  MyDialogFragment extends DialogFragment  {
             case R.id.makeGameComputer:
                 getDialog().setTitle(R.string.making_computer_game);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.drawSomethingComputer:
                 getDialog().setTitle(R.string.drawing_something);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.writePoemComputer:
                 getDialog().setTitle(R.string.writing_poem);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.recordMoviesComputer:
                 getDialog().setTitle(R.string.recording_movies);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
+
+            case R.id.button_love_takeSomewhere:
+                getDialog().setTitle(R.string.going_somewhere);
+                view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("Relationship: ");
+                view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
+                break;
+
             default:
                 break;
         }
@@ -238,17 +250,32 @@ public class  MyDialogFragment extends DialogFragment  {
                                 editor.putInt(getResources().getString(R.string.saved_criminal_points_key), sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), 1000));
                                 Toast.makeText(getContext(), "You already have a lot of friends.", Toast.LENGTH_SHORT).show();
                             } else
-                                editor.putInt(getResources().getString(R.string.saved_criminal_points_key), sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) + 10);
+                                editor.putInt(getResources().getString(R.string.saved_criminal_points_key), sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) + 10);
                             editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 20));
                             editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
                             editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 15));
                             break;
 
                         case sell_drugs_index:
-                            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + 75));
-                            editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 25));
-                            editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 25));
+                            double multiplyMoneyForDrugs = ((sharedPref.getInt(getResources().getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) - 100) / 25);
+                            if(multiplyMoneyForDrugs < 0)
+                                multiplyMoneyForDrugs = 0;
+                            double moneyForDrugs = 20 * multiplyMoneyForDrugs + 20;
+                            editor.putInt(getResources().getString(R.string.saved_character_money_key), ((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + (int)moneyForDrugs));
+                            editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 20));
+                            editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
                             editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 20));
+                            Random random = new Random();
+                            if(random.nextInt(25) == 1)
+                            {
+                                editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
+                                Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                                if (r.nextInt(25) == 1)
+                                    if (sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe)) {
+                                        editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
+                                        Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                                    }
+                            }
                             break;
                     }
                     break;
@@ -271,7 +298,7 @@ public class  MyDialogFragment extends DialogFragment  {
                                 double moneyFromAdditionalSkills = 0;
                                 if (mJob.getAdditionalSkillsRes() != 0) {
                                     int additionalSkills = sharedPref.getInt(getResources().getString(mJob.getAdditionalSkillsRes()), 50);
-                                    moneyFromAdditionalSkills = (salary * 0.1 * (Math.sqrt(90.0 + additionalSkills / 10.0))) - salary;
+                                    moneyFromAdditionalSkills = (salary * 0.1 * (Math.sqrt(90.0 + additionalSkills / 10.0))) - salary;//2131689672
                                 }
 
                                 double moneyFromEducation = ((salary * 0.1 * (Math.sqrt(85.0 + educationPoints * 0.1))) - salary) * (Math.sqrt(mJob.getMarkRatio()));
@@ -315,7 +342,7 @@ public class  MyDialogFragment extends DialogFragment  {
                                     JSONObject object = jsonArrayCriminalJobs.getJSONObject(i);
                                     if (object.getString("name").equals(jsonObject.getString("name"))) {
                                         jsonArrayCriminalJobs.put(i, jsonObject);
-                                        editor.putString(getResources().getString(R.string.saved_criminal_points_key), jsonArrayCriminalJobs.toString());
+                                        editor.putString(getResources().getString(R.string.saved_criminal_jobs_list_key), jsonArrayCriminalJobs.toString());
                                         editor.putString(getResources().getString(R.string.saved_my_job_key), jsonObject.toString());
                                         editor.apply();
                                         break;
@@ -412,6 +439,14 @@ public class  MyDialogFragment extends DialogFragment  {
                 editor.putString(getResources().getString(R.string.saved_movies_key), doSomething(getResources().getString(R.string.saved_progress_making_movies_key), getResources().getString(R.string.saved_recording_skills_key), getResources().getString(R.string.saved_games_key), "You successfully made a movie"));
                 break;
 
+            case R.id.button_love_takeSomewhere:
+                editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 20));
+                editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 20));
+                editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + 10));
+                editor.putInt(getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) + 25));
+                ((ProgressBar)view.findViewById(R.id.progressBar_doing_thing)).setProgress((sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations)));
+                break;
+
             default:
                 break;
 
@@ -456,11 +491,11 @@ public class  MyDialogFragment extends DialogFragment  {
 
     private String doSomething(String resSavedProgress, String resSavedSkills, String resSavedList, String textWhenEnd) {
         editor.putInt(resSavedProgress, (sharedPref.getInt(resSavedProgress, 0) + 1));
-        editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 1));
-        editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 1));
-        editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 3));
+        editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
+        editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 10));
+        editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
 
-        ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).setProgress(((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress() + 1);
+        ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).setProgress(((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress() + 20 );
         editor.putInt(resSavedProgress, ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress());
 
         if (sharedPref.getInt(resSavedProgress, 0) >= 10) {

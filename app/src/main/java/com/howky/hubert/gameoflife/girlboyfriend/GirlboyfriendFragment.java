@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.howky.hubert.gameoflife.MainActivity;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.SettingsActivity;
 import com.howky.hubert.gameoflife.utils.Dialogs;
+import com.howky.hubert.gameoflife.utils.MyDialogFragment;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
@@ -222,11 +224,8 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.button_love_takeSomewhere:
-                if(sharedPref.getString(getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) != null)
-                    if(sharedPref.getBoolean(getResources().getString(R.string.saved_sex_key), SharedPreferencesDefaultValues.DefaultIsMale))
-                        showDialogWithChoose(getResources().getString(R.string.take_her_somewhere), getResources().getString(R.string.sure_to_take_her_somewhere), 2);
-                    else
-                        showDialogWithChoose(getResources().getString(R.string.take_him_somewhere), getResources().getString(R.string.sure_to_take_her_somewhere), 2);
+                DialogFragment newDialog = MyDialogFragment.newInstance(v.getId());
+                newDialog.show(getActivity().getSupportFragmentManager(), "love_dialog_tag");
                 break;
 
             case R.id.button_love_brokeUp:
@@ -236,12 +235,12 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                         showDialogWithChoose(getResources().getString(R.string.break_up), getResources().getString(R.string.sure_to_break_up_with_her), 3);
                     else
                         showDialogWithChoose(getResources().getString(R.string.break_up), getResources().getString(R.string.sure_to_break_up_with_him), 3);
-                    Love.BreakUp(Objects.requireNonNull(getContext()));
+                    //Love.BreakUp(Objects.requireNonNull(getContext()));
                 }
                 break;
 
             case R.id.button_love_SearchLove:
-                if(sharedPref.getString(getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) == null)
+                if(sharedPref.getString(getResources().getString(R.string.saved_love_key), SharedPreferencesDefaultValues.DefaultLove) == null && !sharedPref.getBoolean(getResources().getString(R.string.saved_is_sad_key), false))
                 {
                     Random random = new Random();
                     Gson gson = new Gson();
@@ -279,11 +278,13 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                         loveStatus.setText(getResources().getString(R.string.status) + " " + getResources().getString(R.string.lovers));
                     else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2)
                         loveStatus.setText(getResources().getString(R.string.status) + " " + getResources().getString(R.string.betrothed));
-                    else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) == 2)
+                    else if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) >= 3)
                         loveStatus.setText(getResources().getString(R.string.status) + " " + getResources().getString(R.string.marry));
 
                     progressBar.setProgress(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations));
                 }
+                else
+                    Toast.makeText(mContext, "You can't do it yet", Toast.LENGTH_SHORT).show();
                 break;
         }
 
@@ -313,12 +314,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                 .setMessage(message)
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        switch (whichOneEvent)
-                        {
-                            case 1:
-                                //Die();
-                                break;
-                        }
+                        //switch (whichOneEvent) { }
                         mListener.onGirldboyStartTimer();
                         dialoginterface.cancel();
                     }})
@@ -330,8 +326,11 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 100)
                                 {
                                     editor.putInt(getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 100));
-                                    if(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) < 1000)
-                                        editor.putInt(getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) + 50));
+                                    if(sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) <= 875)
+                                        editor.putInt(getResources().getString(R.string.saved_love_relations_key), (sharedPref.getInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) + 125));
+                                    else
+                                        editor.putInt(getResources().getString(R.string.saved_love_relations_key), 1000);
+
                                 }
                                 else
                                     Toast.makeText(getContext(), getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
@@ -357,10 +356,11 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                 break;
 
                             case 3:
-                                editor.putString(getResources().getString(R.string.saved_love_key), null);
-                                editor.putInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
-                                editor.putInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel);
-                                editor.apply();
+                                Love.BreakUp(Objects.requireNonNull(getContext()));
+//                                editor.putString(getResources().getString(R.string.saved_love_key), null);
+//                                editor.putInt(getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
+//                                editor.putInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel);
+//                                editor.apply();
 
                                 loveName.setText(getResources().getString(R.string.single));
                                 view.findViewById(R.id.girlboyfriend_status).setVisibility(View.GONE);

@@ -96,7 +96,7 @@
     <string name="dont_have_televisor">Unfortunately you don\'t have a TV</string>
     <string name="dont_have_computer_phone">Unfortunately you don\'t have a computer or a phone</string>
     <string name="dont_have_safe">You don\'t have the safe!</string>
-    <string name="sure_to_buy_for_25000">Do you want to buy it for 25000$?</string>
+    <string name="sure_to_buy_for_7500">Do you want to buy it for 7500$?</string>
     <string name="no_ads">There are currently no ads!</string>
     <string name="cash">Cash:</string>
 
@@ -302,4 +302,5 @@
     <string name="health">health</string>
     <string name="happiness">happiness</string>
     <string name="black_market">black market</string>
+    <string name="going_somewhere">Going Somewhere</string>
 </resources>

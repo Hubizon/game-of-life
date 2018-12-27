@@ -102,18 +102,18 @@ public class HomeFragment extends Fragment
                     }
                     dialog.setTitle(getResources().getString(R.string.dont_have_safe))
                             //.setIcon(R.drawable.ic_launcher)
-                            .setMessage(getResources().getString(R.string.sure_to_buy_for_25000))
+                            .setMessage(getResources().getString(R.string.sure_to_buy_for_7500))
                             .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialoginterface, int i) {
                                     dialoginterface.cancel();
                                 }})
                             .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialoginterface, int i) {
-                                    if((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) >= 25000)
+                                    if((sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) >= 7500)
                                     {
                                         SharedPreferences.Editor editor = sharedPref.edit();
                                         editor.putBoolean(getResources().getString(R.string.saved_have_safe_key), true);
-                                        editor.putInt(getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - 25000 );
+                                        editor.putInt(getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - 7500 );
                                         editor.apply();
                                     }
                                     else

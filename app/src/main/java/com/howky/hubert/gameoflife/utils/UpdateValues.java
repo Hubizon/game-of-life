@@ -59,27 +59,70 @@ class UpdateValues {
 
             int moneyNow = sharedPref.getInt(context.getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
             Random random = new Random();
-            switch ( random.nextInt(100))
-            {
-                case 0: case 1:
-                    dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money.");
-                    moneyNow += 1000;
-                    editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
-                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
-                    break;
+            if(random.nextInt(50) == 1)
+                if(sharedPref.getInt(context.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints) > 50)
+                {
+                    switch (random.nextInt(2))
+                    {
+                        case 0:
+                            dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money.");
+                            moneyNow += 1000;
+                            editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+                            editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+                            break;
 
-                case 2: case 3: case 4: case 5: case 6:
-                    dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money and additionally gave you 500$!");
-                    moneyNow += 1500;
-                    editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
-                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
-                    break;
+                        case 1:
+                            dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money and additionally gave you 500$!");
+                            moneyNow += 1500;
+                            editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+                            editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+                            break;
+                        case 2:
+                            dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money and additionally gave you 1000$!");
+                            moneyNow += 2000;
+                            editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+                            editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (random.nextInt(2))
+                    {
+                        case 0:
+                            dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money.");
+                            moneyNow += 1000;
+                            editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+                            editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+                            break;
 
-                case 7:
-                    dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour stole your money and run out from city.");
-                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
-                    break;
-            }
+                        case 1: case 2:
+                        dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour stole your money and run out from city.");
+                        editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+                    }
+                }
+
+//            switch ( random.nextInt(100))
+//            {
+//                case 0: case 1:
+//                    dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money.");
+//                    moneyNow += 1000;
+//                    editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+//                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+//                    break;
+//
+//                case 2: case 3: case 4: case 5: case 6:
+//                    dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour returned your money and additionally gave you 500$!");
+//                    moneyNow += 1500;
+//                    editor.putInt(context.getString(R.string.saved_character_money_key), moneyNow);
+//                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+//                    break;
+//
+//                case 7:
+//                    dialogs.showAlertDialog(context, "Neighbour loan", "Neighbour stole your money and run out from city.");
+//                    editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false);
+//                    break;
+//            }
             editor.apply();
         }
 
@@ -299,7 +342,7 @@ class UpdateValues {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Random rnd = new Random();
 
-        switch (rnd.nextInt(150))
+        switch (rnd.nextInt(250))
         {
             case 1:
                 drawGoodEvent(context);
@@ -332,7 +375,7 @@ class UpdateValues {
                     editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + rndFoundMoney));
                     break;
 
-                case 7: case 8: case 9:
+                case 7: case 8:
                     if(sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) != null)
                         if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) > 1250)
                             dialogs.showDialogWithChoose(sharedPreferences, context, "Neighbour loan", "Your neighbour want to borrow 1000$. Do you want to give it to him?", 6);
@@ -368,7 +411,7 @@ class UpdateValues {
                         editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 15000));
                     else
                         editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
-                    dialogs.showDialogWithChoose(sharedPreferences, context,"You were attacked by a murderer!", "Do you want to go to the hospital for $15 000 or order the grave?", 1);
+                    dialogs.showDialogWithChoose(sharedPreferences, context,"You were attacked!", "Do you want to go to the hospital for $15 000 or order the grave?", 1);
                 }
                 break;
 
@@ -408,7 +451,10 @@ class UpdateValues {
 
                 case 5:
                     dialogs.showAlertDialog(context, "You've been robbed!", "Somebody stole " + (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) / 2) + "$");
-                    editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) / 2));
+                    if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 100000)
+                        editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) -   10000));
+                    else
+                        editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) / (rnd.nextInt(5) + 5)));
                     break;
 
                 case 6:
@@ -424,7 +470,7 @@ class UpdateValues {
 
                 case 7: case 8: case 9:
                     if(sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) != null)
-                        if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) > 1250)
+                        if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) > 1250 && sharedPreferences.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
                             dialogs.showDialogWithChoose(sharedPreferences, context, "Neighbour loan", "Your neighbour needs 1000$. Do you lend it to him?", 6);
                 break;
             }
