@@ -57,6 +57,7 @@ public class MainTimer {
             } else {
                 if (isRunning) mHandler.postDelayed(mRunnable, TIMER_LOOP_TIME);
             }
+
         }
     };
 

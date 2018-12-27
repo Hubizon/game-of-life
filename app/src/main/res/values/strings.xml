@@ -225,7 +225,7 @@
     <string name="save">Save</string>
 
     <string name="title_send_feedback">Send feedback</string>
-    <string name="mail_feedback_email">example@gameoflife.com</string>
+    <string name="mail_feedback_email">michal@jastrzebscy.org</string>
     <string name="mail_feedback_subject">Game Of Life - feedback</string>
     <string name="mail_feedback_message">Hi,\n\n</string>
     <string name="description_char_dialog">Chart Dialog</string>
