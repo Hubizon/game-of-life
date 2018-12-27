@@ -13,7 +13,6 @@ import com.howky.hubert.gameoflife.MyDialogDead;
 import com.howky.hubert.gameoflife.R;
 
 import static com.howky.hubert.gameoflife.MainActivity.hasAdd;
-import static com.howky.hubert.gameoflife.MainActivity.mRewardedVideoAd;
 import static com.howky.hubert.gameoflife.MyApplication.CurrentContext;
 
 public class MainTimer {
@@ -90,7 +89,7 @@ public class MainTimer {
         editor.putBoolean(CurrentContext.getString(R.string.saved_is_dead_key), true);
         editor.apply();
 
-        if (hasAdd && mRewardedVideoAd.isLoaded())
+        if (hasAdd)
             (new Dialogs(CurrentContext)).showDialogWithChoose(userSharedPref, CurrentContext, CurrentContext.getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
         else {
             MainTimer.shouldWork = false;

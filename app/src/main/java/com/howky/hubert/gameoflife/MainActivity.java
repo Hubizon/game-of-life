@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     private static AnimatedVectorDrawable mPlayDrawable;
     private static AnimatedVectorDrawable mPauseDrawable;
 
-    public static RewardedVideoAd mRewardedVideoAd;
+    public RewardedVideoAd mRewardedVideoAd;
     private ViewPager mPager;
     private CustomPagerAdapter mPagerAdapter;
     private TabLayout mTabLayout;
@@ -194,10 +194,33 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        mPager = null;
+        mPagerAdapter = null;
+        mTabLayout = null;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         MyApplication.CurrentContext = this;
+
+        if (mPagerAdapter == null) {
+            mPager = findViewById(R.id.pager);
+            mPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager(), this);
+            mPager.setAdapter(mPagerAdapter);
+            Intent intent = getIntent();
+            if (intent.hasExtra(INTENT_PAGE)) {
+                mPager.setCurrentItem(intent.getIntExtra(INTENT_PAGE, 0));
+            }
+
+            mTabLayout = findViewById(R.id.tablayout);
+            mTabLayout.setupWithViewPager(mPager);
+            setupTabIcons();
+        }
     }
+
 
     private void onResumeDialogClicked(MenuItem item) {
         item.setIcon(mPlayDrawable);
@@ -296,5 +319,6 @@ public class MainActivity extends AppCompatActivity
     public void onDialogResume(MenuItem item) {
         onResumeDialogClicked(item);
     }
+
 
 }

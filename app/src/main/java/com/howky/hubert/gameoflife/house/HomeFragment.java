@@ -131,8 +131,8 @@ public class HomeFragment extends Fragment
                 break;
 
             case R.id.cardview_ad:
-                if (MainActivity.mRewardedVideoAd.isLoaded()) {
-                    MainActivity.mRewardedVideoAd.show();
+                if (MainActivity.hasAdd) {
+                    ((MainActivity)getActivity()).mRewardedVideoAd.show();
                 } else {
                     Toast.makeText(getContext(), getResources().getString(R.string.no_ads), Toast.LENGTH_SHORT).show();
                 }

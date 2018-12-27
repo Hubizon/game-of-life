@@ -136,8 +136,8 @@ public class Dialogs {
                                 break;
 
                             case 7:
-                                if (MainActivity.mRewardedVideoAd.isLoaded())
-                                    MainActivity.mRewardedVideoAd.show();
+                                if (MainActivity.hasAdd)
+                                    ((MainActivity)mListener).mRewardedVideoAd.show();
                                 else
                                     Toast.makeText(context, context.getResources().getString(R.string.no_ads), Toast.LENGTH_SHORT).show();
                                 break;

@@ -16,7 +16,7 @@ import com.howky.hubert.gameoflife.utils.MainTimer;
 
 import java.util.Objects;
 
-public class ChooseJobActivity extends AppCompatActivity {
+public class ChooseJobActivity extends AppCompatActivity implements Dialogs.OnResumeDialogInteractionListener{
 
 
     private CustomPagerJobAdapter mPagerAdapter;
@@ -49,6 +49,11 @@ public class ChooseJobActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         MyApplication.CurrentContext = this;
+    }
+
+    @Override
+    public void onDialogResume(MenuItem item) {
+
     }
 
 
