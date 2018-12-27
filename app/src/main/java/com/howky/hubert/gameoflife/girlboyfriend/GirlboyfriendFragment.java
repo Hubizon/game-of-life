@@ -17,15 +17,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.SettingsActivity;
+import com.howky.hubert.gameoflife.utils.Arrays;
 import com.howky.hubert.gameoflife.utils.Dialogs;
 import com.howky.hubert.gameoflife.utils.MyDialogFragment;
+import com.howky.hubert.gameoflife.utils.MainTimer;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 import com.google.gson.Gson;
 
 import java.util.Objects;
 import java.util.Random;
+
+import static com.howky.hubert.gameoflife.utils.Arrays.boyfriendsNames;
+import static com.howky.hubert.gameoflife.utils.Arrays.girlfriendsNames;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,25 +41,6 @@ import java.util.Random;
  */
 public class GirlboyfriendFragment extends Fragment implements View.OnClickListener {
 
-    private final String[] boyfriendsNames = new String[] {
-            "Liam", "Noah", "William", "James", "Logan", "Benjamin", "Mason", "Elijah", "Oliver", "Jacob", "Lucas", "Michael", "Alexander", "Ethan", "Daniel", "Matthew",
-            "Aiden", "Henry", "Joseph", "Jackson", "Samuel", "Sebastian", "David", "Carter", "Wyatt", "Jayden", "John", "Owen", "Dylan", "Luke", "Gabriel", "Anthony",
-            "Isaac", "Grayson", "Jack", "Julian", "Levi", "Christopher", "Joshua", "Andrew", "Lincoln", "Mateo", "Ryan", "Jaxon", "Nathan", "Aaron", "Isaiah", "Thomas",
-            "Charles", "Caleb", "Josiah", "Christian", "Hunter", "Eli", "Jonathan", "Connor", "Landon", "Adrian", "Asher", "Cameron", "Leo", "Theodore", "Jeremiah",
-            "Hudson", "Robert", "Easton", "Nolan", "Nicholas", "Ezra", "Colton", "Angel", "Brayden", "Jordan", "Dominic", "Austin", "Ian", "Adam", "Elias", "Jaxson",
-            "Greyson", "Jose", "Ezekiel", "Carson", "Evan", "Maverick", "Bryson", "Jace", "Cooper", "Xavier", "Parker", "Roman", "Jason", "Santiago", "Chase", "Sawyer",
-            "Gavin", "Leonardo", "Kayden", "Ayden", "Jameson",
-    };
-
-    private final String[] girlfriendsNames = new String[] {
-            "Emma", "Olivia", "Sophia", "Isabella", "Ava", "Mia", "Emily", "Abigail", "Charlotte", "Jacob", "Harper", "Sofia", "Avery", "Elizabeth", "Amelia", "Evelyn",
-            "Ella", "Chloe", "Victoria", "Aubrey", "Grace", "Zoey", "Natalie", "Addison", "Lillian", "Brooklyn", "Lily", "Owen", "Hannah", "Layla", "Scarlett", "Aria",
-            "Zoe", "Samantha", "Anna", "Leah", "Audrey", "Ariana", "Savannah", "Arianna", "Camila", "Penelope", "Gabriella", "Claire", "Aaliyah", "Sadie", "Riley", "Skylar",
-            "Nora", "Sarah", "Hailey", "Kaylee", "Paisley", "Kennedy", "Ellie", "Connor", "Landon", "Lilly", "Asher", "Lyla", "Salma", "Mya", "Amy",
-            "Luna", "Caroline", "Alexa", "Gabriella", "Clara", "Mary", "Quinn", "Peyton", "Annabelle", "Caroline", "Madelyn", "Serenity", "Aubree", "Lyla", "Lucy", "Alexa",
-            "Alexis", "Nevaeh", "Stella", "Violet", "Bella", "Maya", "Taylor", "Naomi", "Eva", "Katherine", "Julia", "Ashley", "Ruby", "Sophie", "Alexandra", "Isabelle",
-            "Alice", "Jasmine", "Clara", "Natalia", "Valentina",
-    };
 
     public GirlboyfriendFragment() {}
 
@@ -68,21 +55,18 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
     private Context mContext;
 
 
-    public interface OnGirlBoyfriendFragmentListener {
-        void onGirldboyStopTimer();
-        void onGirldboyStartTimer();
+    void onGirlTimerStop(Context context) {
+        final MyApplication globalApplication = (MyApplication) context.getApplicationContext();
+        MainTimer.shouldWork = false;
+        globalApplication.mainTimer.stopTimer();
     }
-    OnGirlBoyfriendFragmentListener mListener;
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnGirlBoyfriendFragmentListener) {
-            mListener = (OnGirlBoyfriendFragmentListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnGirlBoyfriendFragmentListener");
-        }
+
+    void onGirlTimerStart(Context context) {
+        final MyApplication globalApplication = (MyApplication) context.getApplicationContext();
+        MainTimer.shouldWork = true;
+        globalApplication.mainTimer.startTimer();
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -93,8 +77,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
         mContext = view.getContext();
 
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
-        //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
 
         progressBar = view.findViewById(R.id.progressBar_girlboyFriend_relations);
         loveName = view.findViewById(R.id.love_name);
@@ -153,7 +136,7 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         //SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -294,13 +277,12 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
 
     private void showDialogWithChoose(final String title, final String message, final int whichOneEvent)
     {
-        final SharedPreferences sharedPref = MainActivity.userSharedPref;
-        //final SharedPreferences sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        final SharedPreferences sharedPref = MyApplication.userSharedPref;
         final SharedPreferences.Editor editor = sharedPref.edit();
 
         AlertDialog.Builder dialog;
 
-        mListener.onGirldboyStopTimer();
+        onGirlTimerStop(getActivity());
 
         SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
         boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
@@ -314,8 +296,13 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                 .setMessage(message)
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        //switch (whichOneEvent) { }
-                        mListener.onGirldboyStartTimer();
+                        switch (whichOneEvent)
+                        {
+                            case 1:
+                                //Die();
+                                break;
+                        }
+                        onGirlTimerStart(getActivity());
                         dialoginterface.cancel();
                     }})
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
@@ -377,15 +364,8 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                                 dialoginterface.cancel();
                                 break;
                         }
-                        mListener.onGirldboyStartTimer();
+                        onGirlTimerStart(getActivity());
                     }
                 }).show();
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        this.mListener = null;
     }
 }

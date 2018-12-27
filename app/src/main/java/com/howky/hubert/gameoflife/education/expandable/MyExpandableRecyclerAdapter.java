@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.education.EduFragment;
 import com.howky.hubert.gameoflife.MainActivity;
 import com.howky.hubert.gameoflife.R;
@@ -87,7 +88,7 @@ private static final int give_up_school_index = 4;
             @Override
             public void onClick(View view) {
 
-                SharedPreferences sharedPref = MainActivity.userSharedPref;
+                SharedPreferences sharedPref = MyApplication.userSharedPref;
 //                SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 Intent intent = null;

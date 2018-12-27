@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.MyDialogDead;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.SettingsActivity;
@@ -24,31 +25,40 @@ import java.util.Objects;
 
 public class Dialogs {
 
-    private OnDialogInteractionListener mListener;
-    public interface OnDialogInteractionListener {
-        void onDialogInteractionTimerStop();
-        void onDialogInteractionTimerStart();
+    private OnResumeDialogInteractionListener mListener;
+    public interface OnResumeDialogInteractionListener {
         void onDialogResume(MenuItem item);
     }
 
+    private void onDialogTimerStop(Context context) {
+        final MyApplication globalApplication = (MyApplication) context.getApplicationContext();
+        MainTimer.shouldWork = false;
+        globalApplication.mainTimer.stopTimer();
+    }
+
+    private void onDialogTimerStart(Context context) {
+        final MyApplication globalApplication = (MyApplication) context.getApplicationContext();
+        MainTimer.shouldWork = true;
+        globalApplication.mainTimer.startTimer();
+    }
+
+
     public Dialogs(Context context) {
-        if (context instanceof OnDialogInteractionListener) {
-            mListener = (OnDialogInteractionListener) context;
+        if (context instanceof OnResumeDialogInteractionListener) {
+            mListener = (OnResumeDialogInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnResumeDialogInteractionListener");
         }
     }
 
-    public void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
+    void showDialogWithChoose(final SharedPreferences sharedPref, final Context context, final String title, final String message, final int whichOneEvent)
     {
-        MainTimer.shouldWork = false;
-        mListener.onDialogInteractionTimerStop();
+        onDialogTimerStop(context);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
         AlertDialog.Builder dialog;
 
-        //SharedPreferences settingsSharedPref = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
         if (isDark) {
@@ -57,54 +67,38 @@ public class Dialogs {
             dialog = new AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
         }
         dialog.setTitle(title)
-                //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
                 .setNegativeButton(context.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        MainTimer.shouldWork = true;
-                        mListener.onDialogInteractionTimerStart();
+                        onDialogTimerStart(context);
                         switch (whichOneEvent)
                         {
-                            case 1:
-                                //mListener.onDialogInteractionDie(); nie lepiek editor.putInt( dead, true) ?
-                                break;
-
                             case 6:
                                 editor.putInt(context.getResources().getString(R.string.saved_karma_points_key), sharedPref.getInt(context.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints) - 10);
+                                onDialogTimerStart(context);
                                 break;
 
                             case 7:
-                               // sharedPref.edit().clear().apply();
-                               // DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_RESET);
-                               // newDialog.show(((AppCompatActivity)context).getSupportFragmentManager(), "open_dialog_tag");
-
-                                //showAlertDialog(context, sharedPref, "You died", "Do you want to play again?");
-                                //TODO: wyczyścic sharedpref
-
-                                mListener.onDialogInteractionTimerStop();
                                 DialogFragment deadDialog = MyDialogDead.newInstance();
                                 deadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "open_dead_dialog_tag");
                                 break;
+                             default:
+                                 onDialogTimerStart(context);
+                                 break;
                         }
                         dialoginterface.cancel();
                     }})
                 .setPositiveButton(context.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
-                        MainTimer.shouldWork = true;
-                        mListener.onDialogInteractionTimerStart();
                         switch (whichOneEvent)
                         {
                             case 1:
                                 if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) < 0)
                                     //mListener.onDialogInteractionDie(); nie lepiej editor.putBoolean(dead, true) ???
-                                editor.apply();
-                                dialoginterface.cancel();
                                 break;
 
                             case 2:
                                 editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + 2500));
-                                editor.apply();
-                                dialoginterface.cancel();
                                 break;
 
                             case 3:
@@ -116,8 +110,6 @@ public class Dialogs {
                                 }
                                 else
                                     Toast.makeText(context, context.getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
-                                editor.apply();
-                                dialoginterface.cancel();
                                 break;
 
                             case 4:
@@ -129,8 +121,6 @@ public class Dialogs {
                                 }
                                 else
                                     Toast.makeText(context, context.getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
-                                editor.apply();
-                                dialoginterface.cancel();
                                 break;
 
                             case 5:
@@ -146,29 +136,29 @@ public class Dialogs {
                                 editor.putInt(context.getResources().getString(R.string.saved_karma_points_key), sharedPref.getInt(context.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints) + 10);
                                 editor.putBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), true);
                                 editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 1000));
-                                editor.apply();
-                                dialoginterface.cancel();
                                 break;
 
                             case 7:
-                                if (MainActivity.mRewardedVideoAd.isLoaded())
-                                    MainActivity.mRewardedVideoAd.show();
+                                if (MainActivity.hasAdd)
+                                    ((MainActivity)mListener).mRewardedVideoAd.show();
                                 else
                                     Toast.makeText(context, context.getResources().getString(R.string.no_ads), Toast.LENGTH_SHORT).show();
                                 break;
 
                             default:
-                                dialoginterface.cancel();
                                 break;
                         }
+                        editor.apply();
+                        onDialogTimerStart(context);
+                        dialoginterface.cancel();
                     }
                 }).show();
     }
 
-    public void showAlertDialog(Context context, String title, final String message)
+    public void showAlertDialog(final Context context, String title, final String message)
     {
-        MainTimer.shouldWork = false;
-        mListener.onDialogInteractionTimerStop();
+        onDialogTimerStop(context);
+
         AlertDialog.Builder dialog;
 
         SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -179,12 +169,11 @@ public class Dialogs {
             dialog = new AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
         }
         dialog.setTitle(title)
-                //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         MainTimer.shouldWork = true;
-                        mListener.onDialogInteractionTimerStart();
+                        onDialogTimerStart(context);
                         dialoginterface.dismiss();
                     }
                 })

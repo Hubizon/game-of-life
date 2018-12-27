@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.house.Fun;
 import com.howky.hubert.gameoflife.house.Lodging;
 import com.howky.hubert.gameoflife.house.Transport;
@@ -54,7 +55,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_choose_job, container, false);
 
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         //SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         ((TextView) (view.findViewById(R.id.money_choose_work))).setText(getResources().getString(R.string.currency) + " " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
 
@@ -79,8 +80,7 @@ public class ChooseJobFragment extends Fragment implements ChooseJobAdapter.Item
 
     @Override
     public void onItemClick(View view, int position) {
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
-        //SharedPreferences sharedPref = getContext().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         SharedPreferences.Editor editor = sharedPref.edit();
         Gson gson = new Gson();
         String json;

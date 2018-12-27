@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.shop.BuyActivity;
+import com.howky.hubert.gameoflife.utils.Dialogs;
 import com.howky.hubert.gameoflife.utils.MyDialogFragment;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
-public class ComputerActivity extends AppCompatActivity implements View.OnClickListener{
+public class ComputerActivity extends AppCompatActivity implements View.OnClickListener,
+        Dialogs.OnResumeDialogInteractionListener{
 
     private static final int PAGE_NUMBER = 4;
     private SharedPreferences sharedPref;
@@ -30,9 +34,10 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_computer);
         setTitle(R.string.title_computer);
 
-        sharedPref = MainActivity.userSharedPref;
-        //sharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
-        ((TextView)(findViewById(R.id.time_computer))).setText("$ " + sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney));
+        sharedPref = MyApplication.userSharedPref;
+        ((TextView)(findViewById(R.id.time_computer))).setText(getString(R.string.money_formatted, getString(R.string.currency),
+                sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
+
 
         Button playComputer = findViewById(R.id.playComputer);
         playComputer.setOnClickListener(this);
@@ -111,7 +116,6 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(title)
-                //.setIcon(R.drawable.ic_launcher)
                 .setMessage(message)
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
@@ -149,5 +153,16 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
         intent.putExtra(MainActivity.INTENT_PAGE, PAGE_NUMBER);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.CurrentContext = this;
+    }
+
+    @Override
+    public void onDialogResume(MenuItem item) {
+        Log.e("TODO", "TODO");
     }
 }

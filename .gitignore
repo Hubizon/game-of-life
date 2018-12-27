@@ -52,5 +52,5 @@ gradle-app.setting
 
 
 gradle.properties
-
+/app/build.gradle
 

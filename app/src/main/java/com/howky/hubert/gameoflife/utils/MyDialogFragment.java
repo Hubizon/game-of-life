@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.education.EduFragment;
 import com.howky.hubert.gameoflife.house.Fun;
 import com.howky.hubert.gameoflife.house.Lodging;
@@ -195,7 +196,7 @@ public class  MyDialogFragment extends DialogFragment  {
                 break;
         }
 
-        sharedPref = MainActivity.userSharedPref;
+        sharedPref = MyApplication.userSharedPref;
 
         String moneyText = "$" + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney);
         ((TextView) view.findViewById(R.id.money_dialog)).setText(moneyText);
@@ -226,7 +227,7 @@ public class  MyDialogFragment extends DialogFragment  {
 
     private void onTimerDelay()
     {
-        sharedPref = MainActivity.userSharedPref;
+        sharedPref = MyApplication.userSharedPref;
         editor = sharedPref.edit();
         Random r = new Random();
 

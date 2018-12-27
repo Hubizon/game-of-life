@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.utils.Arrays;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
@@ -65,7 +66,7 @@ SkillsFragment extends Fragment implements RecyclerViewSkillsAdapter.ItemClickLi
         ArrayList<String> mSkillsNames = new ArrayList<>();
         ArrayList<String> mSkillsPrices = new ArrayList<>();
 
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         try {
             JSONArray jsonArray = new JSONArray();
             JSONObject jsonObject;
@@ -154,7 +155,7 @@ SkillsFragment extends Fragment implements RecyclerViewSkillsAdapter.ItemClickLi
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
 
-                        SharedPreferences sharedPref = MainActivity.userSharedPref;
+                        SharedPreferences sharedPref = MyApplication.userSharedPref;
                         SharedPreferences.Editor editor = sharedPref.edit();
                         JSONArray jsonArray;
                         JSONObject jsonObject;

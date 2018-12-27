@@ -28,12 +28,12 @@ public class MyDialogDead extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_my_dialog_dead, container, false);
         setCancelable(false);
 
-        int pointsNow = MainActivity.userSharedPref.getInt(getString(R.string.saved_age_years_key), 0) * 365 + MainActivity.userSharedPref.getInt(getString(R.string.saved_age_days_key), 0);
-        int pointsHigh = MainActivity.sharedPref.getInt(getString(R.string.saved_high_score_key), 0);
+        int pointsNow = MyApplication.userSharedPref.getInt(getString(R.string.saved_age_years_key), 0) * 365 + MyApplication.userSharedPref.getInt(getString(R.string.saved_age_days_key), 0);
+        int pointsHigh = MyApplication.mainSharedPref.getInt(getString(R.string.saved_high_score_key), 0);
 
         if(pointsNow > pointsHigh) {
             pointsHigh = pointsNow;
-            SharedPreferences.Editor editor = MainActivity.sharedPref.edit();
+            SharedPreferences.Editor editor = MyApplication.mainSharedPref.edit();
             editor.putInt(getString(R.string.saved_high_score_key), pointsHigh);
             editor.apply();
         }
@@ -64,7 +64,7 @@ public class MyDialogDead extends DialogFragment {
             mListener = (OnDialogDeadInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnDialogDeadInteractionListener and only MainActivity implements it so sth went wrong!");
         }
     }
 

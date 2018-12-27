@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.education.expandable.ChildList;
 import com.howky.hubert.gameoflife.education.expandable.MyExpandableRecyclerAdapter;
 import com.howky.hubert.gameoflife.education.expandable.ParentList;
@@ -62,7 +63,7 @@ public class EduFragment extends Fragment
         RecyclerView recycler_view = view.findViewById(R.id.recycler_Expand);
         recycler_view.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         Gson gson = new Gson();
         String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
         Job job = gson.fromJson(json, Job.class);
@@ -120,7 +121,7 @@ public class EduFragment extends Fragment
 
     @Override
     public void onClick(View view) {
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         SharedPreferences.Editor editor = sharedPref.edit();
         Intent intent = null;
 
@@ -149,7 +150,7 @@ public class EduFragment extends Fragment
             ChildWork.add(new ChildList("Start Working"));
             ChildWork.add(new ChildList("Quit the job"));
 
-            SharedPreferences sharedPref = MainActivity.userSharedPref;
+            SharedPreferences sharedPref = MyApplication.userSharedPref;
             Gson gson = new Gson();
             String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
             Job job = gson.fromJson(json, Job.class);
@@ -168,7 +169,7 @@ public class EduFragment extends Fragment
     @Override
     public void onStart() {
         super.onStart();
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         Gson gson = new Gson();
         String json = sharedPref.getString(getResources().getString(R.string.saved_my_job_key), SharedPreferencesDefaultValues.DefaultMyJob);
         Job job = gson.fromJson(json, Job.class);

@@ -4,12 +4,19 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.howky.hubert.gameoflife.MyApplication;
+import com.howky.hubert.gameoflife.MyDialogDead;
 import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
+import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
+import com.howky.hubert.gameoflife.utils.Dialogs;
+import com.howky.hubert.gameoflife.utils.MainTimer;
 
 import java.util.Objects;
 
-public class ChooseJobActivity extends AppCompatActivity{
+public class ChooseJobActivity extends AppCompatActivity implements Dialogs.OnResumeDialogInteractionListener{
 
 
     private CustomPagerJobAdapter mPagerAdapter;
@@ -38,6 +45,16 @@ public class ChooseJobActivity extends AppCompatActivity{
         mTabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyApplication.CurrentContext = this;
+    }
+
+    @Override
+    public void onDialogResume(MenuItem item) {
+
+    }
 
 
     /*public static Job[] officeJobsList = new Job[] {

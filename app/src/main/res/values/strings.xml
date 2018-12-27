@@ -190,12 +190,12 @@
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
-    <string name="buy_food">BUY FOOD</string>
-    <string name="buy_medicines">BUY MEDICINES</string>
-    <string name="buy_fun_items">BUY FUN ITEMS</string>
-    <string name="buy_lotteries">BUY LOTTERIES</string>
-    <string name="buy_houses">BUY HOUSES</string>
-    <string name="buy_transport">BUY TRANSPORT</string>
+    <string name="buy_food">Buy food</string>
+    <string name="buy_medicines">Buy medicines</string>
+    <string name="buy_fun_items">Buy fun items</string>
+    <string name="buy_lotteries">Buy lottery tickets</string>
+    <string name="buy_houses">Buy houses</string>
+    <string name="buy_transport">Buy transport</string>
     <string name="currency">$</string>
     <string name="won">Wow! You won</string>
     <string name="in_lottery">$ in lottery!</string>
@@ -298,9 +298,8 @@
     <string name="pref_header_notifications">Notifications</string>
     <string name="saved_high_score_key">high_score</string>
     <string name="resume">RESUME</string>
-    <string name="hungry">hungry</string>
-    <string name="health">health</string>
-    <string name="happiness">happiness</string>
-    <string name="black_market">black market</string>
-    <string name="going_somewhere">Going Somewhere</string>
+    <string name="hungry">Hunger: </string>
+    <string name="health">Health: </string>
+    <string name="happiness">Happiness: </string>
+    <string name="black_market">Black market: </string>
 </resources>

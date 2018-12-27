@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.MainActivity;
+import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
@@ -47,7 +48,7 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.dialog_safe, container, false);
-        SharedPreferences sharedPref = MainActivity.userSharedPref;
+        SharedPreferences sharedPref = MyApplication.userSharedPref;
         //sharedPref = getActivity().getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
 
         String cashText = R.string.cash + " " + sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + "$";
