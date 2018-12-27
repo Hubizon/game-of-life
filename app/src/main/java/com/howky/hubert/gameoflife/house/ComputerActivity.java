@@ -127,6 +127,7 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
                         {
                             editor.putInt(getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - 100);
                             editor.putInt(getResources().getString(R.string.saved_karma_points_key), (sharedPref.getInt(getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints)) + 5);
+                            Toast.makeText(getApplicationContext(), "Your help will certainly be appreciated!", Toast.LENGTH_SHORT).show();
                         }
                         else
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.not_enough_money), Toast.LENGTH_SHORT).show();
