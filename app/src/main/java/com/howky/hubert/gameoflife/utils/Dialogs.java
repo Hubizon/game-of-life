@@ -127,9 +127,7 @@ public class Dialogs {
                                 editor.putString(context.getResources().getString(R.string.saved_love_key), null);
                                 if(sharedPref.getInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations) < 1000)
                                     editor.putInt(context.getResources().getString(R.string.saved_love_relations_key), SharedPreferencesDefaultValues.DefaultLoveRelations);
-                                editor.apply();
                                 Toast.makeText(context, "You are a single now.", Toast.LENGTH_SHORT).show();
-                                dialoginterface.cancel();
                                 break;
 
                             case 6:
