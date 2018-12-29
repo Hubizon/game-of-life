@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,97 +13,41 @@
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primaryTextColor"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/computer"
-            android:textSize="16sp"/>
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/clock_icon"
-            android:layout_gravity="end"
-            android:layout_marginEnd="100dp"
-            android:layout_marginTop="3dp"
-            android:contentDescription="TODO" />
-
-        <TextView
-            android:id="@+id/time_computer"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="3dp"
-            tools:text="01.09 15:30"
-            android:textColor="@color/primaryTextColor"/>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-
-        <Button
-            android:id="@+id/playComputer"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
+        <LinearLayout
             android:layout_margin="8dp"
-            android:text="@string/play_video_games" />
-
-        <Button
-            android:id="@+id/talkComputer"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
-            android:layout_marginTop="58dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/talk_on_messengers" />
-
-        <Button
-            android:id="@+id/supportComputer"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
-            android:layout_marginTop="58dp"
-            android:layout_marginStart="176dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/support_a_charity_event" />
-
-        <Button
-            android:id="@+id/buyLotteries"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
-            android:layout_marginTop="108dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Buy Lotteries" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <!--<Button-->
-            <!--android:layout_width="160dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:background="@color/secondaryColor"-->
-            <!--android:textColor="@color/secondaryTextColor"-->
-            <!--android:layout_marginTop="108dp"-->
-            <!--android:layout_marginStart="176dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:text="@string/adopt_a_child"/>-->
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:textColor="@color/primaryTextColor"
+                android:text="@string/computer"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/ic_clock" />
+
+            <TextView
+                android:id="@+id/time_computer"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="01.09 15:30"
+                android:textColor="@color/primaryTextColor"/>
+        </LinearLayout>
+
+
 
     </android.support.v7.widget.CardView>
 
@@ -112,53 +56,122 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
-        <Button
-            android:id="@+id/makeGameComputer"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/make_a_game"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/drawSomethingComputer"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="176dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/draw_something"/>
+            <Button
+                android:id="@+id/playComputer"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/secondaryColor"
+                android:textColor="@color/secondaryTextColor"
+                android:text="@string/play_video_games" />
 
-        <Button
-            android:id="@+id/writePoemComputer"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
-            android:layout_marginTop="68dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/write_a_book"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarStyle">
 
-        <Button
-            android:id="@+id/recordMoviesComputer"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:background="@color/secondaryColor"
-            android:textColor="@color/secondaryTextColor"
-            android:layout_marginTop="68dp"
-            android:layout_marginStart="176dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/record_movies"/>
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:id="@+id/talkComputer"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@color/secondaryColor"
+                    android:textColor="@color/secondaryTextColor"
+                    android:text="@string/talk_on_messengers" />
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:id="@+id/buyLotteries"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@color/secondaryColor"
+                    android:textColor="@color/secondaryTextColor"
+                    android:text="Buy Lotteries"
+                     />
+            </LinearLayout>
+
+            <Button
+
+                android:id="@+id/supportComputer"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/secondaryColor"
+                android:textColor="@color/secondaryTextColor"
+                android:text="@string/support_a_charity_event"
+                 />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/makeGameComputer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondaryColor"
+                android:textColor="@color/secondaryTextColor"
+                android:text="@string/make_a_game"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="?android:attr/buttonBarStyle">
+
+                <Button
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:id="@+id/drawSomethingComputer"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@color/secondaryColor"
+                    android:textColor="@color/secondaryTextColor"
+                    android:text="@string/draw_something"
+                    style="?android:attr/buttonBarButtonStyle"/>
+
+                <Button
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:id="@+id/writePoemComputer"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@color/secondaryColor"
+                    android:textColor="@color/secondaryTextColor"
+                    android:text="@string/write_a_book"
+                    style="?android:attr/buttonBarButtonStyle"/>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/recordMoviesComputer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondaryColor"
+                android:textColor="@color/secondaryTextColor"
+                android:text="@string/record_movies"/>
+
+        </LinearLayout>
 
 
     </android.support.v7.widget.CardView>

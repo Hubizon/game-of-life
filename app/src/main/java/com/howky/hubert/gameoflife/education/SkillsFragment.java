@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.howky.hubert.gameoflife.MainActivity;
 import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
+import com.howky.hubert.gameoflife.SettingsActivity;
 import com.howky.hubert.gameoflife.utils.Arrays;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
@@ -141,7 +143,15 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
 
     private void alertDialogLearnSkill(final int position, final Skill[] skills, final String defaultSkills, final String resSavedList, String skillName)
     {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        AlertDialog.Builder dialog;
+        SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
+        if (isDark) {
+            dialog = new AlertDialog.Builder(mContext, R.style.Theme_MaterialComponents_Dialog_Alert);
+        } else {
+            dialog = new AlertDialog.Builder(mContext, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        }
+
         dialog.setTitle(getResources().getString(R.string.buying_skills))
                 //.setIcon(R.drawable.ic_launcher)Are you sure you want to buy and learn
                 .setMessage(getResources().getString(R.string.sure_to_buy_learn) + "" + skillName + "?")

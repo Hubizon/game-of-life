@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
@@ -56,6 +57,10 @@ public class SettingsActivity extends AppCompatActivity {
                     userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
 
                     preference.setSummary(stringValue);
+                } else {
+                    Toast.makeText(preference.getContext(),
+                            "Your name should have 3-10 characters!",
+                            Toast.LENGTH_LONG).show();
                 }
             } else {
                 preference.setSummary(stringValue);
@@ -146,7 +151,6 @@ public class SettingsActivity extends AppCompatActivity {
             editNamePref.setSummary(name);
             editNamePref.setDefaultValue(name);
             bindPreferenceSummaryToValue(editNamePref);
-
 
             //Hard Reset preference
             Preference hardReset = findPreference("reset_key");
