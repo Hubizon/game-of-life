@@ -241,6 +241,12 @@ public class  MyDialogFragment extends DialogFragment  {
                             editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 15));
                             editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 15));
                             editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 25));
+                            editor.apply();
+                            if(sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) >= 1000)
+                            {
+                                editor.putInt(getResources().getString(R.string.saved_education_points_key), 1000);
+                                Toast.makeText(getContext(), "You already have the best grades", Toast.LENGTH_SHORT).show();
+                            }
                             break;
                     }
                     break;
@@ -491,7 +497,7 @@ public class  MyDialogFragment extends DialogFragment  {
     }
 
     private String doSomething(String resSavedProgress, String resSavedSkills, String resSavedList, String textWhenEnd) {
-        editor.putInt(resSavedProgress, (sharedPref.getInt(resSavedProgress, 0) + 200));
+        editor.putInt(resSavedProgress, (sharedPref.getInt(resSavedProgress, 0) + 20));
         editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
         editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 10));
         editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
@@ -499,7 +505,7 @@ public class  MyDialogFragment extends DialogFragment  {
         ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).setProgress(sharedPref.getInt(resSavedProgress, 0));
 
         if (sharedPref.getInt(resSavedProgress, 0) >= 1000) {
-            editor.putInt(resSavedSkills, (sharedPref.getInt(resSavedSkills, 0) + 2));
+            editor.putInt(resSavedSkills, (sharedPref.getInt(resSavedSkills, 0) + 20));
             editor.putInt(resSavedProgress, 0);
             //editor.putInt(resSavedProgress, 0);
             editor.apply();
@@ -513,8 +519,8 @@ public class  MyDialogFragment extends DialogFragment  {
                 toJsonArray.put(true);
             else
                 toJsonArray.put(false);
-            toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears));
-            toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths));
+            toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_age_years_key), SharedPreferencesDefaultValues.DefaultAgeYears));
+            toJsonArray.put(sharedPref.getInt(getResources().getString(R.string.saved_age_days_key), SharedPreferencesDefaultValues.DefaultAgeDays));
 
             try {
                 JSONArray jsonArray = new JSONArray();
@@ -526,7 +532,8 @@ public class  MyDialogFragment extends DialogFragment  {
                 String toastText = textWhenEnd;
                 if(toJsonArray.getBoolean(1))
                     toastText += ". It also became a bestseller!";
-                Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
+                toastText += " Your first payment for it will be soon";
+                Toast.makeText(getContext(), toastText, Toast.LENGTH_LONG).show();
 
                 return jsonArray.toString();
             } catch (JSONException e) {
