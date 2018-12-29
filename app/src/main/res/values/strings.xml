@@ -9,12 +9,12 @@
     <string name="make_a_game">Make a game</string>
     <string name="draw_something">Draw something</string>
     <string name="record_movies">Record movies</string>
-    <string name="search_for_a_girlfriend">Search for a girlfriend</string>
+    <string name="search_for_a_girlfriend">Search for a partner</string>
     <string name="status">Status:</string>
-    <string name="ask_her_to_marry_you">Ask her to marry you</string>
-    <string name="buy_her_a_gift">buy her a gift</string>
-    <string name="take_her_somewhere">take her somewhere</string>
-    <string name="broke_up_with_her">broke up with her</string>
+    <string name="ask_her_to_marry_you">Ask to marry you</string>
+    <string name="buy_her_a_gift">Buy a gift</string>
+    <string name="take_her_somewhere">Meet</string>
+    <string name="broke_up_with_her">Break up</string>
     <string name="loudging">Lodging: </string>
     <string name="education_main">None</string>
     <string name="transport">Transport: </string>
@@ -22,6 +22,7 @@
     <string name="boyfriend">Boyfriend: </string>
     <string name="position">Position: </string>
     <string name="relations">Relations</string>
+    <string name="black_market_title">Black Market</string>
     <!---->
     <string name="years">years</string>
     <string name="days">days</string>
@@ -303,4 +304,5 @@
     <string name="happiness">Happiness: </string>
     <string name="black_market">Black market: </string>
     <string name="going_somewhere">Going Somewhere</string>
+    <string name="fitness">Fitness</string>
 </resources>
