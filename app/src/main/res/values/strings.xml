@@ -99,7 +99,6 @@
     <string name="sure_to_buy_for_7500">Do you want to buy it for 7500$?</string>
     <string name="no_ads">There are currently no ads!</string>
     <string name="cash">Cash:</string>
-    <string name="going_somewhere">Go somewhere</string>
 
     <string name="money_formatted">%1$s%2$d</string>
     <string name="date_format">%d.%d.%d %d:00</string>
@@ -303,4 +302,5 @@
     <string name="health">Health: </string>
     <string name="happiness">Happiness: </string>
     <string name="black_market">Black market: </string>
+    <string name="going_somewhere">Going Somewhere</string>
 </resources>

@@ -75,21 +75,20 @@ public class SharedPreferencesDefaultValues {
 
 
 
-    static private final Skill[] skillsSpecialList = new Skill[] {
-            new Skill("Driving Skills", 100, 10),};
+   // static private final Skill[] skillsSpecialList = new Skill[] {new Skill("Driving Skills", 100, 10),};
 
     //public static final String DefaultSubjectsList = gson.toJson(subjectsList);
     public static final int DefaultEducationPoints = 100;
     public static final String DefaultSkillsEducationList = gson.toJson(Arrays.skillsEducationList);
     public static final String DefaultSkillsCriminalList = gson.toJson(Arrays.skillsCriminalList);
-    public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
+    //public static final String DefaultSkillsSpecialList = gson.toJson(skillsSpecialList);
     public static final String DefaultWeapons = gson.toJson(Arrays.weaponList);
     public static final String DefaultOfficeJobsList = gson.toJson(Arrays.officeJobsList);
     public static final String DefaultCriminalJobsList = gson.toJson(Arrays.criminalJobsList);
 
-    static final int DefaultCommunicationsSkills = 100;
+    public static final int DefaultCommunicationsSkills = 100;
     public static final int DefaultCriminalPoints = 100;
-    public final static int DefaultKarmaPoints = 70;
+    public final static int DefaultKarmaPoints = 100;
     public final static int DefaultWorkPositionPoints = 75;
     public static final int DefaultWorkRelations = 100;
 

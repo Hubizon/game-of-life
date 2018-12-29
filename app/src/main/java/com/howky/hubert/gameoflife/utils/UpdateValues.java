@@ -35,22 +35,15 @@ class UpdateValues {
         {
             String jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
             Lodging lodging = gson.fromJson(jsonString, Lodging.class);
-            if(lodging != null) {
-                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0)) {
-                    if(sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0) == 0) {
-                        dialogs.showAlertDialog(context, "Your rental time has ended", "You are kicked out of your home!");
-                    }
-                }
-            }
+            if(lodging != null)
+                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0) && sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_lodging_key), 0) == 0)
+                    dialogs.showAlertDialog(context, "Your rental time has ended", "You are kicked out of your home!");
 
             jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_transport_key), SharedPreferencesDefaultValues.DefaultMyTransport);
             Transport transport = gson.fromJson(jsonString, Transport.class);
-            if(transport != null) {
-                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0))
-                {
+            if(transport != null)
+                if(0 < sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0) && sharedPref.getInt(context.getResources().getString(R.string.saved_renting_time_transport_key), 0) == 0)
                     dialogs.showAlertDialog(context, "Your rental time has ended", "You have no longer access to your transport.");
-                }
-            }
         }
 
         if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
@@ -174,6 +167,14 @@ class UpdateValues {
             editor.apply();
         }
 
+        if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_sad_key), false))
+        {
+            editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
+            editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) - 1);
+            if(sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) <= 0)
+                editor.putBoolean(context.getResources().getString(R.string.saved_is_sad_key), false);
+        }
+
         if (sharedPref.getInt(context.getResources().getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours) >= 23) {
 
             editor.putInt(context.getResources().getString(R.string.saved_time_hours_key), 0);
@@ -185,14 +186,6 @@ class UpdateValues {
             }
             else
                 editor.putInt(context.getResources().getString(R.string.saved_day_week_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_day_week_key), SharedPreferencesDefaultValues.DefaultDateDays)) + 1));
-
-            if(sharedPref.getBoolean(context.getResources().getString(R.string.saved_is_sad_key), false))
-            {
-                editor.putInt(context.getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(context.getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
-                editor.putInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) - 1);
-                if(sharedPref.getInt(context.getResources().getString(R.string.saved_how_long_will_be_sad_key), 0) <= 0)
-                    editor.putBoolean(context.getResources().getString(R.string.saved_is_sad_key), false);
-            }
 
             String jsonString = sharedPref.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
             Lodging lodging = gson.fromJson(jsonString, Lodging.class);
@@ -400,20 +393,20 @@ class UpdateValues {
             switch (rnd.nextInt(10))
             {
                 case 1: case 2:
-                json = sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
-                gson.fromJson(json, Lodging.class);
-                gson.newBuilder().setLenient().create();
+                    json = sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
+                    gson.fromJson(json, Lodging.class);
+                    gson.newBuilder().setLenient().create();
 
-                lodging = gson.fromJson(json, Lodging.class);
-                if(Arrays.CheapFlatInTheDangerousDistrict.getName().equals(lodging.getName()))
-                {
-                    if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 15000)
-                        editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 15000));
-                    else
-                        editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
-                    dialogs.showDialogWithChoose(sharedPreferences, context,"You were attacked!", "Do you want to go to the hospital for $15 000 or order the grave?", 1);
-                }
-                break;
+                    lodging = gson.fromJson(json, Lodging.class);
+                    if(Arrays.CheapFlatInTheDangerousDistrict.getName().equals(lodging.getName()))
+                    {
+                        if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= 7500)
+                            editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) - 7500));
+                        else
+                            editor.putBoolean(context.getResources().getString(R.string.saved_is_dead_key), true);
+                        dialogs.showDialogWithChoose(sharedPreferences, context,"You were attacked!", "Do you want to pay $7500? (or rather order the grave)", 1);
+                    }
+                    break;
 
                 case 3:
                     json = sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging);
@@ -468,7 +461,7 @@ class UpdateValues {
                     }
                     break;
 
-                case 7: case 8: case 9:
+                case 7: case 8:
                     if(sharedPreferences.getString(context.getResources().getString(R.string.saved_my_lodging_key), SharedPreferencesDefaultValues.DefaultMyLodging) != null)
                         if(sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) > 1250 && sharedPreferences.getBoolean(context.getResources().getString(R.string.saved_do_borrow_money_key), false))
                             dialogs.showDialogWithChoose(sharedPreferences, context, "Neighbour loan", "Your neighbour needs 1000$. Do you lend it to him?", 6);

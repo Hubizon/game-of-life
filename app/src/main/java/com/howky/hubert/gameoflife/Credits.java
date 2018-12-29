@@ -7,13 +7,13 @@ import com.howky.hubert.gameoflife.utils.ScrollingTextView;
 
 public class Credits extends AppCompatActivity {
 
-    private static final String authorsText = "Icons designed by:\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
-            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
-            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
-            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
-            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
-            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
-            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n";
+    private static final String authorsText = "Icons designed by:\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n";// +
+//            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
+//            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
+//            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
+//            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
+//            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
+//            "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
