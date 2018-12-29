@@ -43,31 +43,31 @@ public class SettingsActivity extends AppCompatActivity {
     private static final String NAME_EDIT_KEY = "name_edit";
     private static final String GOOD_NAME_REGEX = "^.{3,10}$";
 
-    private static final Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object value) {
-            String stringValue = value.toString();
-
-            if (preference instanceof EditTextPreference && preference.getKey().equals("name_edit")) {
-
-                Pattern p = Pattern.compile(GOOD_NAME_REGEX);
-                Matcher m = p.matcher(stringValue);
-                if (m.find()) {
-                    SharedPreferences userSharedPref = MyApplication.userSharedPref;
-                    userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
-
-                    preference.setSummary(stringValue);
-                } else {
-                    Toast.makeText(preference.getContext(),
-                            "Your name should have 3-10 characters!",
-                            Toast.LENGTH_LONG).show();
-                }
-            } else {
-                preference.setSummary(stringValue);
-            }
-            return true;
-        }
-    };
+//    private static final Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
+//        @Override
+//        public boolean onPreferenceChange(Preference preference, Object value) {
+//            String stringValue = value.toString();
+//
+//            if (preference instanceof EditTextPreference && preference.getKey().equals("name_edit")) {
+//
+////                Pattern p = Pattern.compile(GOOD_NAME_REGEX);
+////                Matcher m = p.matcher(stringValue);
+////                if (m.find()) {
+////                    SharedPreferences userSharedPref = MyApplication.userSharedPref;
+////                    userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
+////
+////                    preference.setSummary(stringValue);
+////                } else {
+////                    Toast.makeText(preference.getContext(),
+////                            "Your name should have 3-10 characters!",
+////                            Toast.LENGTH_LONG).show();
+////                }
+//            } else {
+//                preference.setSummary(stringValue);
+//            }
+//            return true;
+//        }
+//    };
 
 
     /**
@@ -77,19 +77,19 @@ public class SettingsActivity extends AppCompatActivity {
      * immediately updated upon calling this method. The exact display format is
      * dependent on the type of preference.
      *
-     * @see #sBindPreferenceSummaryToValueListener
+     * see #sBindPreferenceSummaryToValueListener
      */
-    private static void bindPreferenceSummaryToValue(Preference preference) {
-        // Set the listener to watch for value changes.
-        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-
-        // Trigger the listener immediately with the preference's
-        // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
-    }
+//    private static void bindPreferenceSummaryToValue(Preference preference) {
+//        // Set the listener to watch for value changes.
+//        preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
+//
+//        // Trigger the listener immediately with the preference's
+//        // current value.
+//        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
+//                PreferenceManager
+//                        .getDefaultSharedPreferences(preference.getContext())
+//                        .getString(preference.getKey(), ""));
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +150,26 @@ public class SettingsActivity extends AppCompatActivity {
             String name = MyApplication.userSharedPref.getString(getString(R.string.saved_character_name_key), getString(R.string.pref_default_display_name));
             editNamePref.setSummary(name);
             editNamePref.setDefaultValue(name);
-            bindPreferenceSummaryToValue(editNamePref);
+            //bindPreferenceSummaryToValue(editNamePref);
+            editNamePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object o) {
+                    String stringValue = o.toString();
+                    Pattern p = Pattern.compile(GOOD_NAME_REGEX);
+                    Matcher m = p.matcher(stringValue);
+                    if (m.find()) {
+                        SharedPreferences userSharedPref = MyApplication.userSharedPref;
+                        userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
+
+                        preference.setSummary(stringValue);
+                    } else {
+                        Toast.makeText(preference.getContext(),
+                                "Your name should have 3-10 characters!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    return true;
+                }
+            });
 
             //Hard Reset preference
             Preference hardReset = findPreference("reset_key");

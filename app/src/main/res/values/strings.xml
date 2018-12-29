@@ -9,7 +9,7 @@
     <string name="make_a_game">Make a game</string>
     <string name="draw_something">Draw something</string>
     <string name="record_movies">Record movies</string>
-    <string name="search_for_a_girlfriend">Search for a partner</string>
+    <string name="search_for_a_girlfriend">Find a partner</string>
     <string name="status">Status:</string>
     <string name="ask_her_to_marry_you">Ask to marry you</string>
     <string name="buy_her_a_gift">Buy a gift</string>
@@ -75,9 +75,9 @@
     <string name="marry">marry</string>
     <string name="single">single</string>
     <string name="engagement">Engagement</string>
-    <string name="successful_engagement">You successful were engagement!</string>
+    <string name="successful_engagement">You were successfully engaged!</string>
     <string name="getting_married">Getting married</string>
-    <string name="successful_marrying">You successful got married!</string>
+    <string name="successful_marrying">You successfully got married!</string>
     <string name="unsuccessful_engagement">Unfortunately your love didn\'t accept your engagement request</string>
     <string name="unsuccessful_marrying">Unfortunately your love didn\'t accept your request</string>
     <string name="increasing_relationship_level">Increasing relationship level</string>
@@ -91,8 +91,8 @@
     <string name="sure_to_break_up_with_her">Do you want to break up with her?</string>
     <string name="sure_to_break_up_with_him">Do you want to break up with him?</string>
     <string name="found_love">Found love</string>
-    <string name="successful_found_girlfriend">You successful found love! Her name is</string>
-    <string name="successful_found_boyfriend">You successful found love! His name is</string>
+    <string name="successful_found_girlfriend">You successfully found love! Her name is</string>
+    <string name="successful_found_boyfriend">You successfully found love! His name is</string>
     <string name="sure_to_support_a_charity_event">Are you sure you want to support a charity event for 100$?</string>
     <string name="dont_have_televisor">Unfortunately you don\'t have a TV</string>
     <string name="dont_have_computer_phone">Unfortunately you don\'t have a computer or a phone</string>
