@@ -15,7 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -36,33 +40,25 @@ public class SettingsActivity extends AppCompatActivity {
      */
     public static final String DARK_SWITCH_KEY = "dark_mode_switch";
     private static final String NAME_EDIT_KEY = "name_edit";
+    private static final String GOOD_NAME_REGEX = "^.{3,10}$";
 
     private static final Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
-            if (preference instanceof ListPreference) {
-                // For list preferences, look up the correct display value in
-                // the preference's 'entries' list.
-                ListPreference listPreference = (ListPreference) preference;
-                int index = listPreference.findIndexOfValue(stringValue);
 
-                // Set the summary to reflect the new value.
-                preference.setSummary(
-                        index >= 0
-                                ? listPreference.getEntries()[index]
-                                : null);
+            if (preference instanceof EditTextPreference && preference.getKey().equals("name_edit")) {
 
-            } else {
-                // For all other preferences, set the summary to the value's
-                // simple string representation.
-                preference.setSummary(stringValue);
-
-                if (preference instanceof EditTextPreference && preference.getKey().equals("name_edit")) {
+                Pattern p = Pattern.compile(GOOD_NAME_REGEX);
+                Matcher m = p.matcher(stringValue);
+                if (m.find()) {
                     SharedPreferences userSharedPref = MyApplication.userSharedPref;
                     userSharedPref.edit().putString(preference.getContext().getString(R.string.saved_character_name_key), stringValue).apply();
-                }
 
+                    preference.setSummary(stringValue);
+                }
+            } else {
+                preference.setSummary(stringValue);
             }
             return true;
         }
@@ -144,7 +140,11 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
+            // Display name preference
             final Preference editNamePref = findPreference(NAME_EDIT_KEY);
+            String name = MyApplication.userSharedPref.getString(getString(R.string.saved_character_name_key), getString(R.string.pref_default_display_name));
+            editNamePref.setSummary(name);
+            editNamePref.setDefaultValue(name);
             bindPreferenceSummaryToValue(editNamePref);
 
 

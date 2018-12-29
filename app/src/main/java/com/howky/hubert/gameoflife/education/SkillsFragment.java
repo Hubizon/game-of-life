@@ -34,8 +34,7 @@ import java.util.ArrayList;
  * Use the {@link SkillsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class
-SkillsFragment extends Fragment implements RecyclerViewSkillsAdapter.ItemClickListener {
+public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapter.ItemClickListener {
 
     public SkillsFragment() {
         // Required empty public constructor

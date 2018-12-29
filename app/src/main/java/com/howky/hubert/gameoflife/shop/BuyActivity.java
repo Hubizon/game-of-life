@@ -3,6 +3,7 @@ package com.howky.hubert.gameoflife.shop;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,12 +50,43 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
     private int id;
     private View view;
 
+
+    private Handler mHandler;
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+                switch (id)
+                {
+                    case R.id.cardview_food:
+                        itemBuyProgress.setProgress(MyApplication.userSharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
+                        break;
+
+                    case R.id.cardview_medicines:
+                        itemBuyProgress.setProgress(MyApplication.userSharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
+                        break;
+
+                    case R.id.cardview_fun:
+                        itemBuyProgress.setProgress(MyApplication.userSharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
+                        break;
+                    default:
+                        break;
+                }
+
+            mHandler.postDelayed(mRunnable, 1000);
+            }
+    };
+
+    private ProgressBar itemBuyProgress;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy);
         setTitle(R.string.title_shop);
         view = new View(this);
+
+        mHandler = new Handler();
+        itemBuyProgress = findViewById(R.id.progressBar_item_shop_buy);
 
         ArrayList<String> itemsNames = new ArrayList<>();
         ArrayList<String> itemsPrices = new ArrayList<>();
@@ -73,7 +105,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.hungry));
                 setTitle(getResources().getString(R.string.buy_food));
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
+                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
                 break;
 
             case R.id.cardview_medicines:
@@ -83,7 +115,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.health));
                 setTitle(getResources().getString(R.string.buy_medicines));
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
+                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
                 break;
 
             case R.id.cardview_fun:
@@ -93,7 +125,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 ((TextView)(findViewById(R.id.itemToBuy_shop_buy))).setText(getResources().getString(R.string.happiness));
                 setTitle(getResources().getString(R.string.buy_fun_items));
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
+                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
                 break;
 
             case R.id.buyLotteries:
@@ -102,7 +134,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsPrices.add(lottery.getPrice() + getResources().getString(R.string.currency));
                 }
                 setTitle(getResources().getString(R.string.buy_lotteries));
-                findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
+                itemBuyProgress.setVisibility(View.GONE);
                 break;
 
             case R.id.cardview_blackmarket:
@@ -125,7 +157,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
 
                 setTitle(getResources().getString(R.string.black_market));
-                findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
+                itemBuyProgress.setVisibility(View.GONE);
                 break;
 
             case R.id.cardview_house:
@@ -134,7 +166,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsPrices.add((lodging.getPrice() * 25) + getResources().getString(R.string.currency));
                 }
                 setTitle(getResources().getString(R.string.buy_houses));
-                findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
+                itemBuyProgress.setVisibility(View.GONE);
                 //lodgingObjects = lodgingList;
                 break;
 
@@ -144,7 +176,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                     itemsPrices.add((transport.getPrice() * 25) + getResources().getString(R.string.currency));
                 }
                 setTitle(getResources().getString(R.string.buy_transport));
-                findViewById(R.id.progressBar_item_shop_buy).setVisibility(View.GONE);
+                itemBuyProgress.setVisibility(View.GONE);
                 break;
 
             default:
@@ -181,7 +213,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 else
                     Toast.makeText(this, getResources().getString(R.string.not_enough_money), Toast.LENGTH_LONG).show();
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
+                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry));
                 ((TextView)(findViewById(R.id.money_buy))).setText(getString(R.string.money_formatted, getString(R.string.currency),
                         sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
                 break;
@@ -194,7 +226,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 else
                     Toast.makeText(this, getResources().getString(R.string.not_enough_money), Toast.LENGTH_LONG).show();
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
+                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
                 ((TextView)(findViewById(R.id.money_buy))).setText(getString(R.string.money_formatted, getString(R.string.currency),
                         sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
                 break;
@@ -247,7 +279,7 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 else if ("TV".equals( funList[position].getType()))
                     alertDialogSellItem(funList[position].getPrice(),  funList[position].getName(), "buy","fun", position);
 
-                ((ProgressBar)(findViewById(R.id.progressBar_item_shop_buy))).setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
+                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness));
                 break;
             case R.id.buyLotteries:
                 if(sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) >= lotteryList[position].getPrice())
@@ -453,10 +485,18 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
         editor.apply();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
         MyApplication.CurrentContext = this;
+        mHandler.post(mRunnable);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mRunnable);
     }
 
     @Override

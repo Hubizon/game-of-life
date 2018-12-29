@@ -230,8 +230,10 @@ public class MainActivity extends AppCompatActivity
 
 
     private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd(getString(R.string.MONEYBOOSTER_ADMOB_ID),
-                new AdRequest.Builder().build());
+        if (!mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.loadAd(getString(R.string.MONEYBOOSTER_ADMOB_ID),
+                    new AdRequest.Builder().build());
+        }
     }
 
     @Override
