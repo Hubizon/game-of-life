@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
+
 
 public class MyDialogDead extends DialogFragment {
 
@@ -28,7 +30,20 @@ public class MyDialogDead extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_my_dialog_dead, container, false);
         setCancelable(false);
 
-        int pointsNow = MyApplication.userSharedPref.getInt(getString(R.string.saved_age_years_key), 0) * 365 + MyApplication.userSharedPref.getInt(getString(R.string.saved_age_days_key), 0);
+        int pointsNowForSurvival = MyApplication.userSharedPref.getInt(getString(R.string.saved_age_years_key), 0) * 500 + MyApplication.userSharedPref.getInt(getString(R.string.saved_age_days_key), 0);
+
+        int pointsNowForMoney = (MyApplication.userSharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + MyApplication.userSharedPref.getInt(getString(R.string.saved_money_in_safe_key), 0)) / 50;
+        if(pointsNowForMoney > 10000)
+            pointsNowForMoney =  10000;
+
+        int pointsNowForHiddenSkills = (MyApplication.userSharedPref.getInt(getString(R.string.saved_communication_skills_key), SharedPreferencesDefaultValues.DefaultCommunicationsSkills) + MyApplication.userSharedPref.getInt(getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints)
+                + MyApplication.userSharedPref.getInt(getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints) + MyApplication.userSharedPref.getInt(getString(R.string.saved_criminal_points_key), SharedPreferencesDefaultValues.DefaultCriminalPoints)
+                + MyApplication.userSharedPref.getInt(getString(R.string.saved_writing_skills_key), 100) + MyApplication.userSharedPref.getInt(getString(R.string.saved_programming_skills_key), 100) + MyApplication.userSharedPref.getInt(getString(R.string.saved_recording_skills_key), 100)
+                + MyApplication.userSharedPref.getInt(getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints)) / 5;
+
+        int pointsNowForItems = 0;
+
+        int pointsNow = pointsNowForSurvival + pointsNowForMoney + pointsNowForHiddenSkills + pointsNowForItems;
         int pointsHigh = MyApplication.mainSharedPref.getInt(getString(R.string.saved_high_score_key), 0);
 
         if(pointsNow > pointsHigh) {

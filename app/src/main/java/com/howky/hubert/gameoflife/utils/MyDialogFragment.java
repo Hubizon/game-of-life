@@ -299,10 +299,10 @@ public class  MyDialogFragment extends DialogFragment  {
                                 double moneyFromAdditionalSkills = 0;
                                 if (mJob.getAdditionalSkillsRes() != 0) {
                                     int additionalSkills = sharedPref.getInt(getResources().getString(mJob.getAdditionalSkillsRes()), 50);
-                                    moneyFromAdditionalSkills = (salary * 0.1 * (Math.sqrt(90.0 + additionalSkills / 10.0))) - salary;//2131689672
+                                    moneyFromAdditionalSkills = (salary * 0.1 * (Math.sqrt(90.0 + additionalSkills / 10.0))) - salary;
                                 }
 
-                                double moneyFromEducation = ((salary * 0.1 * (Math.sqrt(85.0 + educationPoints * 0.1))) - salary) * (Math.sqrt(mJob.getMarkRatio()));
+                                double moneyFromEducation = (((salary * 0.1 * (Math.sqrt(educationPoints))) - salary) * (Math.sqrt(mJob.getMarkRatio()))) * 0.3;
 
                                 salary = salary + moneyFromAdditionalSkills + moneyFromEducation;
 

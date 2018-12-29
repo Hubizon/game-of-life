@@ -86,9 +86,9 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultOfficeJobsList = gson.toJson(Arrays.officeJobsList);
     public static final String DefaultCriminalJobsList = gson.toJson(Arrays.criminalJobsList);
 
-    static final int DefaultCommunicationsSkills = 100;
+    public static final int DefaultCommunicationsSkills = 100;
     public static final int DefaultCriminalPoints = 100;
-    public final static int DefaultKarmaPoints = 70;
+    public final static int DefaultKarmaPoints = 100;
     public final static int DefaultWorkPositionPoints = 75;
     public static final int DefaultWorkRelations = 100;
 
