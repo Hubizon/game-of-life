@@ -491,18 +491,17 @@ public class  MyDialogFragment extends DialogFragment  {
     }
 
     private String doSomething(String resSavedProgress, String resSavedSkills, String resSavedList, String textWhenEnd) {
-        editor.putInt(resSavedProgress, (sharedPref.getInt(resSavedProgress, 0) + 1));
+        editor.putInt(resSavedProgress, (sharedPref.getInt(resSavedProgress, 0) + 200));
         editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) - 10));
         editor.putInt(getResources().getString(R.string.saved_hungry_key), ((sharedPref.getInt(getResources().getString(R.string.saved_hungry_key), SharedPreferencesDefaultValues.DefaultHungry)) - 10));
         editor.putInt(getResources().getString(R.string.saved_energy_key), ((sharedPref.getInt(getResources().getString(R.string.saved_energy_key), SharedPreferencesDefaultValues.DefaultEnergy)) - 30));
+        editor.apply();
+        ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).setProgress(sharedPref.getInt(resSavedProgress, 0));
 
-        ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).setProgress(((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress() + 20 );
-        editor.putInt(resSavedProgress, ((ProgressBar) view.findViewById(R.id.progressBar_doing_thing)).getProgress());
-
-        if (sharedPref.getInt(resSavedProgress, 0) >= 10) {
+        if (sharedPref.getInt(resSavedProgress, 0) >= 1000) {
             editor.putInt(resSavedSkills, (sharedPref.getInt(resSavedSkills, 0) + 2));
-            editor.putInt(resSavedSkills, 0);
             editor.putInt(resSavedProgress, 0);
+            //editor.putInt(resSavedProgress, 0);
             editor.apply();
 
             int gameScore = sharedPref.getInt(getResources().getString(R.string.saved_education_points_key), SharedPreferencesDefaultValues.DefaultEducationPoints) / 10 + sharedPref.getInt(getResources().getString(R.string.saved_programming_skills_key),0);
@@ -523,14 +522,18 @@ public class  MyDialogFragment extends DialogFragment  {
                     jsonArray = new JSONArray(sharedPref.getString(resSavedList, SharedPreferencesDefaultValues.DefaultGamesList));
 
                 jsonArray.put(toJsonArray);
+
+                String toastText = textWhenEnd;
+                if(toJsonArray.getBoolean(1))
+                    toastText += ". It also became a bestseller!";
+                Toast.makeText(getContext(), toastText, Toast.LENGTH_SHORT).show();
+
                 return jsonArray.toString();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            Toast.makeText(getContext(), textWhenEnd, Toast.LENGTH_SHORT).show();
         }
-        return "";
+        return sharedPref.getString(resSavedList, "");
     }
 
     @Override

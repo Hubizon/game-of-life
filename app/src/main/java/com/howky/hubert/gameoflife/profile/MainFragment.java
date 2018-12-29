@@ -23,6 +23,10 @@ import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 import com.howky.hubert.gameoflife.house.Transport;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainFragment extends Fragment {
 
 
@@ -39,7 +43,7 @@ public class MainFragment extends Fragment {
 
     }
 
-    private TextView characternametext, charactermoneytext, timetext, agetext, lodgingtext, transporttext, girltext;
+    private TextView characternametext, charactermoneytext, timetext, agetext, lodgingtext, transporttext, educationtext, girltext;
     private ProgressBar hungerprogress, healthprogress, energyprogress, happinessprogress;
 
     public static SharedPreferences mUserSharedPref;
@@ -89,6 +93,7 @@ public class MainFragment extends Fragment {
 
         lodgingtext = view.findViewById(R.id.characterLodging);
         transporttext = view.findViewById(R.id.characterTransport);
+        educationtext = view.findViewById(R.id.characterEducation);
         girltext = view.findViewById(R.id.characterGirlboyfriend);
 
         hungerprogress = view.findViewById(R.id.progressBar_character_hungry);
@@ -138,6 +143,18 @@ public class MainFragment extends Fragment {
         Transport transport = gson.fromJson(json, Transport.class);
         if(transport != null)
             transporttext.setText(transport.getName());
+
+        try {
+            JSONArray jsonArray = new JSONArray(mUserSharedPref.getString(getResources().getString(R.string.saved_skills_education_list_key), SharedPreferencesDefaultValues.DefaultSkillsEducationList));
+            String eduName = "None";
+            for(int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if(jsonObject.getBoolean("isBought"))
+                    eduName = jsonObject.getString("useName");
+            }
+            educationtext.setText(eduName);
+        } catch (JSONException e) { }
 
         json = mUserSharedPref.getString(getResources().getString(R.string.saved_love_key), "");
         Love love = gson.fromJson(json, Love.class);

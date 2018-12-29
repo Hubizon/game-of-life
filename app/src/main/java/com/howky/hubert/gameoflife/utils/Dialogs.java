@@ -73,6 +73,10 @@ public class Dialogs {
                         onDialogTimerStart(context);
                         switch (whichOneEvent)
                         {
+                            case 1:
+                                editor.putInt(context.getResources().getString(R.string.saved_health_key), 0);
+                                break;
+
                             case 6:
                                 editor.putInt(context.getResources().getString(R.string.saved_karma_points_key), sharedPref.getInt(context.getResources().getString(R.string.saved_karma_points_key), SharedPreferencesDefaultValues.DefaultKarmaPoints) - 10);
                                 onDialogTimerStart(context);
@@ -93,8 +97,7 @@ public class Dialogs {
                         switch (whichOneEvent)
                         {
                             case 1:
-                                if(sharedPref.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) < 0)
-                                    //mListener.onDialogInteractionDie(); nie lepiej editor.putBoolean(dead, true) ???
+                                Toast.makeText(context, "Thank you, I hope that we'll meet soon in this dangerous district", Toast.LENGTH_SHORT).show();
                                 break;
 
                             case 2:
