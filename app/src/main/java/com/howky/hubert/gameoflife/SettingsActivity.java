@@ -163,8 +163,9 @@ public class SettingsActivity extends AppCompatActivity {
 
                         preference.setSummary(stringValue);
                     } else {
+
                         Toast.makeText(preference.getContext(),
-                                "Your name should have 3-10 characters!",
+                                preference.getContext().getString(R.string.toast_wrong_name),
                                 Toast.LENGTH_LONG).show();
                     }
                     return true;

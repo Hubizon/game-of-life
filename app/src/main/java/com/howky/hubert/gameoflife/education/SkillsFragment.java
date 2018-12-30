@@ -158,8 +158,6 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         dialoginterface.cancel();
-                        //TODO: start timer
-                        // raczej niepotrzebny tu jest dialog
                     }})
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {

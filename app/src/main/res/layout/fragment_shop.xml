@@ -1,14 +1,14 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.howky.hubert.gameoflife.shop.ShopFragment"
-    android:alignmentMode="alignMargins"
-    android:columnCount="2"
-    android:columnOrderPreserved="false"
+    app:alignmentMode="alignMargins"
+    app:columnCount="2"
+    app:columnOrderPreserved="false"
     android:padding="14dp"
-    android:rowCount="3">
+    app:rowCount="3">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardview_food"
@@ -174,4 +174,4 @@
         </FrameLayout>
     </android.support.v7.widget.CardView>
 
-</GridLayout>
+</android.support.v7.widget.GridLayout>

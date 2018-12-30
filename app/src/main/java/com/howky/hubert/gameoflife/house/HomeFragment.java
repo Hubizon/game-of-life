@@ -96,10 +96,10 @@ public class HomeFragment extends Fragment
                     SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());
                     boolean isDark = mSettings.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
                     if (isDark) {
-                        dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Dialog_Alert);
+                        dialog = new AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Dialog_Alert);
                     }
                     else {
-                        dialog = new AlertDialog.Builder(context, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                        dialog = new AlertDialog.Builder(context, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
                     }
                     dialog.setTitle(getResources().getString(R.string.dont_have_safe))
                             //.setIcon(R.drawable.ic_launcher)
