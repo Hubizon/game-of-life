@@ -35,8 +35,11 @@ public class ComputerActivity extends AppCompatActivity implements View.OnClickL
         setTitle(R.string.title_computer);
 
         sharedPref = MyApplication.userSharedPref;
-        ((TextView)(findViewById(R.id.time_computer))).setText(getString(R.string.money_formatted, getString(R.string.currency),
-                sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
+        ((TextView)(findViewById(R.id.time_computer))).setText(getString(R.string.date_format,
+                sharedPref.getInt(getString(R.string.saved_date_years_key), SharedPreferencesDefaultValues.DefaultDateYears),
+                sharedPref.getInt(getString(R.string.saved_date_months_key), SharedPreferencesDefaultValues.DefaultDateMonths),
+                sharedPref.getInt(getString(R.string.saved_date_days_key), SharedPreferencesDefaultValues.DefaultDateDays),
+                sharedPref.getInt(getString(R.string.saved_time_hours_key), SharedPreferencesDefaultValues.DefaultTimeHours)));
 
 
         Button playComputer = findViewById(R.id.playComputer);

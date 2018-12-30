@@ -91,8 +91,6 @@ public class EduFragment extends Fragment
             Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
 
             //ChildWork.add(new ChildList("work hard"));
-
-            //TODO make it in chnageWOrkStatus method
             if(job == null)
                 ChildWork.add(new ChildList("Find a Job"));
             else {

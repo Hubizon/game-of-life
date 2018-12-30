@@ -100,9 +100,10 @@
     <string name="sure_to_buy_for_7500">Do you want to buy it for 7500$?</string>
     <string name="no_ads">There are currently no ads!</string>
     <string name="cash">Cash:</string>
+    <string name="toast_wrong_name">Your name should have 3&#8211;10 characters!</string>
 
-    <string name="money_formatted">%1$s%2$d</string>
-    <string name="date_format">%d.%d.%d %d:00</string>
+    <string name="money_formatted" translatable="false">%1$s%2$d</string>
+    <string name="date_format" translatable="false">%d.%d.%d %d:00</string>
 
     <string name="socre_format">Score: %d</string>
     <string name="highscore_format">High score: %d</string>
@@ -181,7 +182,7 @@
     </string>
 
     <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">Mr. Hubi</string>
+    <string name="pref_default_display_name" translatable="false">Mr. Hubi</string>
 
     <!-- Example settings for Data & Sync -->
 
