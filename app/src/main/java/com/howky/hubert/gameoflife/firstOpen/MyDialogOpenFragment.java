@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.github.florent37.tutoshowcase.TutoShowcase;
 import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.SettingsActivity;
@@ -150,6 +151,8 @@ public class MyDialogOpenFragment extends DialogFragment implements View.OnClick
 
                 mListener.onNewUserAdd();
                 dismiss();
+
+
                 break;
 
             case R.id.avatarImage:

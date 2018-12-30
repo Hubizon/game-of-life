@@ -253,9 +253,9 @@ public class GirlboyfriendFragment extends Fragment implements View.OnClickListe
                     view.findViewById(R.id.button_love_SearchLove).setVisibility(View.GONE);
 
                     if(sharedPref.getBoolean(getResources().getString(R.string.saved_sex_key), SharedPreferencesDefaultValues.DefaultIsMale))
-                        loveName.setText(getResources().getString(R.string.girlfriend) + "" + sharedPref.getString(getResources().getString(R.string.saved_love_name_key), ""));
+                        loveName.setText(getResources().getString(R.string.girlfriend) + " " + sharedPref.getString(getResources().getString(R.string.saved_love_name_key), ""));
                     else
-                        loveName.setText(getResources().getString(R.string.boyfriend) + "" + sharedPref.getString(getResources().getString(R.string.saved_love_name_key), ""));
+                        loveName.setText(getResources().getString(R.string.boyfriend) + " " + sharedPref.getString(getResources().getString(R.string.saved_love_name_key), ""));
 
                     if(sharedPref.getInt(getResources().getString(R.string.saved_love_relationship_level_key), SharedPreferencesDefaultValues.DefaultLoveRelationshipLevel) <= 1)
                         loveStatus.setText(getResources().getString(R.string.status) + " " + getResources().getString(R.string.lovers));

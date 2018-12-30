@@ -154,7 +154,7 @@ public class SkillsFragment extends Fragment implements RecyclerViewSkillsAdapte
 
         dialog.setTitle(getResources().getString(R.string.buying_skills))
                 //.setIcon(R.drawable.ic_launcher)Are you sure you want to buy and learn
-                .setMessage(getResources().getString(R.string.sure_to_buy_learn) + "" + skillName + "?")
+                .setMessage(getResources().getString(R.string.sure_to_buy_learn) + " '" + skillName + "'?")
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         dialoginterface.cancel();

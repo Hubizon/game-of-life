@@ -15,9 +15,11 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 
+import com.github.florent37.tutoshowcase.TutoShowcase;
 import com.howky.hubert.gameoflife.utils.Dialogs;
 import com.howky.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
 import com.howky.hubert.gameoflife.utils.MainTimer;
@@ -121,7 +123,6 @@ public class MainActivity extends AppCompatActivity
         else {
             if(userSharedPref.getBoolean(getString(R.string.saved_is_dead_key), false)) mainTimer.Die();
         }
-
     }
 
     private void setupTabIcons() {
@@ -145,12 +146,27 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_pause:
-                item.setIcon(mPauseDrawable);
-                mPauseDrawable.start();
-                MainTimer.shouldWork = false;
-                mainTimer.stopTimer();
-                Dialogs dialogs = new Dialogs(mContext);
-                dialogs.showResumeDialog(this, item);
+//                item.setIcon(mPauseDrawable);
+//                mPauseDrawable.start();
+//                MainTimer.shouldWork = false;
+//                mainTimer.stopTimer();
+//                Dialogs dialogs = new Dialogs(mContext);
+//                dialogs.showResumeDialog(this, item);
+
+                TutoShowcase.from(this)
+                        .setContentView(R.layout.tutorial_one)
+
+                        .on(R.id.test) //a view in actionbar
+                        .addCircle()
+                        .withBorder()
+                        .onClick(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //custom action
+                            }
+                        })
+
+                        .show();
                 return true;
             case R.id.menu_item_setings:
                 mainTimer.stopTimer();

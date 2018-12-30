@@ -345,7 +345,7 @@ class UpdateValues {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Random rnd = new Random();
 
-        switch (rnd.nextInt(250))
+        switch (rnd.nextInt(400))
         {
             case 1:
                 drawGoodEvent(context);
@@ -372,10 +372,13 @@ class UpdateValues {
                     dialogs.showDialogWithChoose(sharedPreferences, context,"A rich man won the lottery and want to give you 2500$!", "Do you want to accept it?", 2);
                     break;
 
-                case 2: case 3: case 4: case 5: case 6:
-                    int rndFoundMoney = rnd.nextInt(25) * 100 + 500;
-                        dialogs.showAlertDialog(context, "You found " + rndFoundMoney, "");
+                case 2: case 3: case 4:
+                    int rndFoundMoney = rnd.nextInt(10) * 100 + 500;
+                        dialogs.showAlertDialog(context, "You found " + rndFoundMoney + "$", "");
                     editor.putInt(context.getResources().getString(R.string.saved_character_money_key), (sharedPreferences.getInt(context.getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney) + rndFoundMoney));
+                    break;
+
+                case 5: case 6:
                     break;
 
                 case 7: case 8:
