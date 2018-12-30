@@ -226,7 +226,8 @@ public class BuyActivity extends AppCompatActivity implements RecyclerViewShopBu
                 }
                 else
                     Toast.makeText(this, getResources().getString(R.string.not_enough_money), Toast.LENGTH_LONG).show();
-                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth) / 10);
+                editor.apply();
+                itemBuyProgress.setProgress(sharedPref.getInt(getString(R.string.saved_health_key), SharedPreferencesDefaultValues.DefaultHealth));
                 ((TextView)(findViewById(R.id.money_buy))).setText(getString(R.string.money_formatted, getString(R.string.currency),
                         sharedPref.getInt(getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)));
                 break;
