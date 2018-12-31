@@ -3,6 +3,7 @@ package com.howky.hubert.gameoflife.house;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
+import com.github.florent37.tutoshowcase.TutoShowcase;
 import com.howky.hubert.gameoflife.MainActivity;
 import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;

@@ -8,6 +8,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <Space
+        android:id="@+id/spaceTutorialFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/spaceTutorialSix"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_Expand"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/recycler_Expand"
+        app:layout_constraintTop_toTopOf="@+id/recycler_Expand" />
+
+    <Space
+        android:id="@+id/spaceTutorialSix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_Expand"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/recycler_Expand"
+        app:layout_constraintTop_toTopOf="@+id/recycler_Expand" />
+
+    <Space
+        android:id="@+id/spaceTutorialSeven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_Expand"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_Expand"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/recycler_Expand"
+        app:layout_constraintTop_toBottomOf="@+id/spaceTutorialSix" />
+
     <android.support.v7.widget.CardView
         android:id="@+id/cardViewWorkInfo"
         android:layout_width="match_parent"

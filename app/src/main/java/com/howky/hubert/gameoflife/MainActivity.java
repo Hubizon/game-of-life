@@ -1,14 +1,17 @@
 package com.howky.hubert.gameoflife;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
@@ -19,7 +22,13 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.github.florent37.tutoshowcase.TutoShowcase;
+import com.howky.hubert.gameoflife.education.EduFragment;
+import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
+import com.howky.hubert.gameoflife.shop.BuyActivity;
+import com.howky.hubert.gameoflife.shop.ShopFragment;
 import com.howky.hubert.gameoflife.utils.Dialogs;
 import com.howky.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
 import com.howky.hubert.gameoflife.utils.MainTimer;
@@ -28,6 +37,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
 import static com.howky.hubert.gameoflife.MyApplication.currentUserNumber;
 import static com.howky.hubert.gameoflife.MyApplication.userSharedPref;
@@ -115,6 +125,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if (mainSharedPref.getBoolean(getString(R.string.saved_is_first_time_key), true)) {
+            askToStartTutorial();
             MainTimer.shouldWork = false;
             mainTimer.stopTimer();
             DialogFragment newDialog = MyDialogOpenFragment.newInstance(MyDialogOpenFragment.MODE_NEW);
@@ -146,27 +157,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_pause:
-//                item.setIcon(mPauseDrawable);
-//                mPauseDrawable.start();
-//                MainTimer.shouldWork = false;
-//                mainTimer.stopTimer();
-//                Dialogs dialogs = new Dialogs(mContext);
-//                dialogs.showResumeDialog(this, item);
+                item.setIcon(mPauseDrawable);
+                mPauseDrawable.start();
+                MainTimer.shouldWork = false;
+                mainTimer.stopTimer();
+                Dialogs dialogs = new Dialogs(mContext);
+                dialogs.showResumeDialog(this, item);
 
-                TutoShowcase.from(this)
-                        .setContentView(R.layout.tutorial_one)
-
-                        .on(R.id.test) //a view in actionbar
-                        .addCircle()
-                        .withBorder()
-                        .onClick(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //custom action
-                            }
-                        })
-
-                        .show();
                 return true;
             case R.id.menu_item_setings:
                 mainTimer.stopTimer();
@@ -177,6 +174,523 @@ public class MainActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    void askToStartTutorial()
+    {
+        AlertDialog.Builder dialog;
+
+        SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isDark = settingsSharedPref.getBoolean(SettingsActivity.DARK_SWITCH_KEY, false);
+        if (isDark) {
+            dialog = new AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Dialog_Alert);
+        } else {
+            dialog = new AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        }
+
+        dialog.setTitle("Do you want to see tutorial?")
+                .setMessage("Hi! I see you are first time here! Do you want to see tutorial before starting playing?")
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+
+                        dialoginterface.cancel();
+                    }})
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                        startTutorialOne();
+                        dialoginterface.cancel();
+                    }
+                }).show();
+    }
+
+    void startTutorialOne()
+    {
+        MainTimer.shouldWork = false;
+        mainTimer.stopTimer();
+
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialOne), "Top panel", "Here you can see information about yourself." +
+                        "Your avatar, nickname, money, etc.")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(120),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+                        startTutorialTwo();
+                    }
+                });
+    }
+
+    void startTutorialTwo()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialTwo), "Center panel", "This's the most important thing in the whole game. " +
+                        "Here you can see 4 Progress Bars showing your actual level of: health, hungry, exhaust and happiness." +
+                        " But watch out! These bars are getting lower every second!")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(130),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        startTutorialThree();
+                    }
+                });
+    }
+
+    void startTutorialThree()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialThree), "Bottom panel", "It's just showing where do you live, your education, " +
+                        "transport and potential partner")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(140),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        startTutorialFour();
+                    }
+                });
+    }
+
+    void startTutorialFour()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialFour), "Education/Work", "Click now here, to move to the next tab")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(80),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        mPager.setCurrentItem(1);
+                        startTutorialFive();
+                    }
+                });
+    }
+
+    void startTutorialFive()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialFive), "School", "Here, you can go to school (to have higher salary in work), " +
+                        "or learn some new skills")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(120),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        mPager.setCurrentItem(1);
+                        startTutorialSix();
+                    }
+                });
+    }
+
+    void startTutorialSix()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialSix), "Work", "You can find a job here and then go to work")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(120),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        mPager.setCurrentItem(1);
+                        startTutorialSeven();
+                    }
+                });
+    }
+
+    void startTutorialSeven()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialSeven), "Criminal", "If you want to do something not really legal, you can always" +
+                        " check here. There're few options: 'Get new friends' (to make more money from criminal jobs), 'Steal stuff', 'sell drugs', and 'threat teachers." +
+                        " But try not to get caught!")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(120),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        startTutorialEight();
+                    }
+                });
+    }
+
+    void startTutorialEight()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialEight), "Shop", "You can buy many things here! I think that's pretty easy " +
+                        "to understand, but let's have a look at this")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(80),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        mPager.setCurrentItem(2);
+                        startTutorialNine();
+                    }
+                });
+    }
+
+    void startTutorialNine()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialNine), "Love", "Ok, so now let's go to the next tab")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(80),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        mPager.setCurrentItem(3);
+                        startTutorialTen();
+                    }
+                });
+    }
+
+    void startTutorialTen()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.button_love_SearchLove), "Find a partner", "As the name suggests, you can find a partner here." +
+                        " Then you will be able to 'buy a gift' or 'meet' to enlarge your relationship. But remember, if you will forget about your partner, you might" +
+                        " stay with nothing and I suppose that's not the best feel!")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(130),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        startTutorialEleven();
+                    }
+                });
+    }
+
+    void startTutorialEleven()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialEleven), "Home", "Let's go home tab now!")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(80),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        mPager.setCurrentItem(4);
+                        startTutorialTwelve();
+                    }
+                });
+    }
+
+    void startTutorialTwelve()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.computer_img), "Computer", "You need phone/computer to enter that tab, but when you do that you'll" +
+                        " be able to do many interesting things! Like e.g. 'Make a game'. That will take a little time, but when you'll finish doing that,  you'll get some" +
+                        " money every week")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(120),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        startTutorialThirteen();
+                    }
+                });
+    }
+
+    void startTutorialThirteen()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.safe_img), "Safe", "If you will choose a criminal path, safe will be extremely useful. With it," +
+                        " when you will get caught, probably police won't find that hidden safe! ")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(120),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        startTutorialFourteen();
+                    }
+                });
+    }
+
+    void startTutorialFourteen()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.ad_img), "Ad", "You can also watch ad to earn some money!")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(120),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        startTutorialFifteen();
+                    }
+                });
+    }
+
+    void startTutorialFifteen()
+    {
+        TapTargetView.showFor(this,
+                TapTarget.forView(findViewById(R.id.spaceTutorialFifteen), "Main", "So, I think, that's it! Go to main tab now, and start playing! " +
+                        " Good Luck!")
+                        // All options below are optional
+                        .outerCircleColor(R.color.black)
+                        .outerCircleAlpha(0.8f)
+                        .targetCircleColor(R.color.white)
+                        .titleTextSize(25)
+                        .titleTextColor(R.color.white)
+                        .descriptionTextSize(15)
+                        .descriptionTextColor(R.color.white)
+                        // .textColor(R.color.blue)
+                        .textTypeface(Typeface.SANS_SERIF)
+                        .dimColor(R.color.black)
+                        .drawShadow(true)
+                        .cancelable(false)
+                        .tintTarget(true)
+                        .transparentTarget(true)
+                        //      .icon(Drawable)
+                        .targetRadius(80),
+                new TapTargetView.Listener() {
+                    @Override
+                    public void onTargetClick(TapTargetView view) {
+                        super.onTargetClick(view);
+
+                        mPager.setCurrentItem(0);
+                        mPlayDrawable.start();
+                        mainTimer.startTimer();
+                    }
+                });
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

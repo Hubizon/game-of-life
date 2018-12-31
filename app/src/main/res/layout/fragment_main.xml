@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <Spinner
                 android:id="@+id/spinner"
                 style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
@@ -40,6 +39,21 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
                 tools:background="@drawable/avatar_icon1" />
+
+            <Space
+                android:id="@+id/spaceTutorialOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.13999999" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -190,6 +204,7 @@
         app:cardBackgroundColor="@color/cardViewBackgroundColor">
 
         <LinearLayout
+            android:id="@+id/testt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -206,6 +221,8 @@
                     android:layout_marginStart="8dp"
                     android:contentDescription="Health"
                     app:srcCompat="@drawable/ic_cardiogram" />
+
+
 
                 <ProgressBar
                     android:id="@+id/progressBar_character_health"
@@ -243,6 +260,13 @@
                     android:layout_marginEnd="8dp"
                     tools:progress="75" />
             </LinearLayout>
+
+            <Space
+                android:id="@+id/spaceTutorialTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_marginStart="75dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -354,6 +378,13 @@
                     android:gravity="center"
                     android:text="@string/education_main" />
             </LinearLayout>
+
+            <Space
+                android:id="@+id/spaceTutorialThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_marginStart="75dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

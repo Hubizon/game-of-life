@@ -28,6 +28,15 @@
                 android:text="@string/computer"
                 android:textSize="16sp"/>
 
+            <TextView
+                android:id="@+id/time_computer"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="01.09 15:30"
+                android:textColor="@color/primaryTextColor"/>
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -36,15 +45,6 @@
                 android:layout_weight="1"
                 android:contentDescription="TODO"
                 app:srcCompat="@drawable/ic_clock" />
-
-            <TextView
-                android:id="@+id/time_computer"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                tools:text="01.09 15:30"
-                android:textColor="@color/primaryTextColor"/>
         </LinearLayout>
 
 
