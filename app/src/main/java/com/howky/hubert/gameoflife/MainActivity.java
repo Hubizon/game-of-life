@@ -177,6 +177,9 @@ public class MainActivity extends AppCompatActivity
 
     void askToStartTutorial()
     {
+        MainTimer.shouldWork = false;
+        mainTimer.stopTimer();
+
         AlertDialog.Builder dialog;
 
         SharedPreferences settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -191,6 +194,8 @@ public class MainActivity extends AppCompatActivity
                 .setMessage("Hi! I see you are first time here! Do you want to see tutorial before starting playing?")
                 .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+                        mPlayDrawable.start();
+                        mainTimer.startTimer();
 
                         dialoginterface.cancel();
                     }})
@@ -204,9 +209,6 @@ public class MainActivity extends AppCompatActivity
 
     void startTutorialOne()
     {
-        MainTimer.shouldWork = false;
-        mainTimer.stopTimer();
-
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.spaceTutorialOne), "Top panel", "Here you can see information about yourself." +
                         "Your avatar, nickname, money, etc.")
@@ -402,8 +404,7 @@ public class MainActivity extends AppCompatActivity
     {
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.spaceTutorialSeven), "Criminal", "If you want to do something not really legal, you can always" +
-                        " check here. There're few options: 'Get new friends' (to make more money from criminal jobs), 'Steal stuff', 'sell drugs', and 'threat teachers." +
-                        " But try not to get caught!")
+                        " check here. There're few options like 'Get new friends' (to make more money from criminal jobs), or 'sell drugs', but try not to get caught!")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -598,7 +599,7 @@ public class MainActivity extends AppCompatActivity
     {
         TapTargetView.showFor(this,
                 TapTarget.forView(findViewById(R.id.safe_img), "Safe", "If you will choose a criminal path, safe will be extremely useful. With it," +
-                        " when you will get caught, probably police won't find that hidden safe! ")
+                        " when you will get caught, probably police won't find money in that hidden safe! ")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
