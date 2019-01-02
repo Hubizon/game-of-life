@@ -18,17 +18,11 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
-import com.github.florent37.tutoshowcase.TutoShowcase;
-import com.howky.hubert.gameoflife.education.EduFragment;
-import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
-import com.howky.hubert.gameoflife.shop.BuyActivity;
-import com.howky.hubert.gameoflife.shop.ShopFragment;
 import com.howky.hubert.gameoflife.utils.Dialogs;
 import com.howky.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
 import com.howky.hubert.gameoflife.utils.MainTimer;
@@ -37,7 +31,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
 import static com.howky.hubert.gameoflife.MyApplication.currentUserNumber;
 import static com.howky.hubert.gameoflife.MyApplication.userSharedPref;
