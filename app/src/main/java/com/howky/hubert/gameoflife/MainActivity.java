@@ -190,16 +190,16 @@ public class MainActivity extends AppCompatActivity
             dialog = new AlertDialog.Builder(this, R.style.Theme_MaterialComponents_Light_Dialog_Alert);
         }
 
-        dialog.setTitle("Do you want to see tutorial?")
-                .setMessage("Hi! I see you are first time here! Do you want to see tutorial before starting playing?")
-                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+        dialog.setTitle("TUT or not to TUT?")
+                .setMessage("Hi bro!I've never seen you before! Would you like to see the tutorial first or rather to be doomed forever?")
+                .setNegativeButton("Tutorial!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         mPlayDrawable.start();
                         mainTimer.startTimer();
 
                         dialoginterface.cancel();
                     }})
-                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                .setPositiveButton("I know better :)", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         startTutorialOne();
                         dialoginterface.cancel();
@@ -210,8 +210,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialOne()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialOne), "Top panel", "Here you can see information about yourself." +
-                        "Your avatar, nickname, money, etc.")
+                TapTarget.forView(findViewById(R.id.spaceTutorialOne), "Top panel", "If you ever forget your name, that's the place you should come.")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -241,9 +240,8 @@ public class MainActivity extends AppCompatActivity
     void startTutorialTwo()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialTwo), "Center panel", "This's the most important thing in the whole game. " +
-                        "Here you can see 4 Progress Bars showing your actual level of: health, hungry, exhaust and happiness." +
-                        " But watch out! These bars are getting lower every second!")
+                TapTarget.forView(findViewById(R.id.spaceTutorialTwo), "Center panel", "Here you can see 4 indicators: health, hunger, energy and happiness." +
+                        "You'd better FREQUENTLY check out these. They are going down like a bat out of hell!")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -274,8 +272,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialThree()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialThree), "Bottom panel", "It's just showing where do you live, your education, " +
-                        "transport and potential partner")
+                TapTarget.forView(findViewById(R.id.spaceTutorialThree), "Bottom panel", "It shows what you've really got!")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -306,7 +303,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialFour()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialFour), "Education/Work", "Click now here, to move to the next tab")
+                TapTarget.forView(findViewById(R.id.spaceTutorialFour), "Education & Work", "Click here, to move to the next tab")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -338,8 +335,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialFive()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialFive), "School", "Here, you can go to school (to have higher salary in work), " +
-                        "or learn some new skills")
+                TapTarget.forView(findViewById(R.id.spaceTutorialFive), "School", "Here, you can go to school. Someone told me once that better education means more money. Do you think that's true?")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -371,7 +367,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialSix()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialSix), "Work", "You can find a job here and then go to work")
+                TapTarget.forView(findViewById(R.id.spaceTutorialSix), "Work", "You can find a job here and guess what... you can start working!")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -403,8 +399,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialSeven()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialSeven), "Criminal", "If you want to do something not really legal, you can always" +
-                        " check here. There're few options like 'Get new friends' (to make more money from criminal jobs), or 'sell drugs', but try not to get caught!")
+                TapTarget.forView(findViewById(R.id.spaceTutorialSeven), "Criminal", "Keep in mind, dirty jobs are only for tough guys! You ain't wanna risk if you ain't one")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -435,7 +430,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialEight()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialEight), "Shop", "You can buy many things here! I think that's pretty easy " +
+                TapTarget.forView(findViewById(R.id.spaceTutorialEight), "Shop", "You can find here shops! I hope you know what are they for :)" +
                         "to understand, but let's have a look at this")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
@@ -500,9 +495,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialTen()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.button_love_SearchLove), "Find a partner", "As the name suggests, you can find a partner here." +
-                        " Then you will be able to 'buy a gift' or 'meet' to enlarge your relationship. But remember, if you will forget about your partner, you might" +
-                        " stay with nothing and I suppose that's not the best feel!")
+                TapTarget.forView(findViewById(R.id.button_love_SearchLove), "Find a partner", "Everyone needs a partner - even you! And that's great place to find one. Just remember, everyone needs to be taken care of")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -533,7 +526,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialEleven()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialEleven), "Home", "Let's go home tab now!")
+                TapTarget.forView(findViewById(R.id.spaceTutorialEleven), "Home", "Let's go home now!")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -565,9 +558,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialTwelve()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.computer_img), "Computer", "You need phone/computer to enter that tab, but when you do that you'll" +
-                        " be able to do many interesting things! Like e.g. 'Make a game'. That will take a little time, but when you'll finish doing that,  you'll get some" +
-                        " money every week")
+                TapTarget.forView(findViewById(R.id.computer_img), "Computer", "You may find here a great source of profit. However, to enter you need a PC or at least a phone.")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -598,8 +589,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialThirteen()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.safe_img), "Safe", "If you will choose a criminal path, safe will be extremely useful. With it," +
-                        " when you will get caught, probably police won't find money in that hidden safe! ")
+                TapTarget.forView(findViewById(R.id.safe_img), "Safe", "If you choose a criminal path, consider buying a safe box!")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
