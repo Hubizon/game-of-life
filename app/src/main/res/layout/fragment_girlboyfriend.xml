@@ -13,13 +13,13 @@
     android:orientation="vertical"
     tools:context="com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
         app:cardBackgroundColor="@color/cardViewBackgroundColor">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp">
@@ -89,12 +89,12 @@
                 app:layout_constraintBottom_toTopOf="@+id/progressBar_girlboyFriend_relations"
                 app:layout_constraintStart_toStartOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -156,7 +156,7 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <!--<android.support.v7.widget.CardView-->
         <!--android:layout_width="match_parent"-->

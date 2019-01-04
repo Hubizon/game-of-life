@@ -7,14 +7,14 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.DialogFragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -184,15 +184,15 @@ public class MainActivity extends AppCompatActivity
         }
 
         dialog.setTitle("TUT or not to TUT?")
-                .setMessage("Hi bro!I've never seen you before! Would you like to see the tutorial first or rather to be doomed forever?")
-                .setNegativeButton("Tutorial!", new DialogInterface.OnClickListener() {
+                .setMessage("Hi bro! I've never seen you before! Would you like to see the tutorial first or rather to be doomed forever?")
+                .setNegativeButton("I know better :)", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         mPlayDrawable.start();
                         mainTimer.startTimer();
 
                         dialoginterface.cancel();
                     }})
-                .setPositiveButton("I know better :)", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Tutorial!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         startTutorialOne();
                         dialoginterface.cancel();
@@ -423,8 +423,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialEight()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.spaceTutorialEight), "Shop", "You can find here shops! I hope you know what are they for :)" +
-                        "to understand, but let's have a look at this")
+                TapTarget.forView(findViewById(R.id.spaceTutorialEight), "Shop", "You can find here shops! I hope you know what are they for :)")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)
@@ -488,7 +487,7 @@ public class MainActivity extends AppCompatActivity
     void startTutorialTen()
     {
         TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.button_love_SearchLove), "Find a partner", "Everyone needs a partner - even you! And that's great place to find one. Just remember, everyone needs to be taken care of")
+                TapTarget.forView(findViewById(R.id.button_love_SearchLove), "Find a partner", "Everyone needs a partner - even you! And that's great place to find one. Just remember, everyone needs to be taken care of!")
                         // All options below are optional
                         .outerCircleColor(R.color.black)
                         .outerCircleAlpha(0.8f)

@@ -6,17 +6,14 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.EditTextPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.app.ActionBar;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.preference.PreferenceFragmentCompat;
+import androidx.preference.ListPreference;
+import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceFragmentCompat;
 import android.widget.Toast;
-
-import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;
 
 import java.io.IOException;
 import java.util.regex.Matcher;

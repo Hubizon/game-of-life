@@ -4,8 +4,8 @@ package com.howky.hubert.gameoflife.profile;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.girlboyfriend.Love;
-import com.howky.hubert.gameoflife.MainActivity;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.house.Lodging;
 import com.howky.hubert.gameoflife.utils.SharedPreferencesDefaultValues;

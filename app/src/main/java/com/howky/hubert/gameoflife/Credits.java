@@ -1,6 +1,6 @@
 package com.howky.hubert.gameoflife;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.howky.hubert.gameoflife.utils.ScrollingTextView;
