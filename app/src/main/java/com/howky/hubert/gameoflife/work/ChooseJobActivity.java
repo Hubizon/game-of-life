@@ -1,18 +1,14 @@
 package com.howky.hubert.gameoflife.work;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.howky.hubert.gameoflife.MyApplication;
-import com.howky.hubert.gameoflife.MyDialogDead;
 import com.howky.hubert.gameoflife.R;
-import com.howky.hubert.gameoflife.firstOpen.MyDialogOpenFragment;
-import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;
 import com.howky.hubert.gameoflife.utils.Dialogs;
-import com.howky.hubert.gameoflife.utils.MainTimer;
 
 import java.util.Objects;
 

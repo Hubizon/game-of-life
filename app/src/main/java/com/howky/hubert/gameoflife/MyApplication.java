@@ -1,7 +1,7 @@
 package com.howky.hubert.gameoflife;
 
 import android.app.Application;
-import android.arch.lifecycle.ProcessLifecycleOwner;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.SharedPreferences;
 

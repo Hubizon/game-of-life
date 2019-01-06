@@ -1,14 +1,13 @@
 package com.howky.hubert.gameoflife.firstOpen;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,19 +18,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.github.florent37.tutoshowcase.TutoShowcase;
-import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.SettingsActivity;
-import com.howky.hubert.gameoflife.profile.MainFragment;
-import com.howky.hubert.gameoflife.utils.MainTimer;
 import com.howky.hubert.gameoflife.utils.NewUser;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.howky.hubert.gameoflife.MainActivity.INTENT_PAGE;
-import static com.howky.hubert.gameoflife.MyApplication.CurrentContext;
-import static com.howky.hubert.gameoflife.MyApplication.currentUserNumber;
-import static com.howky.hubert.gameoflife.MyApplication.userSharedPref;
 
 public class MyDialogOpenFragment extends DialogFragment implements View.OnClickListener {
 

@@ -1,10 +1,10 @@
 package com.howky.hubert.gameoflife;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.howky.hubert.gameoflife.education.EduFragment;
 import com.howky.hubert.gameoflife.girlboyfriend.GirlboyfriendFragment;

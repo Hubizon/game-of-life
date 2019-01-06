@@ -1,4 +1,4 @@
-<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.gridlayout.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +10,7 @@
     android:padding="14dp"
     app:rowCount="3">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview_food"
         style="@style/MyCardViewStyle">
 
@@ -36,10 +36,10 @@
 
         </FrameLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview_medicines"
         style="@style/MyCardViewStyle">
 
@@ -65,9 +65,9 @@
 
         </FrameLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview_fun"
         style="@style/MyCardViewStyle">
 
@@ -93,9 +93,9 @@
 
         </FrameLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview_blackmarket"
         style="@style/MyCardViewStyle">
 
@@ -120,9 +120,9 @@
 
         </FrameLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview_house"
         style="@style/MyCardViewStyle">
 
@@ -146,9 +146,9 @@
                 android:text="@string/house" />
 
         </FrameLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardview_transport"
         style="@style/MyCardViewStyle">
 
@@ -172,6 +172,6 @@
                 android:text="@string/transportDesc" />
 
         </FrameLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-</android.support.v7.widget.GridLayout>
+</androidx.gridlayout.widget.GridLayout>

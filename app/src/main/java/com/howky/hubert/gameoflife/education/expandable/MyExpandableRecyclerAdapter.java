@@ -3,8 +3,8 @@ package com.howky.hubert.gameoflife.education.expandable;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.howky.hubert.gameoflife.MyApplication;
 import com.howky.hubert.gameoflife.education.EduFragment;
-import com.howky.hubert.gameoflife.MainActivity;
 import com.howky.hubert.gameoflife.R;
 import com.howky.hubert.gameoflife.education.SkillsActivity;
 import com.howky.hubert.gameoflife.utils.MyDialogFragment;
