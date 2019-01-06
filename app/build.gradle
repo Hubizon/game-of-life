@@ -16,8 +16,8 @@ android {
         applicationId "com.howky.hubert.gameoflife"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 7
-        versionName '0.7.5'
+        versionCode 9
+        versionName '0.7.5.2'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
         versionNameSuffix 'beta'

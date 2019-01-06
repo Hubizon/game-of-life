@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Game of Life</string>
+    <string name="app_name" translatable="false">Life on Steroids</string>
 
     <string name="computer">Computer</string>
     <string name="play_video_games">Play video games</string>
@@ -227,8 +227,8 @@
     <string name="save">Save</string>
 
     <string name="title_send_feedback">Send feedback</string>
-    <string name="mail_feedback_email">michal@jastrzebscy.org</string>
-    <string name="mail_feedback_subject">Game Of Life - feedback</string>
+    <string name="mail_feedback_email">howkygameoflife@gmail.com</string>
+    <string name="mail_feedback_subject">Life on Steroids - feedback</string>
     <string name="mail_feedback_message">Hi,\n\n</string>
     <string name="description_char_dialog">Chart Dialog</string>
     <string name="description_chart_dialog_doingThing">To end this:</string>

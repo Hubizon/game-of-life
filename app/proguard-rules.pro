@@ -45,43 +45,43 @@
 -optimizationpasses 5
 -allowaccessmodification
 
--keepclassmembers class com.howky.hubert.gameoflife.education.Skill {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.education.Skill {
         <fields>;
 }
--keepclassmembers class com.howky.hubert.gameoflife.work.Job {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.work.Job {
         <fields>;
 }
--keepclassmembers class com.howky.hubert.gameoflife.work.Job {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.work.Job {
         public <init>();
 }
--keepclassmembers class com.howky.hubert.gameoflife.work.CriminalJob {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.work.CriminalJob {
         <fields>;
 }
--keepclassmembers class com.howky.hubert.gameoflife.work.CriminalJob {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.work.CriminalJob {
         public <init>();
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Weapon {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Weapon {
         <fields>;
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Weapon {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Weapon {
         public <init>();
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Food {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Food {
         <fields>;
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Food {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Food {
         public <init>();
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Lottery {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Lottery {
         <fields>;
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Lottery {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Lottery {
         public <init>();
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Medicines {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Medicines {
         <fields>;
 }
--keepclassmembers class com.howky.hubert.gameoflife.shop.Medicines {
+-keepclassmembers class com.howky.brothers.lifeonsteroids.shop.Medicines {
         public <init>();
 }
 
