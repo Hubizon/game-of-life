@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         dialog.setTitle("TUT or not to TUT?")
-                .setMessage("Hi bro!I've never seen you before! Would you like to see the tutorial first or rather to be doomed forever?")
+                .setMessage("Hi bro! I've never seen you before! Would you like to see the tutorial first or rather to be doomed forever?")
                 .setNegativeButton("Tutorial!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
                         mPlayDrawable.start();
