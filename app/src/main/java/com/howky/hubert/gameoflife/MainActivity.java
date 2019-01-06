@@ -32,12 +32,13 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.howky.hubert.gameoflife.MyApplication.currentUserNumber;
 import static com.howky.hubert.gameoflife.MyApplication.userSharedPref;
 import static com.howky.hubert.gameoflife.MyApplication.mainSharedPref;
 
 public class MainActivity extends AppCompatActivity
-    implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd,
+        implements RewardedVideoAdListener, MyDialogOpenFragment.OnNewUserAdd,
         MyDialogDead.OnDialogDeadInteractionListener, Dialogs.OnResumeDialogInteractionListener {
 
     public MainTimer mainTimer;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity
             R.drawable.house_icon
     };
 
-   private Context mContext;
+    private Context mContext;
 
 
     public static boolean hasAdd = false;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mContext = this;
-        mainSharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
+        mainSharedPref = getSharedPreferences(getResources().getString(R.string.shared_preferences_key), MODE_PRIVATE);
 
         currentUserNumber = mainSharedPref.getInt(getString(R.string.saved_current_user), 0);
         String user_key = getString(R.string.shared_preferences_user_key)

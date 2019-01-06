@@ -106,9 +106,9 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
         {
             case R.id.despositSafe:
                 if(amountOfCashToDespositWithdraw <= 0)
-                    Toast.makeText(getActivity().getApplicationContext(), ("Amount to the Deposit must be more than 0"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), (getString(R.string.desposit_more_0)), Toast.LENGTH_LONG).show();
                 else if(amountOfCashToDespositWithdraw > sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney))
-                    Toast.makeText(getActivity().getApplicationContext(), ("You don't have enough money to deposit!"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), (getString(R.string.not_enough_money_desposit)), Toast.LENGTH_LONG).show();
                 else
                 {
                     editor.putInt(getString(R.string.saved_character_money_key), (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) - amountOfCashToDespositWithdraw);
@@ -117,9 +117,9 @@ public class MyDialogSafeFragment extends DialogFragment implements View.OnClick
                 break;
             case R.id.withdrawSafe:
                 if(amountOfCashToDespositWithdraw <= 0)
-                    Toast.makeText(getActivity().getApplicationContext(), ("Amount to the Deposit must be more than 0"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), (getString(R.string.desposit_more_0)), Toast.LENGTH_LONG).show();
                 else if(amountOfCashToDespositWithdraw > sharedPref.getInt(getResources().getString(R.string.saved_money_in_safe_key), SharedPreferencesDefaultValues.DefaultMoneyInSafe))
-                    Toast.makeText(getActivity().getApplicationContext(), ("You don't have enough money to withdraw!"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), (getString(R.string.not_enough_money_withdraw)), Toast.LENGTH_LONG).show();
                 else
                 {
                     editor.putInt(getResources().getString(R.string.saved_character_money_key), (sharedPref.getInt(getResources().getString(R.string.saved_character_money_key), SharedPreferencesDefaultValues.DefaultMoney)) + amountOfCashToDespositWithdraw);

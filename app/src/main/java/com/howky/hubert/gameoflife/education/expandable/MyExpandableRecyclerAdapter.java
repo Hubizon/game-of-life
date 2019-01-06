@@ -222,7 +222,7 @@ private static final int give_up_school_index = 4;
                             }
                             break;
                         case give_up_work_index:
-                            Toast.makeText(mContext, "You are unemployed now!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext, R.string.become_unemployed, Toast.LENGTH_SHORT).show();
                             mJob = null;
                             editor.putString(mContext.getResources().getString(R.string.saved_my_job_key), gson.toJson(mJob));
                             //EduFragment.changeWorkStatus(false);
