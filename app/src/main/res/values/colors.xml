@@ -37,7 +37,7 @@
 
     <color name="my_dialog_bcgnd">#eeeeee</color>
 
-    <color name="banner_test">#2e2e2e</color>
+    <color name="banner_test">#000000</color>
     <color name="background_material_light_1">#eeeeee</color>
 
     <color name="contrastTextColor">#eeeeee</color>
