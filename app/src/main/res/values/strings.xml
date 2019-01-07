@@ -198,7 +198,7 @@
     <string name="buy_lotteries">Buy lottery tickets</string>
     <string name="buy_houses">Buy houses</string>
     <string name="buy_transport">Buy transport</string>
-    <string name="currency">$</string>
+    <string name="currency" translatable="false">$</string>
     <string name="won">Wow! You won</string>
     <string name="in_lottery">$ in lottery!</string>
     <string name="didnt_win_lottery">Unfortunately, you didn\'t win this lottery</string>
@@ -213,8 +213,8 @@
     <string name="died">You just died!</string>
     <string name="dont_have_a">Unfortunately, you don\'t have a:</string>
     <string name="buying">buying</string>
-    <string name="saved_renting_time_lodging_key">renting_time_lodging</string>
-    <string name="saved_renting_time_transport_key">renting_time_transport</string>
+    <string name="saved_renting_time_lodging_key" translatable="false">renting_time_lodging</string>
+    <string name="saved_renting_time_transport_key" translatable="false">renting_time_transport</string>
 
     <string name="option_no">NO</string>
     <string name="reset">Reset</string>
@@ -227,12 +227,12 @@
     <string name="save">Save</string>
 
     <string name="title_send_feedback">Send feedback</string>
-    <string name="mail_feedback_email">howkygameoflife@gmail.com</string>
+    <string name="mail_feedback_email" translatable="false">howkygameoflife@gmail.com</string>
     <string name="mail_feedback_subject">Life on Steroids - feedback</string>
     <string name="mail_feedback_message">Hi,\n\n</string>
     <string name="description_char_dialog">Chart Dialog</string>
     <string name="description_chart_dialog_doingThing">To end this:</string>
-    <string name="dollar">$</string>
+    <string name="dollar" translatable="false">$</string>
     <string name="title_activity_settings2">Settings</string>
 
     <!-- Strings related to Settings -->
@@ -298,7 +298,7 @@
 
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
-    <string name="saved_high_score_key">high_score</string>
+    <string name="saved_high_score_key" translatable="false">high_score</string>
     <string name="resume">RESUME</string>
     <string name="hungry">Hunger: </string>
     <string name="health">Health: </string>
