@@ -44,15 +44,15 @@ class CustomPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 1:
-                return "Edu";
+                return MyApplication.getMyContext().getString(R.string.edu_education);
             case 2:
-                return "Shop";
+                return MyApplication.getMyContext().getString(R.string.shop);
             case 3:
-                return "Love";
+                return MyApplication.getMyContext().getString(R.string.love);
             case 4:
-                return "Home";
+                return MyApplication.getMyContext().getString(R.string.home);
             default:
-                return "Main";
+                return MyApplication.getMyContext().getString(R.string.main);
         }
     }
 

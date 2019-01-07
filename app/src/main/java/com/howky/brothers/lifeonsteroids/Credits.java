@@ -7,7 +7,7 @@ import com.howky.brothers.lifeonsteroids.utils.ScrollingTextView;
 
 public class Credits extends AppCompatActivity {
 
-    private static final String authorsText = "Icons designed by:\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
+    private static final String authorsText = MyApplication.getMyContext().getString(R.string.icond_designed_by) + " \n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
             "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
             "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +
             "\n(flaticon.com)\nFreepik\nVectors Market\nSmashicons\nNikita Golubev\nRoundicons\n************\n" +

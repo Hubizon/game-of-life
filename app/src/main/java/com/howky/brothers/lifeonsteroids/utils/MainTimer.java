@@ -14,6 +14,7 @@ import com.howky.brothers.lifeonsteroids.R;
 
 import static com.howky.brothers.lifeonsteroids.MainActivity.hasAdd;
 import static com.howky.brothers.lifeonsteroids.MyApplication.CurrentContext;
+import static com.howky.brothers.lifeonsteroids.MyApplication.getMyContext;
 
 public class MainTimer {
 
@@ -91,7 +92,7 @@ public class MainTimer {
         editor.apply();
 
         if (hasAdd)
-            (new Dialogs(CurrentContext)).showDialogWithChoose(userSharedPref, CurrentContext, CurrentContext.getString(R.string.died), "Do you want to be rescued by watching an ad?", 7);
+            (new Dialogs(CurrentContext)).showDialogWithChoose(userSharedPref, CurrentContext, CurrentContext.getString(R.string.died), getMyContext().getString(R.string.want_to_be_rescued_watc_ad), 7);
         else {
             MainTimer.shouldWork = false;
             stopTimer();
