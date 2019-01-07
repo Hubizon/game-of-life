@@ -159,35 +159,35 @@ public class  MyDialogFragment extends DialogFragment  {
             case R.id.makeGameComputer:
                 getDialog().setTitle(R.string.making_computer_game);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
-                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText(getString(R.string.to_end_that));
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.drawSomethingComputer:
                 getDialog().setTitle(R.string.drawing_something);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
-                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText(getString(R.string.to_end_that));
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.writePoemComputer:
                 getDialog().setTitle(R.string.writing_poem);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
-                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText(getString(R.string.to_end_that));
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.recordMoviesComputer:
                 getDialog().setTitle(R.string.recording_movies);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
-                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("To end that: ");
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText(getString(R.string.to_end_that));
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.button_love_takeSomewhere:
                 getDialog().setTitle(R.string.going_somewhere);
                 view.findViewById(R.id.textToDoingThing).setVisibility(View.VISIBLE);
-                ((TextView)view.findViewById(R.id.textToDoingThing)).setText("Relationship: ");
+                ((TextView)view.findViewById(R.id.textToDoingThing)).setText(getString(R.string.relationship));
                 view.findViewById(R.id.progressBar_doing_thing).setVisibility(View.VISIBLE);
                 break;
 
@@ -275,11 +275,11 @@ public class  MyDialogFragment extends DialogFragment  {
                             if(random.nextInt(25) == 1)
                             {
                                 editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-                                Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.got_busted), Toast.LENGTH_LONG).show();
                                 if (r.nextInt(25) == 1)
                                     if (sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe)) {
                                         editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-                                        Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.found_safe_lost_all_money), Toast.LENGTH_LONG).show();
                                     }
                             }
                             break;
@@ -326,7 +326,7 @@ public class  MyDialogFragment extends DialogFragment  {
                                     e.printStackTrace();
                                 }
 
-                                (new Dialogs(getContext())).showAlertDialog(getContext(), "Promotion", "Congratulation! You got promotion in the work!");
+                                (new Dialogs(getContext())).showAlertDialog(getContext(), getString(R.string.promotion), getString(R.string.got_promoted_work));
                             }
 
                             try {
@@ -365,11 +365,11 @@ public class  MyDialogFragment extends DialogFragment  {
                             if (mJob instanceof CriminalJob)
                                 if (r.nextInt(((CriminalJob) mJob).getChanceToGetBusted()) == 1) {
                                     editor.putInt(getResources().getString(R.string.saved_character_money_key), 0);
-                                    Toast.makeText(getActivity().getApplicationContext(), ("You got busted! You lost all your money."), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), (getString(R.string.got_busted)), Toast.LENGTH_LONG).show();
                                     if (r.nextInt(25) == 1)
                                         if (sharedPref.getBoolean(getResources().getString(R.string.saved_have_safe_key), SharedPreferencesDefaultValues.DefaultHaveSafe)) {
                                             editor.putInt(getResources().getString(R.string.saved_money_in_safe_key), 0);
-                                            Toast.makeText(getActivity().getApplicationContext(), ("Policeman found your safe! You lost all your money in safe."), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.found_safe_lost_all_money), Toast.LENGTH_LONG).show();
                                         }
                                 }
                             break;
@@ -396,7 +396,7 @@ public class  MyDialogFragment extends DialogFragment  {
                 if(myTv != null)
                     editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHealth)) + myTv.getGivenFun()));
                 else
-                    Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a televisor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.dont_have_televisor), Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.playComputer:
@@ -412,7 +412,7 @@ public class  MyDialogFragment extends DialogFragment  {
                     else if(myComputer != null)
                         editor.putInt(getResources().getString(R.string.saved_happiness_key), ((sharedPref.getInt(getResources().getString(R.string.saved_happiness_key), SharedPreferencesDefaultValues.DefaultHappiness)) + myComputer.getGivenFun()));
                     else
-                        Toast.makeText(getActivity().getApplicationContext(), "Unfortunately you don't have a computer or a phone", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.dont_have_computer_phone), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -430,19 +430,19 @@ public class  MyDialogFragment extends DialogFragment  {
                 break;
 
             case R.id.makeGameComputer:
-                editor.putString(getResources().getString(R.string.saved_games_key), doSomething(getResources().getString(R.string.saved_progress_making_game_key), getResources().getString(R.string.saved_programming_skills_key), getResources().getString(R.string.saved_games_key), "You successfully made a game"));
+                editor.putString(getResources().getString(R.string.saved_games_key), doSomething(getResources().getString(R.string.saved_progress_making_game_key), getResources().getString(R.string.saved_programming_skills_key), getResources().getString(R.string.saved_games_key), getString(R.string.successfully_made_game)));
                 break;
 
             case R.id.drawSomethingComputer:
-                editor.putString(getResources().getString(R.string.saved_drawings_key), doSomething(getResources().getString(R.string.saved_progress_making_drawings_key), getResources().getString(R.string.saved_drawing_skills_key), getResources().getString(R.string.saved_games_key), "You successfully made a drawing"));
+                editor.putString(getResources().getString(R.string.saved_drawings_key), doSomething(getResources().getString(R.string.saved_progress_making_drawings_key), getResources().getString(R.string.saved_drawing_skills_key), getResources().getString(R.string.saved_games_key), getString(R.string.successfully_made_drawing)));
                 break;
 
             case R.id.writePoemComputer:
-                editor.putString(getResources().getString(R.string.saved_books_key), doSomething(getResources().getString(R.string.saved_progress_making_book_key), getResources().getString(R.string.saved_writing_skills_key), getResources().getString(R.string.saved_games_key), "You successfully wrote a book"));
+                editor.putString(getResources().getString(R.string.saved_books_key), doSomething(getResources().getString(R.string.saved_progress_making_book_key), getResources().getString(R.string.saved_writing_skills_key), getResources().getString(R.string.saved_games_key), getString(R.string.successfully_wrote_book)));
                 break;
 
             case R.id.recordMoviesComputer:
-                editor.putString(getResources().getString(R.string.saved_movies_key), doSomething(getResources().getString(R.string.saved_progress_making_movies_key), getResources().getString(R.string.saved_recording_skills_key), getResources().getString(R.string.saved_games_key), "You successfully made a movie"));
+                editor.putString(getResources().getString(R.string.saved_movies_key), doSomething(getResources().getString(R.string.saved_progress_making_movies_key), getResources().getString(R.string.saved_recording_skills_key), getResources().getString(R.string.saved_games_key), getString(R.string.successfully_made_movie)));
                 break;
 
             case R.id.button_love_takeSomewhere:
@@ -530,8 +530,8 @@ public class  MyDialogFragment extends DialogFragment  {
 
                 String toastText = textWhenEnd;
                 if(toJsonArray.getBoolean(1))
-                    toastText += ". It also became a bestseller!";
-                toastText += " Your first payment for it will be soon";
+                    toastText += ". " + getString(R.string.become_bestseller);
+                toastText += " " + getString(R.string.first_payment_soon);
                 Toast.makeText(getContext(), toastText, Toast.LENGTH_LONG).show();
 
                 return jsonArray.toString();

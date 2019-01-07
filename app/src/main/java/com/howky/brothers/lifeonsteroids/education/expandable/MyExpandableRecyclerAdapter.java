@@ -39,7 +39,7 @@ public class MyExpandableRecyclerAdapter extends ExpandableRecyclerViewAdapter<M
     private static final int hang_around_index = 2;
 
     private static final int learn_at_home_index = 1;
-private static final int give_up_school_index = 4;
+    private static final int give_up_school_index = 4;
 
     private static final int get_new_friends_index = 0;
     private static final int steal_stuff_index = 1;
@@ -114,18 +114,18 @@ private static final int give_up_school_index = 4;
 //                         case hang_around_index:
 //                             newDialog = MyDialogFragment.newInstanceWithPosition(view_id, group.getTitle(), hang_around_index);
 //                            break;
-                       // case learn_at_home_index:
+                        // case learn_at_home_index:
                             /*FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             SkillsFragment fragment = new SkillsFragment();
                             fragmentTransaction.add(R.id.pagerSkills, fragment);
                             fragmentTransaction.commit();*/
-                           // intent = new Intent(mContext.getApplicationContext(), SkillsActivity.class);
-                          //  break;
-                      //  case give_up_school_index:
-                          //  editor.putBoolean(mContext.getString(R.string.saved_is_in_school_now_key), false);
-                            //intent = new Intent(mContext.getApplicationContext(), FindJobActivity.class);
-                           // break;
+                        // intent = new Intent(mContext.getApplicationContext(), SkillsActivity.class);
+                        //  break;
+                        //  case give_up_school_index:
+                        //  editor.putBoolean(mContext.getString(R.string.saved_is_in_school_now_key), false);
+                        //intent = new Intent(mContext.getApplicationContext(), FindJobActivity.class);
+                        // break;
                     }
                 } else if (group.getTitle().equals(EduFragment.TITLE_CRIMINAL)) {
                     switch (childIndex) {
@@ -232,7 +232,7 @@ private static final int give_up_school_index = 4;
                 }
 
                 if (intent != null) mContext.startActivity(intent);
-                    else if (newDialog != null) newDialog.show(((AppCompatActivity) mContext).getSupportFragmentManager(), EDU_DIALOG_TAG);
+                else if (newDialog != null) newDialog.show(((AppCompatActivity) mContext).getSupportFragmentManager(), EDU_DIALOG_TAG);
 
                 editor.apply();
             }

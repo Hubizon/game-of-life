@@ -1,5 +1,6 @@
 package com.howky.brothers.lifeonsteroids.utils;
 
+import com.howky.brothers.lifeonsteroids.MyApplication;
 import com.howky.brothers.lifeonsteroids.house.Lodging;
 import com.howky.brothers.lifeonsteroids.house.Transport;
 import com.howky.brothers.lifeonsteroids.R;
@@ -17,7 +18,7 @@ public class SharedPreferencesDefaultValues {
     // sa 2 domyslne wartosci, tu i w strings.xml (do preference_headers potrzeba strings.xml)
     public static final String DefaultName = "";
     public static final boolean DefaultIsMale = true;
-    public static final int DefaultIcon = R.drawable.avatar_icon1;
+    //public static final int DefaultIcon = R.drawable.avatar_icon1;
     public static final int DefaultMoney = 5000;
     public static final int DefaultMoneyInSafe = 0;
 
@@ -31,11 +32,11 @@ public class SharedPreferencesDefaultValues {
 
     public static final int DefaultDayWeek = 1;
 
-    public static final String DefaultMyLodging = gson.toJson(new Lodging("Street", 0,  5, 100, 5));
-    public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
-    public static final boolean DefaultIsInSchoolNow = true;
+    public static final String DefaultMyLodging = gson.toJson(new Lodging(MyApplication.getMyContext().getString(R.string.street), 0,  5, 100, 5));
+    //public static final String DefaultMyLodgingAfter18 = gson.toJson(new Lodging("Public Bench and Blanket from The Garbage Bin", 0,  -5, 75, -5));
+    //public static final boolean DefaultIsInSchoolNow = true;
     public static final String DefaultMyJob = null;
-    public static final String DefaultMyTransport = gson.toJson(new Transport("Foot", 0, 10));
+    public static final String DefaultMyTransport = gson.toJson(new Transport(MyApplication.getMyContext().getString(R.string.foot), 0, 10));
     public static final String DefaultLove = null;
     public static final int DefaultLoveRelations = 50;
     public static final int DefaultLoveRelationshipLevel = 1;
@@ -54,7 +55,7 @@ public class SharedPreferencesDefaultValues {
     public static final String DefaultMyComputer = null;
     public static final String DefaultMyTv = null;
     public static final String DefaultMyPhone = null;
-    public static final String DefaultOwnedLotteries = gson.toJson(new ArrayList<>());
+    //public static final String DefaultOwnedLotteries = gson.toJson(new ArrayList<>());
     public static final boolean DefaultHaveSafe = false;
 
     /*static private final Subject[] subjectsList = new Subject[] {

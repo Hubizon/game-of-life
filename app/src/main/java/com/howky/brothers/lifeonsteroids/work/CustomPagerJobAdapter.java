@@ -1,6 +1,10 @@
 package com.howky.brothers.lifeonsteroids.work;
 
 import android.content.Context;
+
+import com.howky.brothers.lifeonsteroids.MyApplication;
+import com.howky.brothers.lifeonsteroids.R;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -33,11 +37,11 @@ class CustomPagerJobAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Job";
+                return MyApplication.getMyContext().getString(R.string.job);
             case 1:
-                return "Crim Job";
+                return MyApplication.getMyContext().getString(R.string.crim_job);
             default:
-                return "Job";
+                return  MyApplication.getMyContext().getString(R.string.job);
         }
     }
 
