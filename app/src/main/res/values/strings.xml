@@ -321,4 +321,5 @@
     <string name="desposit_more_0">Amount to the Deposit must be more than 0</string>
     <string name="not_enough_money_desposit">You don\'t have enough money to deposit!</string>
     <string name="not_enough_money_withdraw">You don\'t have enough money to withdraw!</string>
+    <string name="pass_primary_school">Pass Primary School</string>
 </resources>

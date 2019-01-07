@@ -1,5 +1,7 @@
 package com.howky.brothers.lifeonsteroids.utils;
 
+import android.support.annotation.MainThread;
+
 import com.howky.brothers.lifeonsteroids.education.Skill;
 import com.howky.brothers.lifeonsteroids.house.Fun;
 import com.howky.brothers.lifeonsteroids.house.Lodging;
@@ -14,7 +16,7 @@ import com.howky.brothers.lifeonsteroids.work.Job;
 
 public class Arrays {
 
-    private static Skill PassPrimarySchool = new Skill("Pass Primary School", "Primary School", 100, 10);
+    private static Skill PassPrimarySchool = new Skill(MainThread.getString(R.string.pass_primary_school), "Primary School", 100, 10);
     private static Skill PassSecondarySchool = new Skill("Pass Secondary School", "Secondary School", 750, 15);
     private static Skill PassHighSchool = new Skill("Pass High School", "High School", 2500, 20);
     private static Skill GeneralTraining = new Skill("General training", "General training", 7500, 25);

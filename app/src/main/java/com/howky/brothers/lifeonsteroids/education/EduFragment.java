@@ -82,26 +82,26 @@ public class EduFragment extends Fragment
 
 
         if (!(Parent.size() > 0)) {
-            ChildSchool.add(new ChildList(getString(R.string.go_to_school)));
+            ChildSchool.add(new ChildList("Go to school"));
             //ChildSchool.add(new ChildList("learn hard"));
             //ChildSchool.add(new ChildList("hand around"));
-            ChildSchool.add(new ChildList(getString(R.string.get_some_skills)));
+            ChildSchool.add(new ChildList("Get some skills"));
             //ChildSchool.add(new ChildList("Give up school"));
             Parent.add(new ParentList(TITLE_SCHOOL, ChildSchool));
 
             //ChildWork.add(new ChildList("work hard"));
             if(job == null)
-                ChildWork.add(new ChildList(getString(R.string.find_a_job)));
+                ChildWork.add(new ChildList("Find a Job"));
             else {
-                ChildWork.add(new ChildList(getString(R.string.start_working)));
-                ChildWork.add(new ChildList(getString(R.string.give_up_work)));
+                ChildWork.add(new ChildList("Start working"));
+                ChildWork.add(new ChildList("Give up work"));
             }
             Parent.add(new ParentList(TITLE_WORK, ChildWork));
 
-            ChildCriminal.add(new ChildList(getString(R.string.get_new_friends)));
-            ChildCriminal.add(new ChildList(getString(R.string.steal_stuff)));
-            ChildCriminal.add(new ChildList(getString(R.string.sell_drugs)));
-            ChildCriminal.add(new ChildList(getString(R.string.threat_teachers)));
+            ChildCriminal.add(new ChildList("Get new friends"));
+            ChildCriminal.add(new ChildList("Steal stuff"));
+            ChildCriminal.add(new ChildList("Sell drugs"));
+            ChildCriminal.add(new ChildList("Threat teachers"));
             Parent.add(new ParentList(TITLE_CRIMINAL, ChildCriminal));
         }
 
@@ -144,8 +144,8 @@ public class EduFragment extends Fragment
     public void UpdateJobStatus(boolean hasJob) {
         ChildWork.clear();
         if( hasJob ) {
-            ChildWork.add(new ChildList(getString(R.string.find_a_job)));
-            ChildWork.add(new ChildList(getString(R.string.quit_a_job)));
+            ChildWork.add(new ChildList("Start Working"));
+            ChildWork.add(new ChildList("Quit the job"));
 
             SharedPreferences sharedPref = MyApplication.userSharedPref;
             Gson gson = new Gson();
@@ -157,7 +157,7 @@ public class EduFragment extends Fragment
             workCardView.setVisibility(View.VISIBLE);
         }
         else {
-            ChildWork.add(new ChildList(getString(R.string.find_a_job)));
+            ChildWork.add(new ChildList("Find a job"));
             workCardView.setVisibility(View.GONE);
         }
         adapter.notifyDataSetChanged();
